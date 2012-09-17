@@ -1,4 +1,4 @@
-package main;
+package Screens;
 
 import java.awt.Graphics;
 import java.awt.Point;
