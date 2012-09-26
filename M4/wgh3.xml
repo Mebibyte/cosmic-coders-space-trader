@@ -50,13 +50,13 @@
 	</target>
 	
 	<target name="junit" depends="jar">
-		<junit>
+		<junit printsummary = "yes">
 			<classpath>
 		        <fileset dir="lib">
             		<include name="resources.jar"/>
 		        	<include name="junit.jar"/>
 	        	</fileset>
-		</classpath>
+			</classpath>
 			<test name="edu.gatech.oad.antlab.test.AntTest"/>
 		</junit>
 	</target>
