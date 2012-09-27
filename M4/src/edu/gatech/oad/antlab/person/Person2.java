@@ -1,5 +1,10 @@
 package edu.gatech.oad.antlab.person;
 
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *  A simple class for person 2
  *  returns their name and a
@@ -30,8 +35,14 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
+	  //Person 2 put your implementation here  
+		List<String> letters = Arrays.asList(input.split(""));
+		Collections.shuffle( letters);
+		String shuffled = "";
+		for (String letter : letters) {
+			shuffled += letter;
+		}
+		return shuffled;
 	}
 	/**
 	 * Return a string rep of this object
