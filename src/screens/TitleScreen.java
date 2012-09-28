@@ -1,6 +1,6 @@
 package screens;
 
-import guiElements.MyButton;
+import guiElements.BigButton;
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -8,7 +8,7 @@ import java.awt.Point;
 import main.GamePanel;
 
 public class TitleScreen extends Screen{
-	private MyButton newGame;
+	private BigButton newGame;
 	private int width, height;
 	private GamePanel panel;
 	
@@ -16,7 +16,7 @@ public class TitleScreen extends Screen{
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
-		newGame = new MyButton("New Game", width, height/2);
+		newGame = new BigButton("New Game", width, height/2);
 	}
 	
 	@Override

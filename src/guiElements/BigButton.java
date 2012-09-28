@@ -5,14 +5,14 @@ import javax.swing.*;
 
 import main.GamePanel;
 
-public class MyButton{
+public class BigButton extends Button{
 	private ImageIcon button, buttonHovered;
 	private String text;
 	private int buttonWidth, buttonHeight;
 	private int x, y;
 	private Rectangle bounds;
 	
-	public MyButton(String text, int x, int y){
+	public BigButton(String text, int x, int y){
 		button = new ImageIcon(getClass().getResource("/res/button.png"));
 		//buttonHovered = new ImageIcon(getClass().getResource("/res/buttonHovered.png"));
 		this.text = text;
