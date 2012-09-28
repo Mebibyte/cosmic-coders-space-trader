@@ -1,4 +1,4 @@
-<project name = "Space Trader" default = "all" basedir = ".">
+<project name = "M4" default = "all" basedir = ".">
 
 	<!-- init is a prereq for everything and sets up variables -->
 	<target name = "init">
