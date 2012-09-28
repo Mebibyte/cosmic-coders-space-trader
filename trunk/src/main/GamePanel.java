@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 import screens.Screen;
-import screens.Title;
+import screens.TitleScreen;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
@@ -21,7 +21,7 @@ public class GamePanel extends JPanel{
 	public GamePanel(int width, int height){
 		setFocusable(true);
 		requestFocus();
-		activeScreen = new Title(this, width, height);
+		activeScreen = new TitleScreen(this, width, height);
 		setBackground(Color.white);
 		addMouseListener(new Listener());
 		addKeyListener(new Listener());
