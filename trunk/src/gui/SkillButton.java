@@ -31,8 +31,8 @@ public class SkillButton extends Button{
         buttonWidth = button.getIconWidth();
         buttonHeight = button.getIconHeight();
         
-        this.x = (x / 2) - (buttonWidth / 2);
-        this.y = (y - buttonHeight / 2);
+        this.x = x;
+        this.y = y;
         
         bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
     }
