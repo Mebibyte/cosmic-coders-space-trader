@@ -35,9 +35,8 @@ public class SpaceTrader extends JFrame {
 
 		runGameLoop();    
 		final Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - WIDTH) / 2);
-	    int y = (int) ((dimension.getHeight() - HEIGHT) / 2);
-	    setLocation(x, y);
+	    setLocation((int) (dimension.getWidth() - WIDTH) >> 1,
+	            (int) (dimension.getHeight() - HEIGHT) >> 1);
 		setResizable(false);
 		pack();
 		setVisible(true);

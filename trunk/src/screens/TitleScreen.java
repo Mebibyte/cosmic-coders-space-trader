@@ -22,7 +22,7 @@ public class TitleScreen extends Screen{
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
-		newGame = new BigButton("New Game", width, height / 2);
+		newGame = new BigButton("New Game", width, height >> 1);
 	}
 
 	@Override

@@ -29,8 +29,8 @@ public class BigButton extends Button{
 		this.text = text;
 		buttonWidth = button.getIconWidth();
 		buttonHeight = button.getIconHeight();
-		this.x = (x / 2) - (buttonWidth / 2);
-		this.y = (y - buttonHeight / 2);
+		this.x = (x >> 1) - (buttonWidth >> 1);
+		this.y = (y - (buttonHeight >> 1));
 		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
 	}
 	
@@ -38,8 +38,8 @@ public class BigButton extends Button{
         g.setFont(new Font("serif", Font.PLAIN, 25));
 		button.paintIcon(panel, g, x, y);
 		g.drawString(text, 
-				x + (buttonWidth / 2) - ((g.getFontMetrics()).stringWidth(text)) / 2, 
-				y + (buttonHeight / 2) + 3);
+				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
+				y + (buttonHeight >> 1) + 3);
 	}
 	
 	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
