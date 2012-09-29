@@ -1,15 +1,26 @@
-package guiElements;
+/* Comment
+ * 
+ */
+package gui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
 
 import main.GamePanel;
 
 public class BigButton extends Button{
-	private ImageIcon button, buttonHovered;
+	private ImageIcon button; //buttonHovered;
+	
 	private String text;
+	
 	private int buttonWidth, buttonHeight;
+	
 	private int x, y;
+	
 	private Rectangle bounds;
 	
 	public BigButton(String text, int x, int y){
@@ -18,7 +29,7 @@ public class BigButton extends Button{
 		this.text = text;
 		buttonWidth = button.getIconWidth();
 		buttonHeight = button.getIconHeight();
-		this.x = (x/2) - (buttonWidth / 2);
+		this.x = (x / 2) - (buttonWidth / 2);
 		this.y = (y - buttonHeight / 2);
 		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
 	}
@@ -27,27 +38,24 @@ public class BigButton extends Button{
         g.setFont(new Font("serif", Font.PLAIN, 25));
 		button.paintIcon(panel, g, x, y);
 		g.drawString(text, 
-				x+(buttonWidth/2)-((g.getFontMetrics()).stringWidth(text))/2, 
-				y+(buttonHeight/2)+3);
+				x + (buttonWidth / 2) - ((g.getFontMetrics()).stringWidth(text)) / 2, 
+				y + (buttonHeight / 2) + 3);
 	}
 	
 	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
-		g.setFont(new Font("serif", Font.PLAIN, 25));
+		/*g.setFont(new Font("serif", Font.PLAIN, 25));
 		buttonHovered.paintIcon(panel, g, x, y);
 		g.drawString(text, 
 				x+(buttonWidth/2)-((g.getFontMetrics()).stringWidth(text))/2, 
-				y+(buttonHeight/2)+3);
+				y+(buttonHeight/2)+3);*/
 	}
 	
-	public boolean checkForClick(Point point){
-		if((point.x >= x && point.x <= x + buttonWidth) && 
-				(point.y >= y && point.y <= y + buttonHeight))
-			return true;
-		else
-			return false;
+	public boolean isClicked(Point point){
+		return (point.x >= x && point.x <= x + buttonWidth) && 
+				(point.y >= y && point.y <= y + buttonHeight);
 	}
 	
-	public boolean contains(Point p){
+	public boolean isIn(Point p){
 		return bounds.contains(p);
 	}
 	

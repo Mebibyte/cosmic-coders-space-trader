@@ -1,13 +1,35 @@
+/* Comment
+ * 
+ */
+
 package screens;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
 public abstract class Screen {
-	public abstract void hoverPosition(Point point);
+    private Point hoverPoint;
+    
 	public abstract void draw(Graphics g);
+	
 	public abstract void update();
+	
 	public abstract void checkForClick(Point point);
-	public abstract void keyPress(int keyCode);
-	public abstract void keyRelease(int keyCode);
+	
+	public void keyPress(int keyCode) {
+	    System.out.println(keyCode);
+	}
+	
+	public void keyRelease(int keyCode) {
+	       System.out.println(keyCode);
+
+	}
+
+    public Point getHoverPoint() {
+        return hoverPoint;
+    }
+
+    public void setHoverPoint(Point hoverPoint) {
+        this.hoverPoint = hoverPoint;
+    }
 }
