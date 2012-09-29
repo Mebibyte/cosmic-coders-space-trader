@@ -77,12 +77,8 @@ public class GamePanel extends JPanel{
 	}
 	
 	private class KeyListener extends KeyAdapter {
-	    public void keyPressed(KeyEvent e) {
-            activeScreen.keyPress(e.getKeyCode());
-        }
-        
-        public void keyReleased(KeyEvent e) {
-            activeScreen.keyRelease(e.getKeyCode());
+	    public void keyTyped(KeyEvent e) {
+            activeScreen.keyTyped(e);
         }
 	}
 }
