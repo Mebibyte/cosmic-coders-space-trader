@@ -27,7 +27,7 @@ public class TitleScreen extends Screen{
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawString("Space Tsrader", 200, 150);
+		g.drawString("Space Trader", 200, 150);
 		newGame.draw(g, panel, width, height);
 	}
 
