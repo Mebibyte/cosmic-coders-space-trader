@@ -6,6 +6,7 @@ package edu.gatech.spacetrader.gui;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 
 public abstract class Screen {
     private Point hoverPoint;
@@ -16,15 +17,10 @@ public abstract class Screen {
 	
 	public abstract void checkForClick(Point point);
 	
-	public void keyPress(int keyCode) {
-	    System.out.println(keyCode);
+	public void keyTyped(KeyEvent e) {
+	    
 	}
 	
-	public void keyRelease(int keyCode) {
-	       System.out.println(keyCode);
-
-	}
-
     public Point getHoverPoint() {
         return hoverPoint;
     }

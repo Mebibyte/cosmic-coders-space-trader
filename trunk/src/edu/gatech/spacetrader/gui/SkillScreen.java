@@ -8,6 +8,7 @@ import edu.gatech.spacetrader.main.GamePanel;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -28,6 +29,8 @@ public class SkillScreen extends Screen{
     private int width, height;
 	
     private GamePanel panel;
+    
+    private String playerName = "";
 	
 	public SkillScreen(GamePanel panel, int width, int height){
 	    skills = new int[3];
@@ -52,6 +55,8 @@ public class SkillScreen extends Screen{
 	@Override
 	public void draw(Graphics g) {
 		g.drawString("Skill Screen", width >> 1, height >> 1);
+		g.drawString("Player name: ", (width >> 1) - 100, (height >> 1) - 50);
+		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 50);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -88,4 +93,11 @@ public class SkillScreen extends Screen{
             }
         }
 	}
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && playerName.length() > 0) {
+            playerName = playerName.substring(0, playerName.length() - 1);
+        } else if (!e.isActionKey()) playerName += e.getKeyChar();
+    }
 }
