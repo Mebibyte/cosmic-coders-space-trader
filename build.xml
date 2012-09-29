@@ -25,8 +25,8 @@
 		<javac srcdir = "${src.dir}" destdir = "${build.dir}" includeantruntime = "false">
 			<classpath refid = "classpath" />
 		</javac>
-		<copy todir = "${build.dir}/res">
-			<fileset dir="${src.dir}/res"/>
+		<copy todir = "${build.dir}/edu/gatech/spacetrader/res">
+			<fileset dir="${src.dir}/edu/gatech/spacetrader/res"/>
 		</copy>
 	</target>
 	
@@ -51,7 +51,7 @@
 	<target name = "jar" depends = "javadoc">
 		<jar destfile = "SpaceTrader.jar" basedir="${build.dir}">
 			<manifest>
-				<attribute name = "Main-Class" value = "main.SpaceTrader"/>
+				<attribute name = "Main-Class" value = "edu.gatech.spacetrader.main.SpaceTrader"/>
 			</manifest>
 		</jar>
 	</target>

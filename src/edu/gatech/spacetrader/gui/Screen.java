@@ -2,7 +2,7 @@
  * 
  */
 
-package screens;
+package edu.gatech.spacetrader.gui;
 
 import java.awt.Graphics;
 import java.awt.Point;

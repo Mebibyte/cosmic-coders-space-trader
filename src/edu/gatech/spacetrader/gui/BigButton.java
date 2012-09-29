@@ -1,7 +1,7 @@
 /* Comment
  * 
  */
-package gui;
+package edu.gatech.spacetrader.gui;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,7 +10,8 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import main.GamePanel;
+import edu.gatech.spacetrader.main.GamePanel;
+
 
 public class BigButton extends Button{
 	private ImageIcon button; //buttonHovered;
@@ -24,7 +25,8 @@ public class BigButton extends Button{
 	private Rectangle bounds;
 	
 	public BigButton(String text, int x, int y){
-		button = new ImageIcon(getClass().getResource("/res/button.png"));
+		button = new ImageIcon(getClass().getResource(
+		        "/edu/gatech/spacetrader/res/button.png"));
 		//buttonHovered = new ImageIcon(getClass().getResource("/res/buttonHovered.png"));
 		this.text = text;
 		buttonWidth = button.getIconWidth();
