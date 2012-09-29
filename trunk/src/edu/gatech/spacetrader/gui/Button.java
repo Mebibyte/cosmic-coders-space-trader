@@ -2,12 +2,13 @@
  * 
  */
 
-package gui;
+package edu.gatech.spacetrader.gui;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
-import main.GamePanel;
+import edu.gatech.spacetrader.main.GamePanel;
+
 
 public abstract class Button{
 	public abstract void draw(Graphics g, GamePanel panel, int width, int height);

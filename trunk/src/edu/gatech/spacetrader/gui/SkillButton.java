@@ -2,7 +2,7 @@
  * 
  */
 
-package gui;
+package edu.gatech.spacetrader.gui;
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -10,7 +10,8 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import main.GamePanel;
+import edu.gatech.spacetrader.main.GamePanel;
+
 
 public class SkillButton extends Button{
     private ImageIcon button; //buttonHovered;
@@ -23,9 +24,11 @@ public class SkillButton extends Button{
 	
     public SkillButton(String type, int x, int y){
         if (type.equals("+")) {
-            button = new ImageIcon(getClass().getResource("/res/plusButton.png"));
+            button = new ImageIcon(getClass().getResource(
+                    "/edu/gatech/spacetrader/res/plusButton.png"));
         } else if (type.equals("-")) {
-            button = new ImageIcon(getClass().getResource("/res/minusButton.png"));
+            button = new ImageIcon(getClass().getResource(
+                    "/edu/gatech/spacetrader/res/minusButton.png"));
         }
         
         buttonWidth = button.getIconWidth();

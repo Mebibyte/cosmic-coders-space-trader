@@ -2,14 +2,13 @@
  * 
  */
 
-package screens;
+package edu.gatech.spacetrader.gui;
 
-import gui.BigButton;
+import edu.gatech.spacetrader.main.GamePanel;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
-import main.GamePanel;
 
 public class TitleScreen extends Screen{
 	private BigButton newGame;

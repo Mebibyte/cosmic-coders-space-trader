@@ -2,7 +2,7 @@
  * 
  */
 
-package main;
+package edu.gatech.spacetrader.main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 
 @SuppressWarnings("serial")
 public class SpaceTrader extends JFrame {
-    private static int WIDTH = 500, HEIGHT = 500;
+    private static int WIDTH = 1000, HEIGHT = 500;
 	
     private static GamePanel GamePanel = new GamePanel(WIDTH, HEIGHT);;
 	
@@ -24,7 +24,7 @@ public class SpaceTrader extends JFrame {
 	
 	private static final double TARGET_TIME_BETWEEN_RENDERS = 1000000000 / TARGET_FPS;
 	
-	private static boolean gameRunning = true;
+	private static boolean GameRunning = true;
 	
 	public SpaceTrader(){
 		super("Space Trader");
@@ -57,7 +57,7 @@ public class SpaceTrader extends JFrame {
       
 		int lastSecondTime = (int) (lastUpdateTime / 1000000000);
       
-		while (gameRunning) {
+		while (GameRunning) {
 			double now = System.nanoTime();
 			int updateCount = 0;
          
@@ -98,7 +98,7 @@ public class SpaceTrader extends JFrame {
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new SpaceTrader();
+				new edu.gatech.spacetrader.main.SpaceTrader();
 			}
 		});
 	}

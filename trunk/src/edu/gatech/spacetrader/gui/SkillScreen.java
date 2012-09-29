@@ -2,16 +2,15 @@
  * 
  */
 
-package screens;
+package edu.gatech.spacetrader.gui;
 
-import gui.SkillButton;
+import edu.gatech.spacetrader.main.GamePanel;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
-import main.GamePanel;
 
 public class SkillScreen extends Screen{
     private SkillButton[] buttons;
@@ -19,10 +18,12 @@ public class SkillScreen extends Screen{
     private int[] skills;
     
     private final ImageIcon unusedSkillPoint = new ImageIcon(
-            getClass().getResource("/res/unusedSkillPoint.png"));
+            getClass().getResource(
+                    "/edu/gatech/spacetrader/res/unusedSkillPoint.png"));
 
     private final ImageIcon usedSkillPoint = new ImageIcon(
-            getClass().getResource("/res/usedSkillPoint.png"));;
+            getClass().getResource(
+                    "/edu/gatech/spacetrader/res/usedSkillPoint.png"));;
 	
     private int width, height;
 	
@@ -36,7 +37,7 @@ public class SkillScreen extends Screen{
 	    int skillPointBarWidth = 50;
 	    int xNeg = (width >> 1) - (buttonWidth + skillPointBarWidth);
 	    int xPos = (width >> 1) + skillPointBarWidth + 5;
-	    int y = (width >> 1);
+	    int y = (height >> 1);
 	    
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % 2 == 0 ? "-" : "+",
