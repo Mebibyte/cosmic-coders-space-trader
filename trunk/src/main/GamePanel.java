@@ -1,12 +1,18 @@
+/* Comment
+ * 
+ */
+
 package main;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -16,6 +22,7 @@ import screens.TitleScreen;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
 	private Screen activeScreen;
+	
 	private boolean mouseOnScreen;
 	
 	public GamePanel(int width, int height){
@@ -23,13 +30,18 @@ public class GamePanel extends JPanel{
 		requestFocus();
 		activeScreen = new TitleScreen(this, width, height);
 		setBackground(Color.white);
-		addMouseListener(new Listener());
-		addKeyListener(new Listener());
-		addMouseMotionListener(new Listener());
+		addMouseListener(new MouseListener());
+		addKeyListener(new KeyListener());
 	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		if (mouseOnScreen) {
+		    PointerInfo pInfo = MouseInfo.getPointerInfo();
+		    activeScreen.setHoverPoint(new Point(
+		            pInfo.getLocation().x - this.getLocationOnScreen().x,
+	                pInfo.getLocation().y - this.getLocationOnScreen().y));
+		}
 		activeScreen.draw(g);
 	}
 	
@@ -48,32 +60,28 @@ public class GamePanel extends JPanel{
 	public void setMouseOnScreen(boolean mouseOnScreen) {
 		this.mouseOnScreen = mouseOnScreen;
 	}
-
-	private class Listener implements MouseMotionListener, MouseListener, KeyListener{
-		public void mousePressed(MouseEvent event){
-			activeScreen.checkForClick(event.getPoint());
-		}
-		
-		public void mouseEntered(MouseEvent event){
-			setMouseOnScreen(true);
-		}
-		
-		public void mouseExited(MouseEvent event){
-			setMouseOnScreen(false);
-		}
-		
-		public void keyPressed(KeyEvent e) {
-			activeScreen.keyPress(e.getKeyCode());
-		}
-		
-		public void keyReleased(KeyEvent e) {
-			activeScreen.keyRelease(e.getKeyCode());
-		}
-		
-		public void mouseMoved(MouseEvent event){}
-		public void keyTyped(KeyEvent e) {}
-		public void mouseClicked(MouseEvent arg0) {}
-		public void mouseReleased(MouseEvent arg0) {}
-		public void mouseDragged(MouseEvent arg0) {}
+	
+	private class MouseListener extends MouseAdapter {
+	    public void mousePressed(MouseEvent event){
+            activeScreen.checkForClick(event.getPoint());
+        }
+        
+        public void mouseEntered(MouseEvent event){
+            setMouseOnScreen(true);
+        }
+        
+        public void mouseExited(MouseEvent e){
+            setMouseOnScreen(false);
+        }
+	}
+	
+	private class KeyListener extends KeyAdapter {
+	    public void keyPressed(KeyEvent e) {
+            activeScreen.keyPress(e.getKeyCode());
+        }
+        
+        public void keyReleased(KeyEvent e) {
+            activeScreen.keyRelease(e.getKeyCode());
+        }
 	}
 }
