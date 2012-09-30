@@ -2,8 +2,9 @@
  * 
  */
 
-package edu.gatech.spacetrader.gui;
+package edu.gatech.spacetrader.screens;
 
+import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
 import java.awt.Graphics;
