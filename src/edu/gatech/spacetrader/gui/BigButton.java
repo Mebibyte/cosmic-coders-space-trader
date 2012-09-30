@@ -14,7 +14,11 @@ import edu.gatech.spacetrader.main.GamePanel;
 
 
 public class BigButton extends Button{
-	private ImageIcon button; //buttonHovered;
+	private static final ImageIcon BUTTON = new ImageIcon(
+	        BigButton.class.getResource("/edu/gatech/spacetrader/res/button.png"));
+	
+	private static final ImageIcon BUTTONHOVERED = new ImageIcon(
+	        BigButton.class.getResource("/edu/gatech/spacetrader/res/buttonHovered.png"));
 	
 	private String text;
 	
@@ -25,12 +29,9 @@ public class BigButton extends Button{
 	private Rectangle bounds;
 	
 	public BigButton(String text, int x, int y){
-		button = new ImageIcon(getClass().getResource(
-		        "/edu/gatech/spacetrader/res/button.png"));
-		//buttonHovered = new ImageIcon(getClass().getResource("/res/buttonHovered.png"));
 		this.text = text;
-		buttonWidth = button.getIconWidth();
-		buttonHeight = button.getIconHeight();
+		buttonWidth = BUTTON.getIconWidth();
+		buttonHeight = BUTTON.getIconHeight();
 		this.x = (x >> 1) - (buttonWidth >> 1);
 		this.y = (y - (buttonHeight >> 1));
 		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
@@ -38,18 +39,18 @@ public class BigButton extends Button{
 	
 	public void draw(Graphics g, GamePanel panel, int width, int height){
         g.setFont(new Font("serif", Font.PLAIN, 25));
-		button.paintIcon(panel, g, x, y);
+		BUTTON.paintIcon(panel, g, x, y);
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
 				y + (buttonHeight >> 1) + 3);
 	}
 	
 	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
-		/*g.setFont(new Font("serif", Font.PLAIN, 25));
-		buttonHovered.paintIcon(panel, g, x, y);
+		g.setFont(new Font("serif", Font.PLAIN, 25));
+		BUTTONHOVERED.paintIcon(panel, g, x, y);
 		g.drawString(text, 
-				x+(buttonWidth/2)-((g.getFontMetrics()).stringWidth(text))/2, 
-				y+(buttonHeight/2)+3);*/
+				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
+				y + (buttonHeight >> 1) + 3);
 	}
 	
 	public boolean isClicked(Point point){
@@ -58,10 +59,15 @@ public class BigButton extends Button{
 	}
 	
 	public boolean isIn(Point p){
+	    if (p == null) return false;
 		return bounds.contains(p);
 	}
 	
 	public int getHeight(){
 		return buttonHeight;
+	}
+	
+	public Rectangle getBounds(){
+	    return bounds;
 	}
 }
