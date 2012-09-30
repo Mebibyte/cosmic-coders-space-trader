@@ -16,8 +16,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import edu.gatech.spacetrader.gui.Screen;
-import edu.gatech.spacetrader.gui.TitleScreen;
+import edu.gatech.spacetrader.screens.Screen;
+import edu.gatech.spacetrader.screens.TitleScreen;
 
 
 @SuppressWarnings("serial")
