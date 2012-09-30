@@ -1,0 +1,68 @@
+<project name="M4Ant" basedir="." default="all">
+    <!--init - Set up properties -->
+   <target name="init">
+       	<property name="src.dir" value = "src"/>
+	    <property name="build.dir" value="build"/>
+	    <property name="classes.dir" value="${build.dir}/classes"/>
+	    <property name="apidoc.dir" value="apidoc"/>
+	    <property name="resources.jar" value="lib/resources.jar"/>
+	    <property name="junit.jar" value="lib/junit.jar"/>
+	    
+	    <path id="classpath">
+	        <pathelement path="${build.dir}"/>
+	        <pathelement path="${resources.jar}"/>
+	        <pathelement path="${junit.jar}"/>
+	    </path>
+       
+   </target>
+    
+    
+    <!-- prepare - Make required directories -->
+    <target name="prepare" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${apidoc.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+    </target>
+    
+    <!-- compile - compile all java classes -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime = "false">
+        	<classpath refid="classpath"/>
+        </javac>
+    </target>
+    <!-- Javadoc - generate documentation -->
+    <target name="javadoc" depends="compile">
+        <javadoc destdir="${apidoc.dir}" author = "true" version = "true">
+            <classpath refid="classpath"/>
+            <packageset dir = "${src.dir}" defaultexcludes = "yes" />
+        </javadoc>
+    </target>
+    
+    <!-- jar - create jar class -->
+    <target name="jar" depends="javadoc">
+        <jar destfile="AntLabRun.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+                <attribute name="Class-Path" value="lib/resources.jar"/>
+               
+            </manifest>
+        </jar>
+    </target>
+    <target name="run" depends="jar">
+        <java jar="AntLabRun.jar" fork="true" />
+        
+    </target>
+    <target name="all" depends="run">
+        
+    </target>
+    
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+        <delete dir= "${apidoc.dir}"/>
+        <delete file="AntLabRun.jar"/>
+    </target>
+        
+    
+    
+    
+</project>
