@@ -13,21 +13,56 @@ import javax.swing.ImageIcon;
 import edu.gatech.spacetrader.main.GamePanel;
 
 
+/**
+ * @version 1.0
+ * @since 1.0
+ * @author Glenn
+ */
 public class BigButton extends Button{
+	/**
+	 * Field BUTTON.
+	 */
 	private static final ImageIcon BUTTON = new ImageIcon(
 	        BigButton.class.getResource("/edu/gatech/spacetrader/res/button.png"));
 	
+	/**
+	 * Field BUTTONHOVERED.
+	 */
 	private static final ImageIcon BUTTONHOVERED = new ImageIcon(
 	        BigButton.class.getResource("/edu/gatech/spacetrader/res/buttonHovered.png"));
 	
+	/**
+	 * Field text.
+	 */
 	private String text;
 	
+	/**
+	 * Field buttonHeight.
+	 */
+	/**
+	 * Field buttonWidth.
+	 */
 	private int buttonWidth, buttonHeight;
 	
+	/**
+	 * Field y.
+	 */
+	/**
+	 * Field x.
+	 */
 	private int x, y;
 	
+	/**
+	 * Field bounds.
+	 */
 	private Rectangle bounds;
 	
+	/**
+	 * Constructor for BigButton.
+	 * @param text String
+	 * @param x int
+	 * @param y int
+	 */
 	public BigButton(String text, int x, int y){
 		this.text = text;
 		buttonWidth = BUTTON.getIconWidth();
@@ -37,6 +72,13 @@ public class BigButton extends Button{
 		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
 	}
 	
+	/**
+	 * Method draw.
+	 * @param g Graphics
+	 * @param panel GamePanel
+	 * @param width int
+	 * @param height int
+	 */
 	public void draw(Graphics g, GamePanel panel, int width, int height){
         g.setFont(new Font("serif", Font.PLAIN, 25));
 		BUTTON.paintIcon(panel, g, x, y);
@@ -45,6 +87,13 @@ public class BigButton extends Button{
 				y + (buttonHeight >> 1) + 3);
 	}
 	
+	/**
+	 * Method drawHovered.
+	 * @param g Graphics
+	 * @param panel GamePanel
+	 * @param width int
+	 * @param height int
+	 */
 	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
 		g.setFont(new Font("serif", Font.PLAIN, 25));
 		BUTTONHOVERED.paintIcon(panel, g, x, y);
@@ -53,20 +102,38 @@ public class BigButton extends Button{
 				y + (buttonHeight >> 1) + 3);
 	}
 	
+	/**
+	 * Method isClicked.
+	 * @param point Point
+	
+	 * @return boolean */
 	public boolean isClicked(Point point){
 		return (point.x >= x && point.x <= x + buttonWidth) && 
 				(point.y >= y && point.y <= y + buttonHeight);
 	}
 	
+	/**
+	 * Method isIn.
+	 * @param p Point
+	
+	 * @return boolean */
 	public boolean isIn(Point p){
 	    if (p == null) return false;
 		return bounds.contains(p);
 	}
 	
+	/**
+	 * Method getHeight.
+	
+	 * @return int */
 	public int getHeight(){
 		return buttonHeight;
 	}
 	
+	/**
+	 * Method getBounds.
+	
+	 * @return Rectangle */
 	public Rectangle getBounds(){
 	    return bounds;
 	}

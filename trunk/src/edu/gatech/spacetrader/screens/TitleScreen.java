@@ -11,13 +11,35 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 
+/**
+ * @author Glenn
+ * @version $Revision: 1.0 $
+ */
 public class TitleScreen extends Screen{
+	/**
+	 * Field newGame.
+	 */
 	private BigButton newGame;
 	
+	/**
+	 * Field height.
+	 */
+	/**
+	 * Field width.
+	 */
 	private int width, height;
 	
+	/**
+	 * Field panel.
+	 */
 	private GamePanel panel;
 	
+	/**
+	 * Constructor for TitleScreen.
+	 * @param panel GamePanel
+	 * @param width int
+	 * @param height int
+	 */
 	public TitleScreen(GamePanel panel, int width, int height){
 		this.panel = panel;
 		this.width = width;
@@ -25,6 +47,10 @@ public class TitleScreen extends Screen{
 		newGame = new BigButton("New Game", width, height >> 1);
 	}
 
+	/**
+	 * Method draw.
+	 * @param g Graphics
+	 */
 	@Override
 	public void draw(Graphics g) {
 		g.drawString("Space Trader", 200, 150);
@@ -36,13 +62,11 @@ public class TitleScreen extends Screen{
 		    newGame.draw(g, panel, width, height);
 		}
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	/**
+	 * Method checkForClick.
+	 * @param point Point
+	 */
 	@Override
 	public void checkForClick(Point point) {
 		if (newGame.isClicked(point)) {

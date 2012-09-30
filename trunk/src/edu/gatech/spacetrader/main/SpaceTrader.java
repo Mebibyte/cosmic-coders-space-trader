@@ -10,22 +10,55 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+/**
+ * @author Glenn
+ * @version $Revision: 1.0 $
+ */
 @SuppressWarnings("serial")
 public class SpaceTrader extends JFrame {
+    /**
+     * Field HEIGHT.
+     */
+    /**
+     * Field WIDTH.
+     */
     private static int WIDTH = 1000, HEIGHT = 500;
 	
+    /**
+     * Field GamePanel.
+     */
     private static GamePanel GamePanel = new GamePanel(WIDTH, HEIGHT);;
 	
+	/**
+	 * Field TIME_BETWEEN_UPDATES.
+	 */
 	private static final double TIME_BETWEEN_UPDATES = 1000000000 / 30.0;
 	
+	/**
+	 * Field MAX_UPDATES_BEFORE_RENDER.
+	 * (value is 5)
+	 */
 	private static final int MAX_UPDATES_BEFORE_RENDER = 5;
 	
+	/**
+	 * Field TARGET_FPS.
+	 * (value is 60.0)
+	 */
 	private static final double TARGET_FPS = 60;
 	
+	/**
+	 * Field TARGET_TIME_BETWEEN_RENDERS.
+	 */
 	private static final double TARGET_TIME_BETWEEN_RENDERS = 1000000000 / TARGET_FPS;
 	
+	/**
+	 * Field GameRunning.
+	 */
 	private static boolean GameRunning = true;
 	
+	/**
+	 * Constructor for SpaceTrader.
+	 */
 	public SpaceTrader(){
 		super("Space Trader");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +75,9 @@ public class SpaceTrader extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Method runGameLoop.
+	 */
 	public void runGameLoop(){
 		Thread loop = new Thread(){
 			public void run(){
@@ -51,6 +87,9 @@ public class SpaceTrader extends JFrame {
 		loop.start();
 	}
 	
+	/**
+	 * Method gameLoop.
+	 */
 	private void gameLoop() {
         double lastUpdateTime = System.nanoTime();
         double lastRenderTime = System.nanoTime();
@@ -91,10 +130,17 @@ public class SpaceTrader extends JFrame {
 		}
 	}
 	
+	/**
+	 * Method drawGame.
+	 */
 	private void drawGame(){
 		GamePanel.repaint();
 	}
 	
+	/**
+	 * Method main.
+	 * @param args String[]
+	 */
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
