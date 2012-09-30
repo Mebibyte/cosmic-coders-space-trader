@@ -14,25 +14,59 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 
+/**
+ * @author Glenn
+ * @version $Revision: 1.0 $
+ */
 public class SkillScreen extends Screen{
+    /**
+     * Field buttons.
+     */
     private SkillButton[] buttons;
     
+    /**
+     * Field skills.
+     */
     private int[] skills;
     
+    /**
+     * Field unusedSkillPoint.
+     */
     private final ImageIcon unusedSkillPoint = new ImageIcon(
             getClass().getResource(
                     "/edu/gatech/spacetrader/res/unusedSkillPoint.png"));
 
+    /**
+     * Field usedSkillPoint.
+     */
     private final ImageIcon usedSkillPoint = new ImageIcon(
             getClass().getResource(
                     "/edu/gatech/spacetrader/res/usedSkillPoint.png"));;
 	
+    /**
+     * Field height.
+     */
+    /**
+     * Field width.
+     */
     private int width, height;
 	
+    /**
+     * Field panel.
+     */
     private GamePanel panel;
     
+    /**
+     * Field playerName.
+     */
     private String playerName = "";
 	
+	/**
+	 * Constructor for SkillScreen.
+	 * @param panel GamePanel
+	 * @param width int
+	 * @param height int
+	 */
 	public SkillScreen(GamePanel panel, int width, int height){
 	    skills = new int[3];
 	    buttons = new SkillButton[6];
@@ -53,6 +87,10 @@ public class SkillScreen extends Screen{
 		this.height = height;
 	}
 
+	/**
+	 * Method draw.
+	 * @param g Graphics
+	 */
 	@Override
 	public void draw(Graphics g) {
 		g.drawString("Skill Screen", width >> 1, height >> 1);
@@ -80,12 +118,10 @@ public class SkillScreen extends Screen{
 		}
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * Method checkForClick.
+	 * @param point Point
+	 */
 	@Override
 	public void checkForClick(Point point) {
 	    for (int i = 0; i < buttons.length; i++) {
@@ -95,6 +131,10 @@ public class SkillScreen extends Screen{
         }
 	}
 
+    /**
+     * Method keyTyped.
+     * @param e KeyEvent
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && playerName.length() > 0) {
