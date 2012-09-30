@@ -27,7 +27,13 @@ public class TitleScreen extends Screen{
 	@Override
 	public void draw(Graphics g) {
 		g.drawString("Space Trader", 200, 150);
-		newGame.draw(g, panel, width, height);
+		if (panel.isMouseOnScreen()) {
+		    if (newGame.isIn(getHoverPoint())) {
+		        newGame.drawHovered(g, panel, width, height);
+		    } else newGame.draw(g, panel, width, height);
+		} else {
+		    newGame.draw(g, panel, width, height);
+		}
 	}
 
 	@Override
