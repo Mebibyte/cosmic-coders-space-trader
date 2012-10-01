@@ -29,7 +29,7 @@ public class SkillButton extends Button{
     /**
      * Field buttonWidth.
      */
-    private int buttonWidth, buttonHeight;
+    private final int buttonWidth, buttonHeight;
     
     /**
      * Field y.
@@ -37,12 +37,12 @@ public class SkillButton extends Button{
     /**
      * Field x.
      */
-    private int x, y;
+    private final int x, y;
     
     /**
      * Field bounds.
      */
-    private Rectangle bounds;
+    private final Rectangle bounds;
 	
     /**
      * Constructor for SkillButton.
