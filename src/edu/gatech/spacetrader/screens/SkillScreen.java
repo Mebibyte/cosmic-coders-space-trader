@@ -79,7 +79,7 @@ public class SkillScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int numSkills = 3, diffHeight = 450;
+    private static final int NUMSKILLS = 3, diffHeight = 450;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -88,8 +88,8 @@ public class SkillScreen extends Screen{
 	 * @param height int
 	 */
 	public SkillScreen(GamePanel panel, int width, int height) {
-	    skills = new int[numSkills];
-	    buttons = new SkillButton[numSkills << 1];
+	    skills = new int[NUMSKILLS];
+	    buttons = new SkillButton[NUMSKILLS << 1];
 
 	    final int xNeg = (width >> 1) - 90;
 	    final int xPos = (width >> 1) + 55;
@@ -101,7 +101,7 @@ public class SkillScreen extends Screen{
 	    }
 	    
 	    easy = new SelectableButton("Easy", 300, diffHeight, false);
-	    normal = new SelectableButton("Normal", 500, diffHeight, true);
+	    normal = new SelectableButton("Normal", width >> 1, diffHeight, true);
 	    hard = new SelectableButton("Hard", 700, diffHeight, false);
         
 		this.panel = panel;
@@ -115,18 +115,18 @@ public class SkillScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawString("Skill Screen", width >> 1, height >> 1);
-		g.drawString("Player name: ", (width >> 1) - 100, (height >> 1) - 50);
+	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 50);
 		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 50);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
 		}
 		
-		int x = (width >> 1) - 50;
+		final int sep = 50;
+		int x = (width >> 1) - sep;
 		int y = 255;
 		
-		for (int skill = 0; skill < skills.length; skill++) {
+		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    for (int i = 0; i < skills[skill]; i++) {
 		        usedSkillPoint.paintIcon(panel, g, x, y);
 		        x += usedSkillPoint.getIconWidth();
@@ -135,8 +135,8 @@ public class SkillScreen extends Screen{
                 unusedSkillPoint.paintIcon(panel, g, x, y);
                 x += unusedSkillPoint.getIconWidth();
             }
-		    y += 50;
-		    x = (width >> 1) - 50;
+		    y += sep;
+		    x = (width >> 1) - sep;
 		}
 		
 		if (easy.isSelected()) {
@@ -160,7 +160,10 @@ public class SkillScreen extends Screen{
 	public void checkForClick(Point point) {
 	    for (int i = 0; i < buttons.length; i++) {
             if (buttons[i].isClicked(point)) {
-                skills[i >> 1] += 2 * (i % 2) - 1;
+                if ((i % 2 == 0 && skills[i >> 1] > 0) 
+                        || (i % 2 == 1 && skills[i >> 1] < 10)) {
+                    skills[i >> 1] += 2 * (i % 2) - 1;
+                }
             }
         }
 	    changeDifficulty(point);
