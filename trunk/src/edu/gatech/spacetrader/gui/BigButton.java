@@ -34,7 +34,7 @@ public class BigButton extends Button{
 	/**
 	 * Field text.
 	 */
-	private String text;
+	private final String text;
 	
 	/**
 	 * Field buttonHeight.
@@ -42,7 +42,7 @@ public class BigButton extends Button{
 	/**
 	 * Field buttonWidth.
 	 */
-	private int buttonWidth, buttonHeight;
+	private final int buttonWidth, buttonHeight;
 	
 	/**
 	 * Field y.
@@ -50,12 +50,12 @@ public class BigButton extends Button{
 	/**
 	 * Field x.
 	 */
-	private int x, y;
+	private final int x, y;
 	
 	/**
 	 * Field bounds.
 	 */
-	private Rectangle bounds;
+	private final Rectangle bounds;
 	
 	/**
 	 * Constructor for BigButton.

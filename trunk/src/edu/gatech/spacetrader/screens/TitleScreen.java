@@ -19,7 +19,7 @@ public class TitleScreen extends Screen{
 	/**
 	 * Field newGame.
 	 */
-	private BigButton newGame;
+	private final BigButton newGame;
 	
 	/**
 	 * Field height.
@@ -27,12 +27,12 @@ public class TitleScreen extends Screen{
 	/**
 	 * Field width.
 	 */
-	private int width, height;
+	private final int width, height;
 	
 	/**
 	 * Field panel.
 	 */
-	private GamePanel panel;
+	private final GamePanel panel;
 	
 	/**
 	 * Constructor for TitleScreen.

@@ -22,12 +22,12 @@ public class SpaceTrader extends JFrame {
     /**
      * Field WIDTH.
      */
-    private static int WIDTH = 1000, HEIGHT = 500;
+    private static final int WIDTH = 1000, HEIGHT = 500;
 	
     /**
      * Field GamePanel.
      */
-    private static GamePanel GamePanel = new GamePanel(WIDTH, HEIGHT);;
+    private static final GamePanel GamePanel = new GamePanel(WIDTH, HEIGHT);;
 	
 	/**
 	 * Field TIME_BETWEEN_UPDATES.
@@ -54,7 +54,7 @@ public class SpaceTrader extends JFrame {
 	/**
 	 * Field GameRunning.
 	 */
-	private static boolean GameRunning = true;
+	private static final boolean GameRunning = true;
 	
 	/**
 	 * Constructor for SpaceTrader.
@@ -79,7 +79,7 @@ public class SpaceTrader extends JFrame {
 	 * Method runGameLoop.
 	 */
 	public void runGameLoop(){
-		Thread loop = new Thread(){
+		final Thread loop = new Thread(){
 			public void run(){
 				gameLoop();
 			}

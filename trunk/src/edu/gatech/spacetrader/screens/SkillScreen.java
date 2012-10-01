@@ -4,6 +4,7 @@
 
 package edu.gatech.spacetrader.screens;
 
+import edu.gatech.spacetrader.gui.SelectableButton;
 import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
@@ -22,12 +23,12 @@ public class SkillScreen extends Screen{
     /**
      * Field buttons.
      */
-    private SkillButton[] buttons;
+    private final SkillButton[] buttons;
     
     /**
      * Field skills.
      */
-    private int[] skills;
+    private final int[] skills;
     
     /**
      * Field unusedSkillPoint.
@@ -41,7 +42,18 @@ public class SkillScreen extends Screen{
      */
     private final ImageIcon usedSkillPoint = new ImageIcon(
             getClass().getResource(
-                    "/edu/gatech/spacetrader/res/usedSkillPoint.png"));;
+                    "/edu/gatech/spacetrader/res/usedSkillPoint.png"));
+    
+    /**
+     * Field easy.
+     */
+    /**
+     * Field normal.
+     */
+    /**
+     * Field hard.
+     */
+    private final SelectableButton easy, normal, hard;
 	
     /**
      * Field height.
@@ -49,17 +61,25 @@ public class SkillScreen extends Screen{
     /**
      * Field width.
      */
-    private int width, height;
+    private final int width, height;
 	
     /**
      * Field panel.
      */
-    private GamePanel panel;
+    private final GamePanel panel;
     
     /**
      * Field playerName.
      */
     private String playerName = "";
+    
+    /**
+     * Field numSkill.
+     */
+    /**
+     * Field numSkill.
+     */
+    private static final int numSkills = 3, diffHeight = 450;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -67,20 +87,22 @@ public class SkillScreen extends Screen{
 	 * @param width int
 	 * @param height int
 	 */
-	public SkillScreen(GamePanel panel, int width, int height){
-	    skills = new int[3];
-	    buttons = new SkillButton[6];
-	    
-	    int buttonWidth = 40;
-	    int skillPointBarWidth = 50;
-	    int xNeg = (width >> 1) - (buttonWidth + skillPointBarWidth);
-	    int xPos = (width >> 1) + skillPointBarWidth + 5;
-	    int y = (height >> 1);
+	public SkillScreen(GamePanel panel, int width, int height) {
+	    skills = new int[numSkills];
+	    buttons = new SkillButton[numSkills << 1];
+
+	    final int xNeg = (width >> 1) - 90;
+	    final int xPos = (width >> 1) + 55;
+	    final int y = (height >> 1);
 	    
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % 2 == 0 ? "-" : "+",
 	                i % 2 == 0 ? xNeg : xPos, y + (i >> 1) * 50);
 	    }
+	    
+	    easy = new SelectableButton("Easy", 300, diffHeight, false);
+	    normal = new SelectableButton("Normal", 500, diffHeight, true);
+	    hard = new SelectableButton("Hard", 700, diffHeight, false);
         
 		this.panel = panel;
 		this.width = width;
@@ -116,6 +138,18 @@ public class SkillScreen extends Screen{
 		    y += 50;
 		    x = (width >> 1) - 50;
 		}
+		
+		if (easy.isSelected()) {
+		    easy.drawSelected(g, panel, width, height);
+		} else easy.draw(g, panel, width, height);
+		
+		if (normal.isSelected()) {
+		    normal.drawSelected(g, panel, width, height);
+		} else normal.draw(g, panel, width, height);
+		
+		if (hard.isSelected()) {
+		    hard.drawSelected(g, panel, width, height);
+		} else hard.draw(g, panel, width, height);
 	}
 
 	/**
@@ -128,6 +162,27 @@ public class SkillScreen extends Screen{
             if (buttons[i].isClicked(point)) {
                 skills[i >> 1] += 2 * (i % 2) - 1;
             }
+        }
+	    changeDifficulty(point);
+	}
+	
+	/**
+     * Method changeDifficulty.
+     * @param p Point
+     */
+	private void changeDifficulty(Point p) {
+	    if (!easy.isSelected() && easy.isIn(p)) {
+            easy.setSelected(true);
+            normal.setSelected(false);
+            hard.setSelected(false);
+        } else if (!normal.isSelected() && normal.isIn(p)) {
+            easy.setSelected(false);
+            normal.setSelected(true);
+            hard.setSelected(false);
+        } else if (!hard.isSelected() && hard.isIn(p)) {
+            easy.setSelected(false);
+            normal.setSelected(false);
+            hard.setSelected(true);
         }
 	}
 

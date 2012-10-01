@@ -57,7 +57,7 @@ public class GamePanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if (mouseOnScreen) {
-		    PointerInfo pInfo = MouseInfo.getPointerInfo();
+		    final PointerInfo pInfo = MouseInfo.getPointerInfo();
 		    activeScreen.setHoverPoint(new Point(
 		            pInfo.getLocation().x - this.getLocationOnScreen().x,
 	                pInfo.getLocation().y - this.getLocationOnScreen().y));
