@@ -79,7 +79,8 @@ public class SkillScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int NUMSKILLS = 3, diffHeight = 450;
+    private static final int NUMSKILLS = 3, DIFFHEIGHT = 450, MAXSKILL = 10,
+            POSNEG = 2;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -89,20 +90,22 @@ public class SkillScreen extends Screen{
 	 */
 	public SkillScreen(GamePanel panel, int width, int height) {
 	    skills = new int[NUMSKILLS];
-	    buttons = new SkillButton[NUMSKILLS << 1];
+	    buttons = new SkillButton[6];
 
 	    final int xNeg = (width >> 1) - 90;
 	    final int xPos = (width >> 1) + 55;
 	    final int y = (height >> 1);
-	    
+
 	    for (int i = 0; i < buttons.length; i++) {
-	        buttons[i] = new SkillButton(i % 2 == 0 ? "-" : "+",
-	                i % 2 == 0 ? xNeg : xPos, y + (i >> 1) * 50);
+	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
+	                i % POSNEG == 0 ? xNeg : xPos, y + (i >> 1) * 50);
 	    }
 	    
-	    easy = new SelectableButton("Easy", 300, diffHeight, false);
-	    normal = new SelectableButton("Normal", width >> 1, diffHeight, true);
-	    hard = new SelectableButton("Hard", 700, diffHeight, false);
+	    final int buttonSep = 200;
+	    
+	    easy = new SelectableButton("Easy", (width >> 1) - buttonSep, DIFFHEIGHT, false);
+	    normal = new SelectableButton("Normal", width >> 1, DIFFHEIGHT, true);
+	    hard = new SelectableButton("Hard", (width >> 1) + buttonSep, DIFFHEIGHT, false);
         
 		this.panel = panel;
 		this.width = width;
@@ -117,6 +120,7 @@ public class SkillScreen extends Screen{
 	public void draw(Graphics g) {
 	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 50);
 		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 50);
+		g.drawRect((width >> 1) - 30, (height >> 1) - 65, 175, 20);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -131,7 +135,7 @@ public class SkillScreen extends Screen{
 		        usedSkillPoint.paintIcon(panel, g, x, y);
 		        x += usedSkillPoint.getIconWidth();
 		    }
-		    for (int j = skills[skill]; j < 10; j++) {
+		    for (int j = skills[skill]; j < MAXSKILL; j++) {
                 unusedSkillPoint.paintIcon(panel, g, x, y);
                 x += unusedSkillPoint.getIconWidth();
             }
@@ -160,9 +164,9 @@ public class SkillScreen extends Screen{
 	public void checkForClick(Point point) {
 	    for (int i = 0; i < buttons.length; i++) {
             if (buttons[i].isClicked(point)) {
-                if ((i % 2 == 0 && skills[i >> 1] > 0) 
-                        || (i % 2 == 1 && skills[i >> 1] < 10)) {
-                    skills[i >> 1] += 2 * (i % 2) - 1;
+                if ((i % POSNEG == 0 && skills[i >> 1] > 0) 
+                        || (i % POSNEG == 1 && skills[i >> 1] < MAXSKILL)) {
+                    skills[i >> 1] += POSNEG * (i % POSNEG) - 1;
                 }
             }
         }
@@ -195,8 +199,12 @@ public class SkillScreen extends Screen{
      */
     @Override
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && playerName.length() > 0) {
-            playerName = playerName.substring(0, playerName.length() - 1);
-        } else if (!e.isActionKey()) playerName += e.getKeyChar();
+        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+            if (playerName.length() > 0) {
+                playerName = playerName.substring(0, playerName.length() - 1);
+            }
+        } else if (!e.isActionKey() && playerName.length() < 15) {
+            playerName += e.getKeyChar();
+        }
     }
 }
