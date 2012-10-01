@@ -118,11 +118,13 @@ public class SkillScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
+	    final int minBoxWidth = 50;
 	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 150);
 		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 150);
 		g.drawRect((width >> 1) - 30, (height >> 1) - 165, 
-		        g.getFontMetrics().stringWidth(playerName) + 10 < 50 ? 
-		                50 : g.getFontMetrics().stringWidth(playerName) + 10, 20);
+		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
+		                minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10,
+		                20);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -133,6 +135,9 @@ public class SkillScreen extends Screen{
 		int y = 155;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
+		    g.drawString("Skill " + (skill + 1), (width >> 1) - 
+		        (g.getFontMetrics().stringWidth("Skill " + (skill + 1)) >> 1), y - 5);
+		    
 		    for (int i = 0; i < skills[skill]; i++) {
 		        usedSkillPoint.paintIcon(panel, g, x, y);
 		        x += usedSkillPoint.getIconWidth();
