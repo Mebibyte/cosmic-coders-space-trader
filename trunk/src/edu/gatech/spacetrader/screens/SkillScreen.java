@@ -120,7 +120,9 @@ public class SkillScreen extends Screen{
 	public void draw(Graphics g) {
 	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 150);
 		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 150);
-		g.drawRect((width >> 1) - 30, (height >> 1) - 165, g.getFontMetrics().stringWidth(playerName) + 10, 20);
+		g.drawRect((width >> 1) - 30, (height >> 1) - 165, 
+		        g.getFontMetrics().stringWidth(playerName) + 10 < 50 ? 
+		                50 : g.getFontMetrics().stringWidth(playerName) + 10, 20);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -203,7 +205,7 @@ public class SkillScreen extends Screen{
             if (playerName.length() > 0) {
                 playerName = playerName.substring(0, playerName.length() - 1);
             }
-        } else if (!e.isActionKey() && playerName.length() < 15) {
+        } else if (!e.isActionKey() && playerName.length() < 20) {
             playerName += e.getKeyChar();
         }
     }
