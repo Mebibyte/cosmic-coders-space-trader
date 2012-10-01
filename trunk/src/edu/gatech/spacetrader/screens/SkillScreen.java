@@ -1,3 +1,5 @@
+// $codepro.audit.disable numericLiterals
+
 /* Comment
  * 
  */
@@ -99,6 +101,7 @@ public class SkillScreen extends Screen{
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
 	                i % POSNEG == 0 ? xNeg : xPos, y + (i >> 1) * 50);
+	        if (i % POSNEG == 0) buttons[i].setDisabled(true);
 	    }
 	    
 	    final int buttonSep = 200;
@@ -175,6 +178,14 @@ public class SkillScreen extends Screen{
                         || (i % POSNEG == 1 && skills[i >> 1] < MAXSKILL)) {
                     skills[i >> 1] += POSNEG * (i % POSNEG) - 1;
                 }
+                
+                if (skills[i >> 1] > 0) {
+                    buttons[(i >> 1) << 1].setDisabled(false);
+                } else buttons[(i >> 1) << 1].setDisabled(true);
+                
+                if (skills[i >> 1] < MAXSKILL) {
+                    buttons[((i >> 1) << 1) + 1].setDisabled(false);
+                } else buttons[((i >> 1) << 1) + 1].setDisabled(true);
             }
         }
 	    changeDifficulty(point);
