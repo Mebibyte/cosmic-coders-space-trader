@@ -29,13 +29,11 @@ public abstract class Screen {
 	 * @param point Point
 	 */
 	public abstract void checkForClick(Point point);
-	
 	/**
+	 *
 	 * Method update.
 	 */
-	public void update() {
-	    
-	}
+	/*public void update() {}*/
 	
 	/**
 	 * Method keyTyped.
