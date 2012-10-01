@@ -21,7 +21,7 @@ public class SkillButton extends Button{
     /**
      * Field button.
      */
-    private ImageIcon button; //buttonHovered;
+    private ImageIcon button, buttonDisabled; //buttonHovered;
     
     /**
      * Field buttonHeight.
@@ -43,6 +43,11 @@ public class SkillButton extends Button{
      * Field bounds.
      */
     private final Rectangle bounds;
+    
+    /**
+     * Field disabled.
+     */
+    private boolean disabled;
 	
     /**
      * Constructor for SkillButton.
@@ -54,9 +59,13 @@ public class SkillButton extends Button{
         if (type.equals("+")) {
             button = new ImageIcon(getClass().getResource(
                     "/edu/gatech/spacetrader/res/plusButton.png"));
+            buttonDisabled = new ImageIcon(getClass().getResource(
+                    "/edu/gatech/spacetrader/res/plusButtonDisabled.png"));
         } else if (type.equals("-")) {
             button = new ImageIcon(getClass().getResource(
                     "/edu/gatech/spacetrader/res/minusButton.png"));
+            buttonDisabled = new ImageIcon(getClass().getResource(
+                    "/edu/gatech/spacetrader/res/minusButtonDisabled.png"));
         }
         
         buttonWidth = button.getIconWidth();
@@ -77,21 +86,11 @@ public class SkillButton extends Button{
 	 */
 	@Override
     public void draw(Graphics g, GamePanel panel, int width, int height) {
-	    button.paintIcon(panel, g, x, y);
+	    if (disabled) {
+	        buttonDisabled.paintIcon(panel, g, x, y);
+	    } else button.paintIcon(panel, g, x, y);
 	}
-
-	/**
-	 * Method drawHovered.
-	 * @param g Graphics
-	 * @param panel GamePanel
-	 * @param width int
-	 * @param height int
-	 */
-	@Override
-	public void drawHovered(Graphics g, GamePanel panel, int width, int height) {
-		// TODO Auto-generated method stub
-	}
-
+	
 	/**
 	 * Method isClicked.
 	 * @param point Point
@@ -121,5 +120,13 @@ public class SkillButton extends Button{
 	public int getHeight() {
 		return buttonHeight;
 	}
+    
+    /**
+     * Method setDisabled.
+    
+     * @param disabled boolean. */
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
 
 }

@@ -25,15 +25,6 @@ public abstract class Button{
 	public abstract void draw(Graphics g, GamePanel panel, int width, int height);
 	
 	/**
-	 * Method drawHovered.
-	 * @param g Graphics
-	 * @param panel GamePanel
-	 * @param width int
-	 * @param height int
-	 */
-	public abstract void drawHovered(Graphics g, GamePanel panel, int width, int height);
-	
-	/**
 	 * Method isClicked.
 	 * @param point Point
 	
