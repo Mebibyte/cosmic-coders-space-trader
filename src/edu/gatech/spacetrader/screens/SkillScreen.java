@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
 
 /**
  * @author Glenn
- * @version $Revision: 1.0 $
+ * @version $Revision: 1.0 $Z
  */
 public class SkillScreen extends Screen{
     /**
@@ -79,7 +79,7 @@ public class SkillScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int NUMSKILLS = 3, DIFFHEIGHT = 450, MAXSKILL = 10,
+    private static final int NUMSKILLS = 3, DIFFHEIGHT = 350, MAXSKILL = 10,
             POSNEG = 2;
 	
 	/**
@@ -94,7 +94,7 @@ public class SkillScreen extends Screen{
 
 	    final int xNeg = (width >> 1) - 90;
 	    final int xPos = (width >> 1) + 55;
-	    final int y = (height >> 1);
+	    final int y = (height >> 1) - 100;
 
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -118,9 +118,9 @@ public class SkillScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 50);
-		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 50);
-		g.drawRect((width >> 1) - 30, (height >> 1) - 65, 175, 20);
+	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 150);
+		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 150);
+		g.drawRect((width >> 1) - 30, (height >> 1) - 165, g.getFontMetrics().stringWidth(playerName) + 10, 20);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -128,7 +128,7 @@ public class SkillScreen extends Screen{
 		
 		final int sep = 50;
 		int x = (width >> 1) - sep;
-		int y = 255;
+		int y = 155;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    for (int i = 0; i < skills[skill]; i++) {
