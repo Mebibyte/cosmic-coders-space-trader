@@ -7,6 +7,7 @@
 		<property name = "apidoc.dir"	value = "apidoc" />
 		<property name = "junit.jar"	value = "lib/junit.jar" />
 		<property name = "res.jar"		value = "lib/resources.jar" />
+		<property name = "test.dir"	value = "test"/>
 		<property name = "test.class"	value = "test.AntTest"/>
 		<property name = "junit.dir"	value = "junit-results"/>
 		<path id = "classpath">
@@ -26,6 +27,9 @@
 	<!-- compile the code -->
 	<target name = "compile" depends = "prepare">
 		<javac srcdir = "${src.dir}" destdir = "${build.dir}" includeantruntime = "false">
+			<classpath refid = "classpath" />
+		</javac>
+		<javac srcdir = "${test.dir}" destdir = "${build.dir}" includeantruntime = "false">
 			<classpath refid = "classpath" />
 		</javac>
 	</target>

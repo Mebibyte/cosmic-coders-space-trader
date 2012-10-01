@@ -6,12 +6,10 @@
 	    <property name="classes.dir" value="${build.dir}/classes"/>
 	    <property name="apidoc.dir" value="apidoc"/>
 	    <property name="resources.jar" value="lib/resources.jar"/>
-	    <property name="junit.jar" value="lib/junit.jar"/>
 	    
 	    <path id="classpath">
 	        <pathelement path="${build.dir}"/>
 	        <pathelement path="${resources.jar}"/>
-	        <pathelement path="${junit.jar}"/>
 	    </path>
        
    </target>
