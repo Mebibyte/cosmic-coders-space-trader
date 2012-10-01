@@ -1,0 +1,73 @@
+<project name="M4" basedir="." default="all">
+    <!--init - Setting up variables -->
+   <target name="init">
+       	<property name="src.dir" value = "src"/>
+	    <property name="build.dir" value="build"/>
+	    <property name="classes.dir" value="${build.dir}/classes"/>
+	    <property name="apidoc.dir" value="apidoc"/>
+	    <property name="resources.jar" value="lib/resources.jar"/>
+	    <property name="junit.jar" value="lib/junit.jar"/>
+	    
+	    <path id="classpath">
+	        <pathelement path="${build.dir}"/>
+	        <pathelement path="${resources.jar}"/>
+	        <pathelement path="${junit.jar}"/>
+	    </path>
+       
+   </target>
+    
+    
+    <!-- prepare - prepares ant for the build -->
+    <target name="prepare" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${apidoc.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+    </target>
+    
+    <!-- compile - compiles everything -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime = "false">
+        	<classpath refid="classpath"/>
+        </javac>
+    </target>
+    
+    <!-- Javadoc - creates Java docs -->
+    <target name="javadoc" depends="compile">
+        <javadoc destdir="${apidoc.dir}" author = "true" version = "true">
+            <classpath refid="classpath"/>
+            <packageset dir = "${src.dir}" defaultexcludes = "yes" />
+        </javadoc>
+    </target>
+    
+    <!-- jar - creates the jar class -->
+    <target name="jar" depends="javadoc">
+        <jar destfile="AntLabRun.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+                <attribute name="Class-Path" value="lib/resources.jar"/>
+               
+            </manifest>
+        </jar>
+    </target> 
+    
+    <!-- run - runs the classes -->  
+    <target name="run" depends="jar">
+        <java jar="AntLabRun.jar" fork="true" />    
+    </target> 
+    
+    <!-- runs everything except for clean --> 
+    <target name="all" depends="run">
+        
+    </target>
+    
+    <!-- clean- cleans up everything that was made by the build --> 
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+        <delete dir= "${apidoc.dir}"/>
+        <delete file="AntLabRun.jar"/>
+    </target>
+        
+    
+    
+    
+</project>
