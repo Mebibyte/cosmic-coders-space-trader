@@ -3,7 +3,7 @@
    <target name="init">
        	<property name="src.dir" value = "src"/>
 	    <property name="build.dir" value="build"/>
-	    <property name="classes.dir" value="${build.dir}/classes"/>
+	    
 	    <property name="apidoc.dir" value="apidoc"/>
 	    <property name="resources.jar" value="lib/resources.jar"/>
 	    <property name="junit.jar" value="lib/junit.jar"/>
@@ -21,7 +21,7 @@
     <target name="prepare" depends="init">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${apidoc.dir}"/>
-        <mkdir dir="${classes.dir}"/>
+       
     </target>
     
     <!-- compile - compile all java classes -->
@@ -38,7 +38,7 @@
         </javadoc>
     </target>
     
-    <!-- jar - create jar class -->
+    <!-- jar - create jar file -->
     <target name="jar" depends="javadoc">
         <jar destfile="AntLabRun.jar" basedir="${build.dir}">
             <manifest>
@@ -52,10 +52,13 @@
         <java jar="AntLabRun.jar" fork="true" />
         
     </target>
+    
+    <!-- All - runs all tasks except "clean." -->
     <target name="all" depends="run">
         
     </target>
     
+    <!-- Clean - removes compiled classes, created .jars, and javadocs -->
     <target name="clean" depends="init">
         <delete dir="${build.dir}"/>
         <delete dir= "${apidoc.dir}"/>
