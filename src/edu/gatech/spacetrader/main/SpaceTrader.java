@@ -27,7 +27,7 @@ public class SpaceTrader extends JFrame {
     /**
      * Field GamePanel.
      */
-    private static final GamePanel GamePanel = new GamePanel(WIDTH, HEIGHT);;
+    private static final GamePanel GAMEPANEL = new GamePanel(WIDTH, HEIGHT);;
 	
 	/**
 	 * Field TIME_BETWEEN_UPDATES.
@@ -54,7 +54,7 @@ public class SpaceTrader extends JFrame {
 	/**
 	 * Field GameRunning.
 	 */
-	private static final boolean GameRunning = true;
+	private static final boolean GAMERUNNING = true;
 	
 	/**
 	 * Constructor for SpaceTrader.
@@ -63,8 +63,8 @@ public class SpaceTrader extends JFrame {
 		super("Space Trader");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		GamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		getContentPane().add(GamePanel);
+		GAMEPANEL.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		getContentPane().add(GAMEPANEL);
 
 		runGameLoop();    
 		final Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -93,10 +93,12 @@ public class SpaceTrader extends JFrame {
 	private void gameLoop() {
         double lastUpdateTime = System.nanoTime();
         double lastRenderTime = System.nanoTime();
+        
+        final int oneBillion = 1000000000;
       
-		int lastSecondTime = (int) (lastUpdateTime / 1000000000);
+		int lastSecondTime = (int) (lastUpdateTime / oneBillion);
       
-		while (GameRunning) {
+		while (GAMERUNNING) {
 			double now = System.nanoTime();
 			int updateCount = 0;
          
@@ -114,7 +116,7 @@ public class SpaceTrader extends JFrame {
 			drawGame();
 			lastRenderTime = now;
          
-			int thisSecond = (int) (lastUpdateTime / 1000000000);
+			int thisSecond = (int) (lastUpdateTime / oneBillion);
 			if (thisSecond > lastSecondTime) lastSecondTime = thisSecond;
          
 			while(now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS 
@@ -134,7 +136,7 @@ public class SpaceTrader extends JFrame {
 	 * Method drawGame.
 	 */
 	private void drawGame(){
-		GamePanel.repaint();
+		GAMEPANEL.repaint();
 	}
 	
 	/**
