@@ -64,13 +64,12 @@ public class GamePanel extends JPanel{
 		}
 		activeScreen.draw(g);
 	}
-	
 	/**
 	 * Method update.
 	 */
-	public void update(){
+	/*public void update(){
 		activeScreen.update();
-	}
+	}*/
 	
 	/**
 	 * Method setActiveScreen.

@@ -66,10 +66,12 @@ public class SpaceTrader extends JFrame {
 		GAMEPANEL.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		getContentPane().add(GAMEPANEL);
 
-		runGameLoop();    
+		runGameLoop();
+		
 		final Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    setLocation((int) (dimension.getWidth() - WIDTH) >> 1,
 	            (int) (dimension.getHeight() - HEIGHT) >> 1);
+	    
 		setResizable(false);
 		pack();
 		setVisible(true);
