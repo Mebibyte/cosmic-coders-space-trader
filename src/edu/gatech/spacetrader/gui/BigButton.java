@@ -67,8 +67,8 @@ public class BigButton extends Button{
 		this.text = text;
 		buttonWidth = BUTTON.getIconWidth();
 		buttonHeight = BUTTON.getIconHeight();
-		this.x = (x >> 1) - (buttonWidth >> 1);
-		this.y = (y - (buttonHeight >> 1));
+		this.x = x - (buttonWidth >> 1);
+		this.y = y - (buttonHeight >> 1);
 		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
 	}
 	
