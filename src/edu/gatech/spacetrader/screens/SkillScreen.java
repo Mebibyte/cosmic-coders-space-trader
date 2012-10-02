@@ -1,4 +1,4 @@
-// $codepro.audit.disable numericLiterals
+// $codepro.audit.disable numericLiterals, multiplicationOrDivisionByPowersOf2
 
 /* Comment
  * 
@@ -6,6 +6,7 @@
 
 package edu.gatech.spacetrader.screens;
 
+import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.gui.SelectableButton;
 import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
@@ -26,6 +27,11 @@ public class SkillScreen extends Screen{
      * Field buttons.
      */
     private final SkillButton[] buttons;
+    
+    /**
+     * Field buttons.
+     */
+    private final BigButton startGame;
     
     /**
      * Field skills.
@@ -82,7 +88,9 @@ public class SkillScreen extends Screen{
      * Field numSkill.
      */
     private static final int NUMSKILLS = 3, DIFFHEIGHT = 350, MAXSKILL = 10,
-            POSNEG = 2;
+            POSNEG = 2, MAXSKILLPOINTS = 16;
+    
+    private int skillPointsUsed;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -94,25 +102,27 @@ public class SkillScreen extends Screen{
 	    skills = new int[NUMSKILLS];
 	    buttons = new SkillButton[6];
 
-	    final int xNeg = (width >> 1) - 90;
-	    final int xPos = (width >> 1) + 55;
-	    final int y = (height >> 1) - 100;
+	    final int xNeg = (width / 2) - 90;
+	    final int xPos = (width / 2) + 55;
+	    final int y = (height / 2) - 100;
 
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
-	                i % POSNEG == 0 ? xNeg : xPos, y + (i >> 1) * 50);
+	                i % POSNEG == 0 ? xNeg : xPos, y + (i / 2) * 50);
 	        if (i % POSNEG == 0) buttons[i].setDisabled(true);
 	    }
 	    
 	    final int buttonSep = 200;
 	    
-	    easy = new SelectableButton("Easy", (width >> 1) - buttonSep, DIFFHEIGHT, false);
-	    normal = new SelectableButton("Normal", width >> 1, DIFFHEIGHT, true);
-	    hard = new SelectableButton("Hard", (width >> 1) + buttonSep, DIFFHEIGHT, false);
+	    easy = new SelectableButton("Easy", (width / 2) - buttonSep, DIFFHEIGHT, false);
+	    normal = new SelectableButton("Normal", width / 2, DIFFHEIGHT, true);
+	    hard = new SelectableButton("Hard", (width / 2) + buttonSep, DIFFHEIGHT, false);
         
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
+		
+		startGame = new BigButton("Start", width / 2, height - 50, true);
 	}
 
 	/**
@@ -122,9 +132,9 @@ public class SkillScreen extends Screen{
 	@Override
 	public void draw(Graphics g) {
 	    final int minBoxWidth = 50;
-	    g.drawString("Player name: ", (width >> 1) - 110, (height >> 1) - 150);
-		g.drawString(playerName, (width >> 1) - 25, (height >> 1) - 150);
-		g.drawRect((width >> 1) - 30, (height >> 1) - 165, 
+	    g.drawString("Player name: ", (width / 2) - 110, (height / 2) - 150);
+		g.drawString(playerName, (width / 2) - 25, (height / 2) - 150);
+		g.drawRect((width / 2) - 30, (height / 2) - 165, 
 		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
 		                minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10,
 		                20);
@@ -134,12 +144,12 @@ public class SkillScreen extends Screen{
 		}
 		
 		final int sep = 50;
-		int x = (width >> 1) - sep;
+		int x = (width / 2) - sep;
 		int y = 155;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
-		    g.drawString("Skill " + (skill + 1), (width >> 1) - 
-		        (g.getFontMetrics().stringWidth("Skill " + (skill + 1)) >> 1), y - 5);
+		    g.drawString("Skill " + (skill + 1), (width / 2) - 
+		        (g.getFontMetrics().stringWidth("Skill " + (skill + 1)) / 2), y - 5);
 		    
 		    for (int i = 0; i < skills[skill]; i++) {
 		        usedSkillPoint.paintIcon(panel, g, x, y);
@@ -150,7 +160,7 @@ public class SkillScreen extends Screen{
                 x += unusedSkillPoint.getIconWidth();
             }
 		    y += sep;
-		    x = (width >> 1) - sep;
+		    x = (width / 2) - sep;
 		}
 		
 		if (easy.isSelected()) {
@@ -164,6 +174,8 @@ public class SkillScreen extends Screen{
 		if (hard.isSelected()) {
 		    hard.drawSelected(g, panel, width, height);
 		} else hard.draw(g, panel, width, height);
+		
+		startGame.draw(g, panel, width, height);
 	}
 
 	/**
@@ -174,20 +186,37 @@ public class SkillScreen extends Screen{
 	public void checkForClick(Point point) {
 	    for (int i = 0; i < buttons.length; i++) {
             if (buttons[i].isClicked(point)) {
-                if ((i % POSNEG == 0 && skills[i >> 1] > 0) 
-                        || (i % POSNEG == 1 && skills[i >> 1] < MAXSKILL)) {
-                    skills[i >> 1] += POSNEG * (i % POSNEG) - 1;
+                if ((i % POSNEG == 0 && skills[i / 2] > 0) 
+                        || (i % POSNEG == 1 && skills[i / 2] < MAXSKILL)) {
+                    skills[i / 2] += POSNEG * (i % POSNEG) - 1;
                 }
                 
-                if (skills[i >> 1] > 0) {
-                    buttons[(i >> 1) << 1].setDisabled(false);
-                } else buttons[(i >> 1) << 1].setDisabled(true);
+                if (skills[i / 2] > 0) {
+                    buttons[(i / 2) * 2].setDisabled(false);
+                } else buttons[(i / 2) * 2].setDisabled(true);
                 
-                if (skills[i >> 1] < MAXSKILL) {
-                    buttons[((i >> 1) << 1) + 1].setDisabled(false);
-                } else buttons[((i >> 1) << 1) + 1].setDisabled(true);
+                if (skills[i / 2] < MAXSKILL) {
+                    buttons[((i / 2) * 2) + 1].setDisabled(false);
+                } else buttons[((i / 2) * 2) + 1].setDisabled(true);
             }
         }
+	    skillPointsUsed = 0;
+	    for (int i : skills) {
+	        skillPointsUsed += i;
+	    }
+	    
+	    if (skillPointsUsed >= MAXSKILLPOINTS) {
+	        for (int i = 1; i < NUMSKILLS * 2; i += 2) {
+	            buttons[i].setDisabled(true);
+	        }
+	        if (playerName.length() > 0) {
+	            startGame.setDisabled(false);
+	        }
+	    } else {
+	        for (int i = 1; i < NUMSKILLS * 2; i += 2) {
+                if (skills[i / 2] < MAXSKILL) buttons[i].setDisabled(false);
+            }
+	    }
 	    changeDifficulty(point);
 	}
 	
