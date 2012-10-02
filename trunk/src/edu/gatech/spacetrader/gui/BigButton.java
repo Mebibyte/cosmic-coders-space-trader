@@ -32,6 +32,12 @@ public class BigButton extends Button{
 	        BigButton.class.getResource("/edu/gatech/spacetrader/res/buttonHovered.png"));
 	
 	/**
+     * Field BUTTONDISABLED.
+     */
+    private static final ImageIcon BUTTONDISABLED = new ImageIcon(
+           BigButton.class.getResource("/edu/gatech/spacetrader/res/buttonDisabled.png"));
+	
+	/**
 	 * Field text.
 	 */
 	private final String text;
@@ -58,18 +64,28 @@ public class BigButton extends Button{
 	private final Rectangle bounds;
 	
 	/**
+     * Field disabled.
+     */
+	private boolean disabled;
+	
+	/**
 	 * Constructor for BigButton.
 	 * @param text String
 	 * @param x int
 	 * @param y int
 	 */
 	public BigButton(String text, int x, int y){
-		this.text = text;
-		buttonWidth = BUTTON.getIconWidth();
-		buttonHeight = BUTTON.getIconHeight();
-		this.x = x - (buttonWidth >> 1);
-		this.y = y - (buttonHeight >> 1);
-		bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
+		this(text, x, y, false);
+	}
+	
+	public BigButton(String text, int x, int y, boolean disabled) {
+	    this.text = text;
+        buttonWidth = BUTTON.getIconWidth();
+        buttonHeight = BUTTON.getIconHeight();
+        this.x = x - (buttonWidth >> 1);
+        this.y = y - (buttonHeight >> 1);
+        bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
+        this.disabled = disabled;
 	}
 	
 	/**
@@ -81,7 +97,9 @@ public class BigButton extends Button{
 	 */
 	public void draw(Graphics g, GamePanel panel, int width, int height){
         g.setFont(new Font("serif", Font.PLAIN, 25));
-		BUTTON.paintIcon(panel, g, x, y);
+		if (disabled) {
+		    BUTTONDISABLED.paintIcon(panel, g, x, y);
+		} else BUTTON.paintIcon(panel, g, x, y);
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
 				y + (buttonHeight >> 1) + 3);
@@ -136,5 +154,9 @@ public class BigButton extends Button{
 	 * @return Rectangle */
 	public Rectangle getBounds(){
 	    return bounds;
+	}
+	
+	public void setDisabled(boolean disabled){
+	    this.disabled = disabled;
 	}
 }

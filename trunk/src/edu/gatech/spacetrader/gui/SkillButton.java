@@ -99,7 +99,7 @@ public class SkillButton extends Button{
 	@Override
 	public boolean isClicked(Point point) {
 	    return (point.x >= x && point.x <= x + buttonWidth) && 
-                (point.y >= y && point.y <= y + buttonHeight);
+                (point.y >= y && point.y <= y + buttonHeight) && !disabled;
 	}
 
 	/**
