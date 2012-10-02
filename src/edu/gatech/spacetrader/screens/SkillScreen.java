@@ -143,6 +143,11 @@ public class SkillScreen extends Screen{
 		    buttons[i].draw(g, panel, width, height);
 		}
 		
+		String points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
+		
+	    g.drawString(points, (width / 2) - 
+	            (g.getFontMetrics().stringWidth(points) / 2), 130);
+		
 		final int sep = 50;
 		int x = (width / 2) - sep;
 		int y = 155;
@@ -189,6 +194,7 @@ public class SkillScreen extends Screen{
                 if ((i % POSNEG == 0 && skills[i / 2] > 0) 
                         || (i % POSNEG == 1 && skills[i / 2] < MAXSKILL)) {
                     skills[i / 2] += POSNEG * (i % POSNEG) - 1;
+                    skillPointsUsed += POSNEG * (i % POSNEG) - 1;
                 }
                 
                 if (skills[i / 2] > 0) {
@@ -200,26 +206,27 @@ public class SkillScreen extends Screen{
                 } else buttons[((i / 2) * 2) + 1].setDisabled(true);
             }
         }
-	    skillPointsUsed = 0;
-	    for (int i : skills) {
-	        skillPointsUsed += i;
-	    }
-	    
-	    if (skillPointsUsed >= MAXSKILLPOINTS) {
-	        for (int i = 1; i < NUMSKILLS * 2; i += 2) {
-	            buttons[i].setDisabled(true);
-	        }
-	        if (playerName.length() > 0) {
-	            startGame.setDisabled(false);
-	        } else {
-	            startGame.setDisabled(true);
-	        }
-	    } else {
-	        for (int i = 1; i < NUMSKILLS * 2; i += 2) {
-                if (skills[i / 2] < MAXSKILL) buttons[i].setDisabled(false);
-            }
-	    }
+	    resetButtons();
+	    startGameDisable();
 	    changeDifficulty(point);
+	}
+	
+	private void resetButtons() {
+	    for (int i = 1; i < NUMSKILLS * 2; i += 2) {
+            if (skillPointsUsed >= MAXSKILLPOINTS) {
+                buttons[i].setDisabled(true);
+            } else if (skills[i / 2] < MAXSKILL) {
+                buttons[i].setDisabled(false);
+            }
+        }
+	}
+	
+	private void startGameDisable(){
+	    if (skillPointsUsed >= MAXSKILLPOINTS && playerName.length() > 0) {
+            startGame.setDisabled(false);
+        } else {
+            startGame.setDisabled(true);
+        }
 	}
 	
 	/**
@@ -255,15 +262,6 @@ public class SkillScreen extends Screen{
         } else if (!e.isActionKey() && playerName.length() < 20) {
             playerName += e.getKeyChar();
         }
-        if (skillPointsUsed >= MAXSKILLPOINTS) {
-            for (int i = 1; i < NUMSKILLS * 2; i += 2) {
-                buttons[i].setDisabled(true);
-            }
-            if (playerName.length() > 0) {
-                startGame.setDisabled(false);
-            } else {
-                startGame.setDisabled(true);
-            }
-        }
+        startGameDisable();
     }
 }
