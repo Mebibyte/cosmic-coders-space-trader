@@ -87,7 +87,7 @@ public class SkillScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int NUMSKILLS = 3, DIFFHEIGHT = 350, MAXSKILL = 10,
+    private static final int NUMSKILLS = 5, DIFFHEIGHT = 350, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
     
     private int skillPointsUsed;
@@ -100,7 +100,7 @@ public class SkillScreen extends Screen{
 	 */
 	public SkillScreen(GamePanel panel, int width, int height) {
 	    skills = new int[NUMSKILLS];
-	    buttons = new SkillButton[6];
+	    buttons = new SkillButton[NUMSKILLS * 2];
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
@@ -211,6 +211,8 @@ public class SkillScreen extends Screen{
 	        }
 	        if (playerName.length() > 0) {
 	            startGame.setDisabled(false);
+	        } else {
+	            startGame.setDisabled(true);
 	        }
 	    } else {
 	        for (int i = 1; i < NUMSKILLS * 2; i += 2) {
@@ -252,6 +254,16 @@ public class SkillScreen extends Screen{
             }
         } else if (!e.isActionKey() && playerName.length() < 20) {
             playerName += e.getKeyChar();
+        }
+        if (skillPointsUsed >= MAXSKILLPOINTS) {
+            for (int i = 1; i < NUMSKILLS * 2; i += 2) {
+                buttons[i].setDisabled(true);
+            }
+            if (playerName.length() > 0) {
+                startGame.setDisabled(false);
+            } else {
+                startGame.setDisabled(true);
+            }
         }
     }
 }
