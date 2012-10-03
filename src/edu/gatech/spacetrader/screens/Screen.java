@@ -40,7 +40,9 @@ public abstract class Screen {
 	 * @param e KeyEvent
 	 */
 	public void keyTyped(KeyEvent e) {
-	    
+	    if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+	        System.out.println("Pause");
+	    }
 	}
 	
     /**
