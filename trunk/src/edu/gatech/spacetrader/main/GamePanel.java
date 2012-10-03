@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /* Comment
  * 
  */
@@ -35,19 +36,26 @@ public class GamePanel extends JPanel{
 	 * Field mouseOnScreen.
 	 */
 	private boolean mouseOnScreen;
+
+	/**
+     * Field spaceTrader.
+     */
+    private final SpaceTrader spaceTrader;
 	
 	/**
 	 * Constructor for GamePanel.
+	 * @param spaceTrader 
 	 * @param width int
 	 * @param height int
 	 */
-	public GamePanel(int width, int height){
+	public GamePanel(SpaceTrader spaceTrader, int width, int height){
 		setFocusable(true);
 		requestFocus();
 		activeScreen = new TitleScreen(this, width, height);
 		setBackground(Color.white);
 		addMouseListener(new MouseListener());
 		addKeyListener(new KeyListener());
+		this.spaceTrader = spaceTrader;
 	}
 	
 	/**
@@ -140,4 +148,12 @@ public class GamePanel extends JPanel{
             activeScreen.keyTyped(e);
         }
 	}
+
+	/**
+     * Method quitGame.
+     */
+    public void quitGame() {
+        spaceTrader.quitGame();
+        System.exit(0);
+    }
 }

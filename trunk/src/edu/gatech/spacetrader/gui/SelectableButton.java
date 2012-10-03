@@ -62,6 +62,11 @@ public class SelectableButton extends Button{
     private final int x, y;
     
     /**
+     * Field fontSize.
+     */
+    private static final int FONTSIZE = 25, FONTY = 3;
+    
+    /**
      * Field bounds.
      */
     private final Rectangle bounds;
@@ -96,11 +101,11 @@ public class SelectableButton extends Button{
      * @param height int
      */
     public void draw(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, 25));
+        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
         BUTTON.paintIcon(panel, g, x, y);
         g.drawString(text, 
                 x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-                y + (buttonHeight >> 1) + 3);
+                y + (buttonHeight >> 1) + FONTY);
     }
     
     /**
@@ -111,11 +116,11 @@ public class SelectableButton extends Button{
      * @param height int
      */
     public void drawHovered(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, 25));
+        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
         BUTTONHOVERED.paintIcon(panel, g, x, y);
         g.drawString(text, 
                 x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-                y + (buttonHeight >> 1) + 3);
+                y + (buttonHeight >> 1) + FONTY);
     }
     
     /**
@@ -126,11 +131,11 @@ public class SelectableButton extends Button{
      * @param height int
      */
     public void drawSelected(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, 25));
+        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
         BUTTONSELECTED.paintIcon(panel, g, x, y);
         g.drawString(text, 
                 x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-                y + (buttonHeight >> 1) + 3);
+                y + (buttonHeight >> 1) + FONTY);
     }
     
     /**
@@ -184,5 +189,14 @@ public class SelectableButton extends Button{
      */
     public void setSelected(boolean selected){
         this.selected = selected;
+    }
+    
+    /**
+     * Method toString.
+    
+     * @return String
+     */
+    public String toString(){
+        return "Selectable Button with x = " + x + " and y = " + y;
     }
 }

@@ -1,4 +1,4 @@
-// $codepro.audit.disable numericLiterals, multiplicationOrDivisionByPowersOf2
+// $codepro.audit.disable numericLiterals, multiplicationOrDivisionByPowersOf2, expressionValue
 
 /* Comment
  * 
@@ -89,8 +89,16 @@ public class SkillScreen extends Screen{
      */
     private static final int NUMSKILLS = 5, DIFFHEIGHT = 350, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
-    
+   
+    /**
+     * Field skillPointsUsed.
+     */
     private int skillPointsUsed;
+    
+    /**
+     * Field points.
+     */
+    private String points;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -143,7 +151,7 @@ public class SkillScreen extends Screen{
 		    buttons[i].draw(g, panel, width, height);
 		}
 		
-		String points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
+		points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
 		
 	    g.drawString(points, (width / 2) - 
 	            (g.getFontMetrics().stringWidth(points) / 2), 130);
@@ -211,6 +219,9 @@ public class SkillScreen extends Screen{
 	    changeDifficulty(point);
 	}
 	
+	/**
+     * Method resetButtons.
+     */
 	private void resetButtons() {
 	    for (int i = 1; i < NUMSKILLS * 2; i += 2) {
             if (skillPointsUsed >= MAXSKILLPOINTS) {
@@ -221,6 +232,9 @@ public class SkillScreen extends Screen{
         }
 	}
 	
+	/**
+     * Method startGameDisable.
+     */
 	private void startGameDisable(){
 	    if (skillPointsUsed >= MAXSKILLPOINTS && playerName.length() > 0) {
             startGame.setDisabled(false);
@@ -263,5 +277,15 @@ public class SkillScreen extends Screen{
             playerName += e.getKeyChar();
         }
         startGameDisable();
+    }
+    
+    /**
+     * Method toString.
+    
+     * @return String
+     */
+    @Override
+    public String toString(){
+        return "Skill Screen";
     }
 }

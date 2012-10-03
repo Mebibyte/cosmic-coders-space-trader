@@ -1,4 +1,4 @@
-// $codepro.audit.disable disallowSleepInsideWhile
+// $codepro.audit.disable disallowSleepInsideWhile, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, lossOfPrecisionInCast
 /* Comment
  * 
  */
@@ -28,7 +28,7 @@ public class SpaceTrader extends JFrame {
     /**
      * Field GamePanel.
      */
-    private static final GamePanel GAMEPANEL = new GamePanel(WIDTH, HEIGHT);;
+    private final GamePanel gamePanel;
 	
 	/**
 	 * Field TIME_BETWEEN_UPDATES.
@@ -40,6 +40,12 @@ public class SpaceTrader extends JFrame {
 	 * (value is 5)
 	 */
 	private static final int MAX_UPDATES_BEFORE_RENDER = 5;
+	
+	/**
+     * Field ONEBILLION.
+     * (value is 5)
+     */
+    private static final int ONEBILLION = 1000000000;
 	
 	/**
 	 * Field TARGET_FPS.
@@ -55,7 +61,7 @@ public class SpaceTrader extends JFrame {
 	/**
 	 * Field GameRunning.
 	 */
-	private static final boolean GAMERUNNING = true;
+	private boolean gameRunning = true;
 	
 	/**
 	 * Constructor for SpaceTrader.
@@ -64,8 +70,9 @@ public class SpaceTrader extends JFrame {
 		super("Space Trader");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		GAMEPANEL.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		getContentPane().add(GAMEPANEL);
+		gamePanel = new GamePanel(this, WIDTH, HEIGHT);
+		gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		getContentPane().add(gamePanel);
 
 		runGameLoop();
 		
@@ -96,12 +103,10 @@ public class SpaceTrader extends JFrame {
 	private void gameLoop() {
         double lastUpdateTime = System.nanoTime();
         double lastRenderTime = System.nanoTime();
-        
-        final int oneBillion = 1000000000;
+              
+		int lastSecondTime = (int) (lastUpdateTime / ONEBILLION);
       
-		int lastSecondTime = (int) (lastUpdateTime / oneBillion);
-      
-		while (GAMERUNNING) {
+		while (gameRunning) {
 			double now = System.nanoTime();
 			int updateCount = 0;
          
@@ -119,7 +124,7 @@ public class SpaceTrader extends JFrame {
 			drawGame();
 			lastRenderTime = now;
          
-			int thisSecond = (int) (lastUpdateTime / oneBillion);
+			int thisSecond = (int) (lastUpdateTime / ONEBILLION);
 			if (thisSecond > lastSecondTime) lastSecondTime = thisSecond;
          
 			while(now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS 
@@ -139,7 +144,7 @@ public class SpaceTrader extends JFrame {
 	 * Method drawGame.
 	 */
 	private void drawGame(){
-		GAMEPANEL.repaint();
+		gamePanel.repaint();
 	}
 	
 	/**
@@ -153,4 +158,11 @@ public class SpaceTrader extends JFrame {
 			}
 		});
 	}
+
+	/**
+     * Method quitGame.
+     */
+	public void quitGame() {
+        gameRunning = false;
+    }
 }

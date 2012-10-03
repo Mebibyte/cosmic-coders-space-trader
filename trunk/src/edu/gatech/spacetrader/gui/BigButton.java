@@ -59,6 +59,11 @@ public class BigButton extends Button{
 	private final int x, y;
 	
 	/**
+     * Field fontSize.
+     */
+	private static final int FONTSIZE = 25, FONTY = 3;
+	
+	/**
 	 * Field bounds.
 	 */
 	private final Rectangle bounds;
@@ -78,6 +83,13 @@ public class BigButton extends Button{
 		this(text, x, y, false);
 	}
 	
+	/**
+     * Constructor for BigButton.
+     * @param text String
+     * @param x int
+     * @param y int
+     * @param disabled boolean
+     */
 	public BigButton(String text, int x, int y, boolean disabled) {
 	    this.text = text;
         buttonWidth = BUTTON.getIconWidth();
@@ -96,13 +108,13 @@ public class BigButton extends Button{
 	 * @param height int
 	 */
 	public void draw(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, 25));
+        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
 		if (disabled) {
 		    BUTTONDISABLED.paintIcon(panel, g, x, y);
 		} else BUTTON.paintIcon(panel, g, x, y);
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-				y + (buttonHeight >> 1) + 3);
+				y + (buttonHeight >> 1) + FONTY);
 	}
 	
 	/**
@@ -113,11 +125,11 @@ public class BigButton extends Button{
 	 * @param height int
 	 */
 	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
-		g.setFont(new Font("serif", Font.PLAIN, 25));
+		g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
 		BUTTONHOVERED.paintIcon(panel, g, x, y);
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-				y + (buttonHeight >> 1) + 3);
+				y + (buttonHeight >> 1) + FONTY);
 	}
 	
 	/**
@@ -156,7 +168,21 @@ public class BigButton extends Button{
 	    return bounds;
 	}
 	
+	/**
+     * Method setDisabled.
+    
+     * @param disabled boolean
+     */
 	public void setDisabled(boolean disabled){
 	    this.disabled = disabled;
+	}
+	
+	/**
+     * Method toString.
+    
+     * @return String
+     */
+	public String toString(){
+	    return "Button with x = " + x + " and y = " + y;
 	}
 }

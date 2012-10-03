@@ -128,5 +128,14 @@ public class SkillButton extends Button{
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
-
+    
+    /**
+     * Method toString.
+    
+     * @return String
+     */
+    @Override
+    public String toString(){
+        return "Skill Button with x = " + x + " and y = " + y;
+    }
 }
