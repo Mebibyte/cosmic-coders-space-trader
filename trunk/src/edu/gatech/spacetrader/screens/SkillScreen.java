@@ -99,6 +99,13 @@ public class SkillScreen extends Screen{
      * Field points.
      */
     private String points;
+    
+    private enum Difficulty {EASY, NORMAL, HARD};
+    
+    /**
+     * Field currentDifficulty.
+     */
+    private Difficulty currentDifficulty = Difficulty.NORMAL;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -176,17 +183,9 @@ public class SkillScreen extends Screen{
 		    x = (width / 2) - sep;
 		}
 		
-		if (easy.isSelected()) {
-		    easy.drawSelected(g, panel, width, height);
-		} else easy.draw(g, panel, width, height);
-		
-		if (normal.isSelected()) {
-		    normal.drawSelected(g, panel, width, height);
-		} else normal.draw(g, panel, width, height);
-		
-		if (hard.isSelected()) {
-		    hard.drawSelected(g, panel, width, height);
-		} else hard.draw(g, panel, width, height);
+		easy.draw(g, panel, width, height);
+		normal.draw(g, panel, width, height);
+		hard.draw(g, panel, width, height);
 		
 		startGame.draw(g, panel, width, height);
 	}
@@ -248,15 +247,18 @@ public class SkillScreen extends Screen{
      * @param p Point
      */
 	private void changeDifficulty(Point p) {
-	    if (!easy.isSelected() && easy.isIn(p)) {
+	    if (currentDifficulty != Difficulty.EASY && easy.isIn(p)) {
+	        currentDifficulty = Difficulty.EASY;
             easy.setSelected(true);
             normal.setSelected(false);
             hard.setSelected(false);
-        } else if (!normal.isSelected() && normal.isIn(p)) {
+        } else if (currentDifficulty != Difficulty.NORMAL && normal.isIn(p)) {
+            currentDifficulty = Difficulty.NORMAL;
             easy.setSelected(false);
             normal.setSelected(true);
             hard.setSelected(false);
-        } else if (!hard.isSelected() && hard.isIn(p)) {
+        } else if (currentDifficulty != Difficulty.HARD && hard.isIn(p)) {
+            currentDifficulty = Difficulty.HARD;
             easy.setSelected(false);
             normal.setSelected(false);
             hard.setSelected(true);

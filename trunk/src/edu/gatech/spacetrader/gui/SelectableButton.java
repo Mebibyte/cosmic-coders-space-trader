@@ -100,9 +100,12 @@ public class SelectableButton extends Button{
      * @param width int
      * @param height int
      */
-    public void draw(Graphics g, GamePanel panel, int width, int height){
+    public void draw(Graphics g, GamePanel panel, int width, int height){        
+        if (selected) {
+            BUTTONSELECTED.paintIcon(panel, g, x, y);
+        } else BUTTON.paintIcon(panel, g, x, y);
+        
         g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
-        BUTTON.paintIcon(panel, g, x, y);
         g.drawString(text, 
                 x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
                 y + (buttonHeight >> 1) + FONTY);
@@ -118,21 +121,6 @@ public class SelectableButton extends Button{
     public void drawHovered(Graphics g, GamePanel panel, int width, int height){
         g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
         BUTTONHOVERED.paintIcon(panel, g, x, y);
-        g.drawString(text, 
-                x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-                y + (buttonHeight >> 1) + FONTY);
-    }
-    
-    /**
-     * Method drawSelected.
-     * @param g Graphics
-     * @param panel GamePanel
-     * @param width int
-     * @param height int
-     */
-    public void drawSelected(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
-        BUTTONSELECTED.paintIcon(panel, g, x, y);
         g.drawString(text, 
                 x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
                 y + (buttonHeight >> 1) + FONTY);
