@@ -94,8 +94,8 @@ public class SkillButton extends Button{
 	/**
 	 * Method isClicked.
 	 * @param point Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	@Override
 	public boolean isClicked(Point point) {
 	    return (point.x >= x && point.x <= x + buttonWidth) && 
@@ -105,8 +105,8 @@ public class SkillButton extends Button{
 	/**
 	 * Method isIn.
 	 * @param p Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	@Override
 	public boolean isIn(Point p) {
 		return bounds.contains(p);
@@ -114,8 +114,8 @@ public class SkillButton extends Button{
 
 	/**
 	 * Method getHeight.
-	
-	 * @return int */
+	 * @return int
+	 */
 	@Override
 	public int getHeight() {
 		return buttonHeight;
@@ -123,15 +123,14 @@ public class SkillButton extends Button{
     
     /**
      * Method setDisabled.
-    
-     * @param disabled boolean. */
+     * @param disabled boolean.
+     */
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
     
     /**
      * Method toString.
-    
      * @return String
      */
     @Override

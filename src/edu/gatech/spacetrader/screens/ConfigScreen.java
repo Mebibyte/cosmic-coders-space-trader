@@ -10,12 +10,14 @@ import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.gui.SelectableButton;
 import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.player.Player;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+
 
 
 /**
@@ -100,7 +102,18 @@ public class ConfigScreen extends Screen{
      */
     private String points;
     
-    private enum Difficulty {EASY, NORMAL, HARD};
+    /**
+     */
+    public enum Difficulty {/**
+ * Field EASY.
+ */
+EASY, /**
+  * Field NORMAL.
+  */
+ NORMAL, /**
+  * Field HARD.
+  */
+ HARD};
     
     /**
      * Field currentDifficulty.
@@ -216,6 +229,11 @@ public class ConfigScreen extends Screen{
 	    resetButtons();
 	    startGameDisable();
 	    changeDifficulty(point);
+	    if (startGame.isClicked(point)) {
+	        panel.setActiveScreen(new GameScreen(
+	                new Player(playerName, skills, currentDifficulty),
+	                panel, width, height));
+	    }
 	}
 	
 	/**
@@ -283,7 +301,6 @@ public class ConfigScreen extends Screen{
     
     /**
      * Method toString.
-    
      * @return String
      */
     @Override

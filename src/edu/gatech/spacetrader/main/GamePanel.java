@@ -74,6 +74,7 @@ public class GamePanel extends JPanel{
 	}
 	/**
 	 * Method update.
+	 * @param activeScreen Screen
 	 */
 	/*public void update(){
 		activeScreen.update();
