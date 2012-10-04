@@ -77,7 +77,7 @@ public class TitleScreen extends Screen{
 	@Override
 	public void checkForClick(Point point) {
 		if (newGame.isClicked(point)) {
-		    panel.setActiveScreen(new SkillScreen(panel, width, height));
+		    panel.setActiveScreen(new ConfigScreen(panel, width, height));
 		} else if (quit.isClicked(point)) {
 		    panel.quitGame();
 		}

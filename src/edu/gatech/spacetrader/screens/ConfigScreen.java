@@ -22,7 +22,7 @@ import javax.swing.ImageIcon;
  * @author Glenn
  * @version $Revision: 1.0 $Z
  */
-public class SkillScreen extends Screen{
+public class ConfigScreen extends Screen{
     /**
      * Field buttons.
      */
@@ -113,7 +113,7 @@ public class SkillScreen extends Screen{
 	 * @param width int
 	 * @param height int
 	 */
-	public SkillScreen(GamePanel panel, int width, int height) {
+	public ConfigScreen(GamePanel panel, int width, int height) {
 	    skills = new int[NUMSKILLS];
 	    buttons = new SkillButton[NUMSKILLS * 2];
 
