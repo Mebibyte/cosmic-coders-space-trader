@@ -32,6 +32,7 @@ public abstract class Screen {
 	/**
 	 *
 	 * Method update.
+	 * @param e KeyEvent
 	 */
 	/*public void update() {}*/
 	

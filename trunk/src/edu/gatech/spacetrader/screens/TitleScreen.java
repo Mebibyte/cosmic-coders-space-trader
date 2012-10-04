@@ -85,7 +85,6 @@ public class TitleScreen extends Screen{
 	
 	/**
      * Method toString.
-    
      * @return String
      */
 	@Override

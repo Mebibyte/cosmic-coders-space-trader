@@ -135,18 +135,18 @@ public class BigButton extends Button{
 	/**
 	 * Method isClicked.
 	 * @param point Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public boolean isClicked(Point point){
 		return (point.x >= x && point.x <= x + buttonWidth) && 
-				(point.y >= y && point.y <= y + buttonHeight);
+				(point.y >= y && point.y <= y + buttonHeight) && !disabled;
 	}
 	
 	/**
 	 * Method isIn.
 	 * @param p Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public boolean isIn(Point p){
 	    if (p == null) return false;
 		return bounds.contains(p);
@@ -154,23 +154,22 @@ public class BigButton extends Button{
 	
 	/**
 	 * Method getHeight.
-	
-	 * @return int */
+	 * @return int
+	 */
 	public int getHeight(){
 		return buttonHeight;
 	}
 	
 	/**
 	 * Method getBounds.
-	
-	 * @return Rectangle */
+	 * @return Rectangle
+	 */
 	public Rectangle getBounds(){
 	    return bounds;
 	}
 	
 	/**
      * Method setDisabled.
-    
      * @param disabled boolean
      */
 	public void setDisabled(boolean disabled){
@@ -179,7 +178,6 @@ public class BigButton extends Button{
 	
 	/**
      * Method toString.
-    
      * @return String
      */
 	public String toString(){
