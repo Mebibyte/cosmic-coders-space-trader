@@ -19,7 +19,7 @@ public class TitleScreen extends Screen{
 	/**
 	 * Field newGame.
 	 */
-	private final BigButton newGame, quit;
+	private final BigButton newGame, quit, loadGame;
 	
 	/**
 	 * Field height.
@@ -45,7 +45,10 @@ public class TitleScreen extends Screen{
 		this.width = width;
 		this.height = height;
 		newGame = new BigButton("New Game", width >> 1, height >> 1);
-		quit = new BigButton("Quit", width >> 1, (height >> 1) + newGame.getHeight());
+		loadGame = new BigButton("Load Game", width >> 1,
+				(height >> 1) + newGame.getHeight());
+		quit = new BigButton("Quit", width >> 1,
+				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
 	}
 
 	/**
@@ -61,12 +64,18 @@ public class TitleScreen extends Screen{
 		    if (newGame.isIn(getHoverPoint())) {
 		        newGame.drawHovered(g, panel, width, height);
 		    } else newGame.draw(g, panel, width, height);
+		    
+		    if (loadGame.isIn(getHoverPoint())) {
+		        loadGame.drawHovered(g, panel, width, height);
+		    } else loadGame.draw(g, panel, width, height);
+		    
 		    if (quit.isIn(getHoverPoint())) {
 		        quit.drawHovered(g, panel, width, height);
 		    } else quit.draw(g, panel, width, height);
 		} else {
 		    newGame.draw(g, panel, width, height);
 		    quit.draw(g, panel, width, height);
+		    loadGame.draw(g, panel, width, height);
 		}
 	}
 	
@@ -78,8 +87,10 @@ public class TitleScreen extends Screen{
 	public void checkForClick(Point point) {
 		if (newGame.isClicked(point)) {
 		    panel.setActiveScreen(new ConfigScreen(panel, width, height));
-		} else if (quit.isClicked(point)) {
-		    panel.quitGame();
+		} else if (loadGame.isClicked(point)) {
+		    System.out.println("Fix this later");//FIXME 
+		} else{
+			panel.quitGame();
 		}
 	}
 	
