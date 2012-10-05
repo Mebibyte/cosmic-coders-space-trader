@@ -129,8 +129,8 @@ public class SelectableButton extends Button{
     /**
      * Method isClicked.
      * @param point Point
-     * @return boolean
-     */
+    
+     * @return boolean */
     public boolean isClicked(Point point){
         return (point.x >= x && point.x <= x + buttonWidth) && 
                 (point.y >= y && point.y <= y + buttonHeight);
@@ -139,8 +139,8 @@ public class SelectableButton extends Button{
     /**
      * Method isIn.
      * @param p Point
-     * @return boolean
-     */
+    
+     * @return boolean */
     public boolean isIn(Point p){
         if (p == null) return false;
         return bounds.contains(p);
@@ -148,24 +148,24 @@ public class SelectableButton extends Button{
     
     /**
      * Method getHeight.
-     * @return int
-     */
+    
+     * @return int */
     public int getHeight(){
         return buttonHeight;
     }
     
     /**
      * Method getBounds.
-     * @return Rectangle
-     */
+    
+     * @return Rectangle */
     public Rectangle getBounds(){
         return bounds;
     }
     
     /**
      * Method isSelected.
-     * @return boolean
-     */
+    
+     * @return boolean */
     public boolean isSelected(){
         return selected;
     }
@@ -180,8 +180,8 @@ public class SelectableButton extends Button{
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     public String toString(){
         return "Selectable Button with x = " + x + " and y = " + y;
     }

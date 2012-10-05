@@ -65,9 +65,15 @@ public class GameScreen extends Screen {
         g.drawString(player.getSkills(), 
                 x - (((g.getFontMetrics()).stringWidth(player.getSkills())) / 2), 
                 y + g.getFontMetrics().getHeight());
+        g.drawString(player.getCredits() + " credits", x 
+                - (g.getFontMetrics().stringWidth(player.getCredits() + " credits") / 2), 
+                y + (g.getFontMetrics().getHeight() * 2));
+        g.drawString(player.getSpaceCraft().toString(), x 
+                - (g.getFontMetrics().stringWidth(player.getSpaceCraft().toString()) / 2),
+                y + (g.getFontMetrics().getHeight() * 3));
         g.drawString(player.getDifficulty(), 
                 x - (((g.getFontMetrics()).stringWidth(player.getDifficulty())) / 2), 
-                y + (g.getFontMetrics().getHeight() * 2));
+                y + (g.getFontMetrics().getHeight() * 4));
     }
 
     /**
@@ -81,8 +87,8 @@ public class GameScreen extends Screen {
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString(){
         return "Game screen";

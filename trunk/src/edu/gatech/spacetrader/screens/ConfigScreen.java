@@ -103,6 +103,7 @@ public class ConfigScreen extends Screen{
     private String points;
     
     /**
+     * @author Glenn
      */
     public enum Difficulty {/**
  * Field EASY.
@@ -132,7 +133,7 @@ EASY, /**
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
-	    final int y = (height / 2) - 100;
+	    final int y = 55;
 
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -160,12 +161,11 @@ EASY, /**
 	@Override
 	public void draw(Graphics g) {
 	    final int minBoxWidth = 50;
-	    g.drawString("Player name: ", (width / 2) - 110, (height / 2) - 150);
-		g.drawString(playerName, (width / 2) - 25, (height / 2) - 150);
-		g.drawRect((width / 2) - 30, (height / 2) - 165, 
+	    g.drawString("Player name: ", (width / 2) - 110, g.getFontMetrics().getHeight());
+		g.drawString(playerName, (width / 2) - 25, g.getFontMetrics().getHeight());
+		g.drawRect((width / 2) - 30, g.getFontMetrics().getHeight() - 15, 
 		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
-		                minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10,
-		                20);
+                minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10, 20);
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i].draw(g, panel, width, height);
@@ -174,11 +174,11 @@ EASY, /**
 		points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
 		
 	    g.drawString(points, (width / 2) - 
-	            (g.getFontMetrics().stringWidth(points) / 2), 130);
+	            (g.getFontMetrics().stringWidth(points) / 2), 40);
 		
 		final int sep = 50;
 		int x = (width / 2) - sep;
-		int y = 155;
+		int y = 60;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    g.drawString("Skill " + (skill + 1), (width / 2) - 
@@ -301,8 +301,8 @@ EASY, /**
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString(){
         return "Skill Screen";

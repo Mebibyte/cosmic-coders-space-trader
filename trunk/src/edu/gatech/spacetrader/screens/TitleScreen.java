@@ -88,16 +88,16 @@ public class TitleScreen extends Screen{
 		if (newGame.isClicked(point)) {
 		    panel.setActiveScreen(new ConfigScreen(panel, width, height));
 		} else if (loadGame.isClicked(point)) {
-		    System.out.println("Fix this later");//FIXME 
-		} else{
+		    System.out.println("Fix this later"); //FIXME 
+		} else if (quit.isClicked(point)) {
 			panel.quitGame();
 		}
 	}
 	
 	/**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
 	@Override
     public String toString(){
         return "Title Screen";
