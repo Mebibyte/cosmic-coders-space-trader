@@ -18,8 +18,6 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-
-
 /**
  * @author Glenn
  * @version $Revision: 1.0 $Z
@@ -28,12 +26,23 @@ public class ConfigScreen extends Screen{
     /**
      * Field buttons.
      */
-    private final SkillButton[] buttons;
+    private final SkillButton[] skillButtons;
     
     /**
      * Field buttons.
      */
     private final BigButton startGame;
+    
+    /**
+     * Field easy.
+     */
+    /**
+     * Field normal.
+     */
+    /**
+     * Field hard.
+     */
+    private final SelectableButton easy, normal, hard;
     
     /**
      * Field skills.
@@ -53,17 +62,6 @@ public class ConfigScreen extends Screen{
     private final ImageIcon usedSkillPoint = new ImageIcon(
             getClass().getResource(
                     "/edu/gatech/spacetrader/res/usedSkillPoint.png"));
-    
-    /**
-     * Field easy.
-     */
-    /**
-     * Field normal.
-     */
-    /**
-     * Field hard.
-     */
-    private final SelectableButton easy, normal, hard;
 	
     /**
      * Field height.
@@ -129,16 +127,16 @@ EASY, /**
 	 */
 	public ConfigScreen(GamePanel panel, int width, int height) {
 	    skills = new int[NUMSKILLS];
-	    buttons = new SkillButton[NUMSKILLS * 2];
+	    skillButtons = new SkillButton[NUMSKILLS * 2];
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
 	    final int y = 85;
 
-	    for (int i = 0; i < buttons.length; i++) {
-	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
+	    for (int i = 0; i < skillButtons.length; i++) {
+	        skillButtons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
 	                i % POSNEG == 0 ? xNeg : xPos, y + (i / 2) * 50);
-	        if (i % POSNEG == 0) buttons[i].setDisabled(true);
+	        if (i % POSNEG == 0) skillButtons[i].setDisabled(true);
 	    }
 	    
 	    final int buttonSep = 200;
@@ -167,8 +165,8 @@ EASY, /**
 		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
                 minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10, 20);
 		
-		for (int i = 0; i < buttons.length; i++) {
-		    buttons[i].draw(g, panel, width, height);
+		for (int i = 0; i < skillButtons.length; i++) {
+		    skillButtons[i].draw(g, panel, width, height);
 		}
 		
 		points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
@@ -209,8 +207,8 @@ EASY, /**
 	 */
 	@Override
 	public void checkForClick(Point point) {
-	    for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i].isClicked(point)) {
+	    for (int i = 0; i < skillButtons.length; i++) {
+            if (skillButtons[i].isClicked(point)) {
                 if ((i % POSNEG == 0 && skills[i / 2] > 0) 
                         || (i % POSNEG == 1 && skills[i / 2] < MAXSKILL)) {
                     skills[i / 2] += POSNEG * (i % POSNEG) - 1;
@@ -218,12 +216,12 @@ EASY, /**
                 }
                 
                 if (skills[i / 2] > 0) {
-                    buttons[(i / 2) * 2].setDisabled(false);
-                } else buttons[(i / 2) * 2].setDisabled(true);
+                    skillButtons[(i / 2) * 2].setDisabled(false);
+                } else skillButtons[(i / 2) * 2].setDisabled(true);
                 
                 if (skills[i / 2] < MAXSKILL) {
-                    buttons[((i / 2) * 2) + 1].setDisabled(false);
-                } else buttons[((i / 2) * 2) + 1].setDisabled(true);
+                    skillButtons[((i / 2) * 2) + 1].setDisabled(false);
+                } else skillButtons[((i / 2) * 2) + 1].setDisabled(true);
             }
         }
 	    resetButtons();
@@ -242,9 +240,9 @@ EASY, /**
 	private void resetButtons() {
 	    for (int i = 1; i < NUMSKILLS * 2; i += 2) {
             if (skillPointsUsed >= MAXSKILLPOINTS) {
-                buttons[i].setDisabled(true);
+                skillButtons[i].setDisabled(true);
             } else if (skills[i / 2] < MAXSKILL) {
-                buttons[i].setDisabled(false);
+                skillButtons[i].setDisabled(false);
             }
         }
 	}
