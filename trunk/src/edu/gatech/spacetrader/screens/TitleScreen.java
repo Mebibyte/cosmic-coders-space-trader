@@ -7,8 +7,13 @@ package edu.gatech.spacetrader.screens;
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 /**
@@ -34,6 +39,8 @@ public class TitleScreen extends Screen{
 	 */
 	private final GamePanel panel;
 	
+	private static Image bg;
+	
 	/**
 	 * Constructor for TitleScreen.
 	 * @param panel GamePanel
@@ -49,6 +56,13 @@ public class TitleScreen extends Screen{
 				(height >> 1) + newGame.getHeight(), true);
 		quit = new BigButton("Quit", width >> 1,
 				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
+		
+		try {
+		    bg = ImageIO.read(TitleScreen.class.getResource(
+                    "/edu/gatech/spacetrader/res/space.jpg"));
+		} catch (IOException e) {
+		    System.out.println(e.getStackTrace());
+		}
 	}
 
 	/**
@@ -57,9 +71,12 @@ public class TitleScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
+	    g.drawImage(bg, 0, 0, null);
+	    g.setColor(Color.WHITE);
 	    g.drawString("Space Trader",
 		        (width >> 1) - (g.getFontMetrics().stringWidth("Space Trader") >> 1),
 		        (height >> 1) - (newGame.getHeight()));
+	    g.setColor(Color.BLACK);
 	    
 		newGame.draw(g, panel, width, height);
         loadGame.draw(g, panel, width, height);
@@ -87,6 +104,7 @@ public class TitleScreen extends Screen{
      */
 	@Override
 	public void setHoverPoint(Point p) {
+	    super.setHoverPoint(p);
         newGame.setHovered(p);
         loadGame.setHovered(p);
         quit.setHovered(p);
