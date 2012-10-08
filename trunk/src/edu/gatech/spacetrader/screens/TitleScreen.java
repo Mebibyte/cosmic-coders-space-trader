@@ -44,7 +44,7 @@ public class TitleScreen extends Screen{
 	 */
 	private Image bg; // $codepro.audit.disable variableShouldBeFinal
 	
-	/**s
+	/**
 	 * Constructor for TitleScreen.
 	 * @param panel GamePanel
 	 * @param width int
