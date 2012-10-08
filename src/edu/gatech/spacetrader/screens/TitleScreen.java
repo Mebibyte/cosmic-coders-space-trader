@@ -39,15 +39,18 @@ public class TitleScreen extends Screen{
 	 */
 	private final GamePanel panel;
 	
-	private static Image bg;
-	
 	/**
+	 * Field bg.
+	 */
+	private Image bg; // $codepro.audit.disable variableShouldBeFinal
+	
+	/**s
 	 * Constructor for TitleScreen.
 	 * @param panel GamePanel
 	 * @param width int
 	 * @param height int
 	 */
-	public TitleScreen(GamePanel panel, int width, int height){
+	public TitleScreen(GamePanel panel, int width, int height) {
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
@@ -58,11 +61,11 @@ public class TitleScreen extends Screen{
 				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
 		
 		try {
-		    bg = ImageIO.read(TitleScreen.class.getResource(
-                    "/edu/gatech/spacetrader/res/space.jpg"));
-		} catch (IOException e) {
-		    System.out.println(e.getStackTrace());
-		}
+            bg = ImageIO.read(TitleScreen.class.getResource(
+                        "/edu/gatech/spacetrader/res/space.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	/**
