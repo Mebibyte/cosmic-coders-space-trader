@@ -80,21 +80,21 @@ public class Player {
     
      * @return String */
     public String getDifficulty() {
-        return difficulty.toString();
+        return difficulty.toString().toLowerCase();
     }
     
     /**
      * Method getDifficulty.
-     * @return String
-     */
+    
+     * @return String */
     public int getCredits() {
         return credits;
     }
     
     /**
      * Method getSpaceCraft.
-     * @return SpaceCraft
-     */
+    
+     * @return SpaceCraft */
     public SpaceCraft getSpaceCraft() {
         return spaceCraft;
     }
