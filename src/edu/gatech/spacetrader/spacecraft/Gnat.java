@@ -20,8 +20,8 @@ public class Gnat extends SpaceCraft{
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     public String toString(){
         return "Gnat";
     }

@@ -169,8 +169,8 @@ public class BigButton extends Button{
 	
 	/**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
 	public String toString(){
 	    return "Button with x = " + x + " and y = " + y;
 	}

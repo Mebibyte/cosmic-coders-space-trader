@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.planet.Galaxy;
+import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.player.Player;
 
 
@@ -37,6 +39,16 @@ public class GameScreen extends Screen {
      * Field width.
      */
     private final int width, height;
+    
+    /**
+     * Field galaxy.
+     */
+    private final Galaxy galaxy = new Galaxy();
+    
+    /**
+     * Field currentPlanet.
+     */
+    private Planet currentPlanet;
 
     /**
      * Constructor for GameScreen.
@@ -50,6 +62,7 @@ public class GameScreen extends Screen {
         this.panel = panel;
         this.width = width;
         this.height = height;
+        currentPlanet = galaxy.getStartingPlanet();
     }
 
     /**
@@ -74,6 +87,9 @@ public class GameScreen extends Screen {
         g.drawString(player.getDifficulty(), 
                 x - (((g.getFontMetrics()).stringWidth(player.getDifficulty())) / 2), 
                 y + (g.getFontMetrics().getHeight() * 4));
+        g.drawString(currentPlanet.toString(), 
+                x - (((g.getFontMetrics()).stringWidth(currentPlanet.toString())) / 2), 
+                y + (g.getFontMetrics().getHeight() * 5));
     }
 
     /**
@@ -92,5 +108,13 @@ public class GameScreen extends Screen {
     @Override
     public String toString(){
         return "Game screen";
+    }
+    
+    /**
+     * Method changePlanet.
+     * @param planet Planet
+     */
+    public void changePlanet(Planet planet) {
+        currentPlanet = planet;
     }
 }
