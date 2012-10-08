@@ -46,7 +46,7 @@ public class TitleScreen extends Screen{
 		this.height = height;
 		newGame = new BigButton("New Game", width >> 1, height >> 1);
 		loadGame = new BigButton("Load Game", width >> 1,
-				(height >> 1) + newGame.getHeight());
+				(height >> 1) + newGame.getHeight(), true);
 		quit = new BigButton("Quit", width >> 1,
 				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
 	}
@@ -57,26 +57,13 @@ public class TitleScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawString("Space Trader",
+	    g.drawString("Space Trader",
 		        (width >> 1) - (g.getFontMetrics().stringWidth("Space Trader") >> 1),
 		        (height >> 1) - (newGame.getHeight()));
-		if (panel.isMouseOnScreen()) {
-		    if (newGame.isIn(getHoverPoint())) {
-		        newGame.drawHovered(g, panel, width, height);
-		    } else newGame.draw(g, panel, width, height);
-		    
-		    if (loadGame.isIn(getHoverPoint())) {
-		        loadGame.drawHovered(g, panel, width, height);
-		    } else loadGame.draw(g, panel, width, height);
-		    
-		    if (quit.isIn(getHoverPoint())) {
-		        quit.drawHovered(g, panel, width, height);
-		    } else quit.draw(g, panel, width, height);
-		} else {
-		    newGame.draw(g, panel, width, height);
-		    quit.draw(g, panel, width, height);
-		    loadGame.draw(g, panel, width, height);
-		}
+	    
+		newGame.draw(g, panel, width, height);
+        loadGame.draw(g, panel, width, height);
+		quit.draw(g, panel, width, height);
 	}
 	
 	/**
@@ -95,9 +82,20 @@ public class TitleScreen extends Screen{
 	}
 	
 	/**
+     * Method setHoverPoint.
+     * @param p Point
+     */
+	@Override
+	public void setHoverPoint(Point p) {
+        newGame.setHovered(p);
+        loadGame.setHovered(p);
+        quit.setHovered(p);
+    }
+	
+	/**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
 	@Override
     public String toString(){
         return "Title Screen";

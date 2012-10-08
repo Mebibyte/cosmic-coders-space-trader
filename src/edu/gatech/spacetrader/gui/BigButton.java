@@ -71,7 +71,10 @@ public class BigButton extends Button{
 	/**
      * Field disabled.
      */
-	private boolean disabled;
+	/**
+     * Field hovered.
+     */
+	private boolean disabled, hovered;
 	
 	/**
 	 * Constructor for BigButton.
@@ -108,25 +111,13 @@ public class BigButton extends Button{
 	 * @param height int
 	 */
 	public void draw(Graphics g, GamePanel panel, int width, int height){
-        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
 		if (disabled) {
 		    BUTTONDISABLED.paintIcon(panel, g, x, y);
+		} else if (hovered) {
+		    BUTTONHOVERED.paintIcon(panel, g, x, y);
 		} else BUTTON.paintIcon(panel, g, x, y);
-		g.drawString(text, 
-				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
-				y + (buttonHeight >> 1) + FONTY);
-	}
-	
-	/**
-	 * Method drawHovered.
-	 * @param g Graphics
-	 * @param panel GamePanel
-	 * @param width int
-	 * @param height int
-	 */
-	public void drawHovered(Graphics g, GamePanel panel, int width, int height){
-		g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
-		BUTTONHOVERED.paintIcon(panel, g, x, y);
+		
+        g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
 				y + (buttonHeight >> 1) + FONTY);
@@ -178,9 +169,19 @@ public class BigButton extends Button{
 	
 	/**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
 	public String toString(){
 	    return "Button with x = " + x + " and y = " + y;
 	}
+
+	/**
+     * Method setHovered.
+     * @param p Point
+     */
+    public void setHovered(Point p) {
+        if (bounds.contains(p)) {
+            hovered = true;
+        } else hovered = false;
+    }
 }

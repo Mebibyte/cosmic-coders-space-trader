@@ -81,7 +81,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field playerName.
      */
-    private String playerName = "";
+    private String playerName = "Player";
     
     /**
      * Field numSkill.
@@ -89,7 +89,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int NUMSKILLS = 5, DIFFHEIGHT = 350, MAXSKILL = 10,
+    private static final int NUMSKILLS = 4, DIFFHEIGHT = 350, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
    
     /**
@@ -133,7 +133,7 @@ EASY, /**
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
-	    final int y = 55;
+	    final int y = 85;
 
 	    for (int i = 0; i < buttons.length; i++) {
 	        buttons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -161,9 +161,9 @@ EASY, /**
 	@Override
 	public void draw(Graphics g) {
 	    final int minBoxWidth = 50;
-	    g.drawString("Player name: ", (width / 2) - 110, g.getFontMetrics().getHeight());
-		g.drawString(playerName, (width / 2) - 25, g.getFontMetrics().getHeight());
-		g.drawRect((width / 2) - 30, g.getFontMetrics().getHeight() - 15, 
+	    g.drawString("Player name: ", (width / 2) - 110, 35);
+		g.drawString(playerName, (width / 2) - 25, 35);
+		g.drawRect((width / 2) - 30, 20, 
 		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
                 minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10, 20);
 		
@@ -174,11 +174,11 @@ EASY, /**
 		points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
 		
 	    g.drawString(points, (width / 2) - 
-	            (g.getFontMetrics().stringWidth(points) / 2), 40);
+	            (g.getFontMetrics().stringWidth(points) / 2), 60);
 		
 		final int sep = 50;
 		int x = (width / 2) - sep;
-		int y = 60;
+		int y = 90;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    g.drawString("Skill " + (skill + 1), (width / 2) - 
