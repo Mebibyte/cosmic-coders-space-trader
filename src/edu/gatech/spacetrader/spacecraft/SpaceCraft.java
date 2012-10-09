@@ -15,4 +15,15 @@ public abstract class SpaceCraft {
      * Method fly.
      */
     public abstract void fly();
+    
+    /**
+     * @param attackStrength
+     * @return damage done by opponent 
+     */
+    public abstract int takeDamge(int attackStrength);
+    
+    /**
+     * @param repairSkill
+     */
+    public abstract void repair(int repairSkill);
 }
