@@ -137,6 +137,24 @@ public class Planet {
             "Zuul"          // From the first Ghostbusters movie
         };
     
+    private static enum Environment{
+    	DESERT, WATER, JUNGLE, ICE, EARTHLIKE, TROPICAL, UNDERGROUND
+    }
+    
+    private static enum CivilizationLevel{
+    	STONE_AGE, AGRICULTURAL, IMPERIAL, EARLY_INDUSTRIAL, ADVANCED_INDUSTRIAL
+    }
+    
+    /**
+     * code pro is wrong here. this will change
+     */
+    private CivilizationLevel civLevel;
+    
+    /**
+     * 
+     */
+    private final Environment environment;
+    
     /**
      * Field name.
      */
@@ -183,6 +201,10 @@ public class Planet {
         
         x = RAND.nextInt(galaxyWidth);
         y = RAND.nextInt(galaxyHeight);
+        
+        civLevel = CivilizationLevel.values()
+        		[RAND.nextInt(CivilizationLevel.values().length)];
+        environment = Environment.values()[RAND.nextInt(Environment.values().length)];
     }
     
     /**
@@ -199,6 +221,29 @@ public class Planet {
      */
     public int getY() {
         return y;
+    }
+    
+    /**
+     * @return The planet's environment type
+     */
+    public Environment getEnvironment(){
+    	return this.environment;
+    }
+    
+    /**
+     * @return The planet's civilization level
+     */
+    public CivilizationLevel getCivLevel(){
+    	return this.civLevel;
+    }
+    
+    /**
+     * 
+     */
+    private void advanceCivilization(){
+    	//Advance civilization to next level
+    	//called internally when a random conditional is met during player movement.
+    	System.out.println("CodePro, stahp!");
     }
     
     /**
