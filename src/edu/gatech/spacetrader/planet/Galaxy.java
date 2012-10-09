@@ -3,6 +3,10 @@
  */
 package edu.gatech.spacetrader.planet;
 
+import java.awt.Graphics;
+
+import edu.gatech.spacetrader.main.GamePanel;
+
 /**
  * @author Glenn
  * @version 2.0
@@ -13,6 +17,16 @@ public class Galaxy {
      * (value is 120)
      */
     private static final int NUM_PLANETS = 120;
+    
+    /**
+     * Field GALAXY_WIDTH.
+     * (value is 150)
+     */
+    /**
+     * Field GALAXY_HEIGHT.
+     * (value is 100)
+     */
+    private static final int GALAXY_WIDTH = 150, GALAXY_HEIGHT = 100;
 
     /**
      * Field planets.
@@ -24,7 +38,7 @@ public class Galaxy {
      */
     public Galaxy() {
         for (int i = 0; i < NUM_PLANETS; i++) {
-            planets[i] = new Planet();
+            planets[i] = new Planet(GALAXY_WIDTH, GALAXY_HEIGHT);
         }
     }
 
@@ -34,6 +48,18 @@ public class Galaxy {
      */
     public Planet getStartingPlanet() {
         return planets[0];
+    }
+    
+    /**
+     * Method getStartingPlanet.
+     * @param g Graphics
+     * @param panel GamePanel
+     */
+    public void draw(Graphics g, GamePanel panel) {
+        g.drawRect(0, 0, GALAXY_WIDTH, GALAXY_HEIGHT);
+        for (Planet p : planets) {
+            g.fillOval(p.getX(), p.getY(), 2, 2); // $codepro.audit.disable numericLiterals
+        }
     }
     
     /**

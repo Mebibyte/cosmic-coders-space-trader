@@ -159,9 +159,19 @@ public class Planet {
     private static final int NUM_PLANETS = 120;
     
     /**
-     * Constructor for Planet.
+     * Field x.
      */
-    public Planet(){
+    /**
+     * Field y.
+     */
+    private final int x, y;
+    
+    /**
+     * Constructor for Planet.
+     * @param galaxyWidth Width of galaxy.
+     * @param galaxyHeight Height of the galaxy.
+     */
+    public Planet(int galaxyWidth, int galaxyHeight){
         int nextPlanet = RAND.nextInt(NUM_PLANETS);
         
         while (NAMES_USED.contains(nextPlanet)) {
@@ -170,6 +180,25 @@ public class Planet {
         
         name = PLANET_NAMES[nextPlanet];
         NAMES_USED.add(nextPlanet);
+        
+        x = RAND.nextInt(galaxyWidth);
+        y = RAND.nextInt(galaxyHeight);
+    }
+    
+    /**
+     * Method getX.
+     * @return int X value of planet.
+     */
+    public int getX() {
+        return x;
+    }
+    
+    /**
+     * Method getY.
+     * @return int Y value of planet.
+     */
+    public int getY() {
+        return y;
     }
     
     /**
