@@ -90,6 +90,7 @@ public class GameScreen extends Screen {
         g.drawString(currentPlanet.toString(), 
                 x - (((g.getFontMetrics()).stringWidth(currentPlanet.toString())) / 2), 
                 y + (g.getFontMetrics().getHeight() * 5));
+        galaxy.draw(g, panel);
     }
 
     /**

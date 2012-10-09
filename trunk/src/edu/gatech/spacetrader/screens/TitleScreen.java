@@ -9,11 +9,9 @@ import edu.gatech.spacetrader.main.GamePanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -42,8 +40,9 @@ public class TitleScreen extends Screen{
 	/**
 	 * Field bg.
 	 */
-	private Image bg; // $codepro.audit.disable variableShouldBeFinal
-	
+    private static final ImageIcon BG = new ImageIcon(
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/space.jpg"));
+    
 	/**
 	 * Constructor for TitleScreen.
 	 * @param panel GamePanel
@@ -59,13 +58,6 @@ public class TitleScreen extends Screen{
 				(height >> 1) + newGame.getHeight(), true);
 		quit = new BigButton("Quit", width >> 1,
 				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
-		
-		try {
-            bg = ImageIO.read(TitleScreen.class.getResource(
-                        "/edu/gatech/spacetrader/res/space.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
 
 	/**
@@ -74,7 +66,7 @@ public class TitleScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-	    g.drawImage(bg, 0, 0, null);
+	    BG.paintIcon(panel, g, 0, 0);
 	    g.setColor(Color.WHITE);
 	    g.drawString("Space Trader",
 		        (width >> 1) - (g.getFontMetrics().stringWidth("Space Trader") >> 1),
