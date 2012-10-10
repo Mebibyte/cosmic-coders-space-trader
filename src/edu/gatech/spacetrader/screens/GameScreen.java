@@ -100,7 +100,7 @@ public class GameScreen extends Screen {
      */
     @Override
     public void checkForClick(Point point) {
-        System.out.println("Add a button with a panel: " + panel);
+        System.out.println("Checking for clicks"); //FIXME
     }
     
     /**
