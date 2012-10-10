@@ -137,11 +137,11 @@ public class Planet {
             "Zuul"          // From the first Ghostbusters movie
         };
     
-    private static enum Environment{
+    public static enum Environment{
     	DESERT, WATER, JUNGLE, ICE, EARTHLIKE, TROPICAL, UNDERGROUND
     }
     
-    private static enum CivilizationLevel{
+    public static enum CivilizationLevel{
     	STONE_AGE, AGRICULTURAL, IMPERIAL, EARLY_INDUSTRIAL, ADVANCED_INDUSTRIAL
     }
     

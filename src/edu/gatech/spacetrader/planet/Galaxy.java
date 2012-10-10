@@ -3,6 +3,7 @@
  */
 package edu.gatech.spacetrader.planet;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import edu.gatech.spacetrader.main.GamePanel;
@@ -58,7 +59,31 @@ public class Galaxy {
     public void draw(Graphics g, GamePanel panel) {
         g.drawRect(0, 0, GALAXY_WIDTH, GALAXY_HEIGHT);
         for (Planet p : planets) {
-            g.fillOval(p.getX() - 1, p.getY() - 1, 2, 2); // $codepro.audit.disable numericLiterals
+        	switch(p.getEnvironment()){
+        	case WATER:
+        		g.setColor(Color.BLUE);
+        		break;
+        	case ICE:
+        		g.setColor(new Color(0x36,0xDB,0xCA));
+        		break;
+        	case TROPICAL:
+        		g.setColor(Color.GREEN);
+        		break;
+        	case DESERT:
+        		g.setColor(new Color(0xCD,0x95,0x0C));
+        		break;
+        	case EARTHLIKE:
+        		g.setColor(Color.CYAN);
+        		break;
+        	case JUNGLE:
+        		g.setColor(new Color(00,0x64,00));
+        		break;
+        	default:
+        		g.setColor(Color.BLACK);
+        		break;
+        	}
+            g.fillOval(p.getX() - 2, p.getY() - 2, 4, 4); // $codepro.audit.disable numericLiterals
+            g.setColor(Color.BLACK);
         }
     }
     
