@@ -45,7 +45,6 @@ public class Gnat extends SpaceCraft{
 	 */
 	@Override
 	public void repair(int repairSkill) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Repair"); //FIXME
 	}
 }

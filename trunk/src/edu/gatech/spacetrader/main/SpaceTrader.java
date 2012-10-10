@@ -6,7 +6,6 @@
 package edu.gatech.spacetrader.main;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -68,21 +67,18 @@ public class SpaceTrader extends JFrame {
 	 */
 	public SpaceTrader(){
 		super("Space Trader");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		
 		gamePanel = new GamePanel(this, WIDTH, HEIGHT);
-		gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		getContentPane().add(gamePanel);
-
-		runGameLoop();
-		
-		final Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    setLocation((int) (dimension.getWidth() - WIDTH) >> 1,
-	            (int) (dimension.getHeight() - HEIGHT) >> 1);
+        gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        getContentPane().add(gamePanel);
 	    
-		setResizable(false);
-		pack();
-		setVisible(true);
+        pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+		
+		runGameLoop();
 	}
 	
 	/**

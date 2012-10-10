@@ -243,7 +243,13 @@ public class Planet {
     private void advanceCivilization(){
     	//Advance civilization to next level
     	//called internally when a random conditional is met during player movement.
-    	System.out.println("CodePro, stahp!");
+        switch (civLevel) {
+            case STONE_AGE:
+                civLevel = CivilizationLevel.AGRICULTURAL;
+                break;
+            default:
+                break;
+        }
     }
     
     /**

@@ -7,7 +7,6 @@ package edu.gatech.spacetrader.screens;
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -67,12 +66,6 @@ public class TitleScreen extends Screen{
 	@Override
 	public void draw(Graphics g) {
 	    BG.paintIcon(panel, g, 0, 0);
-	    g.setColor(Color.WHITE);
-	    g.drawString("Space Trader",
-		        (width >> 1) - (g.getFontMetrics().stringWidth("Space Trader") >> 1),
-		        (height >> 1) - (newGame.getHeight()));
-	    g.setColor(Color.BLACK);
-	    
 		newGame.draw(g, panel, width, height);
         loadGame.draw(g, panel, width, height);
 		quit.draw(g, panel, width, height);
