@@ -240,7 +240,8 @@ public class Planet {
     /**
      * 
      */
-    private void advanceCivilization(){
+    @SuppressWarnings("unused")
+    private void advanceCivilization(){ // $codepro.audit.disable unusedMethod
     	//Advance civilization to next level
     	//called internally when a random conditional is met during player movement.
         switch (civLevel) {

@@ -103,16 +103,30 @@ public class ConfigScreen extends Screen{
     /**
      * @author Glenn
      */
-    public enum Difficulty {/**
- * Field EASY.
- */
-EASY, /**
-  * Field NORMAL.
-  */
- NORMAL, /**
-  * Field HARD.
-  */
- HARD};
+    public enum Difficulty {
+        EASY("Easy"), NORMAL("Normal"), HARD("Hard");
+        
+        /**
+         * Field text.
+         */
+        private final String text;
+        
+        /**
+         * Difficulty constructor.
+         * @param text String
+         */
+        private Difficulty(String text){
+            this.text = text;
+        }
+        
+        /**
+         * Method toString.
+         * @return String
+         */
+        public String toString(){
+            return text;
+        }
+    }
     
     /**
      * Field currentDifficulty.
