@@ -58,7 +58,7 @@ public class Galaxy {
     public void draw(Graphics g, GamePanel panel) {
         g.drawRect(0, 0, GALAXY_WIDTH, GALAXY_HEIGHT);
         for (Planet p : planets) {
-            g.fillOval(p.getX(), p.getY(), 2, 2); // $codepro.audit.disable numericLiterals
+            g.fillOval(p.getX() - 1, p.getY() - 1, 2, 2); // $codepro.audit.disable numericLiterals
         }
     }
     
