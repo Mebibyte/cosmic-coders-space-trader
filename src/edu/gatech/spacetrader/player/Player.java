@@ -80,7 +80,7 @@ public class Player {
     
      * @return String */
     public String getDifficulty() {
-        return difficulty.toString().toLowerCase();
+        return difficulty.toString();
     }
     
     /**
