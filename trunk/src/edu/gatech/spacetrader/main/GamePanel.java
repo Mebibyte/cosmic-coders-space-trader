@@ -1,6 +1,6 @@
 // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
-/* Comment
- * 
+/* GamePanel class.
+ * Main JPanel of the game.
  */
 
 package edu.gatech.spacetrader.main;
@@ -23,7 +23,7 @@ import edu.gatech.spacetrader.screens.TitleScreen;
 
 /**
  * @author Glenn
- * @version $Revision: 1.0 $
+ * @version 1.0
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
@@ -39,6 +39,9 @@ public class GamePanel extends JPanel{
 	
 	/**
 	 * Constructor for GamePanel.
+	 * Sets focusable and adds Mouse/Key listener.
+	 * Creates the title screen to be displayed.
+	 * 
 	 * @param width int
 	 * @param height int
 	 */
@@ -53,6 +56,8 @@ public class GamePanel extends JPanel{
 	
 	/**
 	 * Method paintComponent.
+	 * Clears the screen, then draws the current active screen.
+	 * 
 	 * @param g Graphics
 	 */
 	public void paintComponent(Graphics g){
@@ -66,8 +71,7 @@ public class GamePanel extends JPanel{
 		activeScreen.draw(g);
 	}
 	/**
-	 * Method update.
-	 * @param activeScreen Screen
+	 * Method update
 	 */
 	/*public void update(){
 		activeScreen.update();
@@ -75,6 +79,8 @@ public class GamePanel extends JPanel{
 	
 	/**
 	 * Method setActiveScreen.
+	 * Changes the current active screen;
+	 * 
 	 * @param activeScreen Screen
 	 */
 	public void setActiveScreen(Screen activeScreen){
@@ -83,14 +89,16 @@ public class GamePanel extends JPanel{
 	
 	/**
 	 * Method isMouseOnScreen.
-	
-	 * @return boolean */
+	 * 
+	 * @return boolean
+	 */
 	public boolean isMouseOnScreen() {
 		return mouseOnScreen;
 	}
 
 	/**
 	 * Method setMouseOnScreen.
+	 * 
 	 * @param mouseOnScreen boolean
 	 */
 	public void setMouseOnScreen(boolean mouseOnScreen) {
@@ -103,6 +111,7 @@ public class GamePanel extends JPanel{
 	private class MouseListener extends MouseAdapter {
 	    /**
 	     * Method mousePressed.
+	     * 
 	     * @param event MouseEvent
 	     * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
 	     */
@@ -112,6 +121,7 @@ public class GamePanel extends JPanel{
         
         /**
          * Method mouseEntered.
+         * 
          * @param event MouseEvent
          * @see java.awt.event.MouseListener#mouseEntered(MouseEvent)
          */
@@ -143,15 +153,17 @@ public class GamePanel extends JPanel{
 	private class KeyListener extends KeyAdapter {
 	    /**
 	     * Method keyTyped.
+	     * 
 	     * @param e KeyEvent
-	    
-	     * @see java.awt.event.KeyListener#keyTyped(KeyEvent) */
+	     * @see java.awt.event.KeyListener#keyTyped(KeyEvent)
+	     */
 	    public void keyTyped(KeyEvent e) {
             activeScreen.keyTyped(e);
         }
 	    
 	    /**
          * Method toString.
+         * 
          * @return String.
          */
         public String toString() {

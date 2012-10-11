@@ -1,6 +1,6 @@
-// $codepro.audit.disable disallowSleepInsideWhile, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, lossOfPrecisionInCast
-/* Comment
- * 
+// $codepro.audit.disable disallowSleepInsideWhile, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, lossOfPrecisionInCast, multiplicationOrDivisionByPowersOf2
+/* SpaceTrader class
+ * Main class for project.
  */
 
 package edu.gatech.spacetrader.main;
@@ -12,17 +12,18 @@ import javax.swing.SwingUtilities;
 
 /**
  * @author Glenn
- * @version $Revision: 1.0 $
+ * @version 1.0
  */
 @SuppressWarnings("serial")
 public class SpaceTrader extends JFrame {
     /**
      * Field HEIGHT.
+     * (value is 1000)
      */
     /**
      * Field WIDTH.
      */
-    private static final int WIDTH = 1000, HEIGHT = 500;
+    private static final int WIDTH = 1000, HEIGHT = (WIDTH * 9) / 16;
 	
     /**
      * Field GamePanel.
@@ -64,6 +65,8 @@ public class SpaceTrader extends JFrame {
 	
 	/**
 	 * Constructor for SpaceTrader.
+	 * Creates a new GamePanel and adds it to the JFrame.
+	 * Also starts the game loop.
 	 */
 	public SpaceTrader(){
 		super("Space Trader");
@@ -71,7 +74,7 @@ public class SpaceTrader extends JFrame {
 		
 		gamePanel = new GamePanel(WIDTH, HEIGHT);
         gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        getContentPane().add(gamePanel);
+        add(gamePanel);
 	    
         pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +86,7 @@ public class SpaceTrader extends JFrame {
 	
 	/**
 	 * Method runGameLoop.
+	 * Creates a new thread to run the game loop.
 	 */
 	public void runGameLoop(){
 		final Thread loop = new Thread(){
@@ -95,6 +99,8 @@ public class SpaceTrader extends JFrame {
 	
 	/**
 	 * Method gameLoop.
+	 * Draws to the panel and updates the game.
+	 * Attempts to maintain 60 FPS.
 	 */
 	private void gameLoop() {
         double lastUpdateTime = System.nanoTime();
@@ -127,10 +133,10 @@ public class SpaceTrader extends JFrame {
 					&& now - lastUpdateTime < TIME_BETWEEN_UPDATES){
 				Thread.yield();
 				try {
-				    Thread.sleep(1);
-			    } catch(Exception e) {
-			        System.out.println(e);
-			    } 
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 				now = System.nanoTime();
 			}
 		}
@@ -138,6 +144,7 @@ public class SpaceTrader extends JFrame {
 	
 	/**
 	 * Method drawGame.
+	 * Calls the repaint method of the GamePanel.
 	 */
 	private void drawGame(){
 		gamePanel.repaint();
@@ -145,18 +152,21 @@ public class SpaceTrader extends JFrame {
 	
 	/**
 	 * Method main.
+	 * When run, creates a new instance of SpaceTrader.
+	 * 
 	 * @param args String[]
 	 */
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new edu.gatech.spacetrader.main.SpaceTrader();
+				new SpaceTrader();
 			}
 		});
 	}
 
 	/**
      * Method quitGame.
+     * Ends the game loop.
      */
 	public void quitGame() {
         gameRunning = false;
