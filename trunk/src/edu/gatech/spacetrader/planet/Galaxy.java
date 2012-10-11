@@ -1,3 +1,4 @@
+// $codepro.audit.disable numericLiterals, multiplicationOrDivisionByPowersOf2
 /* Comment
  * 
  */
@@ -27,7 +28,17 @@ public class Galaxy {
      * Field GALAXY_HEIGHT.
      * (value is 100)
      */
-    private static final int GALAXY_WIDTH = 150, GALAXY_HEIGHT = 100;
+    public static final int GALAXY_WIDTH = 150,  GALAXY_HEIGHT = 100;
+    
+    /**
+     * Field HALF_GALAXY_WIDTH.
+     * (value is 75)
+     */
+    /**
+     * Field HALF_GALAXY_HEIGHT.
+     * (value is 50)
+     */
+    public static final int HALF_GALAXY_WIDTH = 75,  HALF_GALAXY_HEIGHT = 50;
 
     /**
      * Field planets.
@@ -55,34 +66,38 @@ public class Galaxy {
      * Method getStartingPlanet.
      * @param g Graphics
      * @param panel GamePanel
+     * @param height 
+     * @param width 
      */
-    public void draw(Graphics g, GamePanel panel) {
-        g.drawRect(0, 0, GALAXY_WIDTH, GALAXY_HEIGHT);
+    public void draw(Graphics g, GamePanel panel, int width, int height) {
+        g.drawRect(width - HALF_GALAXY_WIDTH, height - HALF_GALAXY_HEIGHT,
+                GALAXY_WIDTH, GALAXY_HEIGHT);
         for (Planet p : planets) {
         	switch(p.getEnvironment()){
         	case WATER:
         		g.setColor(Color.BLUE);
         		break;
         	case ICE:
-        		g.setColor(new Color(0x36,0xDB,0xCA));
+        		g.setColor(new Color(0x36, 0xDB, 0xCA));
         		break;
         	case TROPICAL:
         		g.setColor(Color.GREEN);
         		break;
         	case DESERT:
-        		g.setColor(new Color(0xCD,0x95,0x0C));
+        		g.setColor(new Color(0xCD, 0x95, 0x0C));
         		break;
         	case EARTHLIKE:
         		g.setColor(Color.CYAN);
         		break;
         	case JUNGLE:
-        		g.setColor(new Color(00,0x64,00));
+        		g.setColor(new Color(00, 0x64, 00));
         		break;
         	default:
         		g.setColor(Color.BLACK);
         		break;
         	}
-            g.fillOval(p.getX() - 2, p.getY() - 2, 4, 4); // $codepro.audit.disable numericLiterals
+            g.fillOval(width - HALF_GALAXY_WIDTH + (p.getX() - 2),
+                    height - HALF_GALAXY_HEIGHT + (p.getY() - 2), 4, 4); // $codepro.audit.disable numericLiterals
             g.setColor(Color.BLACK);
         }
     }
