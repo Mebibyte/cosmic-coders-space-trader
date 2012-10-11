@@ -117,10 +117,12 @@ public class BigButton extends Button{
 		    BUTTONHOVERED.paintIcon(panel, g, x, y);
 		} else BUTTON.paintIcon(panel, g, x, y);
 		
+		final Font default_font = g.getFont();
         g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
 		g.drawString(text, 
 				x + (buttonWidth >> 1) - (((g.getFontMetrics()).stringWidth(text)) >> 1), 
 				y + (buttonHeight >> 1) + FONTY);
+		g.setFont(default_font);
 	}
 	
 	/**

@@ -72,6 +72,7 @@ public class GamePanel extends JPanel{
 	}
 	/**
 	 * Method update
+	 * @param activeScreen Screen
 	 */
 	/*public void update(){
 		activeScreen.update();
@@ -90,8 +91,8 @@ public class GamePanel extends JPanel{
 	/**
 	 * Method isMouseOnScreen.
 	 * 
-	 * @return boolean
-	 */
+	
+	 * @return boolean */
 	public boolean isMouseOnScreen() {
 		return mouseOnScreen;
 	}
@@ -113,8 +114,8 @@ public class GamePanel extends JPanel{
 	     * Method mousePressed.
 	     * 
 	     * @param event MouseEvent
-	     * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
-	     */
+	    
+	     * @see java.awt.event.MouseListener#mousePressed(MouseEvent) */
 	    public void mousePressed(MouseEvent event){
             activeScreen.checkForClick(event.getPoint());
         }
@@ -123,8 +124,8 @@ public class GamePanel extends JPanel{
          * Method mouseEntered.
          * 
          * @param event MouseEvent
-         * @see java.awt.event.MouseListener#mouseEntered(MouseEvent)
-         */
+        
+         * @see java.awt.event.MouseListener#mouseEntered(MouseEvent) */
         public void mouseEntered(MouseEvent event){
             setMouseOnScreen(true);
         }
@@ -132,16 +133,16 @@ public class GamePanel extends JPanel{
         /**
          * Method mouseExited.
          * @param e MouseEvent
-         * @see java.awt.event.MouseListener#mouseExited(MouseEvent)
-         */
+        
+         * @see java.awt.event.MouseListener#mouseExited(MouseEvent) */
         public void mouseExited(MouseEvent e){
             setMouseOnScreen(false);
         }
         
         /**
          * Method toString.
-         * @return String.
-         */
+        
+         * @return String. */
         public String toString() {
             return "Mouse Listener";
         }
@@ -155,8 +156,8 @@ public class GamePanel extends JPanel{
 	     * Method keyTyped.
 	     * 
 	     * @param e KeyEvent
-	     * @see java.awt.event.KeyListener#keyTyped(KeyEvent)
-	     */
+	    
+	     * @see java.awt.event.KeyListener#keyTyped(KeyEvent) */
 	    public void keyTyped(KeyEvent e) {
             activeScreen.keyTyped(e);
         }
@@ -164,8 +165,8 @@ public class GamePanel extends JPanel{
 	    /**
          * Method toString.
          * 
-         * @return String.
-         */
+        
+         * @return String. */
         public String toString() {
             return "Key Listener";
         }

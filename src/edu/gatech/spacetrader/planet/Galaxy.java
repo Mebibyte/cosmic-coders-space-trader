@@ -56,8 +56,8 @@ public class Galaxy {
 
     /**
      * Method getStartingPlanet.
-     * @return Planet
-     */
+    
+     * @return Planet */
     public Planet getStartingPlanet() {
         return planets[0];
     }
@@ -104,8 +104,8 @@ public class Galaxy {
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     public String toString() {
         final StringBuffer res = new StringBuffer("{");
         for (Planet p : planets) {

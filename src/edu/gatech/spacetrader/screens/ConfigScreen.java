@@ -7,6 +7,7 @@
 package edu.gatech.spacetrader.screens;
 
 import edu.gatech.spacetrader.gui.BigButton;
+import edu.gatech.spacetrader.gui.TextFieldFrame;
 import edu.gatech.spacetrader.gui.SelectableButton;
 import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
@@ -14,7 +15,6 @@ import edu.gatech.spacetrader.player.Player;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -31,7 +31,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field buttons.
      */
-    private final BigButton startGame;
+    private final BigButton startGame, editName;
     
     /**
      * Field easy.
@@ -87,7 +87,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field numSkill.
      */
-    private static final int NUMSKILLS = 4, DIFFHEIGHT = 350, MAXSKILL = 10,
+    private static final int NUMSKILLS = 4, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
    
     /**
@@ -104,7 +104,16 @@ public class ConfigScreen extends Screen{
      * @author Glenn
      */
     public enum Difficulty {
-        EASY("Easy"), NORMAL("Normal"), HARD("Hard");
+        /**
+         * Field EASY.
+         */
+        EASY("Easy"), /**
+  * Field NORMAL.
+  */
+ NORMAL("Normal"), /**
+  * Field HARD.
+  */
+ HARD("Hard");
         
         /**
          * Field text.
@@ -121,8 +130,8 @@ public class ConfigScreen extends Screen{
         
         /**
          * Method toString.
-         * @return String
-         */
+        
+         * @return String */
         public String toString(){
             return text;
         }
@@ -145,7 +154,7 @@ public class ConfigScreen extends Screen{
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
-	    final int y = 85;
+	    final int y = 150;
 
 	    for (int i = 0; i < skillButtons.length; i++) {
 	        skillButtons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -155,14 +164,15 @@ public class ConfigScreen extends Screen{
 	    
 	    final int buttonSep = 200;
 	    
-	    easy = new SelectableButton("Easy", (width / 2) - buttonSep, DIFFHEIGHT, false);
-	    normal = new SelectableButton("Normal", width / 2, DIFFHEIGHT, true);
-	    hard = new SelectableButton("Hard", (width / 2) + buttonSep, DIFFHEIGHT, false);
+	    easy = new SelectableButton("Easy", (width / 2) - buttonSep, height - 125, false);
+	    normal = new SelectableButton("Normal", width / 2, height - 125, true);
+	    hard = new SelectableButton("Hard", (width / 2) + buttonSep, height - 125, false);
         
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
 		
+		editName = new BigButton("Edit", width / 2, 75);
 		startGame = new BigButton("Start", width / 2, height - 50, true);
 	}
 
@@ -172,12 +182,11 @@ public class ConfigScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-	    final int minBoxWidth = 50;
-	    g.drawString("Player name: ", (width / 2) - 110, 35);
-		g.drawString(playerName, (width / 2) - 25, 35);
-		g.drawRect((width / 2) - 30, 20, 
-		        g.getFontMetrics().stringWidth(playerName) + 10 < minBoxWidth ? 
-                minBoxWidth : g.getFontMetrics().stringWidth(playerName) + 10, 20);
+	    g.drawString("Player name: " + playerName, (width / 2) - 
+	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
+	            35);
+		
+		editName.draw(g, panel, width, height);
 		
 		for (int i = 0; i < skillButtons.length; i++) {
 		    skillButtons[i].draw(g, panel, width, height);
@@ -186,11 +195,11 @@ public class ConfigScreen extends Screen{
 		points = "Remaining Skill Points: " + (MAXSKILLPOINTS - skillPointsUsed);
 		
 	    g.drawString(points, (width / 2) - 
-	            (g.getFontMetrics().stringWidth(points) / 2), 60);
+	            (g.getFontMetrics().stringWidth(points) / 2), 130);
 		
 		final int sep = 50;
 		int x = (width / 2) - sep;
-		int y = 90;
+		int y = 155;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    g.drawString("Skill " + (skill + 1), (width / 2) - 
@@ -245,6 +254,8 @@ public class ConfigScreen extends Screen{
 	        panel.setActiveScreen(new GameScreen(
 	                new Player(playerName, skills, currentDifficulty),
 	                panel, width, height));
+	    } else if (editName.isClicked(point)) {
+	        new TextFieldFrame(this, 15, playerName);
 	    }
 	}
 	
@@ -294,21 +305,16 @@ public class ConfigScreen extends Screen{
             hard.setSelected(true);
         }
 	}
-
+    
     /**
-     * Method keyTyped.
-     * @param e KeyEvent
+     * Method setHoverPoint.
+     * @param p Point
      */
     @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-            if (playerName.length() > 0) {
-                playerName = playerName.substring(0, playerName.length() - 1);
-            }
-        } else if (!e.isActionKey() && playerName.length() < 20) {
-            playerName += e.getKeyChar();
-        }
-        startGameDisable();
+    public void setHoverPoint(Point p) {
+        super.setHoverPoint(p);
+        editName.setHovered(p);
+        startGame.setHovered(p);
     }
     
     /**
@@ -318,5 +324,13 @@ public class ConfigScreen extends Screen{
     @Override
     public String toString(){
         return "Skill Screen";
+    }
+
+    /**
+     * Method changeName.
+     * @param playerName String
+     */
+    public void changeName(String playerName) {
+        this.playerName = playerName;
     }
 }
