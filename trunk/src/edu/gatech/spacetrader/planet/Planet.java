@@ -137,12 +137,52 @@ public class Planet {
             "Zuul"          // From the first Ghostbusters movie
         };
     
+    /**
+     */
     public static enum Environment{
-    	DESERT, WATER, JUNGLE, ICE, EARTHLIKE, TROPICAL, UNDERGROUND
+    	/**
+    	 * Field DESERT.
+    	 */
+    	DESERT, /**
+  * Field WATER.
+  */
+ WATER, /**
+  * Field JUNGLE.
+  */
+ JUNGLE, /**
+  * Field ICE.
+  */
+ ICE, /**
+  * Field EARTHLIKE.
+  */
+ EARTHLIKE, /**
+  * Field TROPICAL.
+  */
+ TROPICAL, /**
+  * Field UNDERGROUND.
+  */
+ UNDERGROUND
     }
     
+    /**
+     */
     public static enum CivilizationLevel{
-    	STONE_AGE, AGRICULTURAL, IMPERIAL, EARLY_INDUSTRIAL, ADVANCED_INDUSTRIAL
+    	/**
+    	 * Field STONE_AGE.
+    	 */
+    	STONE_AGE, /**
+  * Field AGRICULTURAL.
+  */
+ AGRICULTURAL, /**
+  * Field IMPERIAL.
+  */
+ IMPERIAL, /**
+  * Field EARLY_INDUSTRIAL.
+  */
+ EARLY_INDUSTRIAL, /**
+  * Field ADVANCED_INDUSTRIAL.
+  */
+ ADVANCED_INDUSTRIAL
     }
     
     /**
@@ -209,30 +249,30 @@ public class Planet {
     
     /**
      * Method getX.
-     * @return int X value of planet.
-     */
+    
+     * @return int X value of planet. */
     public int getX() {
         return x;
     }
     
     /**
      * Method getY.
-     * @return int Y value of planet.
-     */
+    
+     * @return int Y value of planet. */
     public int getY() {
         return y;
     }
     
     /**
-     * @return The planet's environment type
-     */
+    
+     * @return The planet's environment type */
     public Environment getEnvironment(){
     	return this.environment;
     }
     
     /**
-     * @return The planet's civilization level
-     */
+    
+     * @return The planet's civilization level */
     public CivilizationLevel getCivLevel(){
     	return this.civLevel;
     }
@@ -255,8 +295,8 @@ public class Planet {
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     public String toString(){
         return name;
     }

@@ -18,8 +18,8 @@ public abstract class SpaceCraft {
     
     /**
      * @param attackStrength
-     * @return damage done by opponent 
-     */
+    
+     * @return damage done by opponent  */
     public abstract int takeDamge(int attackStrength);
     
     /**
