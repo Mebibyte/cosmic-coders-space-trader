@@ -100,6 +100,8 @@ public class ConfigScreen extends Screen{
      */
     private String points;
     
+    private boolean editFrameDisplayed;
+    
     /**
      * @author Glenn
      */
@@ -255,7 +257,10 @@ public class ConfigScreen extends Screen{
 	                new Player(playerName, skills, currentDifficulty),
 	                panel, width, height));
 	    } else if (editName.isClicked(point)) {
-	        new TextFieldFrame(this, 15, playerName);
+	        if (!editFrameDisplayed) {
+	            new TextFieldFrame(this, 15, playerName);
+	            editFrameDisplayed = true;
+	        }
 	    }
 	}
 	
@@ -332,5 +337,6 @@ public class ConfigScreen extends Screen{
      */
     public void changeName(String playerName) {
         this.playerName = playerName;
+        editFrameDisplayed = false;
     }
 }
