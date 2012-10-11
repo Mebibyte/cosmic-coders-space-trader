@@ -69,7 +69,7 @@ public class SpaceTrader extends JFrame {
 		super("Space Trader");
 		setResizable(false);
 		
-		gamePanel = new GamePanel(this, WIDTH, HEIGHT);
+		gamePanel = new GamePanel(WIDTH, HEIGHT);
         gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         getContentPane().add(gamePanel);
 	    

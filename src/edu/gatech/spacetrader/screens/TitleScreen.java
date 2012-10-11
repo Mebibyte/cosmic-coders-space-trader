@@ -82,7 +82,7 @@ public class TitleScreen extends Screen{
 		} else if (loadGame.isClicked(point)) {
 		    System.out.println("Fix this later"); //FIXME 
 		} else if (quit.isClicked(point)) {
-			panel.quitGame();
+			System.exit(0);
 		}
 	}
 	

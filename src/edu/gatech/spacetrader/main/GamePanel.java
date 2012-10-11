@@ -1,4 +1,4 @@
-// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 /* Comment
  * 
  */
@@ -36,26 +36,19 @@ public class GamePanel extends JPanel{
 	 * Field mouseOnScreen.
 	 */
 	private boolean mouseOnScreen;
-
-	/**
-     * Field spaceTrader.
-     */
-    private final SpaceTrader spaceTrader;
 	
 	/**
 	 * Constructor for GamePanel.
-	 * @param spaceTrader 
 	 * @param width int
 	 * @param height int
 	 */
-	public GamePanel(SpaceTrader spaceTrader, int width, int height){
+	public GamePanel(int width, int height){
 		setFocusable(true);
 		requestFocus();
-		activeScreen = new TitleScreen(this, width, height);
-		setBackground(Color.white);
 		addMouseListener(new MouseListener());
 		addKeyListener(new KeyListener());
-		this.spaceTrader = spaceTrader;
+		setBackground(Color.WHITE);
+	    activeScreen = new TitleScreen(this, width, height);
 	}
 	
 	/**
@@ -111,8 +104,8 @@ public class GamePanel extends JPanel{
 	    /**
 	     * Method mousePressed.
 	     * @param event MouseEvent
-	    
-	     * @see java.awt.event.MouseListener#mousePressed(MouseEvent) */
+	     * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
+	     */
 	    public void mousePressed(MouseEvent event){
             activeScreen.checkForClick(event.getPoint());
         }
@@ -120,8 +113,8 @@ public class GamePanel extends JPanel{
         /**
          * Method mouseEntered.
          * @param event MouseEvent
-        
-         * @see java.awt.event.MouseListener#mouseEntered(MouseEvent) */
+         * @see java.awt.event.MouseListener#mouseEntered(MouseEvent)
+         */
         public void mouseEntered(MouseEvent event){
             setMouseOnScreen(true);
         }
@@ -129,10 +122,18 @@ public class GamePanel extends JPanel{
         /**
          * Method mouseExited.
          * @param e MouseEvent
-        
-         * @see java.awt.event.MouseListener#mouseExited(MouseEvent) */
+         * @see java.awt.event.MouseListener#mouseExited(MouseEvent)
+         */
         public void mouseExited(MouseEvent e){
             setMouseOnScreen(false);
+        }
+        
+        /**
+         * Method toString.
+         * @return String.
+         */
+        public String toString() {
+            return "Mouse Listener";
         }
 	}
 	
@@ -148,13 +149,13 @@ public class GamePanel extends JPanel{
 	    public void keyTyped(KeyEvent e) {
             activeScreen.keyTyped(e);
         }
+	    
+	    /**
+         * Method toString.
+         * @return String.
+         */
+        public String toString() {
+            return "Key Listener";
+        }
 	}
-
-	/**
-     * Method quitGame.
-     */
-    public void quitGame() {
-        spaceTrader.quitGame();
-        System.exit(0);
-    }
 }
