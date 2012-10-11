@@ -70,8 +70,8 @@ public class Galaxy {
      * @param width 
      */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
-        g.drawRect(width - HALF_GALAXY_WIDTH, height - HALF_GALAXY_HEIGHT,
-                GALAXY_WIDTH, GALAXY_HEIGHT);
+        g.drawRect(width - HALF_GALAXY_WIDTH - 2, height - HALF_GALAXY_HEIGHT - 2,
+                GALAXY_WIDTH + 4, GALAXY_HEIGHT + 4);
         for (Planet p : planets) {
         	switch(p.getEnvironment()){
         	case WATER:
