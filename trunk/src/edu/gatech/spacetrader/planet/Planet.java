@@ -137,6 +137,10 @@ public class Planet {
             "Zuul"          // From the first Ghostbusters movie
         };
     
+    public static enum Event{
+    	
+    }
+    
     /**
      */
     public static enum Environment{
@@ -182,7 +186,12 @@ public class Planet {
  EARLY_INDUSTRIAL, /**
   * Field ADVANCED_INDUSTRIAL.
   */
- ADVANCED_INDUSTRIAL
+ ADVANCED_INDUSTRIAL,
+ 
+ /**
+ * 
+ */
+POST_INDUSTRIAL
     }
     
     /**
@@ -194,6 +203,12 @@ public class Planet {
      * 
      */
     private final Environment environment;
+    
+    /**
+     * 
+     */
+    @SuppressWarnings("unused")
+	private Event currentEvent;
     
     /**
      * Field name.
@@ -248,6 +263,16 @@ public class Planet {
     }
     
     /**
+     * This is the huge method that will generate random events, 
+     * advance or revert the civilization level,
+     * and determine market prices.
+     * It should be called whenever the player flies to a new location.
+     */
+    public void advanceTime(){
+    	//TODO - Everything
+    }
+    
+    /**
      * Method getX.
     
      * @return int X value of planet. */
@@ -288,9 +313,35 @@ public class Planet {
             case STONE_AGE:
                 civLevel = CivilizationLevel.AGRICULTURAL;
                 break;
+            case AGRICULTURAL:
+            	civLevel = CivilizationLevel.IMPERIAL;
+            	break;
+            case IMPERIAL:
+            	civLevel = CivilizationLevel.EARLY_INDUSTRIAL;
+            	break;
+            case EARLY_INDUSTRIAL:
+            	civLevel = CivilizationLevel.ADVANCED_INDUSTRIAL;
+            	break;
+            case ADVANCED_INDUSTRIAL:
+            	civLevel = CivilizationLevel.POST_INDUSTRIAL;
+            	break;
             default:
                 break;
         }
+    }
+    
+    /**
+     * @return A short descriptor of any recent planetary events that affect the market
+     */
+    public String eventMessage(){
+    	/*TODO - Create a string-generator. More importantly,
+    	 * create a list (enum) of possible events,
+    	 * e.g. Government uprising, famine.
+    	 * Events can be triggered in the "advanceTime" method.
+    	 * Message is based on "currentEvent" field.
+    	 * The message will be displayed when a player arrives at a planet
+    	*/
+    	return null;
     }
     
     /**
