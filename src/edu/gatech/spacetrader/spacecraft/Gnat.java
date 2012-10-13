@@ -4,6 +4,8 @@
 
 package edu.gatech.spacetrader.spacecraft;
 
+
+
 /**
  * @version 1.0
  * @since 1.0
@@ -11,15 +13,27 @@ package edu.gatech.spacetrader.spacecraft;
  */
 public class Gnat extends SpaceCraft{
     
-    /**
-     * Method fly.
-     * 
-     */
-	@Override
-    public void fly(){
-        System.out.println("Implement later");
-    }
-    
+	/**
+	 * 
+	 */
+	private final int GNAT_HEALTH = 100;
+	
+	private final int GNAT_SPEED = 2;
+	
+	private final int GNAT_ATTACK = 5;
+	
+	private final int GNAT_DEFENSE = 5;
+
+	/**
+	 * 
+	 */
+	public Gnat(){
+		this.health = GNAT_HEALTH;
+		this.speed = GNAT_SPEED;
+		this.attack = GNAT_ATTACK;
+		this.defense = GNAT_DEFENSE;
+	}
+
     /**
      * Method toString.
     
@@ -29,16 +43,6 @@ public class Gnat extends SpaceCraft{
         return "Gnat";
     }
 
-	/**
-	 * @param attackStrength Attack strength of enemy
-	
-	 * @return damage done to the gnat */
-	@Override
-	public int takeDamge(int attackStrength) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	/** 
 	 * @param repairSkill
 	
@@ -47,4 +51,5 @@ public class Gnat extends SpaceCraft{
 	public void repair(int repairSkill) {
 		System.out.println("Repair"); //FIXME
 	}
+	
 }

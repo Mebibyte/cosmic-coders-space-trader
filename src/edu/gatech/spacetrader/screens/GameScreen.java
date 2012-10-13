@@ -6,6 +6,7 @@
 
 package edu.gatech.spacetrader.screens;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -93,7 +94,12 @@ public class GameScreen extends Screen {
         galaxy.draw(g, panel, width / 2, (height / 2) - 70);
         g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 5,
                 currentPlanet.getY() + (height / 2) - 70 - Galaxy.HALF_GALAXY_HEIGHT - 5,
-                10, 10);
+                10, 10); 
+        g.setColor(Color.GRAY);
+        //Draw radius of travel. Depends on "speed" ability of the player's current ship
+        g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 10,
+                currentPlanet.getY() + (height / 2) - 70 - Galaxy.HALF_GALAXY_HEIGHT - 10,
+                20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
     }
 
     /**

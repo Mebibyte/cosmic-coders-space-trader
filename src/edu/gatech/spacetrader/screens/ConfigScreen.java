@@ -100,6 +100,9 @@ public class ConfigScreen extends Screen{
      */
     private String points;
     
+    /**
+     * 
+     */
     private boolean editFrameDisplayed;
     
     /**

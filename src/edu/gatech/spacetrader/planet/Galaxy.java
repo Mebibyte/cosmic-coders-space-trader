@@ -70,8 +70,10 @@ public class Galaxy {
      * @param width 
      */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
-        g.drawRect(width - HALF_GALAXY_WIDTH - 2, height - HALF_GALAXY_HEIGHT - 2,
-                GALAXY_WIDTH + 4, GALAXY_HEIGHT + 4);
+        g.drawRect(width - HALF_GALAXY_WIDTH - 8, height - HALF_GALAXY_HEIGHT - 8,
+                GALAXY_WIDTH + 16, GALAXY_HEIGHT + 16);
+        /*I expanded the border a bit. We may need to find a real workaround for when the 
+        *player's travel radius increases beyond the border */
         for (Planet p : planets) {
         	switch(p.getEnvironment()){
         	case WATER:
