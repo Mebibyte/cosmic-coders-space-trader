@@ -3,8 +3,12 @@
  */
 package edu.gatech.spacetrader.planet;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
+
+import edu.gatech.spacetrader.main.GamePanel;
 
 /**
  * @author Glenn
@@ -143,29 +147,20 @@ public class Planet {
     
     /**
      */
-    public static enum Environment{
-    	/**
-    	 * Field DESERT.
-    	 */
-    	DESERT, /**
-  * Field WATER.
-  */
- WATER, /**
-  * Field JUNGLE.
-  */
- JUNGLE, /**
-  * Field ICE.
-  */
- ICE, /**
-  * Field EARTHLIKE.
-  */
- EARTHLIKE, /**
-  * Field TROPICAL.
-  */
- TROPICAL, /**
-  * Field UNDERGROUND.
-  */
- UNDERGROUND
+    public static enum Environment {
+    	DESERT(new Color(0xCD, 0x95, 0x0C)), WATER(Color.BLUE),
+    	JUNGLE(new Color(00, 0x64, 00)), ICE(new Color(0x36, 0xDB, 0xCA)),
+    	EARTHLIKE(Color.CYAN), TROPICAL(Color.GREEN), UNDERGROUND(Color.BLACK);
+    	
+    	private final Color color;
+    	
+    	Environment(Color color) {
+    	    this.color = color;
+    	}
+    	
+    	public Color getColor(){
+    	    return color;
+    	}
     }
     
     /**
@@ -350,5 +345,12 @@ POST_INDUSTRIAL
      * @return String */
     public String toString(){
         return name;
+    }
+
+    public void draw(Graphics g, GamePanel panel, int width, int height) {
+        g.setColor(environment.getColor());
+        g.fillOval(width - Galaxy.HALF_GALAXY_WIDTH + (x - 2),
+                    height - Galaxy.HALF_GALAXY_HEIGHT + (y - 2), 4, 4); // $codepro.audit.disable numericLiterals
+        g.setColor(Color.BLACK);
     }
 }

@@ -18,8 +18,7 @@ public abstract class SpaceCraft {
 	/**
 	 * 
 	 */
-	private static Random RAND = new Random();
-	
+	private static final Random RAND = new Random();
 	/**
 	 * 
 	 */
@@ -64,7 +63,7 @@ public abstract class SpaceCraft {
 	 * @return damage done to the gnat */
 	public int takeDamge(int enemyAttack) {
 		// TODO Auto-generated method stub
-		int damage;
+		final int damage;
 		damage = RAND.nextInt(enemyAttack) - RAND.nextInt(defense);
 		health -= damage;
 		return damage;
