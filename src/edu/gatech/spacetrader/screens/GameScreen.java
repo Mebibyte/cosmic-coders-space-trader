@@ -100,6 +100,7 @@ public class GameScreen extends Screen {
         g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 10,
                 currentPlanet.getY() + (height / 2) - 70 - Galaxy.HALF_GALAXY_HEIGHT - 10,
                 20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
+        g.setColor(Color.BLACK);
     }
 
     /**

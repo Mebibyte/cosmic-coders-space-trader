@@ -4,7 +4,6 @@
  */
 package edu.gatech.spacetrader.planet;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import edu.gatech.spacetrader.main.GamePanel;
@@ -75,32 +74,7 @@ public class Galaxy {
         /*I expanded the border a bit. We may need to find a real workaround for when the 
         *player's travel radius increases beyond the border */
         for (Planet p : planets) {
-        	switch(p.getEnvironment()){
-        	case WATER:
-        		g.setColor(Color.BLUE);
-        		break;
-        	case ICE:
-        		g.setColor(new Color(0x36, 0xDB, 0xCA));
-        		break;
-        	case TROPICAL:
-        		g.setColor(Color.GREEN);
-        		break;
-        	case DESERT:
-        		g.setColor(new Color(0xCD, 0x95, 0x0C));
-        		break;
-        	case EARTHLIKE:
-        		g.setColor(Color.CYAN);
-        		break;
-        	case JUNGLE:
-        		g.setColor(new Color(00, 0x64, 00));
-        		break;
-        	default:
-        		g.setColor(Color.BLACK);
-        		break;
-        	}
-            g.fillOval(width - HALF_GALAXY_WIDTH + (p.getX() - 2),
-                    height - HALF_GALAXY_HEIGHT + (p.getY() - 2), 4, 4); // $codepro.audit.disable numericLiterals
-            g.setColor(Color.BLACK);
+            p.draw(g, panel, width, height);
         }
     }
     
