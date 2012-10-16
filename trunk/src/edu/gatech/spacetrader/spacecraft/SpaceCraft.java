@@ -19,6 +19,7 @@ public abstract class SpaceCraft {
 	 * 
 	 */
 	private static final Random RAND = new Random();
+
 	/**
 	 * 
 	 */
@@ -55,7 +56,7 @@ public abstract class SpaceCraft {
      * 
      */
     public void fly(){
-        
+        System.out.println("2 Infinity N Beyond!"); //TODO
     }
     
     /**
@@ -70,14 +71,14 @@ public abstract class SpaceCraft {
 	}
 
     /**
-     * @return
+     * @return int Attack value.
      */
     public int getAttack(){
 		return this.attack;
 	}
     
     /**
-     * @return
+     * @return int Defense Value.
      */
     public int getDefense(){
     	return this.defense;

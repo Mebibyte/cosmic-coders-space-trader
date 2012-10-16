@@ -1,3 +1,4 @@
+// $codepro.audit.disable numericLiterals
 /* Comment
  * 
  */
@@ -142,7 +143,7 @@ public class Planet {
         };
     
     public static enum Event{
-    	
+    	DROUGHT, COLD, CROPFAIL, WAR, BOREDOM, PLAGUE, LACKOFWORKERS
     }
     
     /**
@@ -152,12 +153,25 @@ public class Planet {
     	JUNGLE(new Color(00, 0x64, 00)), ICE(new Color(0x36, 0xDB, 0xCA)),
     	EARTHLIKE(Color.CYAN), TROPICAL(Color.GREEN), UNDERGROUND(Color.BLACK);
     	
+    	/**
+         * Field color.
+         */
     	private final Color color;
     	
-    	Environment(Color color) {
+    	/**
+    	 * Constructor for Environment.
+    	 * 
+    	 * @param color Color.
+         */
+    	private Environment(Color color) {
     	    this.color = color;
     	}
     	
+    	/**
+         * Method getColor.
+         * 
+         * @return Color.
+         */
     	public Color getColor(){
     	    return color;
     	}
@@ -166,27 +180,8 @@ public class Planet {
     /**
      */
     public static enum CivilizationLevel{
-    	/**
-    	 * Field STONE_AGE.
-    	 */
-    	STONE_AGE, /**
-  * Field AGRICULTURAL.
-  */
- AGRICULTURAL, /**
-  * Field IMPERIAL.
-  */
- IMPERIAL, /**
-  * Field EARLY_INDUSTRIAL.
-  */
- EARLY_INDUSTRIAL, /**
-  * Field ADVANCED_INDUSTRIAL.
-  */
- ADVANCED_INDUSTRIAL,
- 
- /**
- * 
- */
-POST_INDUSTRIAL
+    	STONE_AGE, AGRICULTURAL, IMPERIAL, EARLY_INDUSTRIAL,
+    	ADVANCED_INDUSTRIAL, POST_INDUSTRIAL
     }
     
     /**
@@ -265,34 +260,36 @@ POST_INDUSTRIAL
      */
     public void advanceTime(){
     	//TODO - Everything
+        System.out.println("Time++");
     }
     
     /**
      * Method getX.
-    
-     * @return int X value of planet. */
+     * 
+     * @return int X value of planet.
+     */
     public int getX() {
         return x;
     }
     
     /**
      * Method getY.
-    
-     * @return int Y value of planet. */
+     * @return int Y value of planet.
+     */
     public int getY() {
         return y;
     }
     
     /**
-    
-     * @return The planet's environment type */
+     * @return The planet's environment type
+     */
     public Environment getEnvironment(){
     	return this.environment;
     }
     
     /**
-    
-     * @return The planet's civilization level */
+     * @return The planet's civilization level
+     */
     public CivilizationLevel getCivLevel(){
     	return this.civLevel;
     }
@@ -326,6 +323,14 @@ POST_INDUSTRIAL
     }
     
     /**
+     * Method changeEvent.
+     * Changes the current event to a new random event.
+     */
+    public void changeEvent(){
+        currentEvent = Event.values()[new Random().nextInt(Event.values().length)];
+    }
+    
+    /**
      * @return A short descriptor of any recent planetary events that affect the market
      */
     public String eventMessage(){
@@ -341,12 +346,20 @@ POST_INDUSTRIAL
     
     /**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
     public String toString(){
         return name;
     }
-
+    
+    /**
+     * Method draw.
+     * 
+     * @param g Graphics
+     * @param panel GamePanel
+     * @param width Int
+     * @param height Int
+     */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
         g.setColor(environment.getColor());
         g.fillOval(width - Galaxy.HALF_GALAXY_WIDTH + (x - 2),
