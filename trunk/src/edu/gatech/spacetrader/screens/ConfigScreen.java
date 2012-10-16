@@ -82,6 +82,12 @@ public class ConfigScreen extends Screen{
     private String playerName = "Player";
     
     /**
+     * Field SKILL_NAMES.
+     */
+    private static final String[] SKILL_NAMES = 
+            new String[]{"Pilot", "Fighter", "Trader", "Engineer"};
+    
+    /**
      * Field numSkill.
      */
     /**
@@ -159,7 +165,7 @@ public class ConfigScreen extends Screen{
 
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
-	    final int y = 150;
+	    final int y = 155;
 
 	    for (int i = 0; i < skillButtons.length; i++) {
 	        skillButtons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -204,11 +210,11 @@ public class ConfigScreen extends Screen{
 		
 		final int sep = 50;
 		int x = (width / 2) - sep;
-		int y = 155;
+		int y = 160;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
-		    g.drawString("Skill " + (skill + 1), (width / 2) - 
-		        (g.getFontMetrics().stringWidth("Skill " + (skill + 1)) / 2), y - 5);
+		    g.drawString(SKILL_NAMES[skill], (width / 2) - 
+		        (g.getFontMetrics().stringWidth(SKILL_NAMES[skill]) / 2), y - 5);
 		    
 		    for (int i = 0; i < skills[skill]; i++) {
 		        usedSkillPoint.paintIcon(panel, g, x, y);

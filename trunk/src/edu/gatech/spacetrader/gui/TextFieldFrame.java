@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -42,7 +43,7 @@ public class TextFieldFrame extends JFrame {
     /**
      * Field button.
      */
-    private final JButton button;
+    private static final JButton BUTTON = new JButton("Submit");
     
     /**
      * Constructor for TextFieldFrame.
@@ -58,9 +59,8 @@ public class TextFieldFrame extends JFrame {
         panel = new JPanel();
         field = new JTextField(new MaxLengthDocument(limit), playerName, limit + 2); // $codepro.audit.disable numericLiterals
         panel.add(field);
-        button = new JButton("Submit");
-        button.addActionListener(new SubmitListener());
-        panel.add(button);
+        BUTTON.addActionListener(new SubmitListener());
+        panel.add(BUTTON);
         add(panel);
         
         pack();
@@ -100,6 +100,15 @@ public class TextFieldFrame extends JFrame {
             if (str == null) return;
             super.insertString(offset, str, attr);
             if (getLength() > limit) super.remove(limit, getLength() - limit);
+            if (getLength() > 0) BUTTON.setEnabled(true);
+        }
+        
+        /**
+         * Method removeUpdate
+         * @param chng DefaultDocumentEvent
+         */
+        protected void removeUpdate(AbstractDocument.DefaultDocumentEvent chng) {
+            if (getLength() == 1) BUTTON.setEnabled(false);
         }
         
         /**
@@ -123,10 +132,8 @@ public class TextFieldFrame extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            if (field.getText().length() > 0) {
-                screen.changeName(field.getText());
-                dispose();
-            }
+            screen.changeName(field.getText());
+            dispose();
         }
         
         /**
