@@ -237,11 +237,8 @@ public class ConfigScreen extends Screen{
 	public void checkForClick(Point point) {
 	    for (int i = 0; i < skillButtons.length; i++) {
             if (skillButtons[i].isClicked(point)) {
-                if ((i % POSNEG == 0 && skills[i / 2] > 0) 
-                        || (i % POSNEG == 1 && skills[i / 2] < MAXSKILL)) {
-                    skills[i / 2] += POSNEG * (i % POSNEG) - 1;
-                    skillPointsUsed += POSNEG * (i % POSNEG) - 1;
-                }
+                skills[i / 2] += POSNEG * (i % POSNEG) - 1;
+                skillPointsUsed += POSNEG * (i % POSNEG) - 1;
                 
                 if (skills[i / 2] > 0) {
                     skillButtons[(i / 2) * 2].setDisabled(false);
@@ -252,9 +249,11 @@ public class ConfigScreen extends Screen{
                 } else skillButtons[((i / 2) * 2) + 1].setDisabled(true);
             }
         }
+	    
 	    resetButtons();
 	    startGameDisable();
 	    changeDifficulty(point);
+	    
 	    if (startGame.isClicked(point)) {
 	        panel.setActiveScreen(new GameScreen(
 	                new Player(playerName, skills, currentDifficulty),

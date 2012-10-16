@@ -16,13 +16,25 @@ public class Gnat extends SpaceCraft{
 	/**
 	 * 
 	 */
-	private final int GNAT_HEALTH = 100;
+	private static final int GNAT_HEALTH = 100;
 	
-	private final int GNAT_SPEED = 2;
+	/**
+	 * Field GNAT_SPEED.
+	 * (value is 2)
+	 */
+	private static final int GNAT_SPEED = 2;
 	
-	private final int GNAT_ATTACK = 5;
+	/**
+	 * Field GNAT_ATTACK.
+	 * (value is 5)
+	 */
+	private static final int GNAT_ATTACK = 5;
 	
-	private final int GNAT_DEFENSE = 5;
+	/**
+	 * Field GNAT_DEFENSE.
+	 * (value is 5)
+	 */
+	private static final int GNAT_DEFENSE = 5;
 
 	/**
 	 * 
