@@ -108,7 +108,7 @@ public class TextFieldFrame extends JFrame {
          * @param chng DefaultDocumentEvent
          */
         protected void removeUpdate(AbstractDocument.DefaultDocumentEvent chng) {
-            if (getLength() == 1) BUTTON.setEnabled(false);
+            if (chng.getLength() == getLength()) BUTTON.setEnabled(false);
         }
         
         /**
