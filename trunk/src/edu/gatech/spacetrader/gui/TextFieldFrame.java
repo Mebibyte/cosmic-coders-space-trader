@@ -17,6 +17,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.screens.ConfigScreen;
 
 /**
@@ -49,15 +50,16 @@ public class TextFieldFrame extends JFrame {
      * Constructor for TextFieldFrame.
      * @param screen ConfigScreen
      * @param limit int
-     * @param playerName String
+     * @param gPanel GamePanel
+     * @param name String
      */
-    public TextFieldFrame(ConfigScreen screen, int limit, String playerName) {
+    public TextFieldFrame(ConfigScreen screen, GamePanel gPanel, int limit, String name) {
         super("Edit Name");
         setResizable(false);
         
         this.screen = screen;
         panel = new JPanel();
-        field = new JTextField(new MaxLengthDocument(limit), playerName, limit + 2); // $codepro.audit.disable numericLiterals
+        field = new JTextField(new MaxLengthDocument(limit), name, limit + 2); // $codepro.audit.disable numericLiterals
         panel.add(field);
         BUTTON.addActionListener(new SubmitListener());
         panel.add(BUTTON);
@@ -65,7 +67,7 @@ public class TextFieldFrame extends JFrame {
         
         pack();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(gPanel);
         setVisible(true);
     }
 
@@ -127,13 +129,12 @@ public class TextFieldFrame extends JFrame {
     private class SubmitListener implements ActionListener {
         /**
          * Method actionPerformed.
-         * @param arg0 ActionEvent
+         * @param event ActionEvent
          * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
          */
         @Override
-        public void actionPerformed(ActionEvent arg0) {
+        public void actionPerformed(ActionEvent event) {
             screen.changeName(field.getText());
-            dispose();
         }
         
         /**
@@ -144,5 +145,13 @@ public class TextFieldFrame extends JFrame {
         public String toString() {
             return "SubmitListener";
         }
+    }
+    
+    /**
+     * Method resetFocus.
+     * Resets focus to the text field.
+     */
+    public void resetFocus() {
+        field.requestFocusInWindow(); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
     }
 }

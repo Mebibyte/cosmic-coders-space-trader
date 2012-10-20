@@ -92,9 +92,6 @@ public class GameScreen extends Screen {
                 x - (((g.getFontMetrics()).stringWidth(currentPlanet.toString())) / 2), 
                 y + (g.getFontMetrics().getHeight() * 5));
         galaxy.draw(g, panel, width / 2, (height / 2) - 70);
-        g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 5,
-                currentPlanet.getY() + (height / 2) - 70 - Galaxy.HALF_GALAXY_HEIGHT - 5,
-                10, 10); 
         g.setColor(Color.GRAY);
         //Draw radius of travel. Depends on "speed" ability of the player's current ship
         g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 10,
