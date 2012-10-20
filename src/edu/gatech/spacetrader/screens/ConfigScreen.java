@@ -107,24 +107,10 @@ public class ConfigScreen extends Screen{
     private String points;
     
     /**
-     * 
-     */
-    private boolean editFrameDisplayed;
-    
-    /**
      * @author Glenn
      */
     public enum Difficulty {
-        /**
-         * Field EASY.
-         */
-        EASY("Easy"), /**
-  * Field NORMAL.
-  */
- NORMAL("Normal"), /**
-  * Field HARD.
-  */
- HARD("Hard");
+        EASY("Easy"), NORMAL("Normal"), HARD("Hard");
         
         /**
          * Field text.
@@ -152,6 +138,11 @@ public class ConfigScreen extends Screen{
      * Field currentDifficulty.
      */
     private Difficulty currentDifficulty = Difficulty.NORMAL;
+    
+    /**
+     * Field textFieldFrame.
+     */
+    private TextFieldFrame editNameFrame;
 	
 	/**
 	 * Constructor for SkillScreen.
@@ -265,9 +256,14 @@ public class ConfigScreen extends Screen{
 	                new Player(playerName, skills, currentDifficulty),
 	                panel, width, height));
 	    } else if (editName.isClicked(point)) {
-	        if (!editFrameDisplayed) {
-	            new TextFieldFrame(this, 15, playerName);
-	            editFrameDisplayed = true;
+	        if (editNameFrame == null) {
+	            editNameFrame = new TextFieldFrame(this, panel, 15, playerName);
+	        } else if (!editNameFrame.isVisible()) {
+	            editNameFrame.setVisible(true);
+	            editNameFrame.resetFocus();
+	        } else {
+	            editNameFrame.requestFocus();
+	            editNameFrame.resetFocus();
 	        }
 	    }
 	}
@@ -345,6 +341,6 @@ public class ConfigScreen extends Screen{
      */
     public void changeName(String playerName) {
         this.playerName = playerName;
-        editFrameDisplayed = false;
+        editNameFrame.setVisible(false);
     }
 }
