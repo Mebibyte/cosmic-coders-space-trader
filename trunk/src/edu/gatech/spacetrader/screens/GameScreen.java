@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Galaxy;
 import edu.gatech.spacetrader.planet.Planet;
@@ -50,6 +51,17 @@ public class GameScreen extends Screen {
      * Field currentPlanet.
      */
     private Planet currentPlanet;
+    
+    /**
+     * Field buy.
+     */
+    /**
+     * Field sell.
+     */
+    /**
+     * Field fly.
+     */
+    private final BigButton buy, sell, fly;
 
     /**
      * Constructor for GameScreen.
@@ -64,6 +76,10 @@ public class GameScreen extends Screen {
         this.width = width;
         this.height = height;
         currentPlanet = galaxy.getStartingPlanet();
+        buy = new BigButton("Buy", width / 2, height / 2, true);
+        sell = new BigButton("Sell", width / 2, height / 2 + buy.getHeight(), true);
+        fly = new BigButton("Fly", Galaxy.HALF_GALAXY_WIDTH, 
+                height - Galaxy.GALAXY_HEIGHT - sell.getHeight(), true);
     }
 
     /**
@@ -72,32 +88,28 @@ public class GameScreen extends Screen {
      */
     @Override
     public void draw(Graphics g) {
-        final int x = width / 2;
-        final int y = height / 2;
-        g.drawString(player.getName(), 
-                x - (((g.getFontMetrics()).stringWidth(player.getName())) / 2), y);
-        g.drawString(player.getSkills(), 
-                x - (((g.getFontMetrics()).stringWidth(player.getSkills())) / 2), 
-                y + g.getFontMetrics().getHeight());
-        g.drawString(player.getCredits() + " credits", x 
-                - (g.getFontMetrics().stringWidth(player.getCredits() + " credits") / 2), 
-                y + (g.getFontMetrics().getHeight() * 2));
-        g.drawString(player.getSpaceCraft().toString(), x 
-                - (g.getFontMetrics().stringWidth(player.getSpaceCraft().toString()) / 2),
-                y + (g.getFontMetrics().getHeight() * 3));
-        g.drawString(player.getDifficulty(), 
-                x - (((g.getFontMetrics()).stringWidth(player.getDifficulty())) / 2), 
-                y + (g.getFontMetrics().getHeight() * 4));
-        g.drawString(currentPlanet.toString(), 
-                x - (((g.getFontMetrics()).stringWidth(currentPlanet.toString())) / 2), 
-                y + (g.getFontMetrics().getHeight() * 5));
-        galaxy.draw(g, panel, width / 2, (height / 2) - 70);
+        final int x = 0;
+        final int y = g.getFontMetrics().getHeight();
+        
+        g.drawString(player.getName(), x, y);
+        g.drawString(player.getSkills(), x, y * 2);
+        g.drawString(player.getCredits() + " credits", x,  y * 3);
+        g.drawString(player.getSpaceCraft().toString(), x, y * 4);
+        g.drawString(player.getDifficulty(), x, y * 5);
+        g.drawString(currentPlanet.toString(), x, y * 6);
+        
+        g.drawLine(Galaxy.GALAXY_WIDTH, 0, Galaxy.GALAXY_WIDTH, height);
+        galaxy.draw(g, panel, Galaxy.HALF_GALAXY_WIDTH,
+                height - Galaxy.HALF_GALAXY_HEIGHT);
         g.setColor(Color.GRAY);
         //Draw radius of travel. Depends on "speed" ability of the player's current ship
-        g.drawOval(currentPlanet.getX() + (width / 2) - Galaxy.HALF_GALAXY_WIDTH - 10,
-                currentPlanet.getY() + (height / 2) - 70 - Galaxy.HALF_GALAXY_HEIGHT - 10,
+        g.drawOval(currentPlanet.getX() - 10,
+                currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT) - 10,
                 20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
         g.setColor(Color.BLACK);
+        buy.draw(g, panel, width, height);
+        sell.draw(g, panel, width, height);
+        fly.draw(g, panel, width, height);
     }
 
     /**
@@ -105,14 +117,20 @@ public class GameScreen extends Screen {
      * @param point Point
      */
     @Override
-    public void checkForClick(Point point) {
-        System.out.println("Checking for clicks"); //FIXME
+    public void checkForClick(Point point){
+        if (buy.isClicked(point)) {
+            System.out.println("Bought!"); //TODO
+        } else if (sell.isClicked(point)) {
+            System.out.println("Bought!"); //TODO
+        } else if (fly.isClicked(point)) {
+            System.out.println("Go to fly screen!"); //TODO
+        }
     }
     
     /**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
     @Override
     public String toString(){
         return "Game screen";
