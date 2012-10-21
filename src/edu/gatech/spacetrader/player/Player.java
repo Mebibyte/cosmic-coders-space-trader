@@ -53,7 +53,6 @@ public class Player {
      * @param difficulty ConfigScreen.Difficulty
      */
     public Player(String name, int[] skills, ConfigScreen.Difficulty difficulty) {
-        System.out.println("Player created! (For FS1)"); //TODO Remove after FS1
         this.name = name;
         this.skills = skills.clone();
         this.difficulty = difficulty;

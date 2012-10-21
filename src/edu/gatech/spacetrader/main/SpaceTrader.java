@@ -64,6 +64,14 @@ public class SpaceTrader extends JFrame {
 	private boolean gameRunning = true;
 	
 	/**
+     * Field fps.
+     */
+	/**
+     * Field frameCount.
+     */
+	private int fps, frameCount = 0;
+	
+	/**
 	 * Constructor for SpaceTrader.
 	 * Creates a new GamePanel and adds it to the JFrame.
 	 * Also starts the game loop.
@@ -119,7 +127,7 @@ public class SpaceTrader extends JFrame {
 				updateCount++;
 			}
 			
-			if(now - lastUpdateTime > TIME_BETWEEN_UPDATES){
+			if (now - lastUpdateTime > TIME_BETWEEN_UPDATES){
 				lastUpdateTime = now - TIME_BETWEEN_UPDATES;
 			}
 
@@ -127,18 +135,19 @@ public class SpaceTrader extends JFrame {
 			lastRenderTime = now;
          
 			int thisSecond = (int) (lastUpdateTime / ONEBILLION);
-			if (thisSecond > lastSecondTime) lastSecondTime = thisSecond;
+			if (thisSecond > lastSecondTime) {
+			    fps = frameCount;
+	            frameCount = 0;
+			    lastSecondTime = thisSecond;
+			}
          
-			while(now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS 
+			while (now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS 
 					&& now - lastUpdateTime < TIME_BETWEEN_UPDATES){
 				Thread.yield();
-				try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 				now = System.nanoTime();
 			}
+			
+			this.setTitle("Space Trader || " + fps + " fps");
 		}
 	}
 	
@@ -148,6 +157,7 @@ public class SpaceTrader extends JFrame {
 	 */
 	private void drawGame(){
 		gamePanel.repaint();
+		frameCount++;
 	}
 	
 	/**
