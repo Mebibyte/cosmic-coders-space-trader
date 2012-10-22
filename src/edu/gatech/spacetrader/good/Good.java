@@ -12,8 +12,9 @@ package edu.gatech.spacetrader.good;
  * 
  */
 public enum Good {
-	WATER(30, 0), FURS(250, 1), FOOD(100, 2), ORE(350, 3), GAMES(250, 4), 
-	FIREARMS(1250, 5), MEDICINE(650, 6), MACHINES(900, 7), NARCOTICS(3500, 8), ROBOTS(5000, 9);
+	WATER(30, 0), FURS(250, 1), FOOD(100, 2), ORE(350, 3), 
+	GAMES(250, 4), FIREARMS(1250, 5), MEDICINE(650, 6),
+	MACHINES(900, 7), NARCOTICS(3500, 8), ROBOTS(5000, 9);
 	
 	/**
      * Field basePrice.
