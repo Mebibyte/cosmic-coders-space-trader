@@ -180,15 +180,25 @@ public class Planet {
     
     /**
      */
-    public static enum CivilizationLevel{
-    	STONE_AGE, AGRICULTURAL, IMPERIAL, EARLY_INDUSTRIAL,
-    	ADVANCED_INDUSTRIAL, POST_INDUSTRIAL
+    public static enum TechLevel{
+    	PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), RENAISSANCE(3), EARLY_INDUSTRIAL(4),
+    	INDUSTRIAL(5), POST_INDUSTRIAL(6), HI_TECH(7);
+    	
+    	private int levelInt;
+    	
+    	private TechLevel(int levelInt) {
+    	    this.levelInt = levelInt;
+    	}
+
+        public int getTechLevel() {
+            return levelInt;
+        }
     }
     
     /**
      * code pro is wrong here. this will change
      */
-    private CivilizationLevel civLevel;
+    private TechLevel techLevel;
     
     /**
      * 
@@ -233,7 +243,7 @@ public class Planet {
     /**
      * Field market.
      */
-    private PlanetMarket market;
+    private final PlanetMarket market;
     
     /**
      * Constructor for Planet.
@@ -253,13 +263,12 @@ public class Planet {
         x = RAND.nextInt(galaxyWidth);
         y = RAND.nextInt(galaxyHeight);
         
-        civLevel = CivilizationLevel.values()
-        		[RAND.nextInt(CivilizationLevel.values().length)];
+        techLevel = TechLevel.values()
+        		[RAND.nextInt(TechLevel.values().length)];
         environment = Environment.values()[RAND.nextInt(Environment.values().length)];
         
         currentEvent = Event.NONE;
-        market = new edu.gatech.spacetrader.good.PlanetMarket();
-        market.createPlanetMarket(this);
+        market = new PlanetMarket(this);
     }
     
     /**
@@ -271,6 +280,7 @@ public class Planet {
     public void advanceTime(){
     	//TODO - Everything
         System.out.println("Time++");
+        market.updatePrices();
     }
     
     /**
@@ -300,8 +310,8 @@ public class Planet {
     /**
      * @return The planet's civilization level
      */
-    public CivilizationLevel getCivLevel(){
-    	return this.civLevel;
+    public TechLevel getCivLevel(){
+    	return this.techLevel;
     }
     
     /**
@@ -311,22 +321,25 @@ public class Planet {
     private void advanceCivilization(){ // $codepro.audit.disable unusedMethod
     	//Advance civilization to next level
     	//called internally when a random conditional is met during player movement.
-        switch (civLevel) {
-            case STONE_AGE:
-                civLevel = CivilizationLevel.AGRICULTURAL;
+        switch (techLevel) {
+            case PRE_AGRICULTURAL:
+                techLevel = TechLevel.AGRICULTURAL;
                 break;
             case AGRICULTURAL:
-            	civLevel = CivilizationLevel.IMPERIAL;
+            	techLevel = TechLevel.MEDIEVAL;
             	break;
-            case IMPERIAL:
-            	civLevel = CivilizationLevel.EARLY_INDUSTRIAL;
+            case MEDIEVAL:
+            	techLevel = TechLevel.EARLY_INDUSTRIAL;
             	break;
             case EARLY_INDUSTRIAL:
-            	civLevel = CivilizationLevel.ADVANCED_INDUSTRIAL;
+            	techLevel = TechLevel.INDUSTRIAL;
             	break;
-            case ADVANCED_INDUSTRIAL:
-            	civLevel = CivilizationLevel.POST_INDUSTRIAL;
+            case INDUSTRIAL:
+            	techLevel = TechLevel.POST_INDUSTRIAL;
             	break;
+            case POST_INDUSTRIAL:
+                techLevel = TechLevel.HI_TECH;
+                break;
             default:
                 break;
         }
