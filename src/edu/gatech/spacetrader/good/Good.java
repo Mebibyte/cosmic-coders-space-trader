@@ -1,3 +1,7 @@
+/* Comment
+ * 
+ */
+// $codepro.audit.disable numericLiterals
 package edu.gatech.spacetrader.good;
 
 /**
@@ -7,25 +11,28 @@ package edu.gatech.spacetrader.good;
  * @version 1.0
  * 
  */
-public class Good {
+public enum Good {
+	WATER(30), FURS(250), FOOD(100), ORE(350), GAMES(250), 
+	FIREARMS(1250), MEDICINE(650), MACHINES(900), NARCOTICS(3500), ROBOTS(5000);
 	
+	/**
+     * Field basePrice.
+     */
+	private final int basePrice;
 	
-	
-	public static enum GoodTypes{
-		WATER, FURS, ORE, MEDICINE, MACHINES, WEAPONS, GOLD, NARCOTICS, PRODUCE, MEAT 
+	/**
+     * Constructor for Good.
+     * @param basePrice int.
+     */
+	private Good(int basePrice) {
+	    this.basePrice = basePrice;
 	}
 	
-	public static final int WATER_BASEPRICE = 30;
-	public static final int FURS_BASEPRICE = 250;
-	public static final int ORE_BASEPRICE = 350;
-	public static final int MEDICINE_BASEPRICE = 650;
-	public static final int MACHINES_BASEPRICE = 900;
-	public static final int WEAPONS_BASEPRICE = 1250;
-	public static final int GOLD_BASEPRICE = 500;
-	public static final int NARCOTICS_BASEPRICE = 3500;
-	public static final int PRODUCE_BASEPRICE = 100;
-	public static final int MEAT_BASEPRICE = 200;
-	
-	
-	
+	/**
+	 * Method getBasePrice.
+	 * @return int basePrice.
+	 */
+    public int getBasePrice() {
+        return basePrice;
+    }
 }
