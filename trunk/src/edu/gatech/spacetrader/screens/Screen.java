@@ -29,12 +29,6 @@ public abstract class Screen {
 	 * @param point Point
 	 */
 	public abstract void checkForClick(Point point);
-	/**
-	 *
-	 * Method update.
-	 * @param e KeyEvent
-	 */
-	/*public void update() {}*/
 	
 	/**
 	 * Method keyTyped.
@@ -48,8 +42,8 @@ public abstract class Screen {
 	
     /**
      * Method getHoverPoint.
-    
-     * @return Point */
+     * @return Point
+     */
     public Point getHoverPoint() {
         return hoverPoint;
     }
@@ -60,5 +54,13 @@ public abstract class Screen {
      */
     public void setHoverPoint(Point hoverPoint) {
         this.hoverPoint = hoverPoint;
+    }
+
+    /**
+     * Method tick.
+     * Updates objects on the screen.
+     */
+    public void tick() { // $codepro.audit.disable emptyMethod
+        
     }
 }

@@ -1,3 +1,6 @@
+/* Comment
+ * 
+ */
 package edu.gatech.spacetrader.good;
 
 import edu.gatech.spacetrader.planet.Planet;

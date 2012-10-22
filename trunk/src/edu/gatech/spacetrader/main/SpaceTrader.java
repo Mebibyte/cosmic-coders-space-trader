@@ -122,7 +122,7 @@ public class SpaceTrader extends JFrame {
          
 			while (now - lastUpdateTime > TIME_BETWEEN_UPDATES 
 			        && updateCount < MAX_UPDATES_BEFORE_RENDER){
-				//updateGame();
+				tick();
 				lastUpdateTime += TIME_BETWEEN_UPDATES;
 				updateCount++;
 			}
@@ -131,7 +131,7 @@ public class SpaceTrader extends JFrame {
 				lastUpdateTime = now - TIME_BETWEEN_UPDATES;
 			}
 
-			drawGame();
+			draw();
 			lastRenderTime = now;
          
 			int thisSecond = (int) (lastUpdateTime / ONEBILLION);
@@ -155,10 +155,18 @@ public class SpaceTrader extends JFrame {
 	 * Method drawGame.
 	 * Calls the repaint method of the GamePanel.
 	 */
-	private void drawGame(){
+	private void draw(){
 		gamePanel.repaint();
 		frameCount++;
 	}
+	
+	/**
+     * Method drawGame.
+     * Calls the repaint method of the GamePanel.
+     */
+    private void tick(){
+        gamePanel.tick();
+    }
 	
 	/**
 	 * Method main.

@@ -42,6 +42,20 @@ public class TitleScreen extends Screen{
     private static final ImageIcon BG = new ImageIcon(
             BigButton.class.getResource("/edu/gatech/spacetrader/res/space.jpg"));
     
+    /**
+     * Field player.
+     */
+    private static final ImageIcon PLAYER = new ImageIcon(
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/player.png"));
+    
+    /**
+     * Field playerX.
+     */
+    /**
+     * Field playerY.
+     */
+    private int playerX, playerY;
+    
 	/**
 	 * Constructor for TitleScreen.
 	 * @param panel GamePanel
@@ -66,9 +80,28 @@ public class TitleScreen extends Screen{
 	@Override
 	public void draw(Graphics g) {
 	    BG.paintIcon(panel, g, 0, 0);
+	   
+	    if (playerY + PLAYER.getIconHeight() > height) {
+	        PLAYER.paintIcon(panel, g, playerX, playerY - height);
+	    }
+	    
+	    if (playerX + PLAYER.getIconWidth() > width) {
+            PLAYER.paintIcon(panel, g, playerX - width, playerY);
+        }
+	    
+	    PLAYER.paintIcon(panel, g, playerX, playerY);
 		newGame.draw(g, panel, width, height);
         loadGame.draw(g, panel, width, height);
 		quit.draw(g, panel, width, height);
+	}
+	
+	/**
+     * Method tick.
+     */
+	@Override
+	public void tick(){
+	    playerX = (playerX + 1) % width;
+	    playerY = (playerY + 1) % height;
 	}
 	
 	/**
