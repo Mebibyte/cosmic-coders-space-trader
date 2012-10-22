@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
+import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
 
 /**
@@ -229,8 +230,10 @@ public class Planet {
      */
     private final int x, y;
     
-    
-    private edu.gatech.spacetrader.good.PlanetMarket market;
+    /**
+     * Field market.
+     */
+    private PlanetMarket market;
     
     /**
      * Constructor for Planet.
