@@ -12,110 +12,103 @@ import edu.gatech.spacetrader.planet.Planet;
  * @version 1.0
  */
 public class PlanetMarket {
-	private int waterSellPrice;
-	private int fursSellPrice;
-	private int oreSellPrice;
-	private int medicineSellPrice;
-	private int machinesSellPrice;
-	private int weaponsSellPrice;
-	private int goldSellPrice;
-	private int narcoticsSellPrice;
-	private int produceSellPrice;
-	private int meatSellPrice;
+    private int[][] prices = new int[10][2];
+	private static final int waterIndex = 0;
+	private static final int fursIndex = 1;
+	private static final int foodIndex = 2;
+	private static final int oreIndex = 3;
+	private static final int gamesIndex = 4;
+	private static final int firearmsIndex = 5;
+	private static final int medicineIndex = 6;
+	private static final int machinesIndex = 7;
+	private static final int narcoticsIndex = 8;
+	private static final int robotsIndex = 9;
 	
-	private int waterBuyPrice;
-	private int fursBuyPrice;
-	private int oreBuyPrice;
-	private int medicineBuyPrice;
-	private int machinesBuyPrice;
-	private int weaponsBuyPrice;
-	private int goldBuyPrice;
-	private int narcoticsBuyPrice;
-	private int produceBuyPrice;
-	private int meatBuyPrice;
+	private static final int sellIndex = 0;
+	private static final int buyIndex = 1;
 	
 	// getters and setters. Lots of them
 	
 	
 	public int getWaterSellPrice() {
-		return waterSellPrice;
+		return prices[waterIndex][sellIndex];
 	}
 
 	public int getFursSellPrice() {
-		return fursSellPrice;
+		return prices[fursIndex][sellIndex];
 	}
+	
+	public int getFoodSellPrice() {
+        return prices[foodIndex][sellIndex];
+    }
 
 	public int getOreSellPrice() {
-		return oreSellPrice;
+		return prices[oreIndex][sellIndex];
 	}
+	
+	public int getGamesSellPrice() {
+        return prices[gamesIndex][sellIndex];
+    }
+	
+	public int getFirearmsSellPrice() {
+        return prices[firearmsIndex][sellIndex];
+    }
 
 	public int getMedicineSellPrice() {
-		return medicineSellPrice;
+		return prices[medicineIndex][sellIndex];
 	}
 
 	public int getMachinesSellPrice() {
-		return machinesSellPrice;
-	}
-
-	public int getWeaponsSellPrice() {
-		return weaponsSellPrice;
-	}
-
-	public int getGoldSellPrice() {
-		return goldSellPrice;
+		return prices[machinesIndex][sellIndex];
 	}
 
 	public int getNarcoticsSellPrice() {
-		return narcoticsSellPrice;
+		return prices[narcoticsIndex][sellIndex];
 	}
 
-	public int getProduceSellPrice() {
-		return produceSellPrice;
-	}
-
-	public int getMeatSellPrice() {
-		return meatSellPrice;
+	public int getRobotsSellPrice() {
+	    return prices[robotsIndex][sellIndex];
 	}
 
 	public int getWaterBuyPrice() {
-		return waterBuyPrice;
-	}
+        return prices[waterIndex][buyIndex];
+    }
 
-	public int getFursBuyPrice() {
-		return fursBuyPrice;
-	}
+    public int getFursBuyPrice() {
+        return prices[fursIndex][buyIndex];
+    }
+    
+    public int getFoodBuyPrice() {
+        return prices[foodIndex][buyIndex];
+    }
 
-	public int getOreBuyPrice() {
-		return oreBuyPrice;
-	}
+    public int getOreBuyPrice() {
+        return prices[oreIndex][buyIndex];
+    }
+    
+    public int getGamesBuyPrice() {
+        return prices[gamesIndex][buyIndex];
+    }
+    
+    public int getFirearmsBuyPrice() {
+        return prices[firearmsIndex][buyIndex];
+    }
 
-	public int getMedicineBuyPrice() {
-		return medicineBuyPrice;
-	}
+    public int getMedicineBuyPrice() {
+        return prices[medicineIndex][buyIndex];
+    }
 
-	public int getMachinesBuyPrice() {
-		return machinesBuyPrice;
-	}
+    public int getMachinesBuyPrice() {
+        return prices[machinesIndex][buyIndex];
+    }
 
-	public int getWeaponsBuyPrice() {
-		return weaponsBuyPrice;
-	}
+    public int getNarcoticsBuyPrice() {
+        return prices[narcoticsIndex][buyIndex];
+    }
 
-	public int getGoldBuyPrice() {
-		return goldBuyPrice;
-	}
-
-	public int getNarcoticsBuyPrice() {
-		return narcoticsBuyPrice;
-	}
-
-	public int getProduceBuyPrice() {
-		return produceBuyPrice;
-	}
-
-	public int getMeatBuyPrice() {
-		return meatBuyPrice;
-	}
+    public int getRobotsBuyPrice() {
+        return prices[robotsIndex][buyIndex];
+    }
 
 	
 	
