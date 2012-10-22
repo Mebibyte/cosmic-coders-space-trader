@@ -116,10 +116,10 @@ public class PlanetMarket {
 
 	
 	
-	public PlanetMarket createPlanetMarket(Planet p){
+	public void createPlanetMarket(Planet p){
 		//TODO Logic here that generates market prices
 		//based on environment, current event, and civilization level
-		return null;
+		
 	}
 
 }

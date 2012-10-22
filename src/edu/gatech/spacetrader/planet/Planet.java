@@ -143,7 +143,7 @@ public class Planet {
         };
     
     public static enum Event{
-    	DROUGHT, COLD, CROPFAIL, WAR, BOREDOM, PLAGUE, LACKOFWORKERS
+    	DROUGHT, COLD, CROPFAIL, WAR, BOREDOM, PLAGUE, LACKOFWORKERS, NONE
     }
     
     /**
@@ -229,6 +229,9 @@ public class Planet {
      */
     private final int x, y;
     
+    
+    private edu.gatech.spacetrader.good.PlanetMarket market;
+    
     /**
      * Constructor for Planet.
      * @param galaxyWidth Width of galaxy.
@@ -250,6 +253,10 @@ public class Planet {
         civLevel = CivilizationLevel.values()
         		[RAND.nextInt(CivilizationLevel.values().length)];
         environment = Environment.values()[RAND.nextInt(Environment.values().length)];
+        
+        currentEvent = Event.NONE;
+        market = new edu.gatech.spacetrader.good.PlanetMarket();
+        market.createPlanetMarket(this);
     }
     
     /**
