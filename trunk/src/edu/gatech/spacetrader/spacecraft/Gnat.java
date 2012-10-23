@@ -37,14 +37,19 @@ public class Gnat extends SpaceCraft{
 	 * Field GNAT_DEFENSE.
 	 * (value is 5)
 	 */
-	private static final int GNAT_DEFENSE = 5; 
+	private static final int GNAT_DEFENSE = 5;
+	
+	/**
+     * Field GNAT_CARGO_SIZE.
+     * (value is 10)
+     */
+    private static final int GNAT_CARGO_SIZE = 10;
 	
 	/**
 	 * Field GNAT_STORAGE 
 	 * (Good array of size 10) 
 	 */
-	private static Good[] GNAT_STORAGE= new Good[10]; 
-	
+	private static Good[] GNAT_STORAGE= new Good[GNAT_CARGO_SIZE];
 
 	/**
 	 * 

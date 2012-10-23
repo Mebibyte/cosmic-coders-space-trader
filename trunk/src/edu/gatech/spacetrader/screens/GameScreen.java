@@ -121,7 +121,7 @@ public class GameScreen extends Screen {
         if (buy.isClicked(point)) {
             System.out.println("Bought!"); //TODO
         } else if (sell.isClicked(point)) {
-            System.out.println("Bought!"); //TODO
+            System.out.println("Sold!"); //TODO
         } else if (fly.isClicked(point)) {
             System.out.println("Go to fly screen!"); //TODO
         }
