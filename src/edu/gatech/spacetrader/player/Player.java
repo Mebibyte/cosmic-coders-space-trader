@@ -71,9 +71,15 @@ public class Player {
      * Method getSkills.
     
      * @return String */
-    public String getSkills() {
+    public String getSkillsString() {
         return Arrays.toString(skills);
     }
+    
+    public int[] getSkillsArray(){
+    	return skills;
+    }
+    
+    
 
     /**
      * Method getDifficulty.
