@@ -4,6 +4,8 @@
 
 package edu.gatech.spacetrader.spacecraft;
 
+import edu.gatech.spacetrader.good.Good;
+
 
 
 /**
@@ -14,7 +16,8 @@ package edu.gatech.spacetrader.spacecraft;
 public class Gnat extends SpaceCraft{
     
 	/**
-	 * 
+	 * Field GNAT_HEALTH 
+	 * (value is 100) 
 	 */
 	private static final int GNAT_HEALTH = 100;
 	
@@ -34,7 +37,14 @@ public class Gnat extends SpaceCraft{
 	 * Field GNAT_DEFENSE.
 	 * (value is 5)
 	 */
-	private static final int GNAT_DEFENSE = 5;
+	private static final int GNAT_DEFENSE = 5; 
+	
+	/**
+	 * Field GNAT_STORAGE 
+	 * (Good array of size 10) 
+	 */
+	private static Good[] GNAT_STORAGE= new Good[10]; 
+	
 
 	/**
 	 * 
@@ -43,7 +53,8 @@ public class Gnat extends SpaceCraft{
 		this.health = GNAT_HEALTH;
 		this.speed = GNAT_SPEED;
 		this.attack = GNAT_ATTACK;
-		this.defense = GNAT_DEFENSE;
+		this.defense = GNAT_DEFENSE; 
+		this.storage= GNAT_STORAGE;  
 	}
 
     /**
