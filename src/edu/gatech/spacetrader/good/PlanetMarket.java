@@ -14,16 +14,41 @@ import edu.gatech.spacetrader.planet.Planet;
  * @version 1.0
  */
 public class PlanetMarket {
-    private int[][] prices = new int[10][2];
-
-    private static final int SELL = 0, BUY = 1;
     
+    /**
+     * Field NUM_GOODS.
+     * (Value is 10)
+     */
+    private static final int NUM_GOODS = 10;
+    
+    /**
+     * Field prices.
+     * 2D int arrray for prices of goods. Each good has an inner array.
+     * The first spot of inner array is buy price, second is sell price.
+     */
+    private int[][] prices = new int[NUM_GOODS][2];
+
+    /**
+     * Field BUY.
+     * (Value is 0)
+     */
+    /**
+     * Field prices.
+     * (value is 1)
+     */
+    private static final int BUY = 0, SELL = 1;
+    
+    /**
+     * Field planet.
+     * Planet this market belongs to.
+     */
 	private final Planet planet;
 	
-	public int getPrice(Good g, String s) {
-	    return prices[g.getIndex()][s.equals("s") ? SELL : BUY];
-	}
-	
+	/**
+     * Constructor for PlanetMarket that sets all buy prices to base price.
+     * 
+     * @param planet Planet this market resides on.
+     */
 	public PlanetMarket(Planet planet){
 	    this.planet = planet;
 		for (int i = 0; i < prices.length; i++) {
@@ -31,42 +56,38 @@ public class PlanetMarket {
 		}
 	}
 	
+	/**
+	 * Updates prices based on several factors of the planet and good.
+	 */
 	public void updatePrices(){
 	    for(int i = 0; i < prices.length; i++) {
 	        prices[i][BUY] = Good.getBasePrice(i) + 
 	                planet.getCivLevel().getTechLevel(); // + (IPL * (Planet Tech Level - MTLP)) + (variance)
-	    }
+	    } //TODO Add missing variables from planet/good
 	}
 	
-//<<<<<<< .mine
+	/**
+	 * Get the buy/sell price of a specified good.
+	 * 
+	 * @param g Good.
+	 * @param s String representing buy(b) or sell(s).
+	 * @return Price of specified good.
+	 */
+	public int getPrice(Good g, String s) {
+        return prices[g.getIndex()][s.equals("s") ? SELL : BUY];
+    }
 	
-	public void createPlanetMarket(Planet p){
-		//TODO Logic here that generates market prices
-		//based on environment, current event, and civilization level
-		if(p.getCivLevel().getTechLevel() < 
-				edu.gatech.spacetrader.planet.Planet.
-				TechLevel.EARLY_INDUSTRIAL.getTechLevel()){
-			prices[Good.FIREARMS.getIndex()][BUY]=0;
-			prices[Good.FIREARMS.getIndex()][SELL]=0;
-			
-			prices[Good.ROBOTS.getIndex()][BUY]=0;
-			prices[Good.ROBOTS.getIndex()][SELL]=0;
-			/*I have NO idea if this is the right way to do this
-			 *The "index" system is confusing here.
-			 */
-	
-		}	
-	}
-//=======
+	/**
+	 * toString method for PlanetMarket required by CodePro.
+	 * 
+	 * @return String representation of PlanetMarket.
+	 */
 	public String toString(){
-		//Instead of doing a toString like this, maybe we can format it with HTML
-		//into a table (if that works for Graphics) to show on the market screen
 	    final StringBuffer ans = new StringBuffer("[");
 	    for (int i = 0; i < prices.length; i++) {
 	        ans.append(Arrays.toString(prices[i]));
 	    }
 	    ans.append(']');
 	    return ans.toString();
-//>>>>>>> .r118
 	}
 }

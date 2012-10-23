@@ -184,12 +184,24 @@ public class Planet {
     	PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), RENAISSANCE(3),
     	EARLY_INDUSTRIAL(4), INDUSTRIAL(5), POST_INDUSTRIAL(6), HI_TECH(7);
     	
+    	/**
+         * Field LevelInt of TechLevel.
+         */
     	private final int levelInt;
     	
+    	/**
+    	 * TechLevel constructor to set level int used in calculations.
+    	 * 
+    	 * @param levelInt
+    	 */
     	private TechLevel(int levelInt) {
     	    this.levelInt = levelInt;
     	}
 
+    	/**
+    	 * Get the levelInt of a TechLevel.
+    	 * @return levelInt.
+    	 */
         public int getTechLevel() {
             return levelInt;
         }

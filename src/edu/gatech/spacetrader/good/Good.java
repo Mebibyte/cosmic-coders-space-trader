@@ -24,6 +24,7 @@ public enum Good {
 	/**
      * Constructor for Good.
      * @param basePrice int.
+     * @param index int.
      */
 	private Good(int basePrice, int index) {
 	    this.basePrice = basePrice;
@@ -46,6 +47,12 @@ public enum Good {
         return index;
     }
 
+    /**
+     * Gets the base price of a specific index. (NOT GOOD)
+     * 
+     * @param i Index to get
+     * @return int basePrice.
+     */
     public static int getBasePrice(int i) {
         for(Good g : Good.values()) {
             if (g.index == i) return g.getBasePrice();
