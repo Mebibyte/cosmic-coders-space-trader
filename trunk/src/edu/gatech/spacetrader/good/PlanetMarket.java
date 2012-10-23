@@ -3,8 +3,10 @@
  */
 package edu.gatech.spacetrader.good;
 
+import java.awt.Graphics;
 import java.util.Arrays;
 
+import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
 /**
@@ -75,6 +77,19 @@ public class PlanetMarket {
 	 */
 	public int getPrice(Good g, String s) {
         return prices[g.getIndex()][s.equals("s") ? SELL : BUY];
+    }
+	
+	/**
+	 * draw method for PlanetMarket.
+	 * Draws the goods in the planetMarket using the given graphics g.
+	 * 
+	 * @param g Graphics to be drawn.
+	 * @param panel GamePanel.
+	 * @param x X-coordinate.
+	 * @param y Y-coordinate.
+	 */
+    public void draw(Graphics g, GamePanel panel, int x, int y) {
+        g.drawString("Goods", x, y);
     }
 	
 	/**

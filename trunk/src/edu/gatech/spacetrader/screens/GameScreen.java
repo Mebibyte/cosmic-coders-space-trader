@@ -76,8 +76,10 @@ public class GameScreen extends Screen {
         this.width = width;
         this.height = height;
         currentPlanet = galaxy.getStartingPlanet();
-        buy = new BigButton("Buy", width / 2, height / 2, true);
-        sell = new BigButton("Sell", width / 2, height / 2 + buy.getHeight(), true);
+        buy = new BigButton("Buy", (width / 2) - (BigButton.getWidth() / 2), 
+                (height / 2) + 50, true);
+        sell = new BigButton("Sell", (width / 2) + (BigButton.getWidth() / 2), 
+                (height / 2) + 50, true);
         fly = new BigButton("Fly", Galaxy.HALF_GALAXY_WIDTH, 
                 height - Galaxy.GALAXY_HEIGHT - sell.getHeight(), true);
     }
@@ -107,6 +109,8 @@ public class GameScreen extends Screen {
                 currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT) - 10,
                 20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
         g.setColor(Color.BLACK);
+        
+        currentPlanet.getMarket().draw(g, panel, width / 2, height / 2);
         buy.draw(g, panel, width, height);
         sell.draw(g, panel, width, height);
         fly.draw(g, panel, width, height);

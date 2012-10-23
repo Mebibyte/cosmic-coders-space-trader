@@ -171,8 +171,8 @@ public class BigButton extends Button{
 	
 	/**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
 	public String toString(){
 	    return "Button with x = " + x + " and y = " + y;
 	}
@@ -185,5 +185,14 @@ public class BigButton extends Button{
         if (bounds.contains(p)) {
             hovered = true;
         } else hovered = false;
+    }
+
+    /**
+     * Method getWidth.
+     * Get's the width of the button image.
+     * @return int width.
+     */
+    public static int getWidth() {
+        return BUTTON.getIconWidth();
     }
 }

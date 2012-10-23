@@ -401,4 +401,13 @@ public class Planet {
                     height - Galaxy.HALF_GALAXY_HEIGHT + (y - 2), 4, 4); // $codepro.audit.disable numericLiterals
         g.setColor(Color.BLACK);
     }
+
+    /**
+     * Get the planetMarket of this planet.
+     * 
+     * @return planetMarket for this planet.
+     */
+    public PlanetMarket getMarket() {
+        return market;
+    }
 }
