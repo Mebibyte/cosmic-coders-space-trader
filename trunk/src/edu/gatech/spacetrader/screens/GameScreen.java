@@ -94,13 +94,16 @@ public class GameScreen extends Screen {
         final int y = g.getFontMetrics().getHeight();
         
         g.drawString(player.getName(), x, y);
-        g.drawString(player.getSkills(), x, y * 2);
-        g.drawString(player.getCredits() + " credits", x,  y * 3);
-        g.drawString(player.getSpaceCraft().toString(), x, y * 4);
-        g.drawString(player.getDifficulty(), x, y * 5);
-        g.drawString(currentPlanet.toString(), x, y * 6);
+        g.drawString("Pilot: " + player.getSkillsArray()[0], x, y * 3);
+        g.drawString("Fighter: " + player.getSkillsArray()[1], x, y * 4);
+        g.drawString("Trader: " + player.getSkillsArray()[2], x, y * 5);
+        g.drawString("Engineer: " + player.getSkillsArray()[3], x, y * 6);
+        g.drawString(player.getCredits() + " credits", x,  y * 8);
+        g.drawString(player.getSpaceCraft().toString(), x, y * 9);
+        g.drawString(player.getDifficulty(), x, y * 10);
+        g.drawString(currentPlanet.toString(), x, y * 11);
         
-        g.drawLine(Galaxy.GALAXY_WIDTH, 0, Galaxy.GALAXY_WIDTH, height);
+        g.drawLine(Galaxy.GALAXY_WIDTH+9, 0, Galaxy.GALAXY_WIDTH+9, height);
         galaxy.draw(g, panel, Galaxy.HALF_GALAXY_WIDTH,
                 height - Galaxy.HALF_GALAXY_HEIGHT);
         g.setColor(Color.GRAY);
