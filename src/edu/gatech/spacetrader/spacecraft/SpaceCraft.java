@@ -5,6 +5,7 @@
 package edu.gatech.spacetrader.spacecraft;
 
 import java.util.Random;
+import edu.gatech.spacetrader.good.Good; 
 
 import javax.swing.ImageIcon;
 
@@ -24,6 +25,11 @@ public abstract class SpaceCraft {
 	 * 
 	 */
 	protected int health;
+	
+	/** 
+	 * 
+	 */
+	protected Good[] storage; 
 	
 	/**
 	 * 
@@ -56,7 +62,7 @@ public abstract class SpaceCraft {
      * 
      */
     public void fly(){
-        System.out.println("2 Infinity N Beyond!"); //TODO
+        System.out.println("2 Infinity N Beyond! nice touch glenn"); //TODO
     }
     
     /**
@@ -82,5 +88,28 @@ public abstract class SpaceCraft {
      */
     public int getDefense(){
     	return this.defense;
-    }
+    } 
+    
+    /**
+     * Adds a certain Good to the SpaceCraft's Storage
+     * @param g
+     */
+    public void addToStorage(Good g){
+    	if (storage[0] == null) {
+    		storage[0] = g; 
+    	} else {
+    		boolean ind = true;  
+    		int i = 1; 
+    		while (ind && i < storage.length) {
+    			if (storage[i] == null ) {
+    				storage[i] = g;  
+    				ind= false; 
+    			} 
+    			i++; 
+    		}
+    	}
+    } 
+    
+    
+    
 }
