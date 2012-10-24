@@ -4,10 +4,8 @@
 package edu.gatech.spacetrader.good;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
-import javax.swing.ImageIcon;
-
-import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
@@ -18,10 +16,6 @@ import edu.gatech.spacetrader.planet.Planet;
  * @version 1.0
  */
 public class PlanetMarket {
-
-    private static final ImageIcon GOOD_BG = new ImageIcon(
-            BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
-
     /**
      * Field NUM_GOODS. (Value is 10)
      */
@@ -38,9 +32,13 @@ public class PlanetMarket {
      * @param planet
      *            Planet this market resides on.
      */
-    public PlanetMarket(Planet planet) {
-        for (int i = 0; i < goods.length; i++) {
-            goods[i] = new Good(i, planet);
+    public PlanetMarket(Planet planet, int x, int y) {
+        int goodCount = 0;
+        for (int i = y; i < (y + 150); i += 75) {
+            for (int j = x; j < (x + 250); j += 50) {
+                goods[goodCount] = new Good(goodCount, planet, j, i);
+                goodCount++;
+            }
         }
     }
 
@@ -83,20 +81,10 @@ public class PlanetMarket {
      *            Graphics to be drawn.
      * @param panel
      *            GamePanel.
-     * @param x
-     *            X-coordinate.
-     * @param y
-     *            Y-coordinate.
      */
-    public void draw(Graphics g, GamePanel panel, int x, int y) {
-        g.drawRect(x, y, 250, 150);
-        int goodCount = 0;
-        for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 250); j += 50) {
-                GOOD_BG.paintIcon(panel, g, j, i);
-                goods[goodCount].draw(g, panel, j, i);
-                goodCount++;
-            }
+    public void draw(Graphics g, GamePanel panel) {
+        for (Good good : goods) {
+            good.draw(g, panel);
         }
     }
 
@@ -112,5 +100,19 @@ public class PlanetMarket {
         }
         ans.append(']');
         return ans.toString();
+    }
+
+    public Good checkForClick(Point point) {
+        for (Good g : goods) {
+            if (g.checkForClick(point)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public void boughtGood(Good bought) {
+        goods[bought.getIndex()].setQuantity(goods[bought.getIndex()]
+                .getQuantity() - 1);
     }
 }

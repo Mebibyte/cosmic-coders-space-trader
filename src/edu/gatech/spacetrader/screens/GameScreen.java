@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Galaxy;
@@ -45,7 +46,7 @@ public class GameScreen extends Screen {
     /**
      * Field galaxy.
      */
-    private final Galaxy galaxy = new Galaxy();
+    private final Galaxy galaxy;
     
     /**
      * Field currentPlanet.
@@ -65,6 +66,7 @@ public class GameScreen extends Screen {
 
     /**
      * Constructor for GameScreen.
+     * 
      * @param player Player
      * @param panel GamePanel
      * @param width int
@@ -75,6 +77,7 @@ public class GameScreen extends Screen {
         this.panel = panel;
         this.width = width;
         this.height = height;
+        this.galaxy = new Galaxy(width);
         currentPlanet = galaxy.getStartingPlanet();
         buy = new BigButton("Buy", (width / 2) - (BigButton.getWidth() / 2), 
                 (height / 2) + 50, true);
@@ -113,8 +116,7 @@ public class GameScreen extends Screen {
                 20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
         g.setColor(Color.BLACK);
         
-        currentPlanet.getMarket().draw(g, panel,
-                (width - Galaxy.GALAXY_WIDTH + 10) / 2, 0);
+        currentPlanet.getMarket().draw(g, panel);
         buy.draw(g, panel, width, height);
         sell.draw(g, panel, width, height);
         fly.draw(g, panel, width, height);
@@ -132,6 +134,14 @@ public class GameScreen extends Screen {
             System.out.println("Sold!"); //TODO
         } else if (fly.isClicked(point)) {
             System.out.println("Go to fly screen!"); //TODO
+        } else {
+            Good bought = currentPlanet.getMarket().checkForClick(point);
+            if (bought != null) {
+                if (player.getSpaceCraft().addToStorage(bought)) {
+                    System.out.println("Bought good!");
+                    currentPlanet.getMarket().boughtGood(bought);
+                }
+            }
         }
     }
     
