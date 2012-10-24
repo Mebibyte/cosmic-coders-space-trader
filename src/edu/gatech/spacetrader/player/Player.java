@@ -107,8 +107,12 @@ public class Player {
      * Method useCredits.
      * @param amount int
      */
-    public void useCredits(int amount) {
-        credits += amount;
+    public boolean useCredits(int amount) {
+        if (!(amount * -1 > credits)) {
+            credits += amount;
+            return true;
+        }
+        return false;
     }
     
     /**
