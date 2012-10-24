@@ -4,7 +4,6 @@
 package edu.gatech.spacetrader.good;
 
 import java.awt.Graphics;
-import java.util.Arrays;
 
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
@@ -24,27 +23,10 @@ public class PlanetMarket {
     private static final int NUM_GOODS = 10;
     
     /**
-     * Field prices.
-     * 2D int arrray for prices of goods. Each good has an inner array.
-     * The first spot of inner array is buy price, second is sell price.
+     * Field goods.
+     * Array of goods for PlanetMarket.
      */
-    private int[][] prices = new int[NUM_GOODS][2];
-
-    /**
-     * Field BUY.
-     * (Value is 0)
-     */
-    /**
-     * Field prices.
-     * (value is 1)
-     */
-    private static final int BUY = 0, SELL = 1;
-    
-    /**
-     * Field planet.
-     * Planet this market belongs to.
-     */
-	private final Planet planet;
+    private Good[] goods = new Good[NUM_GOODS];
 	
 	/**
      * Constructor for PlanetMarket that sets all buy prices to base price.
@@ -52,9 +34,8 @@ public class PlanetMarket {
      * @param planet Planet this market resides on.
      */
 	public PlanetMarket(Planet planet){
-	    this.planet = planet;
-		for (int i = 0; i < prices.length; i++) {
-		    prices[i][BUY] = Good.getBasePrice(i);
+		for (int i = 0; i < goods.length; i++) {
+		    goods[i] = new Good(i, planet);
 		}
 	}
 	
@@ -62,21 +43,29 @@ public class PlanetMarket {
 	 * Updates prices based on several factors of the planet and good.
 	 */
 	public void updatePrices(){
-	    for(int i = 0; i < prices.length; i++) {
-	        prices[i][BUY] = Good.getBasePrice(i) + 
-	                planet.getCivLevel().getTechLevel(); // + (IPL * (Planet Tech Level - MTLP)) + (variance)
-	    } //TODO Add missing variables from planet/good
+	    for (int i = 0; i < goods.length; i++) {
+	        goods[i].updatePrice();
+	    }
 	}
 	
 	/**
-	 * Get the buy/sell price of a specified good.
+	 * Get the buy price of a specified good.
 	 * 
 	 * @param g Good.
-	 * @param s String representing buy(b) or sell(s).
 	 * @return Price of specified good.
 	 */
-	public int getPrice(Good g, String s) {
-        return prices[g.getIndex()][s.equals("s") ? SELL : BUY];
+	public int getBuyPrice(Good g) {
+        return g.getBuyPrice();
+    }
+	
+	/**
+     * Get the sell price of a specified good.
+     * 
+     * @param g Good.
+     * @return Price of specified good.
+     */
+    public int getSellPrice(Good g) {
+        return g.getSellPrice();
     }
 	
 	/**
@@ -99,8 +88,8 @@ public class PlanetMarket {
 	 */
 	public String toString(){
 	    final StringBuffer ans = new StringBuffer("[");
-	    for (int i = 0; i < prices.length; i++) {
-	        ans.append(Arrays.toString(prices[i]));
+	    for (int i = 0; i < goods.length; i++) {
+	        ans.append(goods[i].toString());
 	    }
 	    ans.append(']');
 	    return ans.toString();
