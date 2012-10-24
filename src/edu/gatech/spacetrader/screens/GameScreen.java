@@ -161,4 +161,8 @@ public class GameScreen extends Screen {
     public void changePlanet(Planet planet) {
         currentPlanet = planet;
     }
+    
+    public Player getPlayer(){
+    	return player;
+    }
 }
