@@ -43,13 +43,13 @@ public class Gnat extends SpaceCraft{
      * Field GNAT_CARGO_SIZE.
      * (value is 10)
      */
-    private static final int GNAT_CARGO_SIZE = 10;
+    private static final int GNAT_CAPACITY = 10; 
 	
 	/**
 	 * Field GNAT_STORAGE 
 	 * (Good array of size 10) 
 	 */
-	private static Good[] GNAT_STORAGE= new Good[GNAT_CARGO_SIZE];
+	private static Good[] GNAT_STORAGE= new Good[10];
 
 	/**
 	 * 
@@ -59,7 +59,8 @@ public class Gnat extends SpaceCraft{
 		this.speed = GNAT_SPEED;
 		this.attack = GNAT_ATTACK;
 		this.defense = GNAT_DEFENSE; 
-		this.storage= GNAT_STORAGE;  
+		this.storage= GNAT_STORAGE;   
+		this.maxCapacity= GNAT_CAPACITY; 
 	}
 
     /**

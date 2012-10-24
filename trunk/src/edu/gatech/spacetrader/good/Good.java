@@ -96,5 +96,9 @@ public class Good {
 
     public int getSellPrice() {
         return sellPrice;
+    } 
+    
+    public int getIndex(){
+    	return type.index; 
     }
 }

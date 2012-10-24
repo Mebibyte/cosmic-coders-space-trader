@@ -44,7 +44,17 @@ public abstract class SpaceCraft {
 	/**
 	 * 
 	 */
-	protected int attack;
+	protected int attack; 
+	
+	/**
+	 * 
+	 */
+	protected int maxCapacity;  
+	
+	/**
+	 * 
+	 */
+	protected int quantity; 
 	
 	/**
 	 * We can eventually create pictures of each of the ships for when
@@ -93,24 +103,33 @@ public abstract class SpaceCraft {
     
     /**
      * Adds a certain Good to the SpaceCraft's Storage
-     * @param g
+     * @param g 
+     * @return Boolean of whether or not you could add the good to the storage 
      */
-    public void addToStorage(Good g){
-    	if (storage[0] == null) {
-    		storage[0] = g; 
-    	} else {
-    		boolean ind = true;  
-    		int i = 1; 
-    		while (ind && i < storage.length) {
-    			if (storage[i] == null ) {
-    				storage[i] = g;  
-    				ind= false; 
-    			} 
-    			i++; 
-    		}
+    public boolean addToStorage(Good g){ 
+    	boolean ans; 
+    	int i= g.getIndex();  
+    	
+    	if ( quantity >= maxCapacity ){
+    		ans= false; 
+    	} else if (storage[i] == null) {
+    		storage[i]= g;  
+    		ans= true; 
+    		quantity++; 
+    	}else {
+    		storage[i].addGood();  
+    		quantity++;  
+    		ans= true; 
     	}
-    } 
+    	return ans; 
+    	
+    }  
+
     
-    
-    
+    public Good removeGood(Good g){  
+    	int i= 0; 
+    	boolean a; 
+    	
+    	return null; 
+    }
 }
