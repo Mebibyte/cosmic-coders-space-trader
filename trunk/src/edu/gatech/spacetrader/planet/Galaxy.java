@@ -47,9 +47,9 @@ public class Galaxy {
     /**
      * Constructor for Galaxy.
      */
-    public Galaxy() {
+    public Galaxy(int width) {
         for (int i = 0; i < NUM_PLANETS; i++) {
-            planets[i] = new Planet(GALAXY_WIDTH, GALAXY_HEIGHT);
+            planets[i] = new Planet(width, GALAXY_WIDTH, GALAXY_HEIGHT);
         }
     }
 

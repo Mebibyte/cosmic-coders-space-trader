@@ -262,7 +262,7 @@ public class Planet {
      * @param galaxyWidth Width of galaxy.
      * @param galaxyHeight Height of the galaxy.
      */
-    public Planet(int galaxyWidth, int galaxyHeight){
+    public Planet(int width, int galaxyWidth, int galaxyHeight){
         int nextPlanet = RAND.nextInt(NUM_PLANETS);
         
         while (NAMES_USED.contains(nextPlanet)) {
@@ -280,7 +280,7 @@ public class Planet {
         environment = Environment.values()[RAND.nextInt(Environment.values().length)];
         
         currentEvent = Event.NONE;
-        market = new PlanetMarket(this);
+        market = new PlanetMarket(this, (width - Galaxy.GALAXY_WIDTH + 10) / 2, 0);
     }
     
     /**

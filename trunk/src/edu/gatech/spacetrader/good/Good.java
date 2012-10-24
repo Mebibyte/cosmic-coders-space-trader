@@ -6,10 +6,16 @@
 package edu.gatech.spacetrader.good;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+
+import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
+import edu.gatech.spacetrader.spacecraft.SpaceCraft;
 
 /**
  * Will probably only be used statically. Contains information about good types
@@ -72,17 +78,36 @@ public class Good {
 
     private Planet planet;
 
-    private int quantity, buyPrice, sellPrice;
+    private int quantity, buyPrice, sellPrice, x, y;
+    
+    private final Rectangle bounds;
+
+    private SpaceCraft spaceCraft;
+    
+    private static final ImageIcon GOOD_BG = new ImageIcon(
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
 
     private static final Random RAND = new Random();
 
-    public Good(int index, Planet planet) {
+    public Good(int index, Planet planet, int x, int y) {
         this.planet = planet;
         this.type = GoodType.getGoodType(index);
         this.buyPrice = type.basePrice
                 + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
                 + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
         this.sellPrice = (int) (buyPrice * .9);
+        this.quantity = RAND.nextInt(10);
+        this.x = x;
+        this.y = y;
+        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(), GOOD_BG.getIconHeight());
+    }
+
+    public Good(int index, SpaceCraft spaceCraft, int x, int y) {
+        this.spaceCraft = spaceCraft;
+        this.type = GoodType.getGoodType(index);
+        this.x = x;
+        this.y = y;
+        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(), GOOD_BG.getIconHeight());
     }
 
     public boolean buyGood() {
@@ -117,7 +142,10 @@ public class Good {
         return type.index;
     }
 
-    public void draw(Graphics g, GamePanel panel, int x, int y) {
+    public void draw(Graphics g, GamePanel panel) {
+        GOOD_BG.paintIcon(panel, g, x, y);
+        g.drawString(quantity + "", x + (50 / 2)
+                - (g.getFontMetrics().stringWidth(quantity + "") / 2), y + 13);
         g.drawString(buyPrice + "", x + (50 / 2)
                 - (g.getFontMetrics().stringWidth(buyPrice + "") / 2), y + 33);
         g.drawString(sellPrice + "", x + (50 / 2)
@@ -136,5 +164,9 @@ public class Good {
         } else {
         	this.quantity = quantity;  
         }
+    }
+
+    public boolean checkForClick(Point point) {
+        return bounds.contains(point) && quantity > 0;
     }
 }
