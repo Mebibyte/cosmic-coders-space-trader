@@ -137,7 +137,7 @@ public class GameScreen extends Screen {
         } else {
             Good bought = currentPlanet.getMarket().checkForClick(point);
             if (bought != null) {
-                if (player.getSpaceCraft().addToStorage(bought)) {
+                if (player.useCredits(bought.getBuyPrice() * -1) && player.getSpaceCraft().addToStorage(bought)) {
                     System.out.println("Bought good!");
                     currentPlanet.getMarket().boughtGood(bought);
                 }
