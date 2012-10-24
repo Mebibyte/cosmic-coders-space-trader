@@ -79,11 +79,11 @@ public class Good {
     private Planet planet;
 
     private int quantity, buyPrice, sellPrice, x, y;
-    
+
     private final Rectangle bounds;
 
     private SpaceCraft spaceCraft;
-    
+
     private static final ImageIcon GOOD_BG = new ImageIcon(
             BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
 
@@ -96,10 +96,15 @@ public class Good {
                 + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
                 + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
         this.sellPrice = (int) (buyPrice * .9);
-        this.quantity = RAND.nextInt(10);
+        
+        if (planet.getCivLevel().getTechLevel() >= type.MTLP) {
+            this.quantity = RAND.nextInt(10) + 10;
+        }
+        
         this.x = x;
         this.y = y;
-        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(), GOOD_BG.getIconHeight());
+        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(),
+                GOOD_BG.getIconHeight());
     }
 
     public Good(int index, SpaceCraft spaceCraft, int x, int y) {
@@ -107,7 +112,8 @@ public class Good {
         this.type = GoodType.getGoodType(index);
         this.x = x;
         this.y = y;
-        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(), GOOD_BG.getIconHeight());
+        bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(),
+                GOOD_BG.getIconHeight());
     }
 
     public boolean buyGood() {
@@ -159,10 +165,10 @@ public class Good {
     }
 
     public void setQuantity(int quantity) {
-        if ( quantity < 0) { 
-        	this.quantity= 0;  
+        if (quantity < 0) {
+            this.quantity = 0;
         } else {
-        	this.quantity = quantity;  
+            this.quantity = quantity;
         }
     }
 
