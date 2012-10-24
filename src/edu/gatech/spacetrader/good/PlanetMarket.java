@@ -5,6 +5,9 @@ package edu.gatech.spacetrader.good;
 
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
+
+import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
@@ -15,6 +18,9 @@ import edu.gatech.spacetrader.planet.Planet;
  * @version 1.0
  */
 public class PlanetMarket {
+    
+    private static final ImageIcon goodBG = new ImageIcon(
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
     
     /**
      * Field NUM_GOODS.
@@ -78,7 +84,15 @@ public class PlanetMarket {
 	 * @param y Y-coordinate.
 	 */
     public void draw(Graphics g, GamePanel panel, int x, int y) {
-        g.drawString("Goods", x, y);
+        g.drawRect(x, y, 250, 150);
+        int goodCount = 0;
+        for (int i = y; i < (y + 150); i += 75) {
+            for (int j = x; j < (x + 250); j += 50) {
+                goodBG.paintIcon(panel, g, j, i);
+                goods[goodCount].draw(g, panel, j, i);
+                goodCount++;
+            }
+        }
     }
 	
 	/**

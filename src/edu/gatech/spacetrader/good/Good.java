@@ -3,8 +3,10 @@
  */
 // $codepro.audit.disable numericLiterals
 package edu.gatech.spacetrader.good;
+import java.awt.Graphics;
 import java.util.Random;
 
+import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
 /**
@@ -100,5 +102,9 @@ public class Good {
     
     public int getIndex(){
     	return type.index; 
+    }
+
+    public void draw(Graphics g, GamePanel panel, int x, int y) {
+        g.drawString(type.toString(), x + (50 / 2) - (g.getFontMetrics().stringWidth(type.toString()) / 2), y + 73);
     }
 }
