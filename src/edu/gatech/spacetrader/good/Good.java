@@ -19,7 +19,12 @@ public enum Good {
 	ROBOTS(5000, 9, 6, 4, -150, 100);
 	
 	/**
-     * Field basePrice.
+     * Field basePrice. 
+     * Field index. 
+     * Field MTLP. 
+     * Field MTLU. 
+     * Field IPL. 
+     * Field VAR. 
      */
 	private final int basePrice, index, MTLP, MTLU, IPL, VAR;
 	
