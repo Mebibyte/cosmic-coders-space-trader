@@ -70,8 +70,9 @@ public abstract class SpaceCraft {
 	 * @return damage done to the gnat */
 	public int takeDamge(int enemyAttack) {
 		// TODO Auto-generated method stub
-		final int damage;
-		damage = RAND.nextInt(enemyAttack) - RAND.nextInt(defense);
+		final int damage; 
+		
+		damage = Math.max(RAND.nextInt(enemyAttack) - RAND.nextInt(defense), 0);  
 		health -= damage;
 		return damage;
 	}
