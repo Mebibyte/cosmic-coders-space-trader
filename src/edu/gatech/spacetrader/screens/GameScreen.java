@@ -103,7 +103,7 @@ public class GameScreen extends Screen {
         g.drawString(player.getDifficulty(), x, y * 10);
         g.drawString(currentPlanet.toString(), x, y * 11);
         
-        g.drawLine(Galaxy.GALAXY_WIDTH+9, 0, Galaxy.GALAXY_WIDTH+9, height);
+        g.drawLine(Galaxy.GALAXY_WIDTH + 9, 0, Galaxy.GALAXY_WIDTH + 9, height);
         galaxy.draw(g, panel, Galaxy.HALF_GALAXY_WIDTH,
                 height - Galaxy.HALF_GALAXY_HEIGHT);
         g.setColor(Color.GRAY);
