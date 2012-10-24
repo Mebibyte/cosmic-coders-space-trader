@@ -113,7 +113,8 @@ public class GameScreen extends Screen {
                 20, 20); //TODO: Change boundaries based on player's ship "speed" in later versions. Maybe speed*10?
         g.setColor(Color.BLACK);
         
-        currentPlanet.getMarket().draw(g, panel, (width - Galaxy.GALAXY_WIDTH + 10) / 2, 0);
+        currentPlanet.getMarket().draw(g, panel,
+                (width - Galaxy.GALAXY_WIDTH + 10) / 2, 0);
         buy.draw(g, panel, width, height);
         sell.draw(g, panel, width, height);
         fly.draw(g, panel, width, height);
