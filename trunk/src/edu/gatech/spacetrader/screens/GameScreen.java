@@ -165,4 +165,12 @@ public class GameScreen extends Screen {
     public Player getPlayer(){
     	return player;
     }
+    
+    public Galaxy getGalaxy(){
+    	return galaxy;
+    }
+    
+    public Planet getCurrentPlanet(){
+    	return currentPlanet;
+    }
 }
