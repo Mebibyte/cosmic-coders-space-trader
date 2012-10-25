@@ -194,4 +194,8 @@ public class Good {
     public int getY() {
         return y;
     }
+
+    public void setSalePrice(int sellPrice) {
+        this.sellPrice = sellPrice;
+    }
 }

@@ -81,6 +81,7 @@ public class GameScreen extends Screen {
         this.height = height;
         this.galaxy = new Galaxy(width);
         currentPlanet = galaxy.getStartingPlanet();
+        player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
         buy = new BigButton("Buy", (width / 2) - (BigButton.getWidth() / 2), 
                 (height / 2) + 50, true);
         sell = new BigButton("Sell", (width / 2) + (BigButton.getWidth() / 2), 
