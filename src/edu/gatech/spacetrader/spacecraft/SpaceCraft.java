@@ -102,7 +102,15 @@ public abstract class SpaceCraft {
     public int getDefense() {
         return this.defense;
     }
-
+    
+    public int getHealth(){
+    	return health;
+    }
+    
+    public void setHealth(int health){
+    	this.health = health;
+    }
+    
     /**
      * Adds a certain Good to the SpaceCraft's Storage
      * 
@@ -127,5 +135,9 @@ public abstract class SpaceCraft {
     public void removeGood(Good g) {
         storage[g.getIndex()]
                 .setQuantity(storage[g.getIndex()].getQuantity() - 1);
+    }
+    
+    public Good[] getStorage(){
+    	return storage;
     }
 }

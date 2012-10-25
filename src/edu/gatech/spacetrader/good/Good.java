@@ -175,4 +175,17 @@ public class Good {
     public boolean checkForClick(Point point) {
         return bounds.contains(point) && quantity > 0;
     }
+    
+    public GoodType getType(){
+    	return type;
+    }
+    
+   
+    public int getX(){
+    	return x;
+    }
+    
+    public int getY(){
+    	return y;
+    }
 }

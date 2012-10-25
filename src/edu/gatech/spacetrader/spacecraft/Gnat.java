@@ -70,6 +70,7 @@ public class Gnat extends SpaceCraft {
         return "Gnat";
     }
 
+    
     /**
      * @param repairSkill
      * 

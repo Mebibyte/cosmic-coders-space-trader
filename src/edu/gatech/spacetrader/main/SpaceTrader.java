@@ -23,7 +23,8 @@ public class SpaceTrader extends JFrame {
     /**
      * Field WIDTH.
      */
-    private static final int WIDTH = 1000, HEIGHT = (WIDTH * 9) / 16;
+    public static final int WIDTH = 1000;
+    private static final int HEIGHT = (WIDTH * 9) / 16;
 	
     /**
      * Field GamePanel.

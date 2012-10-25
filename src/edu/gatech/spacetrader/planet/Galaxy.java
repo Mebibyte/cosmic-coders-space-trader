@@ -17,7 +17,7 @@ public class Galaxy {
      * Field NUM_PLANETS.
      * (value is 120)
      */
-    private static final int NUM_PLANETS = 120;
+    public static final int NUM_PLANETS = 120;
     
     /**
      * Field GALAXY_WIDTH.
@@ -90,5 +90,9 @@ public class Galaxy {
         }
         res.append('}');
         return res.toString();
+    }
+    
+    public Planet[] getPlanets(){
+    	return planets;
     }
 }
