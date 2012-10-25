@@ -45,6 +45,10 @@ public class Gnat extends SpaceCraft {
      */
     private static Good[] GNAT_STORAGE = new Good[10];
 
+    /**
+     * Field GNAT_NAME.
+     * (value is Gnat)
+     */
     public static final String GNAT_NAME = "Gnat";
     
     /**
@@ -78,7 +82,6 @@ public class Gnat extends SpaceCraft {
         return "Gnat";
     }
 
-    
     /**
      * @param repairSkill
      * 

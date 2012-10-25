@@ -103,9 +103,9 @@ public class PlanetMarket {
         return ans.toString();
     }
 
-    public boolean checkForClick(Point point) {
+    public boolean isClicked(Point point) {
         for (Good g : goods) {
-            if (g.checkForClick(point)) {
+            if (g.isClicked(point)) {
                 return true;
             }
         }
@@ -113,13 +113,7 @@ public class PlanetMarket {
     }
 
     public void boughtGood(Good bought) {
-        goods[bought.getIndex()].setQuantity(goods[bought.getIndex()]
-                .getQuantity() - 1);
-    }
-
-    public Object getSellPrice(GoodType goodType) {
-        // TODO Auto-generated method stub
-        return null;
+        goods[bought.getIndex()].removeGood();
     }
 
     public Good getGood(int i) {
@@ -128,7 +122,7 @@ public class PlanetMarket {
 
     public Good goodClicked(Point point) {
         for (Good g : goods) {
-            if (g.checkForClick(point)) {
+            if (g.isClicked(point)) {
                 return g;
             }
         }
@@ -136,7 +130,6 @@ public class PlanetMarket {
     }
 
     public void soldGood(Good sold) {
-        goods[sold.getIndex()]
-                .setQuantity(goods[sold.getIndex()].getQuantity() + 1);
+        goods[sold.getIndex()].addGood();
     }
 }

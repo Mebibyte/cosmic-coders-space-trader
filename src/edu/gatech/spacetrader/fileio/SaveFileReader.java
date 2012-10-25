@@ -50,7 +50,7 @@ public class SaveFileReader {
 			int x = Integer.parseInt(scan.nextLine());
 			int y = Integer.parseInt(scan.nextLine());
 			Good scGood = new Good(index, sc, x, y);
-			sc.addToStorage(scGood);
+			sc.canAddToStorage(scGood);
 		}
 		
 		

@@ -121,7 +121,7 @@ public abstract class SpaceCraft {
      * @param g
      * @return Boolean of whether or not you could add the good to the storage
      */
-    public boolean addToStorage(Good g) {
+    public boolean canAddToStorage(Good g) {
         boolean ans;
 
         if (quantity >= maxCapacity) {
@@ -145,9 +145,9 @@ public abstract class SpaceCraft {
         return storage;
     }
 
-    public boolean checkForClick(Point point) {
+    public boolean isClicked(Point point) {
         for (Good g : storage) {
-            if (g.checkForClick(point)) {
+            if (g.isClicked(point)) {
                 return true;
             }
         }
@@ -172,14 +172,14 @@ public abstract class SpaceCraft {
 
     public Good goodClicked(Point point) {
         for (Good g : storage) {
-            if (g.checkForClick(point)) {
+            if (g.isClicked(point)) {
                 return g;
             }
         }
         return null;
     }
 
-    public boolean soldGood(Good sold) {
+    public boolean canSellGood(Good sold) {
         if (storage[sold.getIndex()].getQuantity() > 0) {
             storage[sold.getIndex()].setQuantity(storage[sold.getIndex()]
                 .getQuantity() - 1);

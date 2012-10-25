@@ -117,16 +117,16 @@ public class GameScreen extends Screen {
      */
     @Override
     public void checkForClick(Point point) {
-        if (currentPlanet.getMarket().checkForClick(point)) {
+        if (currentPlanet.getMarket().isClicked(point)) {
             Good bought = currentPlanet.getMarket().goodClicked(point);
             if (player.canSpend(bought.getBuyPrice())
-                    && player.getSpaceCraft().addToStorage(bought)) {
+                    && player.getSpaceCraft().canAddToStorage(bought)) {
                 player.useCredits(bought.getBuyPrice() * -1);
                 currentPlanet.getMarket().boughtGood(bought);
             }
-        } else if (player.getSpaceCraft().checkForClick(point)) {
+        } else if (player.getSpaceCraft().isClicked(point)) {
             Good sold = player.getSpaceCraft().goodClicked(point);
-            if (sold.getSellPrice() > 0 && player.getSpaceCraft().soldGood(sold)) {
+            if (sold.getSellPrice() > 0 && player.getSpaceCraft().canSellGood(sold)) {
                 player.useCredits(sold.getSellPrice());
                 currentPlanet.getMarket().soldGood(sold);
             }
