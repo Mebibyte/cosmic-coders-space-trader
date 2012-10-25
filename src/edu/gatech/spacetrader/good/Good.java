@@ -154,10 +154,16 @@ public class Good {
                 - (g.getFontMetrics().stringWidth(quantity + "") / 2), y + 13);
 
         if (spaceCraft == null) {
+            g.drawString("Buy:", x + (50 / 2)
+                    - (g.getFontMetrics().stringWidth("Buy:") / 2),
+                    y + 33);
             g.drawString(buyPrice + "", x + (50 / 2)
                     - (g.getFontMetrics().stringWidth(buyPrice + "") / 2),
-                    y + 33);
+                    y + 53);
         } else {
+            g.drawString("Sell:", x + (50 / 2)
+                    - (g.getFontMetrics().stringWidth("Sell:") / 2),
+                    y + 33);
             g.drawString(sellPrice + "", x + (50 / 2)
                     - (g.getFontMetrics().stringWidth(sellPrice + "") / 2),
                     y + 53);
