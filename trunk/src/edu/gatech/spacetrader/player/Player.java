@@ -107,12 +107,8 @@ public class Player {
      * Method useCredits.
      * @param amount int
      */
-    public boolean useCredits(int amount) {
-        if (!(amount * -1 > credits)) {
-            credits += amount;
-            return true;
-        }
-        return false;
+    public void useCredits(int amount) {
+        credits += amount;
     }
     
     /**
@@ -131,5 +127,9 @@ public class Player {
     public String toString(){
         return "Player " + name + " with " + credits + " credits, skills " 
                 + Arrays.toString(skills) + " on difficulty " + difficulty.toString();
+    }
+
+    public boolean canSpend(int buyPrice) {
+        return credits > buyPrice;
     }
 }

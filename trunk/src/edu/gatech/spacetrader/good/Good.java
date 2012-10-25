@@ -96,11 +96,11 @@ public class Good {
                 + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
                 + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
         this.sellPrice = (int) (buyPrice * .9);
-        
+
         if (planet.getCivLevel().getTechLevel() >= type.MTLP) {
             this.quantity = RAND.nextInt(10) + 10;
         }
-        
+
         this.x = x;
         this.y = y;
         bounds = new Rectangle(x, y, GOOD_BG.getIconWidth(),
@@ -152,10 +152,17 @@ public class Good {
         GOOD_BG.paintIcon(panel, g, x, y);
         g.drawString(quantity + "", x + (50 / 2)
                 - (g.getFontMetrics().stringWidth(quantity + "") / 2), y + 13);
-        g.drawString(buyPrice + "", x + (50 / 2)
-                - (g.getFontMetrics().stringWidth(buyPrice + "") / 2), y + 33);
-        g.drawString(sellPrice + "", x + (50 / 2)
-                - (g.getFontMetrics().stringWidth(sellPrice + "") / 2), y + 53);
+
+        if (spaceCraft == null) {
+            g.drawString(buyPrice + "", x + (50 / 2)
+                    - (g.getFontMetrics().stringWidth(buyPrice + "") / 2),
+                    y + 33);
+        } else {
+            g.drawString(sellPrice + "", x + (50 / 2)
+                    - (g.getFontMetrics().stringWidth(sellPrice + "") / 2),
+                    y + 53);
+        }
+
         g.drawString(type.toString(), x + (50 / 2)
                 - (g.getFontMetrics().stringWidth(type.toString()) / 2), y + 73);
     }
@@ -175,17 +182,16 @@ public class Good {
     public boolean checkForClick(Point point) {
         return bounds.contains(point) && quantity > 0;
     }
-    
-    public GoodType getType(){
-    	return type;
+
+    public GoodType getType() {
+        return type;
     }
-    
-   
-    public int getX(){
-    	return x;
+
+    public int getX() {
+        return x;
     }
-    
-    public int getY(){
-    	return y;
+
+    public int getY() {
+        return y;
     }
 }

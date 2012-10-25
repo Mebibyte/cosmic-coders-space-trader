@@ -41,7 +41,9 @@ public class GameScreen extends Screen {
     /**
      * Field width.
      */
-    private final int width, height;
+    public final int width;
+
+    private final int height;
     
     /**
      * Field galaxy.
@@ -117,6 +119,7 @@ public class GameScreen extends Screen {
         g.setColor(Color.BLACK);
         
         currentPlanet.getMarket().draw(g, panel);
+        player.getSpaceCraft().drawStorage(g, panel);
         buy.draw(g, panel, width, height);
         sell.draw(g, panel, width, height);
         fly.draw(g, panel, width, height);
@@ -137,8 +140,9 @@ public class GameScreen extends Screen {
         } else {
             Good bought = currentPlanet.getMarket().checkForClick(point);
             if (bought != null) {
-                if (player.useCredits(bought.getBuyPrice() * -1) && player.getSpaceCraft().addToStorage(bought)) {
+                if (player.canSpend(bought.getBuyPrice()) && player.getSpaceCraft().addToStorage(bought)) {
                     System.out.println("Bought good!");
+                    player.useCredits(bought.getBuyPrice() * -1);
                     currentPlanet.getMarket().boughtGood(bought);
                 }
             }

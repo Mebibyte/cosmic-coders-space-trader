@@ -4,8 +4,11 @@
 
 package edu.gatech.spacetrader.spacecraft;
 
+import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Random;
 import edu.gatech.spacetrader.good.Good;
+import edu.gatech.spacetrader.main.GamePanel;
 
 import javax.swing.ImageIcon;
 
@@ -138,6 +141,21 @@ public abstract class SpaceCraft {
     }
     
     public Good[] getStorage(){
-    	return storage;
+        return storage;
+    }
+
+    public Good checkForClick(Point point) {
+        for (Good g : storage) {
+            if (g.checkForClick(point)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public void drawStorage(Graphics g, GamePanel panel) {
+        for (Good good : storage) {
+            good.draw(g, panel);
+        }
     }
 }
