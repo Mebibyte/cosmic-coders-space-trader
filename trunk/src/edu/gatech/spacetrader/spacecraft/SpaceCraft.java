@@ -145,13 +145,13 @@ public abstract class SpaceCraft {
         return storage;
     }
 
-    public Good checkForClick(Point point) {
+    public boolean checkForClick(Point point) {
         for (Good g : storage) {
             if (g.checkForClick(point)) {
-                return g;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     public void drawStorage(Graphics g, GamePanel panel) {
@@ -164,5 +164,28 @@ public abstract class SpaceCraft {
        for (int i = 0; i < 10; i++) {
            storage[i].setSalePrice(market.getGood(i).getSellPrice());
        }
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public Good goodClicked(Point point) {
+        for (Good g : storage) {
+            if (g.checkForClick(point)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public boolean soldGood(Good sold) {
+        if (storage[sold.getIndex()].getQuantity() > 0) {
+            storage[sold.getIndex()].setQuantity(storage[sold.getIndex()]
+                .getQuantity() - 1);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -103,13 +103,13 @@ public class PlanetMarket {
         return ans.toString();
     }
 
-    public Good checkForClick(Point point) {
+    public boolean checkForClick(Point point) {
         for (Good g : goods) {
             if (g.checkForClick(point)) {
-                return g;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     public void boughtGood(Good bought) {
@@ -124,5 +124,19 @@ public class PlanetMarket {
 
     public Good getGood(int i) {
         return goods[i];
+    }
+
+    public Good goodClicked(Point point) {
+        for (Good g : goods) {
+            if (g.checkForClick(point)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public void soldGood(Good sold) {
+        goods[sold.getIndex()]
+                .setQuantity(goods[sold.getIndex()].getQuantity() + 1);
     }
 }
