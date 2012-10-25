@@ -150,15 +150,19 @@ public class Planet {
     /**
      */
     public static enum Environment {
-    	DESERT(new Color(0xCD, 0x95, 0x0C)), WATER(Color.BLUE),
-    	JUNGLE(new Color(00, 0x64, 00)), ICE(new Color(0x36, 0xDB, 0xCA)),
-    	EARTHLIKE(Color.CYAN), TROPICAL(Color.GREEN), UNDERGROUND(Color.BLACK);
+    	DESERT(new Color(0xCD, 0x95, 0x0C)),
+    	WATER(Color.BLUE),
+    	JUNGLE(new Color(00, 0x64, 00)), 
+    	ICE(new Color(0x36, 0xDB, 0xCA)),
+    	EARTHLIKE(Color.CYAN),
+    	TROPICAL(Color.GREEN),
+    	UNDERGROUND(Color.BLACK);
     	
     	/**
          * Field color.
          */
     	private final Color color;
-    	
+    		
     	/**
     	 * Constructor for Environment.
     	 * 
@@ -176,6 +180,7 @@ public class Planet {
     	public Color getColor(){
     	    return color;
     	}
+    
     }
     
     /**
@@ -215,7 +220,7 @@ public class Planet {
     /**
      * 
      */
-    private final Environment environment;
+    private Environment environment;
     
     /**
      * 
@@ -226,7 +231,7 @@ public class Planet {
     /**
      * Field name.
      */
-    private final String name;
+    private String name;
     
     /**
      * Field NAMES_USED.
@@ -250,7 +255,7 @@ public class Planet {
     /**
      * Field y.
      */
-    private final int x, y;
+    private int x, y;
     
     /**
      * Field market.
@@ -410,4 +415,25 @@ public class Planet {
     public PlanetMarket getMarket() {
         return market;
     }
+    
+    public void setX(int x){
+    	this.x = x;
+    }
+    
+    public void setY(int y){
+    	this.y = y;
+    }
+    
+    public void setEnvironment(String env){
+    		environment = Environment.valueOf(env);
+    }
+    
+    public void setCivLevel(String civ){
+    	techLevel = TechLevel.valueOf(civ);
+    }
+    
+    public void setName(String name){
+    	this.name = name;
+    }
+   
 }
