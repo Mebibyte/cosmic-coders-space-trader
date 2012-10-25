@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Random;
 import edu.gatech.spacetrader.good.Good;
+import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
 
 import javax.swing.ImageIcon;
@@ -157,5 +158,11 @@ public abstract class SpaceCraft {
         for (Good good : storage) {
             good.draw(g, panel);
         }
+    }
+
+    public void setSellPrices(PlanetMarket market) {
+       for (int i = 0; i < 10; i++) {
+           storage[i].setSalePrice(market.getGood(i).getSellPrice());
+       }
     }
 }

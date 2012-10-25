@@ -6,6 +6,7 @@ package edu.gatech.spacetrader.good;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import edu.gatech.spacetrader.good.Good.GoodType;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
@@ -114,5 +115,14 @@ public class PlanetMarket {
     public void boughtGood(Good bought) {
         goods[bought.getIndex()].setQuantity(goods[bought.getIndex()]
                 .getQuantity() - 1);
+    }
+
+    public Object getSellPrice(GoodType goodType) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Good getGood(int i) {
+        return goods[i];
     }
 }
