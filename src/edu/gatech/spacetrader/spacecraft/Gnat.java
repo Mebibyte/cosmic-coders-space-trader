@@ -43,6 +43,8 @@ public class Gnat extends SpaceCraft {
      */
     private static Good[] GNAT_STORAGE = new Good[10];
 
+    public static final String GNAT_NAME = "Gnat";
+    
     /**
 	 * 
 	 */
