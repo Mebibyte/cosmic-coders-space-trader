@@ -5,6 +5,8 @@
 package edu.gatech.spacetrader.planet;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import edu.gatech.spacetrader.main.GamePanel;
 
@@ -43,14 +45,20 @@ public class Galaxy {
      * Field planets.
      */
     private final Planet[] planets = new Planet[NUM_PLANETS];
+    
+    private Rectangle bounds;
 
     /**
      * Constructor for Galaxy.
      */
-    public Galaxy(int width) {
+    public Galaxy(int height, int width) {
         for (int i = 0; i < NUM_PLANETS; i++) {
             planets[i] = new Planet(width, GALAXY_WIDTH, GALAXY_HEIGHT);
         }
+        
+        bounds = new Rectangle(-8, 
+                height - (2 * Galaxy.HALF_GALAXY_HEIGHT) - 8, Galaxy.GALAXY_WIDTH + 16, 
+                Galaxy.GALAXY_HEIGHT + 16);
     }
 
     /**
@@ -71,8 +79,7 @@ public class Galaxy {
     public void draw(Graphics g, GamePanel panel, int width, int height) {
         g.drawRect(width - HALF_GALAXY_WIDTH - 8, height - HALF_GALAXY_HEIGHT - 8,
                 GALAXY_WIDTH + 16, GALAXY_HEIGHT + 16);
-        /*I expanded the border a bit. We may need to find a real workaround for when the 
-        *player's travel radius increases beyond the border */
+        
         for (Planet p : planets) {
             p.draw(g, panel, width, height);
         }
@@ -94,5 +101,9 @@ public class Galaxy {
     
     public Planet[] getPlanets(){
     	return planets;
+    }
+
+    public boolean isClicked(Point point) {
+        return bounds.contains(point);
     }
 }
