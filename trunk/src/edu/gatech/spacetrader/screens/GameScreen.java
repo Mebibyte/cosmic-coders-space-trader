@@ -45,7 +45,7 @@ public class GameScreen extends Screen {
      * Field galaxy.
      */
     private final Galaxy galaxy;
-
+    
     /**
      * Field currentPlanet.
      */
@@ -68,7 +68,7 @@ public class GameScreen extends Screen {
         this.panel = panel;
         this.width = width;
         this.height = height;
-        this.galaxy = new Galaxy(width);
+        this.galaxy = new Galaxy(height, width);
         currentPlanet = galaxy.getStartingPlanet();
         player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
     }
@@ -117,7 +117,10 @@ public class GameScreen extends Screen {
      */
     @Override
     public void checkForClick(Point point) {
-        if (currentPlanet.getMarket().isClicked(point)) {
+        if (galaxy.isClicked(point)) {
+            System.out.println("clicked");
+            panel.setActiveScreen(new FlyScreen(this, panel, width, height));
+        } else if (currentPlanet.getMarket().isClicked(point)) {
             Good bought = currentPlanet.getMarket().goodClicked(point);
             if (player.canSpend(bought.getBuyPrice())
                     && player.getSpaceCraft().canAddToStorage(bought)) {
