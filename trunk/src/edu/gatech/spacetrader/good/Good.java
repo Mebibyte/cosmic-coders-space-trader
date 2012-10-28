@@ -38,8 +38,8 @@ public class Good {
          * Field basePrice. Field index. Field MTLP. Field MTLU. Field IPL.
          * Field VAR.
          */
-        private final int basePrice, index, MTLP, MTLU, IPL, VAR;
-
+        private final int basePrice, index, MTLP, MTLU, IPL, VAR; // $codepro.audit.disable
+                                                                  // instanceFieldNamingConvention
         /**
          * Good constructor.
          * 
@@ -50,8 +50,8 @@ public class Good {
          * @param IPL
          * @param VAR
          */
-        private GoodType(int basePrice, int index, int MTLP, int MTLU, int IPL,
-                int VAR) {
+        private GoodType(int basePrice, int index, int MTLP, int MTLU, int IPL, // $codepro.audit.disable largeNumberOfParameters, localVariableNamingConvention
+                int VAR) { // $codepro.audit.disable localVariableNamingConvention
             this.basePrice = basePrice;
             this.index = index;
             this.MTLP = MTLP;
@@ -64,7 +64,7 @@ public class Good {
          * Get the type of a good.
          * 
          * @param index
-         * @return
+         * @return GoodType
          */
         public static GoodType getGoodType(int index) {
             for (GoodType g : GoodType.values()) {
@@ -138,8 +138,8 @@ public class Good {
         this.buyPrice = type.basePrice
                 + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
                 + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
-        this.sellPrice = planet.getCivLevel().getTechLevel() > type.MTLU ? (buyPrice * 9) / 10
-                : 0;
+        this.sellPrice = planet.getCivLevel().getTechLevel() >= type.MTLU ? 
+                (buyPrice * 9) / 10 : 0;
 
         if (planet.getCivLevel().getTechLevel() >= type.MTLP) {
             this.quantity = RAND.nextInt(10) + 10;
@@ -313,6 +313,7 @@ public class Good {
 
     /**
      * Creates a string representation of the good.
+     * @return String representation.
      */
     public String toString() {
         StringBuilder res = new StringBuilder();

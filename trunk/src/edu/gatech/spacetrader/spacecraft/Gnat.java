@@ -1,3 +1,4 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
 /* Comment
  * 
  */

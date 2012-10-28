@@ -1,4 +1,4 @@
-// $codepro.audit.disable numericLiterals
+// $codepro.audit.disable numericLiterals, multiplicationOrDivisionByPowersOf2
 /* Comment
  * 
  */

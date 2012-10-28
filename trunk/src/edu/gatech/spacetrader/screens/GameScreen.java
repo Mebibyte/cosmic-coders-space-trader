@@ -45,7 +45,7 @@ public class GameScreen extends Screen {
      * Field galaxy.
      */
     private final Galaxy galaxy;
-    
+
     /**
      * Field currentPlanet.
      */
@@ -98,11 +98,12 @@ public class GameScreen extends Screen {
         galaxy.draw(g, panel, Galaxy.HALF_GALAXY_WIDTH, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
         g.setColor(Color.GRAY);
-        g.drawOval(currentPlanet.getX() - player.getSpaceCraft().getSpeed() * 5,
+        g.drawOval(
+                currentPlanet.getX() - player.getSpaceCraft().getSpeed() * 5,
                 currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT)
-                        - player.getSpaceCraft().getSpeed() * 5,
-                        player.getSpaceCraft().getSpeed() * 10,
-                        player.getSpaceCraft().getSpeed() * 10);
+                        - player.getSpaceCraft().getSpeed() * 5, player
+                        .getSpaceCraft().getSpeed() * 10, player
+                        .getSpaceCraft().getSpeed() * 10);
         g.setColor(Color.BLACK);
 
         currentPlanet.getMarket().draw(g, panel);
@@ -118,19 +119,25 @@ public class GameScreen extends Screen {
     @Override
     public void checkForClick(Point point) {
         if (galaxy.isClicked(point)) {
-            System.out.println("clicked");
             panel.setActiveScreen(new FlyScreen(this, panel, width, height));
-        } else if (currentPlanet.getMarket().isClicked(point)) {
-            Good bought = currentPlanet.getMarket().goodClicked(point);
+        } 
+        
+        Good bought = currentPlanet.getMarket().goodClicked(point);
+        if (bought != null) {
             if (player.canSpend(bought.getBuyPrice())
-                    && player.getSpaceCraft().canAddToStorage(bought)) {
+                    && player.getSpaceCraft().canAddToStorage()) {
                 player.useCredits(bought.getBuyPrice() * -1);
+                player.getSpaceCraft().addToStorage(bought);
                 currentPlanet.getMarket().boughtGood(bought);
             }
-        } else if (player.getSpaceCraft().isClicked(point)) {
-            Good sold = player.getSpaceCraft().goodClicked(point);
-            if (sold.getSellPrice() > 0 && player.getSpaceCraft().canSellGood(sold)) {
+        }
+        
+        Good sold = player.getSpaceCraft().goodClicked(point);
+        if (sold != null) {
+            if (sold.getSellPrice() > 0
+                    && player.getSpaceCraft().canSellGood(sold)) {
                 player.useCredits(sold.getSellPrice());
+                player.getSpaceCraft().removeGood(sold);
                 currentPlanet.getMarket().soldGood(sold);
             }
         }

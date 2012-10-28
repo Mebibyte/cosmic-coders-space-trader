@@ -6,7 +6,6 @@ package edu.gatech.spacetrader.good;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import edu.gatech.spacetrader.good.Good.GoodType;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Planet;
 
@@ -32,6 +31,8 @@ public class PlanetMarket {
      * 
      * @param planet
      *            Planet this market resides on.
+     * @param x x location
+     * @param y y location
      */
     public PlanetMarket(Planet planet, int x, int y) {
         int goodCount = 0;
@@ -103,23 +104,28 @@ public class PlanetMarket {
         return ans.toString();
     }
 
-    public boolean isClicked(Point point) {
-        for (Good g : goods) {
-            if (g.isClicked(point)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * Buys a good from the market.
+     * @param bought Good bought.
+     */
     public void boughtGood(Good bought) {
         goods[bought.getIndex()].removeGood();
     }
 
+    /**
+     * Gets the good with the specific index.
+     * @param i Index
+     * @return good
+     */
     public Good getGood(int i) {
         return goods[i];
     }
 
+    /**
+     * Returns the good clicked.
+     * @param point
+     * @return
+     */
     public Good goodClicked(Point point) {
         for (Good g : goods) {
             if (g.isClicked(point)) {
@@ -129,6 +135,10 @@ public class PlanetMarket {
         return null;
     }
 
+    /**
+     * Sold a good to market.
+     * @param sold Good.
+     */
     public void soldGood(Good sold) {
         goods[sold.getIndex()].addGood();
     }

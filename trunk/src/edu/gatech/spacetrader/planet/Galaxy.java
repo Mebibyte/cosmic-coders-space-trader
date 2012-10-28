@@ -46,6 +46,10 @@ public class Galaxy {
      */
     private final Planet[] planets = new Planet[NUM_PLANETS];
     
+    /**
+     * Field bounds.
+     * Rectangle used for checking if clicked.
+     */
     private Rectangle bounds;
 
     /**
