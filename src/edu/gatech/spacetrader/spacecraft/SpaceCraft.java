@@ -106,52 +106,37 @@ public abstract class SpaceCraft {
     public int getDefense() {
         return this.defense;
     }
-    
-    public int getHealth(){
-    	return health;
+
+    public int getHealth() {
+        return health;
     }
-    
-    public void setHealth(int health){
-    	this.health = health;
+
+    public void setHealth(int health) {
+        this.health = health;
     }
-    
+
     /**
      * Adds a certain Good to the SpaceCraft's Storage
      * 
      * @param g
      * @return Boolean of whether or not you could add the good to the storage
      */
-    public boolean canAddToStorage(Good g) {
-        boolean ans;
-
-        if (quantity >= maxCapacity) {
-            ans = false;
-        } else {
-            storage[g.getIndex()].setQuantity(storage[g.getIndex()]
-                    .getQuantity() + 1);
-            ans = true;
-            quantity++;
-        }
-        return ans;
-
+    public boolean canAddToStorage() {
+        return quantity < maxCapacity;
+    }
+    
+    public void addToStorage(Good g) {
+        storage[g.getIndex()].addGood();
+        quantity++;
     }
 
     public void removeGood(Good g) {
-        storage[g.getIndex()]
-                .setQuantity(storage[g.getIndex()].getQuantity() - 1);
-    }
-    
-    public Good[] getStorage(){
-        return storage;
+        storage[g.getIndex()].removeGood();
+        quantity--;
     }
 
-    public boolean isClicked(Point point) {
-        for (Good g : storage) {
-            if (g.isClicked(point)) {
-                return true;
-            }
-        }
-        return false;
+    public Good[] getStorage() {
+        return storage;
     }
 
     public void drawStorage(Graphics g, GamePanel panel) {
@@ -161,9 +146,9 @@ public abstract class SpaceCraft {
     }
 
     public void setSellPrices(PlanetMarket market) {
-       for (int i = 0; i < 10; i++) {
-           storage[i].setSalePrice(market.getGood(i).getSellPrice());
-       }
+        for (int i = 0; i < 10; i++) {
+            storage[i].setSalePrice(market.getGood(i).getSellPrice());
+        }
     }
 
     public int getSpeed() {
@@ -180,12 +165,6 @@ public abstract class SpaceCraft {
     }
 
     public boolean canSellGood(Good sold) {
-        if (storage[sold.getIndex()].getQuantity() > 0) {
-            storage[sold.getIndex()].setQuantity(storage[sold.getIndex()]
-                .getQuantity() - 1);
-            return true;
-        } else {
-            return false;
-        }
+        return storage[sold.getIndex()].getQuantity() > 0;
     }
 }
