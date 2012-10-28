@@ -80,10 +80,7 @@ public class Galaxy {
      * @param height 
      * @param width 
      */
-    public void draw(Graphics g, GamePanel panel, int width, int height) {
-        g.drawRect(width - HALF_GALAXY_WIDTH - 8, height - HALF_GALAXY_HEIGHT - 8,
-                GALAXY_WIDTH + 16, GALAXY_HEIGHT + 16);
-        
+    public void draw(Graphics g, GamePanel panel, int width, int height) {        
         for (Planet p : planets) {
             p.draw(g, panel, width, height);
         }
@@ -109,5 +106,15 @@ public class Galaxy {
 
     public boolean isClicked(Point point) {
         return bounds.contains(point);
+    }
+
+    public void drawMiniMap(Graphics g, GamePanel panel, int width,
+            int height) {
+        g.drawRect(width - HALF_GALAXY_WIDTH - 8, height - HALF_GALAXY_HEIGHT - 8,
+                GALAXY_WIDTH + 16, GALAXY_HEIGHT + 16);
+        
+        for (Planet p : planets) {
+            p.drawMini(g, panel, width, height);
+        }
     }
 }
