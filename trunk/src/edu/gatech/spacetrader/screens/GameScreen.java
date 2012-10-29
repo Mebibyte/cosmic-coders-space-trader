@@ -95,17 +95,20 @@ public class GameScreen extends Screen {
         g.drawString(currentPlanet.toString(), x, y * 11);
 
         g.drawLine(Galaxy.GALAXY_WIDTH + 9, 0, Galaxy.GALAXY_WIDTH + 9, height);
-        
+
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
-        
+
         g.setColor(Color.GRAY);
         g.drawOval(
-                currentPlanet.getX() - player.getSpaceCraft().getSpeed() * 5,
+                currentPlanet.getX()
+                        - (player.getSpaceCraft().getSpeed() + player
+                                .getSkillsArray()[0] / 2) * 5,
                 currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT)
-                        - player.getSpaceCraft().getSpeed() * 5, player
-                        .getSpaceCraft().getSpeed() * 10, player
-                        .getSpaceCraft().getSpeed() * 10);
+                        - (player.getSpaceCraft().getSpeed() + player
+                        .getSkillsArray()[0] / 2) * 5,
+                (player.getSpaceCraft().getSpeed() + player.getSkillsArray()[0] / 2) * 10,
+                (player.getSpaceCraft().getSpeed() + player.getSkillsArray()[0] / 2) * 10);
         g.setColor(Color.BLACK);
 
         currentPlanet.getMarket().draw(g, panel);
@@ -122,8 +125,8 @@ public class GameScreen extends Screen {
     public void checkForClick(Point point) {
         if (galaxy.isClicked(point)) {
             panel.setActiveScreen(new FlyScreen(this, panel, width, height));
-        } 
-        
+        }
+
         Good bought = currentPlanet.getMarket().goodClicked(point);
         if (bought != null) {
             if (player.canSpend(bought.getBuyPrice())
@@ -133,7 +136,7 @@ public class GameScreen extends Screen {
                 currentPlanet.getMarket().boughtGood(bought);
             }
         }
-        
+
         Good sold = player.getSpaceCraft().goodClicked(point);
         if (sold != null) {
             if (sold.getSellPrice() > 0

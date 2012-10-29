@@ -195,7 +195,6 @@ public class Planet {
      */
     public void advanceTime() {
         // TODO - Everything
-        System.out.println("Time++");
         market.updatePrices();
     }
 
