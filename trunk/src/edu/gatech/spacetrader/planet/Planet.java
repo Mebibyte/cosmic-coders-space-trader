@@ -316,7 +316,7 @@ public class Planet {
      */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
         g.setColor(environment.getColor());
-        g.fillOval((x * 6), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
+        g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
         g.setColor(Color.BLACK);
     }
 
@@ -350,7 +350,7 @@ public class Planet {
     }
 
     public boolean checkForClick(Point p) {
-        int dx = p.x - ((x * 6) + 10);
+        int dx = p.x - ((x * 5) + 10);
         int dy = p.y - ((y * 5) + 10);
         return dx * dx + dy * dy <= 10 * 10;
     }
