@@ -117,4 +117,10 @@ public class Galaxy {
             p.drawMini(g, panel, width, height);
         }
     }
+
+    public void advanceTime() {
+        for (Planet p : planets) {
+            p.advanceTime();
+        }
+    }
 }

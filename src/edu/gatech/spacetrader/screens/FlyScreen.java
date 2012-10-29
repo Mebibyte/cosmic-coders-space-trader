@@ -5,10 +5,9 @@ package edu.gatech.spacetrader.screens;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.geom.Ellipse2D;
 
 import edu.gatech.spacetrader.main.GamePanel;
-import edu.gatech.spacetrader.main.SpaceTrader;
-import edu.gatech.spacetrader.planet.Galaxy;
 import edu.gatech.spacetrader.planet.Planet;
 
 /**
@@ -32,6 +31,8 @@ public class FlyScreen extends Screen {
      * Field height.
      */
     private int width, height;
+    
+    private Ellipse2D.Double range;
 
     /**
      * Constructor for FlyScreen.
@@ -51,6 +52,12 @@ public class FlyScreen extends Screen {
         this.panel = panel;
         this.width = width;
         this.height = height;
+        range = new Ellipse2D.Double(((gameScreen.getCurrentPlanet().getX() * 6) + 10)
+                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 6)),
+                ((gameScreen.getCurrentPlanet().getY() * 5) + 10)
+                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 5)),
+                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 6),
+                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 5));
     }
 
     /**
@@ -65,11 +72,11 @@ public class FlyScreen extends Screen {
         g.fillOval((150 * 6) - 5, (100 * 5) - 5, 10, 10);
         g.drawOval(
                 ((gameScreen.getCurrentPlanet().getX() * 6) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * 10),
+                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 6)),
                 ((gameScreen.getCurrentPlanet().getY() * 5) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * 10),
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * 20,
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * 20);
+                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 5)),
+                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 6),
+                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 5));
     }
 
     /**
@@ -81,8 +88,9 @@ public class FlyScreen extends Screen {
     @Override
     public void checkForClick(Point point) {
         for (Planet p : gameScreen.getGalaxy().getPlanets()) {
-            if (p.checkForClick(point)) {
-                System.out.println("Hello!");
+            if (range.contains(point) && p.checkForClick(point)) {
+                gameScreen.changePlanet(p);
+                panel.setActiveScreen(gameScreen);
             }
         }
     }

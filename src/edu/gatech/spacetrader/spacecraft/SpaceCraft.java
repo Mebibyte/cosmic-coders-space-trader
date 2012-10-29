@@ -167,4 +167,10 @@ public abstract class SpaceCraft {
     public boolean canSellGood(Good sold) {
         return storage[sold.getIndex()].getQuantity() > 0;
     }
+
+    public void updatePrices(PlanetMarket market) {
+        for (int i = 0; i < 10; i++) {
+            storage[i].setSalePrice(market.getGood(i).getSellPrice());
+        }
+    }
 }
