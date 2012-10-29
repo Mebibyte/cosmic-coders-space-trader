@@ -163,6 +163,8 @@ public class GameScreen extends Screen {
      */
     public void changePlanet(Planet planet) {
         currentPlanet = planet;
+        galaxy.advanceTime();
+        player.getSpaceCraft().updatePrices(planet.getMarket());
     }
 
     public Player getPlayer() {
