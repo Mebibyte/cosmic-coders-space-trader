@@ -13,6 +13,8 @@ import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.player.Player;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -62,6 +64,9 @@ public class ConfigScreen extends Screen{
     private final ImageIcon usedSkillPoint = new ImageIcon(
             getClass().getResource(
                     "/edu/gatech/spacetrader/res/usedSkillPoint.png"));
+    
+    private static final ImageIcon BG = new ImageIcon(
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/configBack.jpg"));
 	
     /**
      * Field height.
@@ -184,12 +189,15 @@ public class ConfigScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-	    g.drawString("Player name: " + playerName, (width / 2) - 
+		g.setFont(new Font("arial heavy", Font.BOLD, 25));
+		BG.paintIcon(panel, g, 0, 0);
+		g.setColor(Color.white);
+	    g.drawString("Player name: " + playerName, 
 	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
-	            35);
+	            50);
 		
 		editName.draw(g, panel, width, height);
-		
+		g.setColor(Color.white);
 		for (int i = 0; i < skillButtons.length; i++) {
 		    skillButtons[i].draw(g, panel, width, height);
 		}
