@@ -4,6 +4,7 @@
 package edu.gatech.spacetrader.screens;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
 
@@ -31,7 +32,7 @@ public class FlyScreen extends Screen {
      * Field height.
      */
     private int width, height;
-    
+
     private Ellipse2D.Double range;
 
     /**
@@ -52,12 +53,13 @@ public class FlyScreen extends Screen {
         this.panel = panel;
         this.width = width;
         this.height = height;
-        range = new Ellipse2D.Double(((gameScreen.getCurrentPlanet().getX() * 6) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 6)),
+        range = new Ellipse2D.Double(
+                ((gameScreen.getCurrentPlanet().getX() * 6) + 10)
+                        - ((gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (5 * 6)),
                 ((gameScreen.getCurrentPlanet().getY() * 5) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 5)),
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 6),
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 5));
+                        - ((gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (5 * 5)),
+                (gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (10 * 6),
+                (gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (10 * 5));
     }
 
     /**
@@ -70,13 +72,8 @@ public class FlyScreen extends Screen {
     public void draw(Graphics g) {
         gameScreen.getGalaxy().draw(g, panel, width, height);
         g.fillOval((150 * 6) - 5, (100 * 5) - 5, 10, 10);
-        g.drawOval(
-                ((gameScreen.getCurrentPlanet().getX() * 6) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 6)),
-                ((gameScreen.getCurrentPlanet().getY() * 5) + 10)
-                        - (gameScreen.getPlayer().getSpaceCraft().getSpeed() * (5 * 5)),
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 6),
-                gameScreen.getPlayer().getSpaceCraft().getSpeed() * (10 * 5));
+        Graphics2D g2 = (Graphics2D) g;
+        g2.draw(range);
     }
 
     /**
