@@ -66,11 +66,11 @@ public class TitleScreen extends Screen{
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
-		newGame = new BigButton("New Game", width >> 1, height >> 1);
+		newGame = new BigButton("New Game", width >> 1, height>>1);
 		loadGame = new BigButton("Load Game", width >> 1,
-				(height >> 1) + newGame.getHeight(), true);
+				(height>>1) + newGame.getHeight(), true);
 		quit = new BigButton("Quit", width >> 1,
-				(height >> 1) + newGame.getHeight() + loadGame.getHeight());
+				(height>>1) + newGame.getHeight() + loadGame.getHeight());
 	}
 
 	/**
@@ -86,10 +86,10 @@ public class TitleScreen extends Screen{
 	    }
 	    
 	    if (playerX + PLAYER.getIconWidth() > width) {
-            PLAYER.paintIcon(panel, g, playerX - width, playerY);
+            PLAYER.paintIcon(panel, g, playerX - width, playerY+440);
         }
 	    
-	    PLAYER.paintIcon(panel, g, playerX, playerY);
+	    PLAYER.paintIcon(panel, g, playerX, playerY+440);
 		newGame.draw(g, panel, width, height);
         loadGame.draw(g, panel, width, height);
 		quit.draw(g, panel, width, height);
@@ -100,8 +100,8 @@ public class TitleScreen extends Screen{
      */
 	@Override
 	public void tick(){
-	    playerX = (playerX + 1) % width;
-	    playerY = (playerY + 1) % height;
+	    playerX = (playerX + 3) % width;
+	    //playerY = (playerY + 1) % height;
 	}
 	
 	/**

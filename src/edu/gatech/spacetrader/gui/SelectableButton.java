@@ -3,6 +3,7 @@
  */
 package edu.gatech.spacetrader.gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -103,7 +104,11 @@ public class SelectableButton extends Button{
     public void draw(Graphics g, GamePanel panel, int width, int height){        
         if (selected) {
             BUTTONSELECTED.paintIcon(panel, g, x, y);
-        } else BUTTON.paintIcon(panel, g, x, y);
+            g.setColor(Color.white);
+        } else{
+        	BUTTON.paintIcon(panel, g, x, y);
+        	g.setColor(Color.black);
+        }
         
         g.setFont(new Font("serif", Font.PLAIN, FONTSIZE));
         g.drawString(text, 
