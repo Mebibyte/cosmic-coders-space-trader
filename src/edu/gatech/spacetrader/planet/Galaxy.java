@@ -54,6 +54,8 @@ public class Galaxy {
 
     /**
      * Constructor for Galaxy.
+     * @param height Height of JFrame.
+     * @param width Width of JFrame.
      */
     public Galaxy(int height, int width) {
         for (int i = 0; i < NUM_PLANETS; i++) {
@@ -100,14 +102,35 @@ public class Galaxy {
         return res.toString();
     }
     
+    /**
+     * getPlanets method.
+     * Returns an array of Planets.
+     * 
+     * @return array of planets.
+     */
     public Planet[] getPlanets(){
     	return planets;
     }
 
+    /**
+     * isClicked method for galaxy.
+     * 
+     * @param point Point clicked
+     * @return If the galaxy has been clicked.
+     */
     public boolean isClicked(Point point) {
         return bounds.contains(point);
     }
 
+    /**
+     * drawMiniMap method.
+     * Draws the minimap for the galaxy.
+     * 
+     * @param g Graphics
+     * @param panel GamePanel
+     * @param width Width of JFrame
+     * @param height Height of JFrame
+     */
     public void drawMiniMap(Graphics g, GamePanel panel, int width,
             int height) {
         g.drawRect(width - HALF_GALAXY_WIDTH - 8, height - HALF_GALAXY_HEIGHT - 8,
@@ -118,6 +141,10 @@ public class Galaxy {
         }
     }
 
+    /**
+     * AdvanceTime method.
+     * Advances the time of all planets.
+     */
     public void advanceTime() {
         for (Planet p : planets) {
             p.advanceTime();

@@ -99,8 +99,8 @@ public class GameScreen extends Screen {
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
 
-        g.drawString("Click Minimap to fly!",
-                ((Galaxy.GALAXY_WIDTH + 9) / 2) - g.getFontMetrics().stringWidth("Click Minimap to fly!") / 2,
+        g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
+                - g.getFontMetrics().stringWidth("Click Minimap to fly!") / 2,
                 height - (Galaxy.GALAXY_HEIGHT + 10));
         g.setColor(Color.GRAY);
         g.drawOval(
@@ -113,7 +113,8 @@ public class GameScreen extends Screen {
                         - (player.getSpaceCraft().getSpeed() + player
                                 .getSkillsArray()[0] / 2) * 5,
                 (player.getSpaceCraft().getSpeed() + player.getSkillsArray()[0] / 2) * 10,
-                (player.getSpaceCraft().getSpeed() + player.getSkillsArray()[0] / 2) * 10);
+                (player.getSpaceCraft().getSpeed() 
+                        + player.getSkillsArray()[0] / 2) * 10);
         g.setColor(Color.BLACK);
 
         currentPlanet.getMarket().draw(g, panel);

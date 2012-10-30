@@ -54,19 +54,23 @@ public class ConfigScreen extends Screen{
     /**
      * Field unusedSkillPoint.
      */
-    private final ImageIcon unusedSkillPoint = new ImageIcon(
-            getClass().getResource(
+    private static final ImageIcon UN_SKILL_POINT = new ImageIcon(
+            ConfigScreen.class.getResource(
                     "/edu/gatech/spacetrader/res/unusedSkillPoint.png"));
 
     /**
      * Field usedSkillPoint.
      */
-    private final ImageIcon usedSkillPoint = new ImageIcon(
-            getClass().getResource(
+    private static final ImageIcon SKILL_POINT = new ImageIcon(
+            ConfigScreen.class.getResource(
                     "/edu/gatech/spacetrader/res/usedSkillPoint.png"));
     
+    /**
+     * Field BG.
+     * Background image for ConfigScreen.
+     */
     private static final ImageIcon BG = new ImageIcon(
-            BigButton.class.getResource("/edu/gatech/spacetrader/res/configBack.jpg"));
+            ConfigScreen.class.getResource("/edu/gatech/spacetrader/res/configBack.jpg"));
 	
     /**
      * Field height.
@@ -216,12 +220,12 @@ public class ConfigScreen extends Screen{
 		        (g.getFontMetrics().stringWidth(SKILL_NAMES[skill]) / 2), y - 5);
 		    
 		    for (int i = 0; i < skills[skill]; i++) {
-		        usedSkillPoint.paintIcon(panel, g, x, y);
-		        x += usedSkillPoint.getIconWidth();
+		        SKILL_POINT.paintIcon(panel, g, x, y);
+		        x += SKILL_POINT.getIconWidth();
 		    }
 		    for (int j = skills[skill]; j < MAXSKILL; j++) {
-                unusedSkillPoint.paintIcon(panel, g, x, y);
-                x += unusedSkillPoint.getIconWidth();
+                UN_SKILL_POINT.paintIcon(panel, g, x, y);
+                x += UN_SKILL_POINT.getIconWidth();
             }
 		    y += sep;
 		    x = (width / 2) - sep;

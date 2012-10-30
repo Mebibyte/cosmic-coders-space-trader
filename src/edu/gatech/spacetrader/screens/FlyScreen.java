@@ -1,3 +1,4 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
 /*
  * Comment
  */
@@ -14,9 +15,12 @@ import java.awt.image.BufferedImage;
 
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.main.SpaceTrader;
+import edu.gatech.spacetrader.planet.Galaxy;
 import edu.gatech.spacetrader.planet.Planet;
 
 /**
+ * @author Cosmic Coders
+ * @version 1.0
  */
 public class FlyScreen extends Screen {
 
@@ -38,8 +42,16 @@ public class FlyScreen extends Screen {
      */
     private int width, height;
 
+    /**
+     * Field range.
+     * Range the player can fly.
+     */
     private Ellipse2D.Double range;
 
+    /**
+     * Field img.
+     * Fog of war cloud.
+     */
     private BufferedImage img;
 
     /**
@@ -68,28 +80,28 @@ public class FlyScreen extends Screen {
 
         range = new Ellipse2D.Double(
                 ovalX - ((gameScreen.getPlayer().getSpaceCraft().getSpeed() 
-                        + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (5 * 5)),
+                        + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (25)),
                 ovalY - ((gameScreen.getPlayer().getSpaceCraft().getSpeed()
-                        + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (5 * 5)),
+                        + gameScreen.getPlayer().getSkillsArray()[0] / 2) * (25)),
                 2 * ovalRadius, 2 * ovalRadius);
 
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = img.createGraphics();
+        Graphics2D g2D = img.createGraphics();
 
         /* Draw the grey rectangle */
-        g.setColor(new Color(180, 180, 180, 200));
-        g.fillRect(0, 0, width, height);
+        g2D.setColor(new Color(180, 180, 180, 200));
+        g2D.fillRect(0, 0, width, height);
 
         /* Enable Anti-Alias */
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         /* Clear the circle away */
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1.0f));
-        g.fillOval(ovalX - ovalRadius, ovalY - ovalRadius, 2 * ovalRadius,
+        g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 1.0f));
+        g2D.fillOval(ovalX - ovalRadius, ovalY - ovalRadius, 2 * ovalRadius,
                 2 * ovalRadius);
 
-        g.dispose();
+        g2D.dispose();
     }
 
     /**
@@ -103,10 +115,10 @@ public class FlyScreen extends Screen {
     	g.setColor(Color.black);
     	g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
         gameScreen.getGalaxy().draw(g, panel, width, height);
-        g.fillOval((150 * 5) - 5, (100 * 5) - 5, 10, 10);
+        g.fillOval((Galaxy.GALAXY_WIDTH * 5) - 5, (Galaxy.GALAXY_HEIGHT * 5) - 5, 10, 10);
         Graphics2D g2 = (Graphics2D) g;
         g2.draw(range);
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, 0, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
     }
 
     /**
@@ -118,7 +130,7 @@ public class FlyScreen extends Screen {
     @Override
     public void checkForClick(Point point) {
         for (Planet p : gameScreen.getGalaxy().getPlanets()) {
-            if (range.contains(point) && p.checkForClick(point)) {
+            if (range.contains(point) && p.isClicked(point)) {
                 gameScreen.changePlanet(p);
                 panel.setActiveScreen(gameScreen);
             }

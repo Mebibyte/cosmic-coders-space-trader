@@ -63,11 +63,10 @@ public class Planet {
         /**
          * Field images
          */
-        private final ImageIcon[] images;
-        
+        private final ImageIcon[] images = new ImageIcon[3];
         
         /**
-         * @return
+         * @return ImageIcon representation of environment.
          */
         private ImageIcon getRandomImage(){
         	return images[RAND.nextInt(images.length)];
@@ -79,14 +78,13 @@ public class Planet {
          * @param color
          *            Color.
          */
-        private Environment(Color color) {
+        private Environment(Color color) { // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
             this.color = color;
-            images = new ImageIcon[3];
             for (int i = 0; i < images.length; i++){
-                String imgPath = "/edu/gatech/spacetrader/res/" + this.toString() + i + ".png";
+                String imgPath = "/edu/gatech/spacetrader/res/"
+                        + this.toString() + i + ".png";
             	images[i] = new ImageIcon(Planet.class.getResource(imgPath));
             }
-            
         }
 
         /**
@@ -97,15 +95,13 @@ public class Planet {
         public Color getColor() {
             return color;
         }
-        
-        
     }
 
     /**
      */
     public static enum TechLevel {
-        PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), RENAISSANCE(3), EARLY_INDUSTRIAL(
-                4), INDUSTRIAL(5), POST_INDUSTRIAL(6), HI_TECH(7);
+        PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), RENAISSANCE(3), 
+            EARLY_INDUSTRIAL(4), INDUSTRIAL(5), POST_INDUSTRIAL(6), HI_TECH(7);
 
         /**
          * Field LevelInt of TechLevel.
@@ -188,6 +184,7 @@ public class Planet {
     /**
      * Constructor for Planet.
      * 
+     * @param width Width of JFrame.
      * @param galaxyWidth
      *            Width of galaxy.
      * @param galaxyHeight
@@ -378,10 +375,10 @@ public class Planet {
         this.name = name;
     }
 
-    public boolean checkForClick(Point p) {
+    public boolean isClicked(Point p) {
         int dx = p.x - ((x * 5) + 10);
         int dy = p.y - ((y * 5) + 10);
-        return dx * dx + dy * dy <= 10 * 10;
+        return dx * dx + dy * dy <= 100;
     }
     
 }

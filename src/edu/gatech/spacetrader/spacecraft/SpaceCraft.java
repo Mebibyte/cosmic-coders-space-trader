@@ -116,9 +116,8 @@ public abstract class SpaceCraft {
     }
 
     /**
-     * Adds a certain Good to the SpaceCraft's Storage
+     * Checks if there is room to add a good to storage.
      * 
-     * @param g
      * @return Boolean of whether or not you could add the good to the storage
      */
     public boolean canAddToStorage() {
