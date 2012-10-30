@@ -66,9 +66,14 @@ public class Planet {
         private final ImageIcon[] images;
         
         /**
+         * Field envIcon
+         */
+        private final ImageIcon envIcon;
+        
+        /**
          * @return
          */
-        public ImageIcon getRandomImage(){
+        private ImageIcon getRandomImage(){
         	return images[RAND.nextInt(images.length)];
         }
         
@@ -85,6 +90,7 @@ public class Planet {
                 String imgPath = "/edu/gatech/spacetrader/res/" + this.toString() + i + ".png";
             	images[i] = new ImageIcon(Planet.class.getResource(imgPath));
             }
+            this.envIcon = this.getRandomImage();
         }
 
         /**
@@ -94,6 +100,10 @@ public class Planet {
          */
         public Color getColor() {
             return color;
+        }
+        
+        public ImageIcon getEnvIcon(){
+        	return envIcon;
         }
 
     }
@@ -336,7 +346,7 @@ public class Planet {
     public void draw(Graphics g, GamePanel panel, int width, int height) {
         //g.setColor(environment.getColor());
         //g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
-        environment.getRandomImage().paintIcon(panel, g, (x * 5), (y * 5));
+        environment.getEnvIcon().paintIcon(panel, g, (x * 5), (y * 5));
         g.setColor(Color.BLACK);
     }
 
