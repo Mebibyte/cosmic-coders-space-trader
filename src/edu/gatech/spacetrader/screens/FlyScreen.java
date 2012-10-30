@@ -13,6 +13,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.main.SpaceTrader;
 import edu.gatech.spacetrader.planet.Planet;
 
 /**
@@ -99,6 +100,8 @@ public class FlyScreen extends Screen {
      */
     @Override
     public void draw(Graphics g) {
+    	g.setColor(Color.black);
+    	g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
         gameScreen.getGalaxy().draw(g, panel, width, height);
         g.fillOval((150 * 5) - 5, (100 * 5) - 5, 10, 10);
         Graphics2D g2 = (Graphics2D) g;
