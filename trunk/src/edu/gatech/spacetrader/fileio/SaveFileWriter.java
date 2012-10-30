@@ -55,7 +55,7 @@ public class SaveFileWriter {
             output.write(p.getX() + "\n");
             output.write(p.getY() + "\n");
             output.write(p.getEnvironment().toString() + "\n");
-            output.write(p.getCivLevel().toString() + "\n");
+            output.write(p.getTechLevel().toString() + "\n");
         }
 
         // do current planet specifics here

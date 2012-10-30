@@ -6,8 +6,6 @@
 package edu.gatech.spacetrader.spacecraft;
 
 import edu.gatech.spacetrader.good.Good;
-import edu.gatech.spacetrader.main.SpaceTrader;
-import edu.gatech.spacetrader.planet.Galaxy;
 
 /**
  * @version 1.0
@@ -56,21 +54,7 @@ public class Gnat extends SpaceCraft {
 	 * 
 	 */
     public Gnat() {
-        this.health = GNAT_HEALTH;
-        this.speed = GNAT_SPEED;
-        this.attack = GNAT_ATTACK;
-        this.defense = GNAT_DEFENSE;
-        this.storage = GNAT_STORAGE;
-        int goodCount = 0;
-        int x = ((SpaceTrader.WIDTH - Galaxy.GALAXY_WIDTH + 10) / 2) + 300;
-        int y = 0;
-        for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 250); j += 50) {
-                storage[goodCount] = new Good(goodCount, this, j, i);
-                goodCount++;
-            }
-        }
-        this.maxCapacity = GNAT_CAPACITY;
+        super(GNAT_HEALTH, GNAT_SPEED, GNAT_ATTACK, GNAT_DEFENSE, GNAT_CAPACITY, GNAT_STORAGE);
     }
 
     /**

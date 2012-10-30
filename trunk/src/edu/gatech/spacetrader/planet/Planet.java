@@ -249,9 +249,9 @@ public class Planet {
     }
 
     /**
-     * @return The planet's civilization level
+     * @return The planet's tech level
      */
-    public TechLevel getCivLevel() {
+    public TechLevel getTechLevel() {
         return this.techLevel;
     }
 

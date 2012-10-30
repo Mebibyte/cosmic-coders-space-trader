@@ -40,14 +40,14 @@ public class TitleScreen extends Screen {
      * Field bg.
      */
     private static final ImageIcon BG = new ImageIcon(
-            BigButton.class
+            TitleScreen.class
                     .getResource("/edu/gatech/spacetrader/res/space.jpg"));
 
     /**
      * Field player.
      */
     private static final ImageIcon PLAYER = new ImageIcon(
-            BigButton.class
+            TitleScreen.class
                     .getResource("/edu/gatech/spacetrader/res/player.png"));
 
     /**

@@ -135,13 +135,9 @@ public class Good {
     public Good(int index, Planet planet, int x, int y) {
         this.planet = planet;
         this.type = GoodType.getGoodType(index);
-        this.buyPrice = type.basePrice
-                + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
-                + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
-        this.sellPrice = planet.getCivLevel().getTechLevel() >= type.MTLU ? 
-                (buyPrice * 9) / 10 : 0;
+        updatePrice();
 
-        if (planet.getCivLevel().getTechLevel() >= type.MTLP) {
+        if (planet.getTechLevel().getTechLevel() >= type.MTLP) {
             this.quantity = RAND.nextInt(10) + 10;
         }
 
@@ -180,9 +176,9 @@ public class Good {
      */
     public void updatePrice() {
         buyPrice = type.basePrice
-                + (type.IPL * (planet.getCivLevel().getTechLevel() - type.MTLP))
+                + (type.IPL * (planet.getTechLevel().getTechLevel() - type.MTLP))
                 + ((RAND.nextBoolean() ? 1 : -1) * RAND.nextInt(type.VAR));
-        sellPrice = planet.getCivLevel().getTechLevel() > type.MTLU ? (buyPrice * 9) / 10
+        sellPrice = planet.getTechLevel().getTechLevel() >= type.MTLU ? (buyPrice * 9) / 10
                 : 0;
     }
 
