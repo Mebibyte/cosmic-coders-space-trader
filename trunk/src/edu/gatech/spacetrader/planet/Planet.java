@@ -10,7 +10,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+
 import edu.gatech.spacetrader.good.PlanetMarket;
+import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
 /**
@@ -59,6 +62,18 @@ public class Planet {
         private final Color color;
 
         /**
+         * Field images
+         */
+        private final ImageIcon[] images;
+        
+        /**
+         * @return
+         */
+        public ImageIcon getRandomImage(){
+        	return images[RAND.nextInt(images.length)];
+        }
+        
+        /**
          * Constructor for Environment.
          * 
          * @param color
@@ -66,6 +81,12 @@ public class Planet {
          */
         private Environment(Color color) {
             this.color = color;
+            images = new ImageIcon[3];
+            for (int i = 0; i < images.length; i++){
+            	String imgPath = "/edu/gatech/spacetrader/res/" + this.toString() + i + ".png";
+            	images[i] = new ImageIcon(imgPath);
+            	//System.out.println(imgPath + images[i].toString());
+            }
         }
 
         /**
@@ -315,8 +336,9 @@ public class Planet {
      *            Int
      */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
-        g.setColor(environment.getColor());
-        g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
+        //g.setColor(environment.getColor());
+        //g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
+        environment.getRandomImage().paintIcon(panel, g, (x * 5), (y * 5));
         g.setColor(Color.BLACK);
     }
 
