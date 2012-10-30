@@ -24,12 +24,7 @@ import javax.swing.ImageIcon;
  * @author Glenn
  * @version $Revision: 1.0 $Z
  */
-public class ConfigScreen extends Screen{
-    /**
-     * Field buttons.
-     */
-    private final SkillButton[] skillButtons;
-    
+public class ConfigScreen extends Screen{ 
     /**
      * Field buttons.
      */
@@ -45,11 +40,6 @@ public class ConfigScreen extends Screen{
      * Field hard.
      */
     private final SelectableButton easy, normal, hard;
-    
-    /**
-     * Field skills.
-     */
-    private final int[] skills;
     
     /**
      * Field unusedSkillPoint.
@@ -104,6 +94,16 @@ public class ConfigScreen extends Screen{
      */
     private static final int NUMSKILLS = 4, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
+    
+    /**
+     * Field skills.
+     */
+    private final int[] skills = new int[NUMSKILLS];
+    
+    /**
+     * Field buttons.
+     */
+    private final SkillButton[] skillButtons = new SkillButton[NUMSKILLS * 2];
    
     /**
      * Field skillPointsUsed.
@@ -160,12 +160,9 @@ public class ConfigScreen extends Screen{
 	 * @param height int
 	 */
 	public ConfigScreen(GamePanel panel, int width, int height) {
-	    skills = new int[NUMSKILLS];
-	    skillButtons = new SkillButton[NUMSKILLS * 2];
-
 	    final int xNeg = (width / 2) - 90;
 	    final int xPos = (width / 2) + 55;
-	    final int y = 155;
+	    final int y = 165;
 
 	    for (int i = 0; i < skillButtons.length; i++) {
 	        skillButtons[i] = new SkillButton(i % POSNEG == 0 ? "-" : "+",
@@ -197,8 +194,8 @@ public class ConfigScreen extends Screen{
 		BG.paintIcon(panel, g, 0, 0);
 		g.setColor(Color.white);
 	    g.drawString("Player name: " + playerName, 
-	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
-	            50);
+	            (width / 2) - (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
+	            35);
 		
 		editName.draw(g, panel, width, height);
 		g.setColor(Color.white);
@@ -213,7 +210,7 @@ public class ConfigScreen extends Screen{
 		
 		final int sep = 50;
 		int x = (width / 2) - sep;
-		int y = 160;
+		int y = 170;
 		
 		for (int skill = 0; skill < NUMSKILLS; skill++) {
 		    g.drawString(SKILL_NAMES[skill], (width / 2) - 

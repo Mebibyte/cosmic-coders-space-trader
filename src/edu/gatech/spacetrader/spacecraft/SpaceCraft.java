@@ -10,6 +10,8 @@ import java.util.Random;
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.main.SpaceTrader;
+import edu.gatech.spacetrader.planet.Galaxy;
 
 import javax.swing.ImageIcon;
 
@@ -25,46 +27,43 @@ public abstract class SpaceCraft {
 	 */
     private static final Random RAND = new Random();
 
-    /**
-	 * 
-	 */
-    protected int health;
-
     /** 
 	 * 
 	 */
-    protected Good[] storage;
+    private Good[] storage;
 
     /**
 	 * 
 	 */
-    protected int speed;
-
-    /**
-	 * 
-	 */
-    protected int defense;
-
-    /**
-	 * 
-	 */
-    protected int attack;
-
-    /**
-	 * 
-	 */
-    protected int maxCapacity;
-
-    /**
-	 * 
-	 */
-    protected int quantity;
+    private int health, speed, defense, attack, maxCapacity, quantity, fuel;
 
     /**
      * We can eventually create pictures of each of the ships for when the
      * player upgrades to a new ship
      */
     protected ImageIcon shipIcon;
+
+    public SpaceCraft(int health, int speed, int attack,
+            int defense, int maxCapacity, Good[] storage) {
+        this.health = health;
+        this.speed = speed;
+        this.attack = attack;
+        this.defense = defense;
+        this.storage = storage;
+        this.maxCapacity = maxCapacity;
+        fuel = 10;
+        
+        int goodCount = 0;
+        int x = ((SpaceTrader.WIDTH - Galaxy.GALAXY_WIDTH + 10) / 2) + 300;
+        int y = 0;
+        
+        for (int i = y; i < (y + 150); i += 75) {
+            for (int j = x; j < (x + 250); j += 50) {
+                this.storage[goodCount] = new Good(goodCount, this, j, i);
+                goodCount++;
+            }
+        }
+    }
 
     /**
      * @param repairSkill
@@ -76,7 +75,7 @@ public abstract class SpaceCraft {
      * 
      */
     public void fly() {
-        System.out.println("2 Infinity N Beyond! nice touch glenn"); // TODO
+        fuel--;
     }
 
     /**
@@ -152,6 +151,14 @@ public abstract class SpaceCraft {
 
     public int getSpeed() {
         return speed;
+    }
+    
+    public int getFuel() {
+        return fuel;
+    }
+    
+    public void addFuel() {
+        fuel++;
     }
 
     public Good goodClicked(Point point) {
