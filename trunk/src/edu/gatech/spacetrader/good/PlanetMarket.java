@@ -124,7 +124,7 @@ public class PlanetMarket {
     /**
      * Returns the good clicked.
      * @param point
-     * @return
+     * @return The good clicked.
      */
     public Good goodClicked(Point point) {
         for (Good g : goods) {

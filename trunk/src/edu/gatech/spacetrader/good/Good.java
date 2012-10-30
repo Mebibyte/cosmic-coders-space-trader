@@ -38,8 +38,8 @@ public class Good {
          * Field basePrice. Field index. Field MTLP. Field MTLU. Field IPL.
          * Field VAR.
          */
-        private final int basePrice, index, MTLP, MTLU, IPL, VAR; // $codepro.audit.disable
-                                                                  // instanceFieldNamingConvention
+        private final int basePrice, index, MTLP, MTLU, IPL, VAR; // $codepro.audit.disable instanceFieldNamingConvention
+        
         /**
          * Good constructor.
          * 
@@ -50,8 +50,8 @@ public class Good {
          * @param IPL
          * @param VAR
          */
-        private GoodType(int basePrice, int index, int MTLP, int MTLU, int IPL, // $codepro.audit.disable largeNumberOfParameters, localVariableNamingConvention
-                int VAR) { // $codepro.audit.disable localVariableNamingConvention
+        private GoodType(int basePrice, int index, int MTLP, int MTLU, int IPL, // $codepro.audit.disable largeNumberOfParameters, localVariableNamingConvention, methodParameterNamingConvention
+                int VAR) { // $codepro.audit.disable localVariableNamingConvention, methodParameterNamingConvention
             this.basePrice = basePrice;
             this.index = index;
             this.MTLP = MTLP;
