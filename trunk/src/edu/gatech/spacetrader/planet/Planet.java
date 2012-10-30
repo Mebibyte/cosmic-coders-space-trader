@@ -13,7 +13,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import edu.gatech.spacetrader.good.PlanetMarket;
-import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
 /**
@@ -83,9 +82,8 @@ public class Planet {
             this.color = color;
             images = new ImageIcon[3];
             for (int i = 0; i < images.length; i++){
-            	String imgPath = "/edu/gatech/spacetrader/res/" + this.toString() + i + ".png";
-            	images[i] = new ImageIcon(imgPath);
-            	//System.out.println(imgPath + images[i].toString());
+                String imgPath = "/edu/gatech/spacetrader/res/" + this.toString() + i + ".png";
+            	images[i] = new ImageIcon(Planet.class.getResource(imgPath));
             }
         }
 
