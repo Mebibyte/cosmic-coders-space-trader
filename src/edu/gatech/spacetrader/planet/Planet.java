@@ -7,6 +7,7 @@ package edu.gatech.spacetrader.planet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -152,6 +153,8 @@ public class Planet {
      * Field NAMES_USED.
      */
     private static final ArrayList<Integer> NAMES_USED = new ArrayList<Integer>();
+    
+    private static final ArrayList<Rectangle> LOCATIONS_USED = new ArrayList<Rectangle>();
 
     /**
      * Field RAND.
@@ -164,12 +167,9 @@ public class Planet {
     private static final int NUM_PLANETS = 120;
 
     /**
-     * Field x.
+     * Field location.
      */
-    /**
-     * Field y.
-     */
-    private int x, y;
+    private Point location;
     
     /**
      * Field icon
@@ -199,9 +199,25 @@ public class Planet {
 
         name = PLANET_NAMES[nextPlanet];
         NAMES_USED.add(nextPlanet);
-
-        x = RAND.nextInt(galaxyWidth);
-        y = RAND.nextInt(galaxyHeight);
+        
+        location = new Point(RAND.nextInt(galaxyWidth), RAND.nextInt(galaxyHeight));
+        
+        boolean added = false;
+        while (!added) {
+            added = true;
+            
+            for (Rectangle r : LOCATIONS_USED) {
+                if (r.contains(location)) {
+                    added = false;
+                }
+            }
+            
+            if (!added) {
+                location = new Point(RAND.nextInt(galaxyWidth), RAND.nextInt(galaxyHeight));
+            }
+        }
+        
+        LOCATIONS_USED.add(new Rectangle(location.x - 3, location.y - 3, 7, 7));
 
         techLevel = TechLevel.values()[RAND.nextInt(TechLevel.values().length)];
         environment = Environment.values()[RAND
@@ -229,7 +245,7 @@ public class Planet {
      * @return int X value of planet.
      */
     public int getX() {
-        return x;
+        return location.x;
     }
 
     /**
@@ -238,7 +254,7 @@ public class Planet {
      * @return int Y value of planet.
      */
     public int getY() {
-        return y;
+        return location.y;
     }
 
     /**
@@ -321,8 +337,8 @@ public class Planet {
 
     public void drawMini(Graphics g, GamePanel panel, int width, int height) {
         g.setColor(environment.getColor());
-        g.fillOval(width - Galaxy.HALF_GALAXY_WIDTH + (x - 2), height
-                - Galaxy.HALF_GALAXY_HEIGHT + (y - 2), 4, 4); // $codepro.audit.disable
+        g.fillOval(width - Galaxy.HALF_GALAXY_WIDTH + (location.x - 2), height
+                - Galaxy.HALF_GALAXY_HEIGHT + (location.y - 2), 4, 4); // $codepro.audit.disable
                                                               // numericLiterals
         g.setColor(Color.BLACK);
     }
@@ -342,7 +358,7 @@ public class Planet {
     public void draw(Graphics g, GamePanel panel, int width, int height) {
         //g.setColor(environment.getColor());
         //g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
-        icon.paintIcon(panel, g, (x * 5), (y * 5));
+        icon.paintIcon(panel, g, (location.x * 5), (location.y * 5));
         g.setColor(Color.BLACK);
     }
 
@@ -356,11 +372,11 @@ public class Planet {
     }
 
     public void setX(int x) {
-        this.x = x;
+        location.x = x;
     }
 
     public void setY(int y) {
-        this.y = y;
+        location.y = y;
     }
 
     public void setEnvironment(String env) {
@@ -376,8 +392,8 @@ public class Planet {
     }
 
     public boolean isClicked(Point p) {
-        int dx = p.x - ((x * 5) + 10);
-        int dy = p.y - ((y * 5) + 10);
+        int dx = p.x - ((location.x * 5) + 10);
+        int dy = p.y - ((location.y * 5) + 10);
         return dx * dx + dy * dy <= 100;
     }
     

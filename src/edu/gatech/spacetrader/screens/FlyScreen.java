@@ -77,6 +77,8 @@ public class FlyScreen extends Screen {
         int ovalY = (gameScreen.getCurrentPlanet().getY() * 5) + 10;
         int ovalRadius = ((gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen
                 .getPlayer().getSkillsArray()[0] / 2) * (10 * 5)) / 2;
+        
+        // TODO: Limit range based on fuel when fuel is low.
 
         range = new Ellipse2D.Double(
                 ovalX - ((gameScreen.getPlayer().getSpaceCraft().getSpeed() 
