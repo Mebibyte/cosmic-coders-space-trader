@@ -138,8 +138,8 @@ public class TitleScreen extends Screen {
     /**
      * Method toString.
      * 
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString() {
         return "Title Screen";

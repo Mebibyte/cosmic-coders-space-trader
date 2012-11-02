@@ -1,3 +1,4 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
 /* Comment
  * 
  */
@@ -8,13 +9,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
-import edu.gatech.spacetrader.main.SpaceTrader;
-import edu.gatech.spacetrader.planet.Galaxy;
-
-import javax.swing.ImageIcon;
 
 /**
  * @version 1.0
@@ -44,13 +44,22 @@ public abstract class SpaceCraft {
      */
     protected ImageIcon shipIcon;
 
-    public SpaceCraft(int health, int speed, int attack, int defense,
+    /**
+     * Constructor for SpaceCraft.
+     * @param health int
+     * @param speed int
+     * @param attack int
+     * @param defense int
+     * @param maxCapacity int
+     * @param storage Good[]
+     */
+    public SpaceCraft(int health, int speed, int attack, int defense, // $codepro.audit.disable largeNumberOfParameters
             int maxCapacity, Good[] storage) {
         this.health = health;
         this.speed = speed;
         this.attack = attack;
         this.defense = defense;
-        this.storage = storage;
+        this.storage = storage.clone();
         this.maxCapacity = maxCapacity;
         fuel = 100;
 
@@ -73,7 +82,7 @@ public abstract class SpaceCraft {
 
     /**
      * Method fly.
-     * 
+     * @param distance
      */
     public void fly(int distance) {
         fuel -= distance / speed;
@@ -94,23 +103,31 @@ public abstract class SpaceCraft {
     }
 
     /**
-     * @return int Attack value.
-     */
+    
+     * @return int Attack value. */
     public int getAttack() {
         return this.attack;
     }
 
     /**
-     * @return int Defense Value.
-     */
+    
+     * @return int Defense Value. */
     public int getDefense() {
         return this.defense;
     }
 
+    /**
+     * Method getHealth.
+     * @return int
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Method setHealth.
+     * @param health int
+     */
     public void setHealth(int health) {
         this.health = health;
     }
@@ -118,47 +135,80 @@ public abstract class SpaceCraft {
     /**
      * Checks if there is room to add a good to storage.
      * 
-     * @return Boolean of whether or not you could add the good to the storage
-     */
+    
+     * @return Boolean of whether or not you could add the good to the storage */
     public boolean canAddToStorage() {
         return quantity < maxCapacity;
     }
 
+    /**
+     * Method addToStorage.
+     * @param g Good
+     */
     public void addToStorage(Good g) {
         storage[g.getIndex()].addGood();
         quantity++;
     }
 
+    /**
+     * Method removeGood.
+     * @param g Good
+     */
     public void removeGood(Good g) {
         storage[g.getIndex()].removeGood();
         quantity--;
     }
 
+    /**
+     * Method getStorage.
+     * @return Good[]
+     */
     public Good[] getStorage() {
         return storage;
     }
 
+    /**
+     * Method drawStorage.
+     * @param g Graphics
+     * @param panel GamePanel
+     */
     public void drawStorage(Graphics g, GamePanel panel) {
         for (Good good : storage) {
             good.draw(g, panel);
         }
     }
 
+    /**
+     * Method setSellPrices.
+     * @param market PlanetMarket
+     */
     public void setSellPrices(PlanetMarket market) {
         for (int i = 0; i < 10; i++) {
             storage[i].setSalePrice(market.getGood(i).getSellPrice());
         }
     }
 
+    /**
+     * Method getSpeed.
+     * @return int
+     */
     public int getSpeed() {
         return speed;
     }
 
+    /**
+     * Method getFuel.
+     * @return int
+     */
     public int getFuel() {
         return fuel;
     }
 
-    public boolean addFuel() {
+    /**
+     * Method canAddFuel.
+     * @return boolean
+     */
+    public boolean canAddFuel() {
         if (fuel < 100) {
             fuel += 10;
             if (fuel > 100) {
@@ -169,6 +219,11 @@ public abstract class SpaceCraft {
         return false;
     }
 
+    /**
+     * Method goodClicked.
+     * @param point Point
+     * @return Good
+     */
     public Good goodClicked(Point point) {
         for (Good g : storage) {
             if (g.isClicked(point)) {
@@ -178,23 +233,40 @@ public abstract class SpaceCraft {
         return null;
     }
 
+    /**
+     * Method canSellGood.
+     * @param sold Good
+     * @return boolean
+     */
     public boolean canSellGood(Good sold) {
         return storage[sold.getIndex()].getQuantity() > 0;
     }
 
+    /**
+     * Method updatePrices.
+     * @param market PlanetMarket
+     */
     public void updatePrices(PlanetMarket market) {
         for (int i = 0; i < 10; i++) {
             storage[i].setSalePrice(market.getGood(i).getSellPrice());
         }
     }
 
+    /**
+     * Method drawFuel.
+     * @param g Graphics
+     * @param panel GamePanel
+     * @param x int
+     * @param y int
+     */
     public void drawFuel(Graphics g, GamePanel panel, int x, int y) {
+        final int fuelWidth = 25;
         g.setColor(Color.BLACK);
-        g.fillRect(x, y, 25, -1 * (fuel - 100));
+        g.fillRect(x, y, fuelWidth, -1 * (fuel - 100));
         g.setColor(Color.ORANGE);
-        g.fillRect(x, y + -1 * (fuel - 100), 25, 100 - -1 * (fuel - 100));
+        g.fillRect(x, y + -1 * (fuel - 100), fuelWidth, 100 - -1 * (fuel - 100));
         g.setColor(Color.BLACK);
-        g.drawRect(x, y, 25, 100);
+        g.drawRect(x, y, fuelWidth, 100);
 
         for (int i = y; i < (y + 100); i += 5) {
             if (i % 10 == 0) {
@@ -204,12 +276,16 @@ public abstract class SpaceCraft {
             }
         }
 
-        g.drawString("F", (25 / 2) - (g.getFontMetrics().stringWidth("F") / 2),
+        g.drawString("F", (fuelWidth / 2) - (g.getFontMetrics().stringWidth("F") / 2),
                 y + g.getFontMetrics().getHeight());
-        g.drawString("E", (25 / 2) - (g.getFontMetrics().stringWidth("E") / 2),
+        g.drawString("E", (fuelWidth / 2) - (g.getFontMetrics().stringWidth("E") / 2),
                 y + 95);
     }
 
+    /**
+     * Method canFly.
+     * @return boolean
+     */
     public boolean canFly() {
         return fuel > 0;
     }

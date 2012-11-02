@@ -155,8 +155,8 @@ public class TextFieldFrame extends JFrame {
         /**
          * Method toString.
          * 
-         * @return String
-         */
+        
+         * @return String */
         public String toString() {
             return "MaxLengthDocument";
         }
@@ -172,8 +172,8 @@ public class TextFieldFrame extends JFrame {
          * 
          * @param event
          *            ActionEvent
-         * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
-         */
+        
+         * @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
         @Override
         public void actionPerformed(ActionEvent event) {
             screen.changeName(field.getText());
@@ -182,8 +182,8 @@ public class TextFieldFrame extends JFrame {
         /**
          * Method toString.
          * 
-         * @return String
-         */
+        
+         * @return String */
         @Override
         public String toString() {
             return "SubmitListener";

@@ -7,6 +7,7 @@
 package edu.gatech.spacetrader.screens;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -53,13 +54,18 @@ public class GameScreen extends Screen {
      * Field currentPlanet.
      */
     private Planet currentPlanet;
-    
+
+    /**
+     * Field fuel button
+     */
     private Rectangle fuelButton;
+
     /**
      * Field BG
      */
     private static final ImageIcon BG = new ImageIcon(
-            ConfigScreen.class.getResource("/edu/gatech/spacetrader/res/market.jpg"));
+            GameScreen.class
+                    .getResource("/edu/gatech/spacetrader/res/market.jpg"));
 
     /**
      * Constructor for GameScreen.
@@ -92,33 +98,37 @@ public class GameScreen extends Screen {
      */
     @Override
     public void draw(Graphics g) {
-        final int x = 0;
-        final int y = g.getFontMetrics().getHeight();
         BG.paintIcon(panel, g, 0, 0);
-        g.drawString(player.getName(), x, y);
-        g.drawString(player.getDifficulty(), x, y * 2);
-        g.drawString("Pilot: " + player.getSkillsArray()[0], x, y * 3);
-        g.drawString("Fighter: " + player.getSkillsArray()[1], x, y * 4);
-        g.drawString("Trader: " + player.getSkillsArray()[2], x, y * 5);
-        g.drawString("Engineer: " + player.getSkillsArray()[3], x, y * 6);
-        g.drawString(player.getCredits() + " credits", x, y * 8);
-        g.drawString(player.getSpaceCraft().toString(), x, y * 9);
-        
-        g.drawRect(fuelButton.x, fuelButton.y, fuelButton.width, fuelButton.height);
-        g.drawString("Buy Fuel", (fuelButton.width / 2) - (g.getFontMetrics().stringWidth("Buy Fuel") / 2), y * 10);
+
+        final FontMetrics fm = g.getFontMetrics();
+        final int x = 0;
+        final int y = fm.getHeight();
+        final int sidebarWidth = 164;
+
+        g.drawString(
+                "Player Information",
+                (sidebarWidth / 2) - (fm.stringWidth("Player Information") / 2),
+                y);
+        player.drawInfo(g, panel, x, y);
+
+        g.drawRect(fuelButton.x, fuelButton.y, fuelButton.width,
+                fuelButton.height);
+        g.drawString("Buy Fuel",
+                (fuelButton.width / 2) - (fm.stringWidth("Buy Fuel") / 2),
+                y * 10);
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
 
         g.drawString(currentPlanet.toString(), x, (y * 11) + 120);
-        g.drawString(currentPlanet.getTechLevel().getTechLevel() + "", x, (y * 12) + 120);
+        g.drawString(currentPlanet.getTechLevel().getTechLevel() + "", x,
+                (y * 12) + 120);
 
-        g.drawLine(Galaxy.GALAXY_WIDTH + 9, 0, Galaxy.GALAXY_WIDTH + 9, height);
-
-        galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH, height
+        galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
 
         g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
-                - g.getFontMetrics().stringWidth("Click Minimap to fly!") / 2,
-                height - (Galaxy.GALAXY_HEIGHT + 10));
+                - fm.stringWidth("Click Minimap to fly!") / 2, height
+                - (Galaxy.GALAXY_HEIGHT + 10));
+
         g.setColor(Color.GRAY);
         g.drawOval(
                 currentPlanet.getX()
@@ -129,9 +139,10 @@ public class GameScreen extends Screen {
                         - (2 * Galaxy.HALF_GALAXY_HEIGHT)
                         - (player.getSpaceCraft().getSpeed() + player
                                 .getSkillsArray()[0] / 2) * 5,
-                (player.getSpaceCraft().getSpeed() + player.getSkillsArray()[0] / 2) * 10,
-                (player.getSpaceCraft().getSpeed() 
-                        + player.getSkillsArray()[0] / 2) * 10);
+                (player.getSpaceCraft().getSpeed() + 
+                        player.getSkillsArray()[0] / 2) * 10,
+                (player.getSpaceCraft().getSpeed() + 
+                        player.getSkillsArray()[0] / 2) * 10);
         g.setColor(Color.BLACK);
 
         currentPlanet.getMarket().draw(g, panel);
@@ -149,7 +160,7 @@ public class GameScreen extends Screen {
         if (galaxy.isClicked(point) && player.getSpaceCraft().canFly()) {
             panel.setActiveScreen(new FlyScreen(this, panel, width, height));
         } else if (fuelButton.contains(point)) {
-            if (player.getSpaceCraft().addFuel()) {
+            if (player.getSpaceCraft().canAddFuel()) {
                 player.useCredits(-5);
             }
         } else {
@@ -162,7 +173,7 @@ public class GameScreen extends Screen {
                     currentPlanet.getMarket().boughtGood(bought);
                 }
             }
-    
+
             Good sold = player.getSpaceCraft().goodClicked(point);
             if (sold != null) {
                 if (sold.getSellPrice() > 0
@@ -178,8 +189,8 @@ public class GameScreen extends Screen {
     /**
      * Method toString.
      * 
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString() {
         return "Game screen";
@@ -192,8 +203,10 @@ public class GameScreen extends Screen {
      *            Planet
      */
     public void changePlanet(Planet planet) {
-        int xSquared = (planet.getX() - currentPlanet.getX()) * (planet.getX() - currentPlanet.getX());
-        int ySquared = (planet.getY() - currentPlanet.getY()) * (planet.getY() - currentPlanet.getY());
+        int xSquared = (planet.getX() - currentPlanet.getX())
+                * (planet.getX() - currentPlanet.getX());
+        int ySquared = (planet.getY() - currentPlanet.getY())
+                * (planet.getY() - currentPlanet.getY());
         int distance = (int) Math.sqrt(xSquared + ySquared);
         currentPlanet = planet;
         galaxy.advanceTime();
@@ -201,14 +214,26 @@ public class GameScreen extends Screen {
         player.getSpaceCraft().fly(distance);
     }
 
+    /**
+     * Method getPlayer.
+     * @return Player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Method getGalaxy.
+     * @return Galaxy
+     */
     public Galaxy getGalaxy() {
         return galaxy;
     }
 
+    /**
+     * Method getCurrentPlanet.
+     * @return Planet
+     */
     public Planet getCurrentPlanet() {
         return currentPlanet;
     }

@@ -42,8 +42,8 @@ public abstract class Screen {
 	
     /**
      * Method getHoverPoint.
-     * @return Point
-     */
+    
+     * @return Point */
     public Point getHoverPoint() {
         return hoverPoint;
     }

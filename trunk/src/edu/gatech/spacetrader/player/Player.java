@@ -1,11 +1,14 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
 /* Comment
  * 
  */
 
 package edu.gatech.spacetrader.player;
 
+import java.awt.Graphics;
 import java.util.Arrays;
 
+import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.screens.ConfigScreen;
 import edu.gatech.spacetrader.spacecraft.Gnat;
 import edu.gatech.spacetrader.spacecraft.SpaceCraft;
@@ -75,30 +78,34 @@ public class Player {
         return Arrays.toString(skills);
     }
     
+    /**
+     * Method getSkillsArray.
+     * @return int[]
+     */
     public int[] getSkillsArray(){
     	return skills;
     }
     
     /**
      * Method getDifficulty.
-     * @return String
-     */
+    
+     * @return String */
     public String getDifficulty() {
         return difficulty.toString();
     }
     
     /**
      * Method getDifficulty.
-     * @return String
-     */
+    
+     * @return String */
     public int getCredits() {
         return credits;
     }
     
     /**
      * Method getSpaceCraft.
-     * @return SpaceCraft
-     */
+    
+     * @return SpaceCraft */
     public SpaceCraft getSpaceCraft() {
         return spaceCraft;
     }
@@ -129,7 +136,30 @@ public class Player {
                 + Arrays.toString(skills) + " on difficulty " + difficulty.toString();
     }
 
+    /**
+     * Method canSpend.
+     * @param buyPrice int
+     * @return boolean
+     */
     public boolean canSpend(int buyPrice) {
         return credits > buyPrice;
+    }
+
+    /**
+     * Method drawInfo.
+     * @param g Graphics
+     * @param panel GamePanel
+     * @param x int
+     * @param y int
+     */
+    public void drawInfo(Graphics g, GamePanel panel, int x, int y) {
+        g.drawString("Name: " + name, x, y * 2);
+        g.drawString("Difficulty: " + difficulty.toString(), x, y * 3);
+        g.drawString("Pilot: " + skills[0], x, y * 4);
+        g.drawString("Fighter: " + skills[1], x, y * 5);
+        g.drawString("Trader: " + skills[2], x, y * 6);
+        g.drawString("Engineer: " + skills[3], x, y * 7);
+        g.drawString(credits + " credits", x, y * 8);
+        g.drawString(spaceCraft.toString(), x, y * 9);
     }
 }

@@ -54,14 +54,15 @@ public class Gnat extends SpaceCraft {
 	 * 
 	 */
     public Gnat() {
-        super(GNAT_HEALTH, GNAT_SPEED, GNAT_ATTACK, GNAT_DEFENSE, GNAT_CAPACITY, GNAT_STORAGE);
+        super(GNAT_HEALTH, GNAT_SPEED, GNAT_ATTACK, GNAT_DEFENSE,
+                GNAT_CAPACITY, GNAT_STORAGE);
     }
 
     /**
      * Method toString.
      * 
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString() {
         return "Gnat";
@@ -70,8 +71,8 @@ public class Gnat extends SpaceCraft {
     /**
      * @param repairSkill
      * 
-     * @see edu.gatech.spacetrader.spacecraft.SpaceCraft#repair(int)
-     */
+    
+     * @see edu.gatech.spacetrader.spacecraft.SpaceCraft#repair(int) */
     @Override
     public void repair(int repairSkill) {
         System.out.println("Repair"); // FIXME

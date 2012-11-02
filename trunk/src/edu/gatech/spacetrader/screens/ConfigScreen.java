@@ -119,7 +119,16 @@ public class ConfigScreen extends Screen{
      * @author Glenn
      */
     public enum Difficulty {
-        EASY("Easy"), NORMAL("Normal"), HARD("Hard");
+        /**
+         * Field EASY.
+         */
+        EASY("Easy"), /**
+  * Field NORMAL.
+  */
+ NORMAL("Normal"), /**
+  * Field HARD.
+  */
+ HARD("Hard");
         
         /**
          * Field text.
@@ -194,7 +203,8 @@ public class ConfigScreen extends Screen{
 		BG.paintIcon(panel, g, 0, 0);
 		g.setColor(Color.white);
 	    g.drawString("Player name: " + playerName, 
-	            (width / 2) - (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
+	            (width / 2) - 
+	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
 	            35);
 		
 		editName.draw(g, panel, width, height);
@@ -266,7 +276,7 @@ public class ConfigScreen extends Screen{
 	                panel, width, height));
 	    } else if (editName.isClicked(point)) {
 	        if (editNameFrame == null) {
-	            editNameFrame = new TextFieldFrame(this, panel, 15, playerName);
+	            editNameFrame = new TextFieldFrame(this, panel, 14, playerName);
 	        } else if (!editNameFrame.isVisible()) {
 	            editNameFrame.setVisible(true);
 	            editNameFrame.resetFocus();

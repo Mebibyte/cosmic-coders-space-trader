@@ -27,12 +27,12 @@ public class FlyScreen extends Screen {
     /**
      * Field gameScreen.
      */
-    private GameScreen gameScreen;
+    private final GameScreen gameScreen;
 
     /**
      * Field panel.
      */
-    private GamePanel panel;
+    private final GamePanel panel;
 
     /**
      * Field width.
@@ -40,19 +40,19 @@ public class FlyScreen extends Screen {
     /**
      * Field height.
      */
-    private int width, height;
+    private final int width, height;
 
     /**
      * Field range.
      * Range the player can fly.
      */
-    private Ellipse2D.Double range;
+    private final Ellipse2D.Double range;
 
     /**
      * Field img.
      * Fog of war cloud.
      */
-    private BufferedImage img;
+    private final BufferedImage img;
 
     /**
      * Constructor for FlyScreen.
@@ -73,9 +73,9 @@ public class FlyScreen extends Screen {
         this.width = width;
         this.height = height;
 
-        int ovalX = (gameScreen.getCurrentPlanet().getX() * 5) + 10;
-        int ovalY = (gameScreen.getCurrentPlanet().getY() * 5) + 10;
-        int ovalRadius = ((gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen
+        final int ovalX = (gameScreen.getCurrentPlanet().getX() * 5) + 10;
+        final int ovalY = (gameScreen.getCurrentPlanet().getY() * 5) + 10;
+        final int ovalRadius = ((gameScreen.getPlayer().getSpaceCraft().getSpeed() + gameScreen
                 .getPlayer().getSkillsArray()[0] / 2) * (10 * 5)) / 2;
         
         // TODO: Limit range based on fuel when fuel is low.
@@ -142,8 +142,8 @@ public class FlyScreen extends Screen {
     /**
      * Method toString.
      * 
-     * @return String
-     */
+    
+     * @return String */
     @Override
     public String toString() {
         return "Fly screen";
