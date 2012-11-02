@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
+
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.planet.Galaxy;
@@ -53,6 +55,11 @@ public class GameScreen extends Screen {
     private Planet currentPlanet;
     
     private Rectangle fuelButton;
+    /**
+     * Field BG
+     */
+    private static final ImageIcon BG = new ImageIcon(
+            ConfigScreen.class.getResource("/edu/gatech/spacetrader/res/market.jpg"));
 
     /**
      * Constructor for GameScreen.
@@ -87,7 +94,7 @@ public class GameScreen extends Screen {
     public void draw(Graphics g) {
         final int x = 0;
         final int y = g.getFontMetrics().getHeight();
-
+        BG.paintIcon(panel, g, 0, 0);
         g.drawString(player.getName(), x, y);
         g.drawString(player.getDifficulty(), x, y * 2);
         g.drawString("Pilot: " + player.getSkillsArray()[0], x, y * 3);
