@@ -62,7 +62,7 @@ public class Galaxy {
             planets[i] = new Planet(width, GALAXY_WIDTH, GALAXY_HEIGHT);
         }
         
-        bounds = new Rectangle(-8, 
+        bounds = new Rectangle(-2, 
                 height - (2 * Galaxy.HALF_GALAXY_HEIGHT) - 8, Galaxy.GALAXY_WIDTH + 16, 
                 Galaxy.GALAXY_HEIGHT + 16);
     }
