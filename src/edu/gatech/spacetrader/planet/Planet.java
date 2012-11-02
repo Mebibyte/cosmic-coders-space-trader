@@ -224,8 +224,8 @@ public class Planet {
                 .nextInt(Environment.values().length)];
 
         currentEvent = Event.NONE;
-        market = new PlanetMarket(this, (width - Galaxy.GALAXY_WIDTH + 10) / 2,
-                0);
+        market = new PlanetMarket(this, 280,
+                350);
         icon = environment.getRandomImage();
     }
 

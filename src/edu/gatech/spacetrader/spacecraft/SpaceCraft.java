@@ -55,8 +55,8 @@ public abstract class SpaceCraft {
         fuel = 100;
 
         int goodCount = 0;
-        int x = ((SpaceTrader.WIDTH - Galaxy.GALAXY_WIDTH + 10) / 2) + 300;
-        int y = 0;
+        int x = 700;
+        int y = 350;
 
         for (int i = y; i < (y + 150); i += 75) {
             for (int j = x; j < (x + 250); j += 50) {
