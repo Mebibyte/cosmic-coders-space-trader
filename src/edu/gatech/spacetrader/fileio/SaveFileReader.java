@@ -1,3 +1,6 @@
+/*
+ * Comment
+ */
 package edu.gatech.spacetrader.fileio;
 
 import java.io.File;
@@ -11,12 +14,29 @@ import edu.gatech.spacetrader.planet.*;
 import edu.gatech.spacetrader.screens.GameScreen;
 import edu.gatech.spacetrader.spacecraft.*;
 
+/**
+ * @author Patrick
+ * @version 1.0
+ */
 public class SaveFileReader {
+	/**
+	 * Field loadedGameScreen.
+	 */
 	private GameScreen loadedGameScreen;
+	/**
+	 * Field gameSave.
+	 */
 	private File gameSave;
+	/**
+	 * Field scan.
+	 */
 	private Scanner scan;
 	
 	
+	/**
+	 * Method readFile.
+	 * @param gameSave File
+	 */
 	public void readFile(File gameSave){
 		this.gameSave = gameSave;
 		try{
@@ -62,13 +82,17 @@ public class SaveFileReader {
 			planets[i].setName(scan.nextLine());
 			planets[i].setX(Integer.parseInt(scan.nextLine()));
 			planets[i].setY(Integer.parseInt(scan.nextLine()));
-			planets[i].setCivLevel(scan.nextLine());
+			planets[i].setTechLevel(scan.nextLine());
 		}
 		
 		//current planet
 		
 	}
 	
+	/**
+	 * Method getLoadedGameScreen.
+	 * @return GameScreen
+	 */
 	public GameScreen getLoadedGameScreen(){
 		return loadedGameScreen;
 	}

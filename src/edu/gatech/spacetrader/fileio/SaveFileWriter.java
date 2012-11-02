@@ -1,3 +1,6 @@
+/*
+ * Comment
+ */
 package edu.gatech.spacetrader.fileio;
 
 import java.io.File;
@@ -9,21 +12,52 @@ import edu.gatech.spacetrader.screens.GameScreen;
 import edu.gatech.spacetrader.player.Player;
 import edu.gatech.spacetrader.planet.*;
 
+/**
+ * @author Patrick
+ * @version 1.0
+ */
 public class SaveFileWriter {
 
+    /**
+     * Field player.
+     */
     private Player player;
+    /**
+     * Field galaxy.
+     */
     private Galaxy galaxy;
+    /**
+     * Field currentPlanet.
+     */
     private Planet currentPlanet;
+    /**
+     * Field fw.
+     */
     private FileWriter fw;
+    /**
+     * Field buffer.
+     */
     private BufferedWriter buffer;
+    /**
+     * Field output.
+     */
     private PrintWriter output;
 
+    /**
+     * Constructor for SaveFileWriter.
+     * @param screen GameScreen
+     */
     public SaveFileWriter(GameScreen screen) {
         this.player = screen.getPlayer();
         this.galaxy = screen.getGalaxy();
         this.currentPlanet = screen.getCurrentPlanet();
     }
 
+    /**
+     * Method generateSaveFile.
+     * @param fileName String
+     * @throws IOException
+     */
     public void generateSaveFile(String fileName) throws IOException {
         fw = new FileWriter(new File(fileName));
         buffer = new BufferedWriter(fw);

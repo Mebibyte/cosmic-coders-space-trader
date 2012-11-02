@@ -50,7 +50,7 @@ public class Galaxy {
      * Field bounds.
      * Rectangle used for checking if clicked.
      */
-    private Rectangle bounds;
+    private final Rectangle bounds;
 
     /**
      * Constructor for Galaxy.
@@ -69,8 +69,8 @@ public class Galaxy {
 
     /**
      * Method getStartingPlanet.
-     * @return Planet
-     */
+    
+     * @return Planet */
     public Planet getStartingPlanet() {
         return planets[0];
     }
@@ -90,8 +90,8 @@ public class Galaxy {
     
     /**
      * Method toString.
-     * @return String
-     */
+    
+     * @return String */
     public String toString() {
         final StringBuffer res = new StringBuffer("{");
         for (Planet p : planets) {
@@ -106,8 +106,8 @@ public class Galaxy {
      * getPlanets method.
      * Returns an array of Planets.
      * 
-     * @return array of planets.
-     */
+    
+     * @return array of planets. */
     public Planet[] getPlanets(){
     	return planets;
     }
@@ -116,8 +116,8 @@ public class Galaxy {
      * isClicked method for galaxy.
      * 
      * @param point Point clicked
-     * @return If the galaxy has been clicked.
-     */
+    
+     * @return If the galaxy has been clicked. */
     public boolean isClicked(Point point) {
         return bounds.contains(point);
     }

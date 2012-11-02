@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -45,16 +46,64 @@ public class Planet {
             "Vandor", "Ventax", "Xenon", "Xerxes", "Yew", "Yojimbo", "Zalkon",
             "Zuul" };
 
+    /**
+     */
     public static enum Event {
-        DROUGHT, COLD, CROPFAIL, WAR, BOREDOM, PLAGUE, LACKOFWORKERS, NONE
+        /**
+         * Field DROUGHT.
+         */
+        DROUGHT, /**
+  * Field COLD.
+  */
+ COLD, /**
+  * Field CROPFAIL.
+  */
+ CROPFAIL, /**
+  * Field WAR.
+  */
+ WAR, /**
+  * Field BOREDOM.
+  */
+ BOREDOM, /**
+  * Field PLAGUE.
+  */
+ PLAGUE, /**
+  * Field LACKOFWORKERS.
+  */
+ LACKOFWORKERS, /**
+  * Field NONE.
+  */
+ NONE
     }
 
     /**
+     * @author Glenn
      */
     public static enum Environment {
-        DESERT(new Color(0xCD, 0x95, 0x0C)), WATER(Color.BLUE), JUNGLE(
-                new Color(00, 0x64, 00)), ICE(new Color(0x36, 0xDB, 0xCA)), EARTHLIKE(
-                Color.CYAN), TROPICAL(Color.GREEN), UNDERGROUND(Color.BLACK);
+        /**
+         * Field DESERT.
+         */
+        DESERT(new Color(0xCD, 0x95, 0x0C)), /**
+  * Field WATER.
+  */
+ WATER(Color.BLUE), /**
+  * Field JUNGLE.
+  */
+ JUNGLE(
+                new Color(00, 0x64, 00)), /**
+  * Field ICE.
+  */
+ ICE(new Color(0x36, 0xDB, 0xCA)), /**
+  * Field EARTHLIKE.
+  */
+ EARTHLIKE(
+                Color.CYAN), /**
+  * Field TROPICAL.
+  */
+ TROPICAL(Color.GREEN), /**
+  * Field UNDERGROUND.
+  */
+ UNDERGROUND(Color.BLACK);
 
         /**
          * Field color.
@@ -67,8 +116,8 @@ public class Planet {
         private final ImageIcon[] images = new ImageIcon[3];
         
         /**
-         * @return ImageIcon representation of environment.
-         */
+        
+         * @return ImageIcon representation of environment. */
         private ImageIcon getRandomImage(){
         	return images[RAND.nextInt(images.length)];
         }
@@ -91,18 +140,43 @@ public class Planet {
         /**
          * Method getColor.
          * 
-         * @return Color.
-         */
+        
+         * @return Color. */
         public Color getColor() {
             return color;
         }
     }
 
     /**
+     * @author Glenn
      */
     public static enum TechLevel {
-        PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), RENAISSANCE(3), 
-            EARLY_INDUSTRIAL(4), INDUSTRIAL(5), POST_INDUSTRIAL(6), HI_TECH(7);
+        /**
+         * Field PRE_AGRICULTURAL.
+         */
+        PRE_AGRICULTURAL(0), /**
+  * Field AGRICULTURAL.
+  */
+ AGRICULTURAL(1), /**
+  * Field MEDIEVAL.
+  */
+ MEDIEVAL(2), /**
+  * Field RENAISSANCE.
+  */
+ RENAISSANCE(3), 
+            /**
+             * Field EARLY_INDUSTRIAL.
+             */
+            EARLY_INDUSTRIAL(4), /**
+  * Field INDUSTRIAL.
+  */
+ INDUSTRIAL(5), /**
+  * Field POST_INDUSTRIAL.
+  */
+ POST_INDUSTRIAL(6), /**
+  * Field HI_TECH.
+  */
+ HI_TECH(7);
 
         /**
          * Field LevelInt of TechLevel.
@@ -121,8 +195,8 @@ public class Planet {
         /**
          * Get the levelInt of a TechLevel.
          * 
-         * @return levelInt.
-         */
+        
+         * @return levelInt. */
         public int getTechLevel() {
             return levelInt;
         }
@@ -154,7 +228,10 @@ public class Planet {
      */
     private static final ArrayList<Integer> NAMES_USED = new ArrayList<Integer>();
     
-    private static final ArrayList<Rectangle> LOCATIONS_USED = new ArrayList<Rectangle>();
+    /**
+     * Field LOCATIONS_USED.
+     */
+    private static final List<Rectangle> LOCATIONS_USED = new ArrayList<Rectangle>();
 
     /**
      * Field RAND.
@@ -174,7 +251,7 @@ public class Planet {
     /**
      * Field icon
      */
-    private ImageIcon icon;
+    private final ImageIcon icon;
 
     /**
      * Field market.
@@ -213,7 +290,8 @@ public class Planet {
             }
             
             if (!added) {
-                location = new Point(RAND.nextInt(galaxyWidth), RAND.nextInt(galaxyHeight));
+                location = new Point(RAND.nextInt(galaxyWidth), 
+                        RAND.nextInt(galaxyHeight));
             }
         }
         
@@ -242,8 +320,8 @@ public class Planet {
     /**
      * Method getX.
      * 
-     * @return int X value of planet.
-     */
+    
+     * @return int X value of planet. */
     public int getX() {
         return location.x;
     }
@@ -251,22 +329,22 @@ public class Planet {
     /**
      * Method getY.
      * 
-     * @return int Y value of planet.
-     */
+    
+     * @return int Y value of planet. */
     public int getY() {
         return location.y;
     }
 
     /**
-     * @return The planet's environment type
-     */
+    
+     * @return The planet's environment type */
     public Environment getEnvironment() {
         return this.environment;
     }
 
     /**
-     * @return The planet's tech level
-     */
+    
+     * @return The planet's tech level */
     public TechLevel getTechLevel() {
         return this.techLevel;
     }
@@ -312,9 +390,9 @@ public class Planet {
     }
 
     /**
+    
      * @return A short descriptor of any recent planetary events that affect the
-     *         market
-     */
+     *         market */
     public String eventMessage() {
         /*
          * TODO - Create a string-generator. More importantly, create a list
@@ -329,12 +407,20 @@ public class Planet {
     /**
      * Method toString.
      * 
-     * @return String
-     */
+    
+     * @return String */
     public String toString() {
         return name;
     }
 
+    /**
+     * Draw the small version of the planet.
+     * 
+     * @param g Graphics
+     * @param panel GamePanel
+     * @param width
+     * @param height
+     */
     public void drawMini(Graphics g, GamePanel panel, int width, int height) {
         g.setColor(environment.getColor());
         g.fillOval(width - Galaxy.HALF_GALAXY_WIDTH + (location.x - 2), height
@@ -365,35 +451,60 @@ public class Planet {
     /**
      * Get the planetMarket of this planet.
      * 
-     * @return planetMarket for this planet.
-     */
+    
+     * @return planetMarket for this planet. */
     public PlanetMarket getMarket() {
         return market;
     }
 
+    /**
+     * Set X.
+     * @param x
+     */
     public void setX(int x) {
         location.x = x;
     }
 
+    /**
+     * Set Y.
+     * @param y
+     */
     public void setY(int y) {
         location.y = y;
     }
 
+    /**
+     * Set environment.
+     * @param env
+     */
     public void setEnvironment(String env) {
         environment = Environment.valueOf(env);
     }
 
-    public void setCivLevel(String civ) {
-        techLevel = TechLevel.valueOf(civ);
+    /**
+     * Set tech level
+     * @param tl
+     */
+    public void setTechLevel(String tl) {
+        techLevel = TechLevel.valueOf(tl);
     }
 
+    /**
+     * Set name.
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Check if the planet is clicked.
+     * @param p point
+    
+     * @return Clicked or not. */
     public boolean isClicked(Point p) {
-        int dx = p.x - ((location.x * 5) + 10);
-        int dy = p.y - ((location.y * 5) + 10);
+        final int dx = p.x - ((location.x * 5) + 10);
+        final int dy = p.y - ((location.y * 5) + 10);
         return dx * dx + dy * dy <= 100;
     }
     

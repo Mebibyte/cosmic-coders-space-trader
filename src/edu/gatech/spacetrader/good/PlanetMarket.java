@@ -24,7 +24,7 @@ public class PlanetMarket {
     /**
      * Field goods. Array of goods for PlanetMarket.
      */
-    private Good[] goods = new Good[NUM_GOODS];
+    private final Good[] goods = new Good[NUM_GOODS];
 
     /**
      * Constructor for PlanetMarket that sets all buy prices to base price.
@@ -58,8 +58,8 @@ public class PlanetMarket {
      * 
      * @param g
      *            Good.
-     * @return Price of specified good.
-     */
+    
+     * @return Price of specified good. */
     public int getBuyPrice(Good g) {
         return g.getBuyPrice();
     }
@@ -69,8 +69,8 @@ public class PlanetMarket {
      * 
      * @param g
      *            Good.
-     * @return Price of specified good.
-     */
+    
+     * @return Price of specified good. */
     public int getSellPrice(Good g) {
         return g.getSellPrice();
     }
@@ -93,8 +93,8 @@ public class PlanetMarket {
     /**
      * toString method for PlanetMarket required by CodePro.
      * 
-     * @return String representation of PlanetMarket.
-     */
+    
+     * @return String representation of PlanetMarket. */
     public String toString() {
         final StringBuffer ans = new StringBuffer("[");
         for (int i = 0; i < goods.length; i++) {
@@ -115,8 +115,8 @@ public class PlanetMarket {
     /**
      * Gets the good with the specific index.
      * @param i Index
-     * @return good
-     */
+    
+     * @return good */
     public Good getGood(int i) {
         return goods[i];
     }
@@ -124,8 +124,8 @@ public class PlanetMarket {
     /**
      * Returns the good clicked.
      * @param point
-     * @return The good clicked.
-     */
+    
+     * @return The good clicked. */
     public Good goodClicked(Point point) {
         for (Good g : goods) {
             if (g.isClicked(point)) {
