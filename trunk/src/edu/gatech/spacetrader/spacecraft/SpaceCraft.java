@@ -68,7 +68,7 @@ public abstract class SpaceCraft {
         int y = 350;
 
         for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 250); j += 50) {
+            for (int j = x; j < (x + 300); j += 60) {
                 this.storage[goodCount] = new Good(goodCount, this, j, i);
                 goodCount++;
             }

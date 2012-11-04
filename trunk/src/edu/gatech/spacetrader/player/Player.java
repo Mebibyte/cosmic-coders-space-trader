@@ -128,8 +128,8 @@ public class Player {
     
     /**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
     @Override
     public String toString(){
         return "Player " + name + " with " + credits + " credits, skills " 
