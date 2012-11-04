@@ -218,6 +218,18 @@ public abstract class SpaceCraft {
         }
         return false;
     }
+    
+    /**
+     * Method canAddFuel.
+     * @return boolean
+     */
+    public boolean canFillFuel() {
+        if (fuel < 100) {
+            fuel = 100;
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Method goodClicked.
