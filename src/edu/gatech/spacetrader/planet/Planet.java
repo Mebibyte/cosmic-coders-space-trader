@@ -49,61 +49,17 @@ public class Planet {
     /**
      */
     public static enum Event {
-        /**
-         * Field DROUGHT.
-         */
-        DROUGHT, /**
-  * Field COLD.
-  */
- COLD, /**
-  * Field CROPFAIL.
-  */
- CROPFAIL, /**
-  * Field WAR.
-  */
- WAR, /**
-  * Field BOREDOM.
-  */
- BOREDOM, /**
-  * Field PLAGUE.
-  */
- PLAGUE, /**
-  * Field LACKOFWORKERS.
-  */
- LACKOFWORKERS, /**
-  * Field NONE.
-  */
- NONE
+        DROUGHT, COLD, CROPFAIL, WAR, BOREDOM,
+        PLAGUE, LACKOFWORKERS, NONE
     }
 
     /**
      * @author Glenn
      */
     public static enum Environment {
-        /**
-         * Field DESERT.
-         */
-        DESERT(new Color(0xCD, 0x95, 0x0C)), /**
-  * Field WATER.
-  */
- WATER(Color.BLUE), /**
-  * Field JUNGLE.
-  */
- JUNGLE(
-                new Color(00, 0x64, 00)), /**
-  * Field ICE.
-  */
- ICE(new Color(0x36, 0xDB, 0xCA)), /**
-  * Field EARTHLIKE.
-  */
- EARTHLIKE(
-                Color.CYAN), /**
-  * Field TROPICAL.
-  */
- TROPICAL(Color.GREEN), /**
-  * Field UNDERGROUND.
-  */
- UNDERGROUND(Color.BLACK);
+        DESERT(new Color(0xCD, 0x95, 0x0C)), WATER(Color.BLUE), 
+        JUNGLE(new Color(00, 0x64, 00)), ICE(new Color(0x36, 0xDB, 0xCA)), 
+        EARTHLIKE(Color.CYAN), TROPICAL(Color.GREEN), UNDERGROUND(Color.BLACK);
 
         /**
          * Field color.
@@ -151,32 +107,9 @@ public class Planet {
      * @author Glenn
      */
     public static enum TechLevel {
-        /**
-         * Field PRE_AGRICULTURAL.
-         */
-        PRE_AGRICULTURAL(0), /**
-  * Field AGRICULTURAL.
-  */
- AGRICULTURAL(1), /**
-  * Field MEDIEVAL.
-  */
- MEDIEVAL(2), /**
-  * Field RENAISSANCE.
-  */
- RENAISSANCE(3), 
-            /**
-             * Field EARLY_INDUSTRIAL.
-             */
-            EARLY_INDUSTRIAL(4), /**
-  * Field INDUSTRIAL.
-  */
- INDUSTRIAL(5), /**
-  * Field POST_INDUSTRIAL.
-  */
- POST_INDUSTRIAL(6), /**
-  * Field HI_TECH.
-  */
- HI_TECH(7);
+        PRE_AGRICULTURAL(0), AGRICULTURAL(1), MEDIEVAL(2), 
+        RENAISSANCE(3), EARLY_INDUSTRIAL(4), INDUSTRIAL(5), 
+        POST_INDUSTRIAL(6), HI_TECH(7);
 
         /**
          * Field LevelInt of TechLevel.
@@ -195,10 +128,15 @@ public class Planet {
         /**
          * Get the levelInt of a TechLevel.
          * 
-        
-         * @return levelInt. */
+         * @return levelInt.
+         */
         public int getTechLevel() {
             return levelInt;
+        }
+        
+        @Override
+        public String toString(){
+            return Character.toUpperCase(name().charAt(0)) + name().substring(1).toLowerCase();
         }
     }
 
@@ -506,6 +444,11 @@ public class Planet {
         final int dx = p.x - ((location.x * 5) + 10);
         final int dy = p.y - ((location.y * 5) + 10);
         return dx * dx + dy * dy <= 100;
+    }
+
+    public void drawInfo(Graphics g, int x, int y) {
+        g.drawString("Name: " + name, x, y);
+        g.drawString("Tech Level: " + techLevel.toString(), x, y + 18);
     }
     
 }

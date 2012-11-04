@@ -31,41 +31,11 @@ public class Good {
     /**
      */
     public static enum GoodType {
-        /**
-         * Field WATER.
-         */
-        WATER(30, 0, 0, 0, 3, 4), /**
-  * Field FURS.
-  */
- FURS(250, 1, 0, 0, 10, 10), /**
-  * Field FOOD.
-  */
- FOOD(100, 2, 1,
-                0, 20, 10), /**
-  * Field ORE.
-  */
- ORE(350, 3, 2, 2, 20, 10), /**
-  * Field GAMES.
-  */
- GAMES(250, 4, 3, 1, -10,
-                5), /**
-  * Field FIREARMS.
-  */
- FIREARMS(1250, 5, 3, 1, -75, 100), /**
-  * Field MEDICINE.
-  */
- MEDICINE(650, 6, 4, 1,
-                -20, 10), /**
-  * Field MACHINES.
-  */
- MACHINES(900, 7, 4, 3, -30, 5), /**
-  * Field NARCOTICS.
-  */
- NARCOTICS(3500, 8, 5,
-                0, -125, 150), /**
-  * Field ROBOTS.
-  */
- ROBOTS(5000, 9, 6, 4, -150, 100);
+        WATER(30, 0, 0, 0, 3, 4), FURS(250, 1, 0, 0, 10, 10), 
+        FOOD(100, 2, 1, 0, 20, 10), ORE(350, 3, 2, 2, 20, 10), 
+        GAMES(250, 4, 3, 1, -10, 5), FIREARMS(1250, 5, 3, 1, -75, 100), 
+        MEDICINE(650, 6, 4, 1, -20, 10), MACHINES(900, 7, 4, 3, -30, 5), 
+        NARCOTICS(3500, 8, 5, 0, -125, 150), ROBOTS(5000, 9, 6, 4, -150, 100);
 
         /**
          * Field basePrice. Field index. Field MTLP. Field MTLU. Field IPL.
@@ -109,6 +79,11 @@ public class Good {
                 }
             }
             return null;
+        }
+        
+        @Override
+        public String toString(){
+            return Character.toUpperCase(name().charAt(0)) + name().substring(1).toLowerCase();
         }
     }
 
@@ -260,10 +235,8 @@ public class Good {
         final FontMetrics fm = g.getFontMetrics();
         final int height = fm.getHeight();
 
-        g.drawString(
-                type.toString().toLowerCase(),
-                x + (GOOD_BG.getIconWidth() / 2)
-                        - (fm.stringWidth(type.toString().toLowerCase()) / 2),
+        g.drawString(type.toString(),
+                x + (GOOD_BG.getIconWidth() / 2) - (fm.stringWidth(type.toString()) / 2),
                 y + height);
 
         g.drawString(quantity + "", x + (GOOD_BG.getIconWidth() / 2)

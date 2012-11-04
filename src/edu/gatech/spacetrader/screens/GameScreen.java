@@ -110,7 +110,6 @@ public class GameScreen extends Screen {
                 (sidebarWidth / 2) - (fm.stringWidth("Player Information") / 2),
                 y);
         player.drawInfo(g, panel, x, y);
-
         
         g.drawRect(fuelButton.x, fuelButton.y, fuelButton.width,
                 fuelButton.height);
@@ -124,12 +123,12 @@ public class GameScreen extends Screen {
                 fillFuelButton.x + ((fillFuelButton.width / 2) - (fm.stringWidth("Fill Fuel - " + (-1 * (player.getSpaceCraft().getFuel() - 100) * 5 / 10) + " cr") / 2)),
                 fillFuelButton.y + y);
         
-        
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
-
-        g.drawString(currentPlanet.toString(), x, (y * 11) + 120);
-        g.drawString(currentPlanet.getTechLevel().getTechLevel() + "", x,
-                (y * 12) + 120);
+        
+        g.drawString("Planet Information",
+                (sidebarWidth / 2) - (fm.stringWidth("Player Information") / 2),
+                y * 19);
+        currentPlanet.drawInfo(g, x, y * 20);
 
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);

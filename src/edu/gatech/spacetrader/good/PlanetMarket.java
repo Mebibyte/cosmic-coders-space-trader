@@ -37,7 +37,7 @@ public class PlanetMarket {
     public PlanetMarket(Planet planet, int x, int y) {
         int goodCount = 0;
         for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 250); j += 50) {
+            for (int j = x; j < (x + 300); j += 60) {
                 goods[goodCount] = new Good(goodCount, planet, j, i);
                 goodCount++;
             }
@@ -93,8 +93,8 @@ public class PlanetMarket {
     /**
      * toString method for PlanetMarket required by CodePro.
      * 
-    
-     * @return String representation of PlanetMarket. */
+     * @return String representation of PlanetMarket.
+     */
     public String toString() {
         final StringBuffer ans = new StringBuffer("[");
         for (int i = 0; i < goods.length; i++) {
