@@ -72,6 +72,8 @@ public class FlyScreen extends Screen {
      * Field rotation.
      */
     private double rotation = Math.toRadians(degrees);
+    
+    private Planet hoveredPlanet;
 
     /**
      * Constructor for FlyScreen.
@@ -177,9 +179,17 @@ public class FlyScreen extends Screen {
         final int sidebarWidth = SpaceTrader.WIDTH - sidebarLocation;
         final int midSidebar = sidebarLocation + (sidebarWidth / 2);
         final FontMetrics fm = g.getFontMetrics();
-        g.drawString("Current Planet Information: ", midSidebar - (fm.stringWidth("Current Planet Information: ") / 2), 18);
-        g.drawString("Name: ", sidebarLocation, 36);
+        final int fh = fm.getHeight();
+        g.drawString("Current Planet Information: ", midSidebar - (fm.stringWidth("Current Planet Information: ") / 2), fh);
+        g.drawString("Name: " + gameScreen.getCurrentPlanet().toString(), sidebarLocation, fh * 2);
+        g.drawString("Tech Level: " + gameScreen.getCurrentPlanet().getTechLevel().toString(), sidebarLocation, fh * 3);
         
+        g.drawString("Selected Planet: ", midSidebar - (fm.stringWidth("Selected Planet: ") / 2), fh * 5);
+        if (hoveredPlanet == null) {
+            g.drawString("No Planet Selected", midSidebar - (fm.stringWidth("No Planet Selected") / 2), fh * 6);
+            g.drawString("Hover over a planet to", midSidebar - (fm.stringWidth("Hover over a planet to") / 2), fh * 7);
+            g.drawString("view its information!", midSidebar - (fm.stringWidth("view its information!") / 2), fh * 8);
+        }
     }
 
     /**
@@ -215,11 +225,29 @@ public class FlyScreen extends Screen {
     /**
      * Method toString.
      * 
-     * 
      * @return String
      */
     @Override
     public String toString() {
         return "Fly screen";
+    }
+    
+    @Override
+    public void setHoverPoint(Point hoverPoint) {
+        super.setHoverPoint(hoverPoint);
+        boolean isPlanetHovered = false;
+        if (range.contains(hoverPoint)) {
+            for (Planet p : gameScreen.getGalaxy().getPlanets()) {
+                if (p.isIn(hoverPoint)) {
+                    hoveredPlanet = p;
+                    isPlanetHovered = true;
+                }
+            }
+            if (!isPlanetHovered) {
+                hoveredPlanet = null;
+            }
+        } else {
+            hoveredPlanet = null;
+        }
     }
 }
