@@ -17,7 +17,7 @@ import edu.gatech.spacetrader.main.GamePanel;
  * @author Glenn
  * @version $Revision: 1.0 $
  */
-public class SkillButton extends Button{
+public class SkillButton extends Button {
     /**
      * Field button.
      */

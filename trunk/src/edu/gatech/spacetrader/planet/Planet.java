@@ -134,9 +134,15 @@ public class Planet {
             return levelInt;
         }
         
+        /**
+         * String representation of good.
+         * 
+         * @return String.
+         */
         @Override
         public String toString(){
-            return Character.toUpperCase(name().charAt(0)) + name().substring(1).toLowerCase();
+            return Character.toUpperCase(name().charAt(0))
+                    + name().substring(1).toLowerCase();
         }
     }
 
@@ -446,6 +452,13 @@ public class Planet {
         return dx * dx + dy * dy <= 100;
     }
 
+    /**
+     * Draw info about planet.
+     * 
+     * @param g Graphics.
+     * @param x X position.
+     * @param y Y position.
+     */
     public void drawInfo(Graphics g, int x, int y) {
         g.drawString("Name: " + name, x, y);
         g.drawString("Tech Level: " + techLevel.toString(), x, y + 18);

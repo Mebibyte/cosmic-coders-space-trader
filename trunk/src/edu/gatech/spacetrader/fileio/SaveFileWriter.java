@@ -22,22 +22,27 @@ public class SaveFileWriter {
      * Field player.
      */
     private Player player;
+
     /**
      * Field galaxy.
      */
     private Galaxy galaxy;
+
     /**
      * Field currentPlanet.
      */
     private Planet currentPlanet;
+
     /**
      * Field fw.
      */
     private FileWriter fw;
+
     /**
      * Field buffer.
      */
     private BufferedWriter buffer;
+
     /**
      * Field output.
      */

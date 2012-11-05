@@ -23,16 +23,17 @@ public class SaveFileReader {
 	 * Field loadedGameScreen.
 	 */
 	private GameScreen loadedGameScreen;
+
 	/**
 	 * Field gameSave.
 	 */
 	private File gameSave;
+
 	/**
 	 * Field scan.
 	 */
 	private Scanner scan;
-	
-	
+
 	/**
 	 * Method readFile.
 	 * @param gameSave File
@@ -72,8 +73,7 @@ public class SaveFileReader {
 			Good scGood = new Good(index, sc, x, y);
 			sc.addToStorage(scGood);
 		}
-		
-		
+
 		//galaxy
 		Planet[] planets = new Planet[Galaxy.NUM_PLANETS];
 		for(int i = 0; i < planets.length; i++){

@@ -8,7 +8,6 @@ package edu.gatech.spacetrader.screens;
 
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.gui.TextFieldFrame;
-import edu.gatech.spacetrader.gui.SelectableButton;
 import edu.gatech.spacetrader.gui.SkillButton;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.player.Player;
@@ -39,7 +38,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field hard.
      */
-    private final SelectableButton easy, normal, hard;
+    private final BigButton easy, normal, hard;
     
     /**
      * Field unusedSkillPoint.
@@ -119,16 +118,7 @@ public class ConfigScreen extends Screen{
      * @author Glenn
      */
     public enum Difficulty {
-        /**
-         * Field EASY.
-         */
-        EASY("Easy"), /**
-  * Field NORMAL.
-  */
- NORMAL("Normal"), /**
-  * Field HARD.
-  */
- HARD("Hard");
+        EASY("Easy"), NORMAL("Normal"), HARD("Hard");
         
         /**
          * Field text.
@@ -181,9 +171,9 @@ public class ConfigScreen extends Screen{
 	    
 	    final int buttonSep = 200;
 	    
-	    easy = new SelectableButton("Easy", (width / 2) - buttonSep, height - 125, false);
-	    normal = new SelectableButton("Normal", width / 2, height - 125, true);
-	    hard = new SelectableButton("Hard", (width / 2) + buttonSep, height - 125, false);
+	    easy = new BigButton("Easy", (width / 2) - buttonSep, height - 125);
+	    normal = new BigButton("Normal", width / 2, height - 125, false, true);
+	    hard = new BigButton("Hard", (width / 2) + buttonSep, height - 125);
         
 		this.panel = panel;
 		this.width = width;
@@ -343,12 +333,15 @@ public class ConfigScreen extends Screen{
         super.setHoverPoint(p);
         editName.setHovered(p);
         startGame.setHovered(p);
+        easy.setHovered(p);
+        normal.setHovered(p);
+        hard.setHovered(p);
     }
     
     /**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
     @Override
     public String toString(){
         return "Skill Screen";
