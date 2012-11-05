@@ -203,21 +203,6 @@ public abstract class SpaceCraft {
     public int getFuel() {
         return fuel;
     }
-
-    /**
-     * Method canAddFuel.
-     * @return boolean
-     */
-    public boolean canAddFuel() {
-        if (fuel < 100) {
-            fuel += 10;
-            if (fuel > 100) {
-                fuel = 100;
-            }
-            return true;
-        }
-        return false;
-    }
     
     /**
      * Method canAddFuel.
@@ -272,7 +257,7 @@ public abstract class SpaceCraft {
      * @param y int
      */
     public void drawFuel(Graphics g, GamePanel panel, int x, int y) {
-        final int fuelWidth = 25;
+        final int fuelWidth = 25, halfFuelWidth = 25 / 2;
         g.setColor(Color.BLACK);
         g.fillRect(x, y, fuelWidth, -1 * (fuel - 100));
         g.setColor(Color.ORANGE);
@@ -288,9 +273,9 @@ public abstract class SpaceCraft {
             }
         }
 
-        g.drawString("F", (fuelWidth / 2) - (g.getFontMetrics().stringWidth("F") / 2),
+        g.drawString("F", halfFuelWidth - (g.getFontMetrics().stringWidth("F") / 2),
                 y + g.getFontMetrics().getHeight());
-        g.drawString("E", (fuelWidth / 2) - (g.getFontMetrics().stringWidth("E") / 2),
+        g.drawString("E", halfFuelWidth - (g.getFontMetrics().stringWidth("E") / 2),
                 y + 95);
     }
 

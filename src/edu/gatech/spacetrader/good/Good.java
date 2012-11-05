@@ -54,10 +54,7 @@ public class Good {
          * @param IPL
          * @param VAR
          */
-        private GoodType(int bPrice, int i, int MTLP, int MTLU, int IPL, int VAR) {// $codepro.audit.disable
-                                                                                   // largeNumberOfParameters,
-                                                                                   // localVariableNamingConvention,
-                                                                                   // methodParameterNamingConvention
+        private GoodType(int bPrice, int i, int MTLP, int MTLU, int IPL, int VAR) {// $codepro.audit.disable largeNumberOfParameters, localVariableNamingConvention, methodParameterNamingConvention
             this.bPrice = bPrice;
             this.i = i;
             this.MTLP = MTLP;
@@ -70,8 +67,8 @@ public class Good {
          * Get the type of a good.
          * 
          * @param index
-        
-         * @return GoodType */
+         * @return GoodType
+         */
         public static GoodType getGoodType(int index) {
             for (GoodType g : GoodType.values()) {
                 if (g.i == index) {
@@ -81,9 +78,15 @@ public class Good {
             return null;
         }
         
+        /**
+         * String representation of good.
+         * 
+         * @return String.
+         */
         @Override
         public String toString(){
-            return Character.toUpperCase(name().charAt(0)) + name().substring(1).toLowerCase();
+            return Character.toUpperCase(name().charAt(0))
+                    + name().substring(1).toLowerCase();
         }
     }
 

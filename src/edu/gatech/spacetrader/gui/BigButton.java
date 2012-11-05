@@ -19,7 +19,7 @@ import edu.gatech.spacetrader.main.GamePanel;
  * @since 1.0
  * @author Glenn
  */
-public class BigButton extends Button{
+public class BigButton extends Button {
 	/**
 	 * Field BUTTON.
 	 */
@@ -37,6 +37,13 @@ public class BigButton extends Button{
      */
     private static final ImageIcon BUTTONDISABLED = new ImageIcon(
            BigButton.class.getResource("/edu/gatech/spacetrader/res/buttonDisabled.png"));
+    
+    /**
+     * Field BUTTONSELECTED.
+     */
+    private static final ImageIcon BUTTONSELECTED = new ImageIcon(
+            BigButton.class.getResource(
+                    "/edu/gatech/spacetrader/res/buttonSelected.png"));
 	
 	/**
 	 * Field text.
@@ -75,7 +82,7 @@ public class BigButton extends Button{
 	/**
      * Field hovered.
      */
-	private boolean disabled, hovered;
+	private boolean disabled, hovered, selected;
 	
 	/**
 	 * Constructor for BigButton.
@@ -83,8 +90,8 @@ public class BigButton extends Button{
 	 * @param x int
 	 * @param y int
 	 */
-	public BigButton(String text, int x, int y){
-		this(text, x, y, false);
+	public BigButton(String text, int x, int y) {
+		this(text, x, y, false, false);
 	}
 	
 	/**
@@ -94,7 +101,19 @@ public class BigButton extends Button{
      * @param y int
      * @param disabled boolean
      */
-	public BigButton(String text, int x, int y, boolean disabled) {
+    public BigButton(String text, int x, int y, boolean disabled) {
+        this(text, x, y, disabled, false);
+    }
+	
+	/**
+     * Constructor for BigButton.
+     * @param text String
+     * @param x int
+     * @param y int
+     * @param disabled boolean
+     * @param selected boolean
+     */
+	public BigButton(String text, int x, int y, boolean disabled, boolean selected) {
 	    this.text = text;
         buttonWidth = BUTTON.getIconWidth();
         buttonHeight = BUTTON.getIconHeight();
@@ -102,6 +121,7 @@ public class BigButton extends Button{
         this.y = y - (buttonHeight >> 1);
         bounds = new Rectangle(this.x, this.y, buttonWidth, buttonHeight);
         this.disabled = disabled;
+        this.selected = selected;
 	}
 	
 	/**
@@ -115,7 +135,10 @@ public class BigButton extends Button{
 		if (disabled) {
 		    BUTTONDISABLED.paintIcon(panel, g, x, y);
 		    g.setColor(Color.white);
-		} else if (hovered) {
+		} else if (selected) {
+		    BUTTONSELECTED.paintIcon(panel, g, x, y);
+            g.setColor(Color.white);
+        } else if (hovered) {
 		    BUTTONHOVERED.paintIcon(panel, g, x, y);
 		    g.setColor(Color.white);
 		} else {
@@ -134,8 +157,8 @@ public class BigButton extends Button{
 	/**
 	 * Method isClicked.
 	 * @param point Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public boolean isClicked(Point point){
 		return (point.x >= x && point.x <= x + buttonWidth) && 
 				(point.y >= y && point.y <= y + buttonHeight) && !disabled;
@@ -144,8 +167,8 @@ public class BigButton extends Button{
 	/**
 	 * Method isIn.
 	 * @param p Point
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public boolean isIn(Point p){
 	    if (p == null) return false;
 		return bounds.contains(p);
@@ -153,16 +176,16 @@ public class BigButton extends Button{
 	
 	/**
 	 * Method getHeight.
-	
-	 * @return int */
+	 * @return int
+	 */
 	public int getHeight(){
 		return buttonHeight;
 	}
 	
 	/**
 	 * Method getBounds.
-	
-	 * @return Rectangle */
+	 * @return Rectangle 
+	 */
 	public Rectangle getBounds(){
 	    return bounds;
 	}
@@ -177,8 +200,8 @@ public class BigButton extends Button{
 	
 	/**
      * Method toString.
-    
-     * @return String */
+     * @return String
+     */
 	public String toString(){
 	    return "Button with x = " + x + " and y = " + y;
 	}
@@ -192,12 +215,28 @@ public class BigButton extends Button{
             hovered = true;
         } else hovered = false;
     }
+    
+    /**
+     * Method isSelected.
+     * @return boolean
+     */
+    public boolean isSelected(){
+        return selected;
+    }
+    
+    /**
+     * Method setSelected.
+     * @param selected boolean.
+     */
+    public void setSelected(boolean selected){
+        this.selected = selected;
+    }
 
     /**
      * Method getWidth.
      * Get's the width of the button image.
-    
-     * @return int width. */
+     * @return int width.
+     */
     public static int getWidth() {
         return BUTTON.getIconWidth();
     }
