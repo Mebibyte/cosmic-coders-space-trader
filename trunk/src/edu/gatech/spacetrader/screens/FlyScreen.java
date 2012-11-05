@@ -6,6 +6,7 @@ package edu.gatech.spacetrader.screens;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -53,9 +54,9 @@ public class FlyScreen extends Screen {
     private final Ellipse2D.Double range;
 
     /**
-     * Field img. Fog of war cloud.
+     * Field fog. Fog of war cloud.
      */
-    private final BufferedImage img;
+    private final BufferedImage fog;
 
     /**
      * Field ship. Spaceship.
@@ -108,12 +109,12 @@ public class FlyScreen extends Screen {
         range = new Ellipse2D.Double(ovalX - ovalRadius, ovalY - ovalRadius,
                 2 * ovalRadius, 2 * ovalRadius);
 
-        img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2D = img.createGraphics();
+        fog = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2D = fog.createGraphics();
 
         /* Draw the grey rectangle */
         g2D.setColor(new Color(180, 180, 180, 200));
-        g2D.fillRect(0, 0, width, height);
+        g2D.fillRect(0, 0, Galaxy.GALAXY_WIDTH * 5 + 35, height);
 
         /* Enable Anti-Alias */
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -154,13 +155,11 @@ public class FlyScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+        g.fillRect(0, 0, Galaxy.GALAXY_WIDTH * 5 + 45, SpaceTrader.HEIGHT);
         gameScreen.getGalaxy().draw(g, panel, width, height);
         g.fillOval((Galaxy.GALAXY_WIDTH * 5) - 5,
                 (Galaxy.GALAXY_HEIGHT * 5) - 5, 10, 10);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.draw(range);
-        g.drawImage(img, 0, 0, null); // $codepro.audit.disable
+        g.drawImage(fog, 0, 0, null); // $codepro.audit.disable
                                       // com.instantiations.assist.eclipse.analysis.unusedReturnValue
 
         // Rotation information
@@ -173,6 +172,14 @@ public class FlyScreen extends Screen {
 
         // Drawing the rotated image at the required drawing locations
         g.drawImage(op.filter(resizedImage, null), shipX, shipY, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+        
+        final int sidebarLocation = (Galaxy.GALAXY_WIDTH * 5 + 45);
+        final int sidebarWidth = SpaceTrader.WIDTH - sidebarLocation;
+        final int midSidebar = sidebarLocation + (sidebarWidth / 2);
+        final FontMetrics fm = g.getFontMetrics();
+        g.drawString("Current Planet Information: ", midSidebar - (fm.stringWidth("Current Planet Information: ") / 2), 18);
+        g.drawString("Name: ", sidebarLocation, 36);
+        
     }
 
     /**
