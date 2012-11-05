@@ -463,5 +463,11 @@ public class Planet {
         g.drawString("Name: " + name, x, y);
         g.drawString("Tech Level: " + techLevel.toString(), x, y + 18);
     }
+
+    public boolean isIn(Point p) {
+        final int dx = p.x - ((location.x * 5) + 10);
+        final int dy = p.y - ((location.y * 5) + 10);
+        return dx * dx + dy * dy <= 100;
+    }
     
 }
