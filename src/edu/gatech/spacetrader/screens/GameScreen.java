@@ -65,7 +65,7 @@ public class GameScreen extends Screen {
      */
     private static final ImageIcon BG = new ImageIcon(
             GameScreen.class
-                    .getResource("/edu/gatech/spacetrader/res/market.jpg"));
+                    .getResource("/edu/gatech/spacetrader/res/market.png"));
 
     /**
      * Constructor for GameScreen.
@@ -98,9 +98,36 @@ public class GameScreen extends Screen {
      */
     @Override
     public void draw(Graphics g) {
+        final FontMetrics fm = g.getFontMetrics();
+
+        galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
+                - Galaxy.HALF_GALAXY_HEIGHT);
+        
+        g.setColor(Color.GRAY);
+        g.drawOval(
+                currentPlanet.getX()
+                        - (player.getSpaceCraft().getSpeed() + player
+                                .getSkillsArray()[0] / 2) * 5,
+                currentPlanet.getY()
+                        + height
+                        - (2 * Galaxy.HALF_GALAXY_HEIGHT)
+                        - (player.getSpaceCraft().getSpeed() + player
+                                .getSkillsArray()[0] / 2) * 5,
+                (player.getSpaceCraft().getSpeed()
+                        + player.getSkillsArray()[0] / 2) * 10,
+                (player.getSpaceCraft().getSpeed()
+                        + player.getSkillsArray()[0] / 2) * 10);
+        
+        g.setColor(Color.WHITE);
+        g.fillRect(0, height - Galaxy.GALAXY_HEIGHT - 40, 164, 32);
+        
+        g.setColor(Color.BLACK);
+        g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
+                - fm.stringWidth("Click Minimap to fly!") / 2, height
+                - (Galaxy.GALAXY_HEIGHT + 10));
+        
         BG.paintIcon(panel, g, 0, 0);
 
-        final FontMetrics fm = g.getFontMetrics();
         final int x = 0;
         final int y = fm.getHeight();
         final int halfSidebarWidth = 82;
@@ -132,29 +159,6 @@ public class GameScreen extends Screen {
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
                 y * 19);
         currentPlanet.drawInfo(g, x, y * 20);
-
-        galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
-                - Galaxy.HALF_GALAXY_HEIGHT);
-
-        g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
-                - fm.stringWidth("Click Minimap to fly!") / 2, height
-                - (Galaxy.GALAXY_HEIGHT + 10));
-
-        g.setColor(Color.GRAY);
-        g.drawOval(
-                currentPlanet.getX()
-                        - (player.getSpaceCraft().getSpeed() + player
-                                .getSkillsArray()[0] / 2) * 5,
-                currentPlanet.getY()
-                        + height
-                        - (2 * Galaxy.HALF_GALAXY_HEIGHT)
-                        - (player.getSpaceCraft().getSpeed() + player
-                                .getSkillsArray()[0] / 2) * 5,
-                (player.getSpaceCraft().getSpeed()
-                        + player.getSkillsArray()[0] / 2) * 10,
-                (player.getSpaceCraft().getSpeed()
-                        + player.getSkillsArray()[0] / 2) * 10);
-        g.setColor(Color.BLACK);
 
         currentPlanet.getMarket().draw(g, panel);
         player.getSpaceCraft().drawStorage(g, panel);
