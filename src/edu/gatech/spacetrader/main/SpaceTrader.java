@@ -28,7 +28,7 @@ public class SpaceTrader extends JFrame {
     /**
      * Field GamePanel.
      */
-    private final GamePanel gamePanel;
+    public static final GamePanel GAME_PANEL = new GamePanel(WIDTH, HEIGHT);
 	
 	/**
 	 * Field TIME_BETWEEN_UPDATES.
@@ -80,9 +80,8 @@ public class SpaceTrader extends JFrame {
 		super("Space Trader");
 		setResizable(false);
 		
-		gamePanel = new GamePanel(WIDTH, HEIGHT);
-        gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        add(gamePanel);
+        GAME_PANEL.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        add(GAME_PANEL);
 	    
         pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,7 +155,7 @@ public class SpaceTrader extends JFrame {
 	 * Calls the repaint method of the GamePanel.
 	 */
 	private void draw(){
-		gamePanel.repaint();
+		GAME_PANEL.repaint();
 		frameCount++;
 	}
 	
@@ -165,7 +164,7 @@ public class SpaceTrader extends JFrame {
      * Calls the repaint method of the GamePanel.
      */
     private void tick(){
-        gamePanel.tick();
+        GAME_PANEL.tick();
     }
 	
 	/**

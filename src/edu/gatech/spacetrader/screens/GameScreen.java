@@ -158,6 +158,7 @@ public class GameScreen extends Screen {
 
         currentPlanet.getMarket().draw(g, panel);
         player.getSpaceCraft().drawStorage(g, panel);
+        super.draw(g);
     }
 
     /**
@@ -196,11 +197,11 @@ public class GameScreen extends Screen {
                 }
             }
         }
+        super.checkForClick(point);
     }
 
     /**
      * Method toString.
-     * 
      * 
      * @return String
      */

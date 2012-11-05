@@ -4,9 +4,13 @@
 
 package edu.gatech.spacetrader.screens;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+
+import edu.gatech.spacetrader.gui.BigButton;
+import edu.gatech.spacetrader.main.SpaceTrader;
 
 /**
  * @author Glenn
@@ -18,17 +22,45 @@ public abstract class Screen {
      */
     private Point hoverPoint;
     
+    /**
+     * Field paused.
+     */
+    private boolean paused;
+    
+    /**
+     * Field saveGame and quitGame buttons.
+     */
+    private BigButton saveGame = new BigButton("Save Game", (SpaceTrader.WIDTH / 2), SpaceTrader.HEIGHT / 2), 
+            quitGame = new BigButton("Quit Game", (SpaceTrader.WIDTH / 2), (SpaceTrader.HEIGHT / 2) + saveGame.getHeight());
+    
 	/**
 	 * Method draw.
 	 * @param g Graphics
 	 */
-	public abstract void draw(Graphics g);
+	public void draw(Graphics g) {
+	    if (paused) {
+	        g.setColor(new Color(0,0,0,150));
+	        g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+	        g.setColor(Color.WHITE);
+	        g.drawString("PAUSED", (SpaceTrader.WIDTH / 2) - (g.getFontMetrics().stringWidth("PAUSED") / 2), (SpaceTrader.HEIGHT / 2) - saveGame.getHeight());
+	        saveGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+	        quitGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+	    }
+	}
 	
 	/**
 	 * Method checkForClick.
 	 * @param point Point
 	 */
-	public abstract void checkForClick(Point point);
+	public void checkForClick(Point point) {
+	    if (paused) {
+	        if (saveGame.isClicked(point)) {
+	            System.out.println("Save Game");
+	        } else if (quitGame.isClicked(point)) {
+	            System.exit(0);
+	        }
+	    }
+	}
 	
 	/**
 	 * Method keyTyped.
@@ -36,7 +68,7 @@ public abstract class Screen {
 	 */
 	public void keyTyped(KeyEvent e) {
 	    if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-	        System.out.println("Pause");
+	        paused = !paused;
 	    }
 	}
 	
@@ -54,6 +86,8 @@ public abstract class Screen {
      */
     public void setHoverPoint(Point hoverPoint) {
         this.hoverPoint = hoverPoint;
+        saveGame.setHovered(hoverPoint);
+        quitGame.setHovered(hoverPoint);
     }
 
     /**
