@@ -11,6 +11,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
@@ -58,7 +59,7 @@ public class GameScreen extends Screen {
     /**
      * Field fuel button
      */
-    private Rectangle fillFuelButton;
+    private final Rectangle fillFuelButton;
 
     /**
      * Field BG
@@ -174,14 +175,18 @@ public class GameScreen extends Screen {
     @Override
     public void checkForClick(Point point) {
         if (galaxy.isClicked(point)) {
-            panel.setActiveScreen(new FlyScreen(this, panel, width, height));
+            try {
+                panel.setActiveScreen(new FlyScreen(this, panel, width, height));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if (fillFuelButton.contains(point)) {
-            int spent = (player.getSpaceCraft().getFuel() - 100) * 5 / 10;
+            final int spent = (player.getSpaceCraft().getFuel() - 100) * 5 / 10;
             if (player.getSpaceCraft().canFillFuel()) {
                 player.useCredits(spent);
             }
         } else {
-            Good bought = currentPlanet.getMarket().goodClicked(point);
+            final Good bought = currentPlanet.getMarket().goodClicked(point);
             if (bought != null) {
                 if (player.canSpend(bought.getBuyPrice())
                         && player.getSpaceCraft().canAddToStorage()) {
@@ -191,7 +196,7 @@ public class GameScreen extends Screen {
                 }
             }
 
-            Good sold = player.getSpaceCraft().goodClicked(point);
+            final Good sold = player.getSpaceCraft().goodClicked(point);
             if (sold != null) {
                 if (sold.getSellPrice() > 0
                         && player.getSpaceCraft().canSellGood(sold)) {
@@ -221,11 +226,11 @@ public class GameScreen extends Screen {
      *            Planet
      */
     public void changePlanet(Planet planet) {
-        int xSquared = (planet.getX() - currentPlanet.getX())
+        final int xSquared = (planet.getX() - currentPlanet.getX())
                 * (planet.getX() - currentPlanet.getX());
-        int ySquared = (planet.getY() - currentPlanet.getY())
+        final int ySquared = (planet.getY() - currentPlanet.getY())
                 * (planet.getY() - currentPlanet.getY());
-        int distance = (int) Math.sqrt(xSquared + ySquared); // $codepro.audit.disable lossOfPrecisionInCast
+        final int distance = (int) Math.sqrt(xSquared + ySquared); // $codepro.audit.disable lossOfPrecisionInCast
         currentPlanet = planet;
         galaxy.advanceTime();
         player.getSpaceCraft().updatePrices(planet.getMarket());
@@ -257,6 +262,9 @@ public class GameScreen extends Screen {
     	this.currentPlanet = currentPlanet;
     }
     
+    /**
+     * @param galaxy
+     */
     public void setGalaxy(Galaxy galaxy){
     	this.galaxy = galaxy;
     }

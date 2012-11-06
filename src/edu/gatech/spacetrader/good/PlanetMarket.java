@@ -1,3 +1,4 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2, numericLiterals
 /* Comment
  * 
  */
@@ -36,8 +37,10 @@ public class PlanetMarket {
      */
     public PlanetMarket(Planet planet, int x, int y) {
         int goodCount = 0;
-        for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 300); j += 60) {
+        final int width = x + (Good.GOOD_BG.getIconWidth() * 5);
+        final int height = y + (Good.GOOD_BG.getIconHeight() * 2);
+        for (int i = y; i < height; i += Good.GOOD_BG.getIconHeight()) {
+            for (int j = x; j < width; j += Good.GOOD_BG.getIconWidth()) {
                 goods[goodCount] = new Good(goodCount, planet, j, i);
                 goodCount++;
             }

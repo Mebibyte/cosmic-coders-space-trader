@@ -164,16 +164,20 @@ public class Player {
      * @param g Graphics
      * @param panel GamePanel
      * @param x int
-     * @param y int
+     * @param dy int
      */
-    public void drawInfo(Graphics g, GamePanel panel, int x, int y) {
-        g.drawString("Name: " + name, x, y * 2);
-        g.drawString("Difficulty: " + difficulty.toString(), x, y * 3);
-        g.drawString("Pilot: " + skills[0], x, y * 4);
-        g.drawString("Fighter: " + skills[1], x, y * 5);
-        g.drawString("Trader: " + skills[2], x, y * 6);
-        g.drawString("Engineer: " + skills[3], x, y * 7);
-        g.drawString(credits + " credits", x, y * 8);
-        g.drawString(spaceCraft.toString(), x, y * 9);
+    public void drawInfo(Graphics g, GamePanel panel, int x, int dy) {
+        int y = dy + dy;
+        g.drawString("Name: " + name, x, y);
+        g.drawString("Difficulty: " + difficulty.toString(), x, y += dy);
+        
+        int skill = 0;
+        g.drawString("Pilot: " + skills[skill++], x, y += dy);
+        g.drawString("Fighter: " + skills[skill++], x, y += dy);
+        g.drawString("Trader: " + skills[skill++], x, y += dy);
+        g.drawString("Engineer: " + skills[skill], x, y += dy);
+        
+        g.drawString(credits + " credits", x, y += dy);
+        g.drawString("Spacecraft: " + spaceCraft.toString(), x, y += dy);
     }
 }

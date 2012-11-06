@@ -3,14 +3,16 @@
  */
 package edu.gatech.spacetrader.fileio;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import edu.gatech.spacetrader.screens.GameScreen;
+
+import edu.gatech.spacetrader.planet.Galaxy;
+import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.player.Player;
-import edu.gatech.spacetrader.planet.*;
+import edu.gatech.spacetrader.screens.GameScreen;
 
 /**
  * @author Patrick
@@ -71,8 +73,9 @@ public class SaveFileWriter {
         // begin writing
         output.write(player.getName() + "\n");
         int[] skills = player.getSkillsArray();
-        for (int i = 0; i < skills.length; i++)
+        for (int i = 0; i < skills.length; i++) {
             output.write(skills[i] + "\n");
+        }
         output.write(player.getCredits() + "\n");
         // TODO Finish writing player attributes
 
@@ -105,8 +108,13 @@ public class SaveFileWriter {
         output.write(currentPlanet.getY() + "\n");
         output.write(currentPlanet.getEnvironment().toString() + "\n");
         output.write(currentPlanet.getTechLevel().toString() + "\n");
-  
-        
     }
 
+    /**
+     * Method toString required by CodePro.
+     * @return String.
+     */
+    public String toString(){
+        return "Save file writer";
+    }
 }

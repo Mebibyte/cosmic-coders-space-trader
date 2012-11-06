@@ -1,3 +1,4 @@
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2, numericLiterals
 /* Comment
  * 
  */
@@ -16,7 +17,7 @@ import edu.gatech.spacetrader.main.SpaceTrader;
  * @author Glenn
  * @version $Revision: 1.0 $
  */
-public abstract class Screen {
+public class Screen {
     /**
      * Field hoverPoint.
      */
@@ -30,8 +31,10 @@ public abstract class Screen {
     /**
      * Field saveGame and quitGame buttons.
      */
-    private BigButton saveGame = new BigButton("Save Game", (SpaceTrader.WIDTH / 2), SpaceTrader.HEIGHT / 2), 
-            quitGame = new BigButton("Quit Game", (SpaceTrader.WIDTH / 2), (SpaceTrader.HEIGHT / 2) + saveGame.getHeight());
+    private final BigButton saveGame = new BigButton("Save Game", (SpaceTrader.WIDTH / 2),
+            SpaceTrader.HEIGHT / 2), 
+            quitGame = new BigButton("Quit Game", (SpaceTrader.WIDTH / 2),
+                    (SpaceTrader.HEIGHT / 2) + saveGame.getHeight());
     
 	/**
 	 * Method draw.
@@ -39,12 +42,16 @@ public abstract class Screen {
 	 */
 	public void draw(Graphics g) {
 	    if (paused) {
-	        g.setColor(new Color(0,0,0,150));
+	        g.setColor(new Color(0, 0, 0, 150));
 	        g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
 	        g.setColor(Color.WHITE);
-	        g.drawString("PAUSED", (SpaceTrader.WIDTH / 2) - (g.getFontMetrics().stringWidth("PAUSED") / 2), (SpaceTrader.HEIGHT / 2) - saveGame.getHeight());
-	        saveGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
-	        quitGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+	        g.drawString("PAUSED", (SpaceTrader.WIDTH / 2)
+	                - (g.getFontMetrics().stringWidth("PAUSED") / 2),
+	                (SpaceTrader.HEIGHT / 2) - saveGame.getHeight());
+	        saveGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
+	                SpaceTrader.HEIGHT);
+	        quitGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
+	                SpaceTrader.HEIGHT);
 	    }
 	}
 	
@@ -74,8 +81,8 @@ public abstract class Screen {
 	
     /**
      * Method getHoverPoint.
-    
-     * @return Point */
+     * @return Point
+     */
     public Point getHoverPoint() {
         return hoverPoint;
     }
@@ -96,5 +103,13 @@ public abstract class Screen {
      */
     public void tick() { // $codepro.audit.disable emptyMethod
         
+    }
+    
+    /**
+     * String representation required by CodePro.
+     * @return String
+     */
+    public String toString() {
+        return "Screen";
     }
 }

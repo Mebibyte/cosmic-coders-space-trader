@@ -444,8 +444,8 @@ public class Planet {
     /**
      * Check if the planet is clicked.
      * @param p point
-    
-     * @return Clicked or not. */
+     * @return Clicked or not.
+     */
     public boolean isClicked(Point p) {
         final int dx = p.x - ((location.x * 5) + 10);
         final int dy = p.y - ((location.y * 5) + 10);
@@ -463,7 +463,12 @@ public class Planet {
         g.drawString("Name: " + name, x, y);
         g.drawString("Tech Level: " + techLevel.toString(), x, y + 18);
     }
-
+    
+    /**
+     * Check if the a point is within the planet.
+     * @param p point
+     * @return point within radius or not.
+     */
     public boolean isIn(Point p) {
         final int dx = p.x - ((location.x * 5) + 10);
         final int dy = p.y - ((location.y * 5) + 10);

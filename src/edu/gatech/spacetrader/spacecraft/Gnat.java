@@ -42,7 +42,7 @@ public class Gnat extends SpaceCraft {
     /**
      * Field GNAT_STORAGE (Good array of size 10)
      */
-    private static Good[] GNAT_STORAGE = new Good[10];
+    private static final Good[] GNAT_STORAGE = new Good[10];
 
     /**
      * Field GNAT_NAME.

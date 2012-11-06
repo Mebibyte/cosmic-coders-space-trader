@@ -1,4 +1,4 @@
-// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2, numericLiterals
 /* Comment
  * 
  */
@@ -31,12 +31,17 @@ public abstract class SpaceCraft {
     /** 
 	 * 
 	 */
-    private Good[] storage;
+    private final Good[] storage;
 
     /**
 	 * 
 	 */
-    private int health, speed, defense, attack, maxCapacity, quantity, fuel;
+    private int health, quantity, fuel;
+    
+    /**
+     * 
+     */
+    private final int speed, defense, attack, maxCapacity, maxFuel;
 
     /**
      * We can eventually create pictures of each of the ships for when the
@@ -62,13 +67,16 @@ public abstract class SpaceCraft {
         this.storage = storage.clone();
         this.maxCapacity = maxCapacity;
         fuel = 100;
+        maxFuel = 100;
 
         int goodCount = 0;
-        int x = 700;
-        int y = 350;
+        final int x = 700;
+        final int y = 350;
+        final int width = x + Good.GOOD_BG.getIconWidth() * 5;
+        final int height = y + Good.GOOD_BG.getIconHeight() * 2;
 
-        for (int i = y; i < (y + 150); i += 75) {
-            for (int j = x; j < (x + 300); j += 60) {
+        for (int i = y; i < height; i += Good.GOOD_BG.getIconHeight()) {
+            for (int j = x; j < width; j += Good.GOOD_BG.getIconWidth()) {
                 this.storage[goodCount] = new Good(goodCount, this, j, i);
                 goodCount++;
             }
@@ -259,13 +267,13 @@ public abstract class SpaceCraft {
     public void drawFuel(Graphics g, GamePanel panel, int x, int y) {
         final int fuelWidth = 25, halfFuelWidth = 25 / 2;
         g.setColor(Color.BLACK);
-        g.fillRect(x, y, fuelWidth, -1 * (fuel - 100));
+        g.fillRect(x, y, fuelWidth, -1 * (fuel - maxFuel));
         g.setColor(Color.ORANGE);
-        g.fillRect(x, y + -1 * (fuel - 100), fuelWidth, 100 - -1 * (fuel - 100));
+        g.fillRect(x, y + -1 * (fuel - maxFuel), fuelWidth, 100 - -1 * (fuel - maxFuel));
         g.setColor(Color.BLACK);
-        g.drawRect(x, y, fuelWidth, 100);
+        g.drawRect(x, y, fuelWidth, maxFuel);
 
-        for (int i = y; i < (y + 100); i += 5) {
+        for (int i = y; i < (y + maxFuel); i += 5) {
             if (i % 10 == 0) {
                 g.drawLine(x, i, x + 5, i);
             } else {
