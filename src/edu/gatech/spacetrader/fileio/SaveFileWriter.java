@@ -86,6 +86,7 @@ public class SaveFileWriter {
             output.write(player.getSpaceCraft().getStorage()[i].getY() + "\n");
 
         }
+        output.write(player.getDifficulty().toString() + "\n");
 
         // Write galaxy here
         Planet[] planets = galaxy.getPlanets();
@@ -98,7 +99,14 @@ public class SaveFileWriter {
         }
 
         // do current planet specifics here
-
+        
+        output.write(currentPlanet.toString() + "\n");
+        output.write(currentPlanet.getX() + "\n");
+        output.write(currentPlanet.getY() + "\n");
+        output.write(currentPlanet.getEnvironment().toString() + "\n");
+        output.write(currentPlanet.getTechLevel().toString() + "\n");
+  
+        
     }
 
 }

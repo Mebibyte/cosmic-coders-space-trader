@@ -32,7 +32,7 @@ public class Player {
     /**
      * Field difficulty.
      */
-    private final ConfigScreen.Difficulty difficulty;
+    private ConfigScreen.Difficulty difficulty;
     
     /**
      * Field credits.
@@ -111,6 +111,13 @@ public class Player {
     }
     
     /**
+     * @param spaceCraft
+     */
+    public void setSpaceCraft(SpaceCraft spaceCraft){
+    	this.spaceCraft = spaceCraft;
+    }
+    
+    /**
      * Method useCredits.
      * @param amount int
      */
@@ -145,6 +152,13 @@ public class Player {
         return credits > buyPrice;
     }
 
+    /**
+     * @param difficulty
+     */
+    public void setDifficulty(ConfigScreen.Difficulty difficulty){
+    	this.difficulty = difficulty;
+    }
+    
     /**
      * Method drawInfo.
      * @param g Graphics
