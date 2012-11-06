@@ -189,6 +189,9 @@ public class FlyScreen extends Screen {
             g.drawString("No Planet Selected", midSidebar - (fm.stringWidth("No Planet Selected") / 2), fh * 6);
             g.drawString("Hover over a planet to", midSidebar - (fm.stringWidth("Hover over a planet to") / 2), fh * 7);
             g.drawString("view its information!", midSidebar - (fm.stringWidth("view its information!") / 2), fh * 8);
+        } else {
+            g.drawString("Name: " + hoveredPlanet.toString(), sidebarLocation, fh * 6);
+            g.drawString("Tech Level: " + hoveredPlanet.getTechLevel().toString(), sidebarLocation, fh * 7);
         }
     }
 
