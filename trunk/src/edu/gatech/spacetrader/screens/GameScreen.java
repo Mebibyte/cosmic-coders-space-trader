@@ -48,7 +48,7 @@ public class GameScreen extends Screen {
     /**
      * Field galaxy.
      */
-    private final Galaxy galaxy;
+    private Galaxy galaxy;
 
     /**
      * Field currentPlanet.
@@ -250,6 +250,17 @@ public class GameScreen extends Screen {
         return galaxy;
     }
 
+    /**
+     * @param currentPlanet
+     */
+    public void setCurrentPlanet(Planet currentPlanet){
+    	this.currentPlanet = currentPlanet;
+    }
+    
+    public void setGalaxy(Galaxy galaxy){
+    	this.galaxy = galaxy;
+    }
+    
     /**
      * Method getCurrentPlanet.
      * 

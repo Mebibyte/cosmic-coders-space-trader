@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import edu.gatech.spacetrader.good.Good;
+import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.main.SpaceTrader;
 import edu.gatech.spacetrader.player.Player;
 import edu.gatech.spacetrader.planet.*;
+import edu.gatech.spacetrader.screens.ConfigScreen;
 import edu.gatech.spacetrader.screens.GameScreen;
 import edu.gatech.spacetrader.spacecraft.*;
 
@@ -22,8 +24,17 @@ public class SaveFileReader {
 	/**
 	 * Field loadedGameScreen.
 	 */
-	private GameScreen loadedGameScreen;
+	private GameScreen gameScreen;
 
+	/**
+	 * 
+	 */
+	private Player player;
+	
+	private GamePanel gamePanel;
+	
+	private Galaxy galaxy;
+	
 	/**
 	 * Field gameSave.
 	 */
@@ -44,8 +55,11 @@ public class SaveFileReader {
 			scan = new Scanner(this.gameSave);
 		}
 		catch (IOException e){
-			
+			//TODO exception handling
 		}
+		
+
+		
 		//method instance data
 		String playerName = scan.nextLine();
 		int[] skills = new int[4];
@@ -53,6 +67,10 @@ public class SaveFileReader {
 			skills[i] = Integer.parseInt(scan.nextLine());
 		int credits = Integer.parseInt(scan.nextLine());
 		//TODO finish player in FileWriter, pick up  from there
+		ConfigScreen.Difficulty difficulty = ConfigScreen.Difficulty.valueOf(scan.nextLine());
+		
+		player = new Player(playerName, skills, difficulty);
+		
 		
 		SpaceCraft sc;
 		String scName = scan.nextLine();
@@ -73,6 +91,8 @@ public class SaveFileReader {
 			Good scGood = new Good(index, sc, x, y);
 			sc.addToStorage(scGood);
 		}
+		
+		player.setSpaceCraft(sc);
 
 		//galaxy
 		Planet[] planets = new Planet[Galaxy.NUM_PLANETS];
@@ -82,11 +102,32 @@ public class SaveFileReader {
 			planets[i].setName(scan.nextLine());
 			planets[i].setX(Integer.parseInt(scan.nextLine()));
 			planets[i].setY(Integer.parseInt(scan.nextLine()));
+			planets[i].setEnvironment(scan.nextLine());
 			planets[i].setTechLevel(scan.nextLine());
 		}
 		
-		//current planet
+		galaxy = new Galaxy(SpaceTrader.HEIGHT, SpaceTrader.WIDTH);
+		galaxy.setPlanets(planets);
 		
+		//current planet
+		Planet currentPlanet = new Planet(SpaceTrader.WIDTH, Galaxy.GALAXY_WIDTH, Galaxy.GALAXY_HEIGHT);
+		currentPlanet.setName(scan.nextLine());
+		currentPlanet.setX(Integer.parseInt(scan.nextLine()));
+		currentPlanet.setY(Integer.parseInt(scan.nextLine()));
+		currentPlanet.setEnvironment(scan.nextLine());
+		currentPlanet.setTechLevel(scan.nextLine());
+		
+		gameScreen.setCurrentPlanet(currentPlanet);
+		
+		//As of now, I'm not having the prices of the market stay as persistant quantities.
+		//Time will advance as if the player has moved when a game is loaded.
+		
+		
+		gamePanel = new GamePanel(SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+		
+		gameScreen = new GameScreen(player, gamePanel, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+		
+		gameScreen.setGalaxy(galaxy);
 	}
 	
 	/**
@@ -94,7 +135,7 @@ public class SaveFileReader {
 	 * @return GameScreen
 	 */
 	public GameScreen getLoadedGameScreen(){
-		return loadedGameScreen;
+		return gameScreen;
 	}
 	
 	

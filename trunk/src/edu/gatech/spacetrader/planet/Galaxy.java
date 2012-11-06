@@ -44,7 +44,7 @@ public class Galaxy {
     /**
      * Field planets.
      */
-    private final Planet[] planets = new Planet[NUM_PLANETS];
+    private Planet[] planets = new Planet[NUM_PLANETS];
     
     /**
      * Field bounds.
@@ -73,6 +73,13 @@ public class Galaxy {
      * @return Planet */
     public Planet getStartingPlanet() {
         return planets[0];
+    }
+    
+    /**
+     * @param planets
+     */
+    public void setPlanets(Planet[] planets){
+    	this.planets = planets;
     }
     
     /**
