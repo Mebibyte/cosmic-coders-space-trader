@@ -41,8 +41,7 @@ public class Good {
          * Field basePrice. Field index. Field MTLP. Field MTLU. Field IPL.
          * Field VAR.
          */
-        private final int bPrice, i, MTLP, MTLU, IPL, VAR; // $codepro.audit.disable
-                                                           // instanceFieldNamingConvention
+        private final int bPrice, i, MTLP, MTLU, IPL, VAR; // $codepro.audit.disable instanceFieldNamingConvention
 
         /**
          * Good constructor.
@@ -101,21 +100,12 @@ public class Good {
     private Planet planet;
 
     /**
-     * Field quantity.
-     */
-    /**
-     * Field buyPrice.
-     */
-    /**
-     * Field sellPrice.
+     * Field quantity, buyPrice, sellPrice.
      */
     private int quantity, buyPrice, sellPrice;
     
     /**
-     * Field x.
-     */
-    /**
-     * Field y.
+     * Field x, y.
      */
     private final int x, y;
 
@@ -132,7 +122,7 @@ public class Good {
     /**
      * Field GOOD_BG.
      */
-    private static final ImageIcon GOOD_BG = new ImageIcon(
+    public static final ImageIcon GOOD_BG = new ImageIcon(
             BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
 
     /**
@@ -202,8 +192,8 @@ public class Good {
     /**
      * Gets the buy price.
      * 
-    
-     * @return buyPrice. */
+     * @return buyPrice.
+     */
     public int getBuyPrice() {
         return buyPrice;
     }
@@ -211,8 +201,8 @@ public class Good {
     /**
      * Gets the sell price.
      * 
-    
-     * @return sellPrice. */
+     * @return sellPrice.
+     */
     public int getSellPrice() {
         return sellPrice;
     }
@@ -220,8 +210,8 @@ public class Good {
     /**
      * Gets the index.
      * 
-    
-     * @return index. */
+     * @return index.
+     */
     public int getIndex() {
         return type.i;
     }
@@ -264,8 +254,8 @@ public class Good {
     /**
      * Gets the quantity.
      * 
-    
-     * @return quantity */
+     * @return quantity
+     */
     public int getQuantity() {
         return quantity;
     }
@@ -287,9 +277,9 @@ public class Good {
      * Checks if a good is clicked and has a quantity greater than 0.
      * 
      * @param point
-    
      * @return True if contained and there is a good to be used, otherwise
-     *         false. */
+     *         false. 
+     */
     public boolean isClicked(Point point) {
         return bounds.contains(point) && quantity > 0;
     }
@@ -297,8 +287,8 @@ public class Good {
     /**
      * Gets the type of a good.
      * 
-    
-     * @return GoodType */
+     * @return GoodType 
+     */
     public GoodType getType() {
         return type;
     }
@@ -306,8 +296,8 @@ public class Good {
     /**
      * Gets the x value.
      * 
-    
-     * @return x */
+     * @return x
+     */
     public int getX() {
         return x;
     }
@@ -315,8 +305,8 @@ public class Good {
     /**
      * Gets the y value.
      * 
-    
-     * @return y */
+     * @return y
+     */
     public int getY() {
         return y;
     }
@@ -333,8 +323,8 @@ public class Good {
     /**
      * Creates a string representation of the good.
      * 
-    
-     * @return String representation. */
+     * @return String representation.
+     */
     public String toString() {
         final StringBuilder res = new StringBuilder();
         res.append("Good of type " + type + " with buy price: " + buyPrice

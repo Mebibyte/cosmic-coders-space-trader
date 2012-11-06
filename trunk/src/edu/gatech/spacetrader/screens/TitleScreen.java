@@ -1,4 +1,4 @@
-// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2, numericLiterals
 /* Comment
  * 
  */
@@ -54,6 +54,11 @@ public class TitleScreen extends Screen {
      * Field shipX. Ships's x location.
      */
     private int shipX;
+    
+    /**
+     * Field SHIP_Y. Ships's y location.
+     */
+    private static final int SHIP_Y = 440;
 
     /**
      * Constructor for TitleScreen.
@@ -87,10 +92,10 @@ public class TitleScreen extends Screen {
         BG.paintIcon(panel, g, 0, 0);
 
         if (shipX + PLAYER.getIconWidth() > width) {
-            PLAYER.paintIcon(panel, g, shipX - width, 440);
+            PLAYER.paintIcon(panel, g, shipX - width, SHIP_Y);
         }
 
-        PLAYER.paintIcon(panel, g, shipX, 440);
+        PLAYER.paintIcon(panel, g, shipX, SHIP_Y);
         newGame.draw(g, panel, width, height);
         loadGame.draw(g, panel, width, height);
         quit.draw(g, panel, width, height);

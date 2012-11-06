@@ -79,7 +79,7 @@ public class Galaxy {
      * @param planets
      */
     public void setPlanets(Planet[] planets){
-    	this.planets = planets;
+    	this.planets = planets.clone();
     }
     
     /**
