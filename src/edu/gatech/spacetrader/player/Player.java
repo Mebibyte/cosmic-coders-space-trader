@@ -159,7 +159,7 @@ public class Player {
     	 
     	if ( num == 19 ) { 
     		// thieves still 10% of your money  
-    		credits = (int) (credits * .9); 
+    		credits = (credits * 9) / 10; 
     	} else if ( num >= 17 ) { 
     		// hit by a stray asteroid in space 
     		spaceCraft.takeDamge(8); 
@@ -168,7 +168,7 @@ public class Player {
     	   credits += rand.nextInt(1000) + 50; 
     	}  else if ( num == 15 ) {
     		// spaceCraft's fuel hull sprung a leak lose 40%  
-    		spaceCraft.setFuel((int) (spaceCraft.getFuel()* .6));
+    		spaceCraft.setFuel((spaceCraft.getFuel()* (rand.nextInt(4) + 6)) /10);
     	} else if ( num == 14 ) {
     		// thieves steal one of your goods 
     		spaceCraft.loseRandomGood(); 
