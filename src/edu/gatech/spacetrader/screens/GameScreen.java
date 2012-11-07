@@ -234,7 +234,8 @@ public class GameScreen extends Screen {
         currentPlanet = planet;
         galaxy.advanceTime();
         player.getSpaceCraft().updatePrices(planet.getMarket());
-        player.getSpaceCraft().fly(distance);
+        player.getSpaceCraft().fly(distance); 
+        player.checkForEvent();  
     }
 
     /**
