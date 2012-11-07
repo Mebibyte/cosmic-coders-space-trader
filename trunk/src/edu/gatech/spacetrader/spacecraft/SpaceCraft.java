@@ -306,7 +306,10 @@ public abstract class SpaceCraft {
     /**
      * 
      */
-    public void loseRandomGood(){ 
+    public void loseRandomGood(){  
+    	if(quantity == 0){
+    		return; 
+    	}
     	boolean[] array= new boolean[10];  
     	int i = 0;  
     	int q = 0;
@@ -332,18 +335,6 @@ public abstract class SpaceCraft {
     /**
      * 
      */ 
-    public void addRandomGood(){
-    	boolean[] array= new boolean[10];  
-    	int i = 0; 
-    	for (Good g : storage) {
-    		array[i]= g.getQuantity() > 0; 
-    		i++; 
-    	} 
-    	for (int v = 0; v < storage.length; v++){
-    		if (array[i] && canAddToStorage()) {
-    			addToStorage(storage[i]); 
-    			 
-    		}
-    	}
-    }
+    public void addRandomGood(){}
+
 }
