@@ -16,6 +16,7 @@ import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
 
+
 /**
  * @version 1.0
  * @since 1.0
@@ -293,5 +294,56 @@ public abstract class SpaceCraft {
      */
     public boolean canFly() {
         return fuel > 0;
+    } 
+    
+    /** 
+     * 
+     */ 
+    public void setFuel(int fuel){
+    	this.fuel = fuel; 
+    } 
+    
+    /**
+     * 
+     */
+    public void loseRandomGood(){ 
+    	boolean[] array= new boolean[10];  
+    	int i = 0;  
+    	int q = 0;
+    	for (Good g : storage) {
+    		array[i]= g.getQuantity() > 0;  
+    		if (array[i]){
+    			q++; 
+    		}
+    		i++; 
+    	} 
+    	int[] array1 = new int[q]; 
+    	int p = 0; 
+    	for (int v = 0; v < storage.length; v++){
+    		if (array[v]) { 
+    			array1[p] = v;  
+    			p++;  
+    		}
+    	} 
+    	Random rand = new Random(); 
+    	removeGood(storage[array1[rand.nextInt(q)]]); 
+    }
+    
+    /**
+     * 
+     */ 
+    public void addRandomGood(){
+    	boolean[] array= new boolean[10];  
+    	int i = 0; 
+    	for (Good g : storage) {
+    		array[i]= g.getQuantity() > 0; 
+    		i++; 
+    	} 
+    	for (int v = 0; v < storage.length; v++){
+    		if (array[i] && canAddToStorage()) {
+    			addToStorage(storage[i]); 
+    			 
+    		}
+    	}
     }
 }
