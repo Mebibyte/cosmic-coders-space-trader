@@ -232,7 +232,7 @@ public class GameScreen extends Screen {
                 * (planet.getY() - currentPlanet.getY());
         final int distance = (int) Math.sqrt(xSquared + ySquared); // $codepro.audit.disable lossOfPrecisionInCast
         currentPlanet = planet;
-        galaxy.advanceTime();
+        galaxy.advanceTime(this);
         player.getSpaceCraft().updatePrices(planet.getMarket());
         player.getSpaceCraft().fly(distance); 
         player.checkForEvent();  
