@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.screens.GameScreen;
 
 /**
  * @author Glenn
@@ -49,8 +50,24 @@ public class Planet {
     /**
      */
     public static enum Event {
-        DROUGHT, COLD, CROPFAIL, WAR, BOREDOM,
-        PLAGUE, LACKOFWORKERS, NONE
+        DROUGHT("This planet has a low supply of fresh water"),
+        COLD("The planet has just experienced a sudden climate drop"),
+        CROPFAIL("Unfavorable weather has caused this year's harvest to be poor"),
+        WAR("Tensions between rival nations have broken into war"),
+        BOREDOM("There is a quiet unrest among citizens here"),
+        PLAGUE("Food is currently scarce"),
+        LACKOFWORKERS("Economic difficulties have resulted in large worker strikes"),
+        NONE("");
+        //TODO make array of messages per event to add some variety;
+        private String eventString;
+        
+        private Event(String eventString){
+        	this.eventString = eventString;
+        }
+        
+        public String getEventString(){
+        	return eventString;
+        }
     }
 
     /**
@@ -256,9 +273,17 @@ public class Planet {
      * revert the civilization level, and determine market prices. It should be
      * called whenever the player flies to a new location.
      */
-    public void advanceTime() {
-        // TODO - Everything
+    public void advanceTime(GameScreen gs) {
+        
         market.updatePrices();
+        if(this.equals(gs.getCurrentPlanet())){
+	        if (RAND.nextInt(100)==0){ //TODO make advancing harder as civ. level increases. Put that number in TechLevel enum
+	        	advanceCivilization();
+	        	System.out.println(this.toString() + " advanced to " + this.getTechLevel().toString());//TODO message box
+	        }
+	        if (changeEvent())
+	        	System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
+        }
     }
 
     /**
@@ -328,9 +353,15 @@ public class Planet {
     /**
      * Method changeEvent. Changes the current event to a new random event.
      */
-    public void changeEvent() {
-        currentEvent = Event.values()[new Random()
-                .nextInt(Event.values().length)];
+    public boolean changeEvent() {
+    	if (RAND.nextInt(4)==0){ //create a one-in-four chance of an event occuring at all.
+    		currentEvent = Event.values()[RAND.nextInt(Event.values().length)];
+    		return true;
+    	}
+    	else{
+    		currentEvent = Event.NONE;
+    		return false;
+    	}
     }
 
     /**
@@ -345,7 +376,7 @@ public class Planet {
          * "currentEvent" field. The message will be displayed when a player
          * arrives at a planet
          */
-        return null;
+        return currentEvent.getEventString();
     }
 
     /**
@@ -371,6 +402,10 @@ public class Planet {
                 - Galaxy.HALF_GALAXY_HEIGHT + (location.y - 2), 4, 4); // $codepro.audit.disable
                                                               // numericLiterals
         g.setColor(Color.BLACK);
+    }
+    
+    public Event getCurrentEvent(){
+    	return this.currentEvent;
     }
 
     /**

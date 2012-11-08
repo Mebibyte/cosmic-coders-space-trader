@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.screens.GameScreen;
 
 /**
  * @author Glenn
@@ -152,9 +153,9 @@ public class Galaxy {
      * AdvanceTime method.
      * Advances the time of all planets.
      */
-    public void advanceTime() {
+    public void advanceTime(GameScreen gs) {
         for (Planet p : planets) {
-            p.advanceTime();
+            p.advanceTime(gs);
         }
     }
 }
