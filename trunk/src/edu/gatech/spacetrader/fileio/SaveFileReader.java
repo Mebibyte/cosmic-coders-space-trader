@@ -73,11 +73,13 @@ public class SaveFileReader {
 			skills[i] = Integer.parseInt(scan.nextLine());
 		}
 		int credits = Integer.parseInt(scan.nextLine());
+		
 		//TODO finish player in FileWriter, pick up  from there
 		ConfigScreen.Difficulty difficulty = ConfigScreen.Difficulty.valueOf(
 		        scan.nextLine());
 		
 		player = new Player(playerName, skills, difficulty);
+		player.setCredits(credits);
 
 		SpaceCraft sc;
 		String scName = scan.nextLine();
