@@ -86,6 +86,12 @@ public class SaveFileWriter {
         try {
             output = new PrintWriter(new BufferedWriter(new FileWriter(
                     new File(fileName))));
+            
+            output.write(player.getName() + "\n");
+            int[] skills = player.getSkillsArray();
+            for (int i = 0; i < skills.length; i++) {
+                output.write(skills[i] + "\n");
+            }
             output.write(player.getCredits() + "\n");
             output.write(player.getDifficulty().toUpperCase()+"\n");
             // TODO Finish writing player attributes
