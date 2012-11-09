@@ -136,7 +136,7 @@ public class GameScreen extends Screen {
         
         g.fillRect(sidebarWidth, 0, width, y + 5);
         g.setColor(Color.WHITE);
-        g.drawString("Event Message!", sidebarWidth, y);
+        g.drawString(currentPlanet.getCurrentEvent().getEventString(), sidebarWidth, y);
         g.setColor(Color.BLACK);
 
         g.drawString(

@@ -5,6 +5,7 @@
 
 package edu.gatech.spacetrader.screens;
 
+import edu.gatech.spacetrader.fileio.SaveFileReader;
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.GamePanel;
 
@@ -12,6 +13,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
 /**
  * @author Glenn
@@ -23,6 +26,16 @@ public class TitleScreen extends Screen {
      */
     private final BigButton newGame, quit, loadGame;
 
+    /**
+     * 
+     */
+    private JFileChooser fc = new JFileChooser();
+    
+    /**
+     * Field saveFileReader
+     */
+    private final SaveFileReader saveFileReader = new SaveFileReader();
+    
     /**
      * Field height.
      */
@@ -76,7 +89,7 @@ public class TitleScreen extends Screen {
         this.height = height;
         newGame = new BigButton("New Game", width / 2, height / 2);
         loadGame = new BigButton("Load Game", width / 2, (height / 2)
-                + newGame.getHeight(), true);
+                + newGame.getHeight(), false);
         quit = new BigButton("Quit", width / 2, (height / 2)
                 + newGame.getHeight() + loadGame.getHeight());
     }
@@ -120,12 +133,34 @@ public class TitleScreen extends Screen {
         if (newGame.isClicked(point)) {
             panel.setActiveScreen(new ConfigScreen(panel, width, height));
         } else if (loadGame.isClicked(point)) {
-            System.out.println("Fix this later"); // FIXME
+            //System.out.println("Fix this later"); // FIXME
+        	loadFile();
+        	
         } else if (quit.isClicked(point)) {
             System.exit(0);
         }
     }
 
+    /**
+     * 
+     * Loads and reads save file, initiates gamescreen
+     * @author Patrick Conner
+     * 
+     */
+    private void loadFile(){
+    	int choice = fc.showOpenDialog(new JPanel());
+    	if (choice == JFileChooser.APPROVE_OPTION){
+    		try{
+    			saveFileReader.readFile(fc.getSelectedFile());
+    			GameScreen gc = saveFileReader.getLoadedGameScreen();
+    			panel.setActiveScreen(gc);
+    		}
+    		catch(Exception e){
+    			System.out.println("WTF???");
+    		}
+    	}
+    }
+    
     /**
      * Method setHoverPoint.
      * 

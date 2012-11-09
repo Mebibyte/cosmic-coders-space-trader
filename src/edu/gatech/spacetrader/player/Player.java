@@ -104,6 +104,13 @@ public class Player {
     }
     
     /**
+     * @param credits
+     */
+    public void setCredits(int credits){
+    	this.credits = credits;
+    }
+    
+    /**
      * Method getSpaceCraft.
     
      * @return SpaceCraft */
