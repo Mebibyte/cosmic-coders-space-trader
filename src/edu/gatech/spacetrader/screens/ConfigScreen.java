@@ -258,9 +258,11 @@ public class ConfigScreen extends Screen{
 	    changeDifficulty(point);
 	    
 	    if (startGame.isClicked(point)) {
-	        panel.setActiveScreen(new GameScreen(
+	    	GameScreen gs = new GameScreen(
 	                new Player(playerName, skills, currentDifficulty),
-	                panel, width, height));
+	                panel, width, height);
+	    	panel.setLocalGameScreen(gs);
+	        panel.setActiveScreen(gs);
 	    } else if (editName.isClicked(point)) {
 	        if (editNameFrame == null) {
 	            editNameFrame = new TextFieldFrame(this, panel, 14, playerName);

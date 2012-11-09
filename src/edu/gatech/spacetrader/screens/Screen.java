@@ -9,7 +9,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+
+import edu.gatech.spacetrader.fileio.SaveFileWriter;
 import edu.gatech.spacetrader.gui.BigButton;
 import edu.gatech.spacetrader.main.SpaceTrader;
 
@@ -22,6 +27,18 @@ public class Screen {
      * Field hoverPoint.
      */
     private Point hoverPoint;
+    
+    /**
+     * 
+     */
+    private JFileChooser fc = new JFileChooser();
+    
+    
+    /**
+     * 
+     */
+    private SaveFileWriter saveFileWriter = new SaveFileWriter();
+    
     
     /**
      * Field paused.
@@ -58,15 +75,34 @@ public class Screen {
 	/**
 	 * Method checkForClick.
 	 * @param point Point
+	 * @throws IOException 
 	 */
-	public void checkForClick(Point point) {
+	public void checkForClick(Point point){
 	    if (paused) {
 	        if (saveGame.isClicked(point)) {
-	            System.out.println("Save Game");
+	            //System.out.println("Save Game");
+	        	
+	        	try {
+					saveFile(SpaceTrader.GAME_PANEL.getLocalGameScreen());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        	
+	            
 	        } else if (quitGame.isClicked(point)) {
 	            System.exit(0);
 	        }
 	    }
+	}
+	
+	private void saveFile(GameScreen gs) throws IOException{
+		int choice = fc.showSaveDialog(new JPanel());
+		
+		if(choice == JFileChooser.APPROVE_OPTION){
+			System.out.println(fc.getSelectedFile().getAbsolutePath());
+			saveFileWriter.generateSaveFile(fc.getSelectedFile().getAbsolutePath(), gs);
+		}
 	}
 	
 	/**
