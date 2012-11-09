@@ -152,6 +152,7 @@ public class Galaxy {
     /**
      * AdvanceTime method.
      * Advances the time of all planets.
+     * @param gs GameScreen;
      */
     public void advanceTime(GameScreen gs) {
         for (Planet p : planets) {
