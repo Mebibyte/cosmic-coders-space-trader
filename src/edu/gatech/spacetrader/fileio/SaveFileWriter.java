@@ -23,27 +23,17 @@ public class SaveFileWriter {
     /**
      * Field player.
      */
-    private Player player;
+    private final Player player;
 
     /**
      * Field galaxy.
      */
-    private Galaxy galaxy;
+    private final Galaxy galaxy;
 
     /**
      * Field currentPlanet.
      */
-    private Planet currentPlanet;
-
-    /**
-     * Field fw.
-     */
-    private FileWriter fw;
-
-    /**
-     * Field buffer.
-     */
-    private BufferedWriter buffer;
+    private final Planet currentPlanet;
 
     /**
      * Field output.
@@ -65,49 +55,54 @@ public class SaveFileWriter {
      * @param fileName String
      * @throws IOException
      */
-    public void generateSaveFile(String fileName) throws IOException {
-        fw = new FileWriter(new File(fileName));
-        buffer = new BufferedWriter(fw);
-        output = new PrintWriter(buffer);
-
-        // begin writing
-        output.write(player.getName() + "\n");
-        int[] skills = player.getSkillsArray();
-        for (int i = 0; i < skills.length; i++) {
-            output.write(skills[i] + "\n");
+    public void generateSaveFile(String fileName) {
+        try {
+            output = new PrintWriter(new BufferedWriter(new FileWriter(
+                    new File(fileName))));
+    
+            // begin writing
+            output.write(player.getName() + "\n");
+            final int[] skills = player.getSkillsArray();
+            for (int i = 0; i < skills.length; i++) {
+                output.write(skills[i] + "\n");
+            }
+            output.write(player.getCredits() + "\n");
+            // TODO Finish writing player attributes
+    
+            output.write(player.getSpaceCraft().toString() + "\n");
+            output.write(player.getSpaceCraft().getHealth() + "\n");
+            output.write(player.getSpaceCraft().getStorage().length);
+            for (int i = 0; i < player.getSpaceCraft().getStorage().length; i++) {
+                output.write(player.getSpaceCraft().getStorage()[i].getIndex()
+                        + "\n");
+                output.write(player.getSpaceCraft().getStorage()[i].getX() + "\n");
+                output.write(player.getSpaceCraft().getStorage()[i].getY() + "\n");
+    
+            }
+            output.write(player.getDifficulty().toString() + "\n");
+    
+            // Write galaxy here
+            final Planet[] planets = galaxy.getPlanets();
+            for (Planet p : planets) {
+                output.write(p.toString() + "\n");
+                output.write(p.getX() + "\n");
+                output.write(p.getY() + "\n");
+                output.write(p.getEnvironment().toString() + "\n");
+                output.write(p.getTechLevel().toString() + "\n");
+            }
+    
+            // do current planet specifics here
+            
+            output.write(currentPlanet.toString() + "\n");
+            output.write(currentPlanet.getX() + "\n");
+            output.write(currentPlanet.getY() + "\n");
+            output.write(currentPlanet.getEnvironment().toString() + "\n");
+            output.write(currentPlanet.getTechLevel().toString() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            output.close();
         }
-        output.write(player.getCredits() + "\n");
-        // TODO Finish writing player attributes
-
-        output.write(player.getSpaceCraft().toString() + "\n");
-        output.write(player.getSpaceCraft().getHealth() + "\n");
-        output.write(player.getSpaceCraft().getStorage().length);
-        for (int i = 0; i < player.getSpaceCraft().getStorage().length; i++) {
-            output.write(player.getSpaceCraft().getStorage()[i].getIndex()
-                    + "\n");
-            output.write(player.getSpaceCraft().getStorage()[i].getX() + "\n");
-            output.write(player.getSpaceCraft().getStorage()[i].getY() + "\n");
-
-        }
-        output.write(player.getDifficulty().toString() + "\n");
-
-        // Write galaxy here
-        Planet[] planets = galaxy.getPlanets();
-        for (Planet p : planets) {
-            output.write(p.toString() + "\n");
-            output.write(p.getX() + "\n");
-            output.write(p.getY() + "\n");
-            output.write(p.getEnvironment().toString() + "\n");
-            output.write(p.getTechLevel().toString() + "\n");
-        }
-
-        // do current planet specifics here
-        
-        output.write(currentPlanet.toString() + "\n");
-        output.write(currentPlanet.getX() + "\n");
-        output.write(currentPlanet.getY() + "\n");
-        output.write(currentPlanet.getEnvironment().toString() + "\n");
-        output.write(currentPlanet.getTechLevel().toString() + "\n");
     }
 
     /**
