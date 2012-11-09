@@ -147,15 +147,32 @@ public class TitleScreen extends Screen {
      * 
      */
     private void loadFile(){
+    	/*
+    }
+<<<<<<< .mine
+    	int choice = fc.showOpenDialog(new JPanel());
+    	if (choice == JFileChooser.APPROVE_OPTION){
+    		//try{
+=======
+*/
     	final int choice = fc.showOpenDialog(new JPanel());
     	if (choice == JFileChooser.APPROVE_OPTION) {
     		try {
+//>>>>>>> .r178
     			saveFileReader.readFile(fc.getSelectedFile());
     			final GameScreen gc = saveFileReader.getLoadedGameScreen();
+    			panel.setLocalGameScreen(gc);
     			panel.setActiveScreen(gc);
+//<<<<<<< .mine
+    		//}
+    		//catch(Exception e){
+    			//System.out.println("WTF???");
+    		//}
+//=======
     		} catch(Exception e) {
     			e.printStackTrace();
     		}
+//>>>>>>> .r178
     	}
     }
     

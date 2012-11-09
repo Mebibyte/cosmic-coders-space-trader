@@ -81,13 +81,17 @@ public class GameScreen extends Screen {
      *            int
      */
     public GameScreen(Player player, GamePanel panel, int width, int height) {
+    	System.out.println("Making Gamescreen");
         this.player = player;
         this.panel = panel;
         this.width = width;
         this.height = height;
         this.galaxy = new Galaxy(height, width);
+        System.out.println("Generated galaxy");
+        
         currentPlanet = galaxy.getStartingPlanet();
-        player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
+        //if (currentPlanet !=null)
+        	player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
         fillFuelButton = new Rectangle(40, 218, 85, 18);
     }
 

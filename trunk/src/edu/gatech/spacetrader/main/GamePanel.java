@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import edu.gatech.spacetrader.screens.GameScreen;
 import edu.gatech.spacetrader.screens.Screen;
 import edu.gatech.spacetrader.screens.TitleScreen;
 
@@ -36,6 +37,11 @@ public class GamePanel extends JPanel{
 	 * Field mouseOnScreen.
 	 */
 	private boolean mouseOnScreen;
+	
+	/**
+	 * 
+	 */
+	private GameScreen localGameScreen;
 	
 	/**
 	 * Constructor for GamePanel.
@@ -69,6 +75,14 @@ public class GamePanel extends JPanel{
 	                pInfo.getLocation().y - this.getLocationOnScreen().y));
 		}
 		activeScreen.draw(g);
+	}
+	
+	public void setLocalGameScreen(GameScreen localGameScreen){
+		this.localGameScreen = localGameScreen;
+	}
+	
+	public GameScreen getLocalGameScreen(){
+		return localGameScreen;
 	}
 	
 	/**
