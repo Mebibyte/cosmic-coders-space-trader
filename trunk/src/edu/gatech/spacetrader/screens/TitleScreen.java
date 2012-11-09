@@ -29,7 +29,7 @@ public class TitleScreen extends Screen {
     /**
      * 
      */
-    private JFileChooser fc = new JFileChooser();
+    private final JFileChooser fc = new JFileChooser();
     
     /**
      * Field saveFileReader
@@ -144,19 +144,17 @@ public class TitleScreen extends Screen {
     /**
      * 
      * Loads and reads save file, initiates gamescreen
-     * @author Patrick Conner
      * 
      */
     private void loadFile(){
-    	int choice = fc.showOpenDialog(new JPanel());
-    	if (choice == JFileChooser.APPROVE_OPTION){
-    		try{
+    	final int choice = fc.showOpenDialog(new JPanel());
+    	if (choice == JFileChooser.APPROVE_OPTION) {
+    		try {
     			saveFileReader.readFile(fc.getSelectedFile());
-    			GameScreen gc = saveFileReader.getLoadedGameScreen();
+    			final GameScreen gc = saveFileReader.getLoadedGameScreen();
     			panel.setActiveScreen(gc);
-    		}
-    		catch(Exception e){
-    			System.out.println("WTF???");
+    		} catch(Exception e) {
+    			e.printStackTrace();
     		}
     	}
     }

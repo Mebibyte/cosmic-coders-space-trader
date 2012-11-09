@@ -57,7 +57,7 @@ public class Planet {
         BOREDOM("There is a quiet unrest among citizens here"),
         PLAGUE("Food is currently scarce"),
         LACKOFWORKERS("Economic difficulties have resulted in large worker strikes"),
-        NONE("");
+        NONE("No event");
         //TODO make array of messages per event to add some variety;
         /**
          * Field eventString.
@@ -72,6 +72,10 @@ public class Planet {
         	this.eventString = eventString;
         }
         
+        /**
+         * Gets the event string.
+         * @return Event String
+         */
         public String getEventString(){
         	return eventString;
         }
@@ -289,7 +293,7 @@ public class Planet {
 	        	System.out.println(this.toString() + " advanced to " + 
 	        	this.getTechLevel().toString());//TODO message box
 	        }
-	        if (changeEvent()) {
+	        if (isEventChanged()) {
 	        	System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
 	        }
         }
@@ -362,7 +366,7 @@ public class Planet {
      * Method changeEvent. Changes the current event to a new random event.
      * @return if event changed.
      */
-    public boolean changeEvent() {
+    public boolean isEventChanged() {
     	if (RAND.nextInt(4) == 0) { //create a one-in-four chance of an event occuring at all.
     		currentEvent = Event.values()[RAND.nextInt(Event.values().length)];
     		return true;

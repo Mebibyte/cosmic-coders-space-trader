@@ -88,10 +88,7 @@ public class ConfigScreen extends Screen{
     /**
      * Field numSkill.
      */
-    /**
-     * Field numSkill.
-     */
-    private static final int NUMSKILLS = 4, MAXSKILL = 10,
+    public static final int NUMSKILLS = 4, MAXSKILL = 10,
             POSNEG = 2, MAXSKILLPOINTS = 16;
     
     /**
