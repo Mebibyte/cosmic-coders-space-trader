@@ -1,4 +1,4 @@
-// $codepro.audit.disable multiplicationOrDivisionByPowersOf2
+// $codepro.audit.disable multiplicationOrDivisionByPowersOf2, numericLiterals
 /* Comment
  * 
  */
@@ -153,22 +153,25 @@ public class Player {
         return credits > buyPrice;
     }
 
+    /**
+     * Checks for an event.
+     */
     public void checkForEvent(){
-    	Random rand = new Random();  
-    	int num = rand.nextInt(20);  
+    	final Random rand = new Random();  
+    	final int num = rand.nextInt(20);  
     	 
     	if ( num == 19 ) { 
     		// thieves still 10% of your money  
     		credits = (credits * 9) / 10; 
     	} else if ( num >= 17 ) { 
     		// hit by a stray asteroid in space 
-    		spaceCraft.takeDamge(8); 
+    		System.out.println("Damage taken: " + spaceCraft.takeDamge(8)); //TODO: Event message
     	} else if ( num == 16) {
     		//find random treasure in space 
     	   credits += rand.nextInt(1000) + 50; 
     	}  else if ( num == 15 ) {
     		// spaceCraft's fuel hull sprung a leak lose 40%  
-    		spaceCraft.setFuel((spaceCraft.getFuel()* (rand.nextInt(4) + 6)) /10);
+    		spaceCraft.setFuel((spaceCraft.getFuel() * (rand.nextInt(4) + 6)) / 10);
     	} else if ( num == 14 ) {
     		// thieves steal one of your goods 
     		spaceCraft.loseRandomGood(); 

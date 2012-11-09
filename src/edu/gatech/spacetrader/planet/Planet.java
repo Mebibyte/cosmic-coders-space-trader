@@ -59,8 +59,15 @@ public class Planet {
         LACKOFWORKERS("Economic difficulties have resulted in large worker strikes"),
         NONE("");
         //TODO make array of messages per event to add some variety;
-        private String eventString;
+        /**
+         * Field eventString.
+         */
+        private final String eventString;
         
+        /**
+         * Constructor for event.
+         * @param eventString
+         */
         private Event(String eventString){
         	this.eventString = eventString;
         }
@@ -176,7 +183,6 @@ public class Planet {
     /**
      * 
      */
-    @SuppressWarnings("unused")
     private Event currentEvent;
 
     /**
@@ -272,17 +278,20 @@ public class Planet {
      * This is the huge method that will generate random events, advance or
      * revert the civilization level, and determine market prices. It should be
      * called whenever the player flies to a new location.
+     * @param gs GameScreen
      */
     public void advanceTime(GameScreen gs) {
         
         market.updatePrices();
         if(this.equals(gs.getCurrentPlanet())){
-	        if (RAND.nextInt(100)==0){ //TODO make advancing harder as civ. level increases. Put that number in TechLevel enum
+	        if (RAND.nextInt(100) == 0) { //TODO make advancing harder as civ. level increases. Put that number in TechLevel enum
 	        	advanceCivilization();
-	        	System.out.println(this.toString() + " advanced to " + this.getTechLevel().toString());//TODO message box
+	        	System.out.println(this.toString() + " advanced to " + 
+	        	this.getTechLevel().toString());//TODO message box
 	        }
-	        if (changeEvent())
+	        if (changeEvent()) {
 	        	System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
+	        }
         }
     }
 
@@ -321,7 +330,6 @@ public class Planet {
     /**
      * 
      */
-    @SuppressWarnings("unused")
     private void advanceCivilization() { // $codepro.audit.disable unusedMethod
         // Advance civilization to next level
         // called internally when a random conditional is met during player
@@ -352,13 +360,13 @@ public class Planet {
 
     /**
      * Method changeEvent. Changes the current event to a new random event.
+     * @return if event changed.
      */
     public boolean changeEvent() {
-    	if (RAND.nextInt(4)==0){ //create a one-in-four chance of an event occuring at all.
+    	if (RAND.nextInt(4) == 0) { //create a one-in-four chance of an event occuring at all.
     		currentEvent = Event.values()[RAND.nextInt(Event.values().length)];
     		return true;
-    	}
-    	else{
+    	} else {
     		currentEvent = Event.NONE;
     		return false;
     	}
@@ -404,6 +412,10 @@ public class Planet {
         g.setColor(Color.BLACK);
     }
     
+    /**
+     * Gets the current event.
+     * @return event
+     */
     public Event getCurrentEvent(){
     	return this.currentEvent;
     }

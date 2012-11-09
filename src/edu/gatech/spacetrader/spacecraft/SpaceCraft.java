@@ -8,6 +8,8 @@ package edu.gatech.spacetrader.spacecraft;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -297,7 +299,7 @@ public abstract class SpaceCraft {
     } 
     
     /** 
-     * 
+     * @param fuel
      */ 
     public void setFuel(int fuel){
     	this.fuel = fuel; 
@@ -307,34 +309,35 @@ public abstract class SpaceCraft {
      * 
      */
     public void loseRandomGood(){  
-    	if(quantity == 0){
+    	if (quantity == 0) {
     		return; 
     	}
-    	boolean[] array= new boolean[10];  
-    	int i = 0;  
-    	int q = 0;
+    	
+    	final List<Good> array = new ArrayList<Good>();  
+
     	for (Good g : storage) {
-    		array[i]= g.getQuantity() > 0;  
-    		if (array[i]){
-    			q++; 
-    		}
-    		i++; 
-    	} 
-    	int[] array1 = new int[q]; 
-    	int p = 0; 
-    	for (int v = 0; v < storage.length; v++){
-    		if (array[v]) { 
-    			array1[p] = v;  
-    			p++;  
-    		}
-    	} 
-    	Random rand = new Random(); 
-    	removeGood(storage[array1[rand.nextInt(q)]]); 
+    		if (g.getQuantity() > 0) {
+    		    array.add(g);
+    		} 
+    	}
+    	
+    	final int[] array1 = new int[array.size()];
+    	int i = 0;
+    	for (Good g : array) {
+    	    array1[i] = g.getIndex();
+    	    i++;
+    	}
+    	
+    	final Random rand = new Random(); 
+    	removeGood(storage[array1[rand.nextInt(array.size())]]); 
     }
     
     /**
      * 
      */ 
-    public void addRandomGood(){}
+    public void addRandomGood() {
+        final Random rand = new Random(); 
+        addToStorage(storage[rand.nextInt(storage.length)]); 
+    }
 
 }

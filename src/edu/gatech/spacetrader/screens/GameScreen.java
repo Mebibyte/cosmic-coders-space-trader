@@ -132,6 +132,12 @@ public class GameScreen extends Screen {
         final int x = 0;
         final int y = fm.getHeight();
         final int halfSidebarWidth = 82;
+        final int sidebarWidth = 176;
+        
+        g.fillRect(sidebarWidth, 0, width, y + 5);
+        g.setColor(Color.WHITE);
+        g.drawString("Event Message!", sidebarWidth, y);
+        g.setColor(Color.BLACK);
 
         g.drawString(
                 "Player Information",
