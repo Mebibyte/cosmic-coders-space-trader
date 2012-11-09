@@ -93,12 +93,12 @@ public class SaveFileWriter {
                 output.write(skills[i] + "\n");
             }
             output.write(player.getCredits() + "\n");
-            output.write(player.getDifficulty().toUpperCase()+"\n");
+            output.write(player.getDifficulty().toUpperCase() + "\n");
             // TODO Finish writing player attributes
 
             output.write(player.getSpaceCraft().toString() + "\n");
             output.write(player.getSpaceCraft().getHealth() + "\n");
-            output.write(player.getSpaceCraft().getStorage().length+"\n");
+            output.write(player.getSpaceCraft().getStorage().length + "\n");
             output.write(player.getSpaceCraft().getFuel() + "\n");
             for (int i = 0; i < player.getSpaceCraft().getStorage().length; i++) {
                 output.write(player.getSpaceCraft().getStorage()[i].getIndex()

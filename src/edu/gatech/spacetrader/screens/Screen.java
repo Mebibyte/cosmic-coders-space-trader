@@ -32,14 +32,12 @@ public class Screen {
      * 
      */
     private JFileChooser fc = new JFileChooser();
-    
-    
+
     /**
      * 
      */
     private SaveFileWriter saveFileWriter = new SaveFileWriter();
-    
-    
+
     /**
      * Field paused.
      */
@@ -88,8 +86,7 @@ public class Screen {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	        	
-	            
+
 	        } else if (quitGame.isClicked(point)) {
 	            System.exit(0);
 	        }
