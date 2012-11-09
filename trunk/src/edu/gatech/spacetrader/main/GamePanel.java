@@ -75,6 +75,7 @@ public class GamePanel extends JPanel{
 	                pInfo.getLocation().y - this.getLocationOnScreen().y));
 		}
 		activeScreen.draw(g);
+
 	}
 	
 	public void setLocalGameScreen(GameScreen localGameScreen){
