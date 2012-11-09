@@ -101,9 +101,7 @@ public class SaveFileReader {
 			}
 			sc.setFuel(fuel);
 			player.setSpaceCraft(sc);
-	
-			
-			
+
 			gamePanel = SpaceTrader.GAME_PANEL;
 			//System.out.println("Made panel");
 			
@@ -128,15 +126,9 @@ public class SaveFileReader {
 				//System.out.println(i);
 			}
 			//System.out.println("End For");
-			
-			
-			
-			
-			
-			
+
 			//current planet
-			
-			
+
 			/*
 			currentPlanet = new Planet(SpaceTrader.WIDTH,
 			        Galaxy.GALAXY_WIDTH, Galaxy.GALAXY_HEIGHT);
