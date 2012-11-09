@@ -104,7 +104,7 @@ public class SaveFileReader {
 	
 			
 			
-			gamePanel = new GamePanel(SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
+			gamePanel = SpaceTrader.GAME_PANEL;
 			//System.out.println("Made panel");
 			
 			gameScreen = new GameScreen(player, gamePanel,
