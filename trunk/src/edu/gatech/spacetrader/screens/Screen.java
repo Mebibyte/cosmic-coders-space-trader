@@ -31,12 +31,12 @@ public class Screen {
     /**
      * 
      */
-    private JFileChooser fc = new JFileChooser();
+    private final JFileChooser fc = new JFileChooser();
 
     /**
      * 
      */
-    private SaveFileWriter saveFileWriter = new SaveFileWriter();
+    private final SaveFileWriter saveFileWriter = new SaveFileWriter();
 
     /**
      * Field paused.
@@ -96,7 +96,7 @@ public class Screen {
 	 * @throws IOException
 	 */
 	private void saveFile(GameScreen gs){
-		int choice = fc.showSaveDialog(new JPanel());
+		final int choice = fc.showSaveDialog(new JPanel());
 		
 		if(choice == JFileChooser.APPROVE_OPTION){
 			System.out.println(fc.getSelectedFile().getAbsolutePath());

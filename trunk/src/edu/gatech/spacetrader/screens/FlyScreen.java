@@ -262,7 +262,7 @@ public class FlyScreen extends Screen {
         boolean isPlanetHovered = false;
         if (range.contains(hoverPoint)) {
             for (Planet p : gameScreen.getGalaxy().getPlanets()) {
-                if (p.isIn(hoverPoint)) {
+                if (p.isClicked(hoverPoint)) {
                     hoveredPlanet = p;
                     isPlanetHovered = true;
                 }
