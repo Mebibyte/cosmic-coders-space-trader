@@ -99,7 +99,6 @@ public class Screen {
 		final int choice = fc.showSaveDialog(new JPanel());
 		
 		if(choice == JFileChooser.APPROVE_OPTION){
-			System.out.println(fc.getSelectedFile().getAbsolutePath());
 			saveFileWriter.generateSaveFile(fc.getSelectedFile().getAbsolutePath(), gs);
 		}
 	}

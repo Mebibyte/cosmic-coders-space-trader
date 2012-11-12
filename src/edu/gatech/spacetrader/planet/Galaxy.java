@@ -59,7 +59,6 @@ public class Galaxy {
      * @param width Width of JFrame.
      */
     public Galaxy(int height, int width) {
-    	
         for (int i = 0; i < NUM_PLANETS; i++) {
             planets[i] = new Planet(width, GALAXY_WIDTH, GALAXY_HEIGHT);
         }

@@ -33,11 +33,6 @@ public class TitleScreen extends Screen {
     private final JFileChooser fc = new JFileChooser();
     
     /**
-     * Field saveFileReader
-     */
-    private final SaveFileReader saveFileReader = new SaveFileReader();
-    
-    /**
      * Field height.
      */
     /**
@@ -77,12 +72,9 @@ public class TitleScreen extends Screen {
     /**
      * Constructor for TitleScreen.
      * 
-     * @param panel
-     *            GamePanel
-     * @param width
-     *            int
-     * @param height
-     *            int
+     * @param panel GamePanel
+     * @param width int
+     * @param height int
      */
     public TitleScreen(GamePanel panel, int width, int height) {
         this.panel = panel;
@@ -98,8 +90,7 @@ public class TitleScreen extends Screen {
     /**
      * Method draw.
      * 
-     * @param g
-     *            Graphics
+     * @param g Graphics
      */
     @Override
     public void draw(Graphics g) {
@@ -126,64 +117,42 @@ public class TitleScreen extends Screen {
     /**
      * Method checkForClick.
      * 
-     * @param point
-     *            Point
+     * @param point Point
      */
     @Override
     public void checkForClick(Point point) {
         if (newGame.isClicked(point)) {
             panel.setActiveScreen(new ConfigScreen(panel, width, height));
         } else if (loadGame.isClicked(point)) {
-            //System.out.println("Fix this later"); // FIXME
         	loadFile();
-        	
         } else if (quit.isClicked(point)) {
             System.exit(0);
         }
     }
 
     /**
-     * 
      * Loads and reads save file, initiates gamescreen
-     * 
      */
     private void loadFile(){
-    	/*
-    }
-<<<<<<< .mine
-    	int choice = fc.showOpenDialog(new JPanel());
-    	if (choice == JFileChooser.APPROVE_OPTION){
-    		//try{
-=======
-*/
     	final int choice = fc.showOpenDialog(new JPanel());
     	if (choice == JFileChooser.APPROVE_OPTION) {
     		try {
-//>>>>>>> .r178
-    			saveFileReader.readFile(fc.getSelectedFile());
-    			final GameScreen gc = saveFileReader.getLoadedGameScreen();
-    			panel.setLocalGameScreen(gc);
-    			panel.setActiveScreen(gc);
-//<<<<<<< .mine
-    		//}
-    		//catch(Exception e){
-    			//System.out.println("WTF???");
-    		//}
-//=======
+    			final GameScreen newGameScreen =
+    			        SaveFileReader.readFile(fc.getSelectedFile());
+    			panel.setLocalGameScreen(newGameScreen);
+    			panel.setActiveScreen(newGameScreen);
     		} catch(Exception e) {
     			e.printStackTrace();
     			JOptionPane.showMessageDialog(new JPanel(), "Error reading file");
     			panel.setActiveScreen(this);
     		}
-//>>>>>>> .r178
     	}
     }
     
     /**
      * Method setHoverPoint.
      * 
-     * @param p
-     *            Point
+     * @param p Point
      */
     @Override
     public void setHoverPoint(Point p) {
@@ -196,8 +165,8 @@ public class TitleScreen extends Screen {
     /**
      * Method toString.
      * 
-    
-     * @return String */
+     * @return String
+     */
     @Override
     public String toString() {
         return "Title Screen";

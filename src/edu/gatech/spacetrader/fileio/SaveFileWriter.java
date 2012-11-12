@@ -42,44 +42,11 @@ public class SaveFileWriter {
     private PrintWriter output;
 
     /**
-     * Constructor for SaveFileWriter.
-     * @param screen GameScreen
-     */
-    /*
-    public SaveFileWriter(GameScreen screen) {
-    	//if (screen instanceof GameScreen){
-    		this.player = screen.getPlayer();
-    		this.galaxy = screen.getGalaxy();
-    		this.currentPlanet = screen.getCurrentPlanet();
-    	//}
-    	//else
-    		System.out.println("F$*k");
-    }
-	*/
-    /**
      * Method generateSaveFile.
      * @param fileName String
      * @param screen GameScreen
      * @throws IOException
      */
-/*<<<<<<< .mine
-    public void generateSaveFile(String fileName, GameScreen screen) throws IOException {
-    	this.player = ((GameScreen) screen).getPlayer();
-		this.galaxy = ((GameScreen) screen).getGalaxy();
-		this.currentPlanet = ((GameScreen) screen).getCurrentPlanet();
-    	
-        fw = new FileWriter(fileName);
-        buffer = new BufferedWriter(fw);
-        output = new PrintWriter(buffer);
-
-        // begin writing
-        output.write(player.getName() + "\n");
-        int[] skills = player.getSkillsArray();
-        for (int i = 0; i < skills.length; i++) {
-            output.write(skills[i] + "\n");
-//=======
- * 
- */
     public void generateSaveFile(String fileName, GameScreen screen) {
     	this.player = screen.getPlayer();
 		this.galaxy = screen.getGalaxy();
@@ -89,7 +56,7 @@ public class SaveFileWriter {
                     new File(fileName))));
             
             output.write(player.getName() + "\n");
-            int[] skills = player.getSkillsArray();
+            final int[] skills = player.getSkillsArray();
             for (int i = 0; i < skills.length; i++) {
                 output.write(skills[i] + "\n");
             }
@@ -111,7 +78,7 @@ public class SaveFileWriter {
             //output.write(player.getDifficulty().toString() + "\n");
 
             // Write galaxy here
-            Planet[] planets = galaxy.getPlanets();
+            final Planet[] planets = galaxy.getPlanets();
             for (Planet p : planets) {
                 output.write(p.toString() + "\n");
                 output.write(p.getX() + "\n");
@@ -126,25 +93,14 @@ public class SaveFileWriter {
             output.write(currentPlanet.getX() + "\n");
             output.write(currentPlanet.getY() + "\n");
             output.write(currentPlanet.getEnvironment().toString().toUpperCase() + "\n");
-            output.write(currentPlanet.getTechLevel().toString().toUpperCase() + "\n");
-    
-            // begin writing
-            
+            output.write(currentPlanet.getTechLevel().toString().toUpperCase() + "\n");            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             output.close();
-//>>>>>>> .r178
         }
     }
-/*<<<<<<< .mine
-        
-        output.close();
-        System.out.println("Closed");
-=======
->>>>>>> .r178
-    }
-*/
+
     /**
      * Method toString required by CodePro.
      * @return String.

@@ -249,6 +249,11 @@ public class Planet {
      *            Height of the galaxy.
      */
     public Planet(int width, int galaxyWidth, int galaxyHeight) {
+        if (NAMES_USED.size() == PLANET_NAMES.length) { // Reset used names & locations.
+            NAMES_USED.clear();
+            LOCATIONS_USED.clear();
+        }
+        
         int nextPlanet = RAND.nextInt(NUM_PLANETS);
 
         while (NAMES_USED.contains(nextPlanet)) {
