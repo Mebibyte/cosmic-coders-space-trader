@@ -65,16 +65,16 @@ public class Player {
 
     /**
      * Method getName.
-    
-     * @return String */
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
     /**
      * Method getSkills.
-    
-     * @return String */
+     * @return String
+     */
     public String getSkillsString() {
         return Arrays.toString(skills);
     }
@@ -89,8 +89,8 @@ public class Player {
     
     /**
      * Method getDifficulty.
-    
-     * @return String */
+     * @return String
+     */
     public String getDifficulty() {
         return difficulty.toString();
     }
@@ -216,5 +216,15 @@ public class Player {
         
         g.drawString(credits + " credits", x, y += dy);
         g.drawString("Spacecraft: " + spaceCraft.toString(), x, y += dy);
+    }
+
+    /**
+     * Fills the player's ship's fuel.
+     */
+    public void fillFuel() {
+        final int spent = (spaceCraft.getFuel() - 100) * 5 / 10;
+        if (spaceCraft.canFillFuel()) {
+            useCredits(spent);
+        }
     }
 }

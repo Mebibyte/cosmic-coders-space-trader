@@ -53,12 +53,13 @@ public class SaveFileWriter {
     		this.currentPlanet = screen.getCurrentPlanet();
     	//}
     	//else
-    		System.out.println("Fuck");
+    		System.out.println("F$*k");
     }
 	*/
     /**
      * Method generateSaveFile.
      * @param fileName String
+     * @param screen GameScreen
      * @throws IOException
      */
 /*<<<<<<< .mine

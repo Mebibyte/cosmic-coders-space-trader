@@ -90,7 +90,7 @@ public class TitleScreen extends Screen {
         newGame = new BigButton("New Game", width / 2, height / 2);
         loadGame = new BigButton("Load Game", width / 2, (height / 2)
                 + newGame.getHeight(), false);
-        quit = new BigButton("Quit", width / 2, (height / 2)
+        quit = new BigButton("Exit Game", width / 2, (height / 2)
                 + newGame.getHeight() + loadGame.getHeight());
     }
 
