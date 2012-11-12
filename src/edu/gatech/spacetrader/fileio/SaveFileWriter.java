@@ -106,7 +106,7 @@ public class SaveFileWriter {
                         + "\n");
                 output.write(player.getSpaceCraft().getStorage()[i].getX() + "\n");
                 output.write(player.getSpaceCraft().getStorage()[i].getY() + "\n");
-
+                output.write(player.getSpaceCraft().getStorage()[i].getQuantity() + "\n");
             }
             //output.write(player.getDifficulty().toString() + "\n");
 

@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.main.SpaceTrader;
@@ -96,8 +99,11 @@ public class SaveFileReader {
 				int index = Integer.parseInt(scan.nextLine());
 				int x = Integer.parseInt(scan.nextLine());
 				int y = Integer.parseInt(scan.nextLine());
-				//Good scGood = new Good(index, sc, x, y);
-				//sc.addToStorage(scGood);
+				int quant = Integer.parseInt(scan.nextLine());
+				Good scGood = new Good(index, sc, x, y);
+				//scGood.setQuantity(quant);
+				for(int j = 0; j < quant; j++)
+					sc.addToStorage(scGood);
 			}
 			sc.setFuel(fuel);
 			player.setSpaceCraft(sc);
@@ -153,9 +159,11 @@ public class SaveFileReader {
 		}
 	
 		catch(IOException e){
+			//JOptionPane.showMessageDialog(new JPanel(), "Error reading file");
 			e.printStackTrace();
 		}
 		catch(NumberFormatException e){
+			//JOptionPane.showMessageDialog(new JPanel(), "Error reading file");
 			e.printStackTrace();
 		}
 

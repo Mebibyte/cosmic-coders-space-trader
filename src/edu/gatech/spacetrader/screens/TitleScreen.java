@@ -14,6 +14,7 @@ import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -171,6 +172,8 @@ public class TitleScreen extends Screen {
 //=======
     		} catch(Exception e) {
     			e.printStackTrace();
+    			JOptionPane.showMessageDialog(new JPanel(), "Error reading file");
+    			panel.setActiveScreen(this);
     		}
 //>>>>>>> .r178
     	}
