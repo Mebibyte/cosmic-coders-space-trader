@@ -39,10 +39,7 @@ public class GameScreen extends Screen {
     private final GamePanel panel;
 
     /**
-     * Field height.
-     */
-    /**
-     * Field width.
+     * Field width & height
      */
     public final int width, height;
 
@@ -84,7 +81,7 @@ public class GameScreen extends Screen {
         this.width = width;
         this.height = height;
         this.galaxy = new Galaxy(height, width);
-        
+
         currentPlanet = galaxy.getStartingPlanet();
         player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
         fillFuelButton = new Rectangle(40, 218, 85, 18);

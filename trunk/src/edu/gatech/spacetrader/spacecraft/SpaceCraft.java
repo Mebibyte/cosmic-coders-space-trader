@@ -114,15 +114,15 @@ public abstract class SpaceCraft {
     }
 
     /**
-    
-     * @return int Attack value. */
+     * @return int Attack value.
+     */
     public int getAttack() {
         return this.attack;
     }
 
     /**
-    
-     * @return int Defense Value. */
+     * @return int Defense Value.
+     */
     public int getDefense() {
         return this.defense;
     }
@@ -146,8 +146,8 @@ public abstract class SpaceCraft {
     /**
      * Checks if there is room to add a good to storage.
      * 
-    
-     * @return Boolean of whether or not you could add the good to the storage */
+     * @return Boolean of whether or not you could add the good to the storage
+     */
     public boolean canAddToStorage() {
         return quantity < maxCapacity;
     }

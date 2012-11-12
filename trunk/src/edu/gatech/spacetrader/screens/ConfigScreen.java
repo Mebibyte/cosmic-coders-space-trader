@@ -30,13 +30,7 @@ public class ConfigScreen extends Screen{
     private final BigButton startGame, editName;
     
     /**
-     * Field easy.
-     */
-    /**
-     * Field normal.
-     */
-    /**
-     * Field hard.
+     * Field easy, normal, and hard buttons.
      */
     private final BigButton easy, normal, hard;
     
@@ -62,10 +56,7 @@ public class ConfigScreen extends Screen{
             ConfigScreen.class.getResource("/edu/gatech/spacetrader/res/configBack.jpg"));
 	
     /**
-     * Field height.
-     */
-    /**
-     * Field width.
+     * Field height & width
      */
     private final int width, height;
 	
@@ -258,7 +249,7 @@ public class ConfigScreen extends Screen{
 	    changeDifficulty(point);
 	    
 	    if (startGame.isClicked(point)) {
-	    	GameScreen gs = new GameScreen(
+	    	final GameScreen gs = new GameScreen(
 	                new Player(playerName, skills, currentDifficulty),
 	                panel, width, height);
 	    	panel.setLocalGameScreen(gs);

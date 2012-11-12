@@ -168,22 +168,25 @@ public class Player {
     	final int num = rand.nextInt(20);  
     	 
     	if ( num == 19 ) { 
-    		// thieves still 10% of your money  
+    		// thieves still 10% of your money
+    	    System.out.println("Thieves steal 10% of your money!");
     		credits = (credits * 9) / 10; 
-    	} else if ( num >= 17 ) { 
+    	} else if ( num == 17 ) { 
     		// hit by a stray asteroid in space 
     		System.out.println("Damage taken: " + spaceCraft.takeDamge(8)); //TODO: Event message
     	} else if ( num == 16) {
     		//find random treasure in space 
-    	   credits += rand.nextInt(1000) + 50; 
+    	    System.out.println("You found an abandonded ship in space with money in it!");
+    	    credits += rand.nextInt(100) + 50; 
     	}  else if ( num == 15 ) {
-    		// spaceCraft's fuel hull sprung a leak lose 40%  
-    		spaceCraft.setFuel((spaceCraft.getFuel() * (rand.nextInt(4) + 6)) / 10);
+    		// spaceCraft's fuel hull sprung a leak lose 40%
+            System.out.println("Your fuel storage sprung a link");
+    		spaceCraft.setFuel((spaceCraft.getFuel() * (rand.nextInt(1) + 9)) / 10);
     	} else if ( num == 14 ) {
-    		// thieves steal one of your goods 
+    	    System.out.println("Thieves steal a good from your storage!");
     		spaceCraft.loseRandomGood(); 
-    	} else if (num == 13) {
-    		// find random good in space
+    	} else if (num == 13 && spaceCraft.canAddToStorage()){
+            System.out.println("You found a random good floating in space!");
     		spaceCraft.addRandomGood(); 
     	} 
     	// other than that nothing happens
