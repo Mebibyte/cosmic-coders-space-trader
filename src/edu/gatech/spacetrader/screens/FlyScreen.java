@@ -58,7 +58,12 @@ public class FlyScreen extends Screen {
     /**
      * Field ship. Spaceship.
      */
-    private final BufferedImage ship, resizedImage;
+    private BufferedImage ship = null;
+    
+    /**
+     * Field resizedImage. Smaller version of ship.
+     */
+    private final BufferedImage resizedImage;
     
     /**
      * Field shipX, shipY, & degrees.
@@ -90,7 +95,7 @@ public class FlyScreen extends Screen {
      * @throws IOException 
      */
     public FlyScreen(GameScreen gameScreen, GamePanel panel, int width,
-            int height) throws IOException {
+            int height) {
         this.gameScreen = gameScreen;
         this.panel = panel;
         this.width = width;
@@ -134,8 +139,12 @@ public class FlyScreen extends Screen {
                 ovalDiameter);
 
         g2D.dispose();
-        ship = ImageIO.read(FlyScreen.class
-                    .getResource("/edu/gatech/spacetrader/res/ship.png"));
+        try {
+            ship = ImageIO.read(FlyScreen.class
+                        .getResource("/edu/gatech/spacetrader/res/ship.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         resizedImage = new BufferedImage(20, 15, ship.getType());
         final Graphics2D g2 = resizedImage.createGraphics();

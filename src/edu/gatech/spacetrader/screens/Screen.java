@@ -60,9 +60,12 @@ public class Screen {
 	        g.setColor(new Color(0, 0, 0, 150));
 	        g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
 	        g.setColor(Color.WHITE);
-	        g.drawString("PAUSED", (SpaceTrader.WIDTH / 2)
-	                - (g.getFontMetrics().stringWidth("PAUSED") / 2),
+	        g.drawString("Paused", (SpaceTrader.WIDTH / 2)
+	                - (g.getFontMetrics().stringWidth("Paused") / 2),
 	                (SpaceTrader.HEIGHT / 2) - saveGame.getHeight());
+	        g.drawString("Press escape to unpause!", (SpaceTrader.WIDTH / 2)
+                    - (g.getFontMetrics().stringWidth("Press escape to unpause!") / 2),
+                    (SpaceTrader.HEIGHT / 2) - saveGame.getHeight() + 16);
 	        saveGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
 	                SpaceTrader.HEIGHT);
 	        quitGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
@@ -78,21 +81,25 @@ public class Screen {
 	public void checkForClick(Point point){
 	    if (paused) {
 	        if (saveGame.isClicked(point)) {
-	            //System.out.println("Save Game");
-	        	
-	        	try {
+	            try {
 					saveFile(SpaceTrader.GAME_PANEL.getLocalGameScreen());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 	        } else if (quitGame.isClicked(point)) {
-	            System.exit(0);
+	            SpaceTrader.GAME_PANEL.setActiveScreen(
+	                    new TitleScreen(SpaceTrader.GAME_PANEL,
+	                    SpaceTrader.WIDTH, SpaceTrader.HEIGHT));
 	        }
 	    }
 	}
 	
+	/**
+	 * Saves the game.
+	 * @param gs Game screen
+	 * @throws IOException
+	 */
 	private void saveFile(GameScreen gs) throws IOException{
 		int choice = fc.showSaveDialog(new JPanel());
 		
@@ -144,5 +151,23 @@ public class Screen {
      */
     public String toString() {
         return "Screen";
+    }
+    
+    /**
+     * Changes the value of paused.
+     * 
+     * @param paused
+     */
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+    
+    /**
+     * Checks if paused.
+     * 
+     * @return paused
+     */
+    public boolean isPaused() {
+        return paused;
     }
 }

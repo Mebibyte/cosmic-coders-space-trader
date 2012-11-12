@@ -78,10 +78,18 @@ public class GamePanel extends JPanel{
 
 	}
 	
+	/**
+	 * Sets the local game screen.
+	 * @param localGameScreen
+	 */
 	public void setLocalGameScreen(GameScreen localGameScreen){
 		this.localGameScreen = localGameScreen;
 	}
 	
+	/**
+	 * Gets the local game screen.
+	 * @return Local game screen.
+	 */
 	public GameScreen getLocalGameScreen(){
 		return localGameScreen;
 	}

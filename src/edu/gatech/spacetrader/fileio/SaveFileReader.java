@@ -66,7 +66,7 @@ public class SaveFileReader {
 		
 			//method instance data
 			String playerName = scan.nextLine();
-			int[] skills = new int[4];
+			int[] skills = new int[ConfigScreen.NUMSKILLS];
 			for (int i = 0; i < skills.length; i++) {
 				skills[i] = Integer.parseInt(scan.nextLine());
 			}
