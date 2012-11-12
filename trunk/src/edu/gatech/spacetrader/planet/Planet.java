@@ -109,8 +109,7 @@ public class Planet {
         /**
          * Constructor for Environment.
          * 
-         * @param color
-         *            Color.
+         * @param color Color.
          */
         private Environment(Color color) { // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
             this.color = color;
@@ -124,10 +123,21 @@ public class Planet {
         /**
          * Method getColor.
          * 
-        
-         * @return Color. */
+         * @return Color.
+         */
         public Color getColor() {
             return color;
+        }
+        
+        /**
+         * String representation of good.
+         * 
+         * @return String.
+         */
+        @Override
+        public String toString(){
+            return Character.toUpperCase(name().charAt(0))
+                    + name().substring(1).toLowerCase();
         }
     }
 
@@ -332,12 +342,11 @@ public class Planet {
     }
 
     /**
-     * 
+     * Advance civilization to next level
+     * called internally when a random conditional is met during player
+     * movement.
      */
     private void advanceCivilization() { // $codepro.audit.disable unusedMethod
-        // Advance civilization to next level
-        // called internally when a random conditional is met during player
-        // movement.
         switch (techLevel) {
         case PRE_AGRICULTURAL:
             techLevel = TechLevel.AGRICULTURAL;
@@ -512,7 +521,8 @@ public class Planet {
      */
     public void drawInfo(Graphics g, int x, int y) {
         g.drawString("Name: " + name, x, y);
-        g.drawString("Tech Level: " + techLevel.toString(), x, y + 18);
+        g.drawString("Environment: " + environment.toString(), x, y + 18);
+        g.drawString("Tech Level: " + techLevel.toString(), x, y + 36);
     }
     
     /**
