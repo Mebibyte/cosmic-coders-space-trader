@@ -81,12 +81,7 @@ public class Screen {
 	public void checkForClick(Point point){
 	    if (paused) {
 	        if (saveGame.isClicked(point)) {
-	            try {
-					saveFile(SpaceTrader.GAME_PANEL.getLocalGameScreen());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	            saveFile(SpaceTrader.GAME_PANEL.getLocalGameScreen());
 	        } else if (quitGame.isClicked(point)) {
 	            SpaceTrader.GAME_PANEL.setActiveScreen(
 	                    new TitleScreen(SpaceTrader.GAME_PANEL,
@@ -100,7 +95,7 @@ public class Screen {
 	 * @param gs Game screen
 	 * @throws IOException
 	 */
-	private void saveFile(GameScreen gs) throws IOException{
+	private void saveFile(GameScreen gs){
 		int choice = fc.showSaveDialog(new JPanel());
 		
 		if(choice == JFileChooser.APPROVE_OPTION){

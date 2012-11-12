@@ -7,9 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.main.GamePanel;
 import edu.gatech.spacetrader.main.SpaceTrader;
@@ -101,9 +98,9 @@ public class SaveFileReader {
 				int y = Integer.parseInt(scan.nextLine());
 				int quant = Integer.parseInt(scan.nextLine());
 				Good scGood = new Good(index, sc, x, y);
-				//scGood.setQuantity(quant);
-				for(int j = 0; j < quant; j++)
+				for(int j = 0; j < quant; j++) {
 					sc.addToStorage(scGood);
+				}
 			}
 			sc.setFuel(fuel);
 			player.setSpaceCraft(sc);
@@ -115,7 +112,7 @@ public class SaveFileReader {
 			        SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
 			
 			//System.out.println("made gameScreen");
-			Galaxy galaxy = gameScreen.getGalaxy();
+			galaxy = gameScreen.getGalaxy();
 			//System.out.println("Got galaxy");
 			
 			//Planet[] planets = new Planet[Galaxy.NUM_PLANETS];

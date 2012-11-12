@@ -209,9 +209,7 @@ public class FlyScreen extends Screen {
             g.drawString("view its information!", midSidebar
                     - (fm.stringWidth("view its information!") / 2), y += fh);
         } else {
-            g.drawString("Name: " + hoveredPlanet.toString(), sidebarLocation, y += fh);
-            g.drawString("Tech Level: " + hoveredPlanet.getTechLevel().toString(),
-                    sidebarLocation, y += fh);
+            hoveredPlanet.drawInfo(g, sidebarLocation, y += fh);
         }
     }
 
