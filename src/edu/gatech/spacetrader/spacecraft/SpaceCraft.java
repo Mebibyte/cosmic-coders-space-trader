@@ -73,7 +73,7 @@ public abstract class SpaceCraft {
         maxFuel = 100;
 
         int goodCount = 0;
-        final int x = 700;
+        final int x = 673;
         final int y = 350;
         final int width = x + Good.GOOD_BG.getIconWidth() * 5;
         final int height = y + Good.GOOD_BG.getIconHeight() * 2;
