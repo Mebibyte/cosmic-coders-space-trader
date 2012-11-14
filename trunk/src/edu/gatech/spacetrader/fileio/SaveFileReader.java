@@ -91,6 +91,7 @@ public class SaveFileReader {
 					gameScreen.setCurrentPlanet(p);
 				}
 			}
+			sc.updatePrices(gameScreen.getCurrentPlanet().getMarket());
 			return gameScreen;
 		} catch(IOException e) {
 			e.printStackTrace();
