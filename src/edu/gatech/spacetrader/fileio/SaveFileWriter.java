@@ -93,7 +93,7 @@ public class SaveFileWriter {
             output.write(currentPlanet.getX() + "\n");
             output.write(currentPlanet.getY() + "\n");
             output.write(currentPlanet.getEnvironment().toString().toUpperCase() + "\n");
-            output.write(currentPlanet.getTechLevel().toString().toUpperCase() + "\n");            
+            output.write(currentPlanet.getTechLevel().toString().toUpperCase() + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

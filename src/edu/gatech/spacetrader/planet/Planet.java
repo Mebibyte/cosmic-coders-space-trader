@@ -185,7 +185,7 @@ public class Planet {
     }
 
     /**
-     * code pro is wrong here. this will change
+     * 
      */
     private TechLevel techLevel;
 
@@ -450,8 +450,6 @@ public class Planet {
      *            Int
      */
     public void draw(Graphics g, GamePanel panel, int width, int height) {
-        //g.setColor(environment.getColor());
-        //g.fillOval((x * 5), (y * 5), 20, 20); // $codepro.audit.disable numericLiterals
         icon.paintIcon(panel, g, (location.x * 5), (location.y * 5));
         g.setColor(Color.BLACK);
     }
