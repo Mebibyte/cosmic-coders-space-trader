@@ -29,10 +29,10 @@ public class SpaceTraderTests {
     }
 
     @Test
-    public void  CanFlyTest(){
+    public void  CanFlyTest(){// by Kenisha Luby
     	SpaceCraft craft = new Gnat();
     	assertTrue("Can fly away?", craft.canFly());
     	craft.setFuel(0);
-    	assertFalse("Can't fly away?"), craft.canFly());
+    	assertFalse("Can't fly away?", craft.canFly());
     }
 }
