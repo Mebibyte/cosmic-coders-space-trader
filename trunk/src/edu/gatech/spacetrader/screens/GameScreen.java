@@ -84,7 +84,7 @@ public class GameScreen extends Screen {
 
         currentPlanet = galaxy.getStartingPlanet();
         player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
-        fillFuelButton = new Rectangle(40, 218, 85, 18);
+        fillFuelButton = new Rectangle(40, 200, 85, 36);
         pauseButton = new Rectangle(SpaceTrader.WIDTH - PAUSE.getIconWidth(),
                 0, PAUSE.getIconWidth(), PAUSE.getIconHeight());
     }
@@ -106,8 +106,7 @@ public class GameScreen extends Screen {
                 currentPlanet.getX()
                         - (player.getSpaceCraft().getSpeed() + player
                                 .getSkillsArray()[0] / 2) * 5,
-                currentPlanet.getY()
-                        + height
+                currentPlanet.getY() + height
                         - (2 * Galaxy.HALF_GALAXY_HEIGHT)
                         - (player.getSpaceCraft().getSpeed() + player
                                 .getSkillsArray()[0] / 2) * 5,
@@ -143,21 +142,21 @@ public class GameScreen extends Screen {
                 y);
         player.drawInfo(g, panel, x, y);
 
-        g.drawRect(fillFuelButton.x, fillFuelButton.y, fillFuelButton.width,
-                fillFuelButton.height);
-        g.drawString(
-                "Fill Fuel - "
-                        + (-1 * (player.getSpaceCraft().getFuel() - 100) * 5 / 10)
-                        + " cr",
-                fillFuelButton.x + ((fillFuelButton.width / 2) 
-                        - (fm.stringWidth("Fill Fuel - " + (-1
-                                * (player.getSpaceCraft().getFuel() - 100) * 5 / 10) 
-                                + " cr") / 2)), fillFuelButton.y + y);
+        g.drawRoundRect(fillFuelButton.x, fillFuelButton.y, fillFuelButton.width,
+                fillFuelButton.height, 50, 50);
+
+        g.drawString( "Fill Fuel", fillFuelButton.x + ((fillFuelButton.width / 2) 
+                        - (fm.stringWidth("Fill Fuel") / 2)), fillFuelButton.y + y);
+        
+        final String fuelCost = (-1 * (player.getSpaceCraft().getFuel() - 100) * 5 / 10)
+                + " credits";
+        
+        g.drawString(fuelCost, fillFuelButton.x + ((fillFuelButton.width / 2)
+                    - (fm.stringWidth(fuelCost) / 2)), fillFuelButton.y + y * 2);
 
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
 
-        g.drawString(
-                "Planet Information",
+        g.drawString("Planet Information",
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
                 y * 19);
         currentPlanet.drawInfo(g, x, y * 20);
