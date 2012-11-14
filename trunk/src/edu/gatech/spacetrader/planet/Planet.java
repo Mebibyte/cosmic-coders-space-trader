@@ -288,8 +288,7 @@ public class Planet {
                 .nextInt(Environment.values().length)];
 
         currentEvent = Event.NONE;
-        market = new PlanetMarket(this, 280,
-                350);
+        market = new PlanetMarket(this, 253, 350);
         icon = environment.getRandomImage();
     }
 

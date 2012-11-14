@@ -149,13 +149,10 @@ public class GameScreen extends Screen {
                 "Fill Fuel - "
                         + (-1 * (player.getSpaceCraft().getFuel() - 100) * 5 / 10)
                         + " cr",
-                fillFuelButton.x
-                        + ((fillFuelButton.width / 2) - (fm
-                                .stringWidth("Fill Fuel - "
-                                        + (-1
-                                                * (player.getSpaceCraft()
-                                                        .getFuel() - 100) * 5 / 10)
-                                        + " cr") / 2)), fillFuelButton.y + y);
+                fillFuelButton.x + ((fillFuelButton.width / 2) 
+                        - (fm.stringWidth("Fill Fuel - " + (-1
+                                * (player.getSpaceCraft().getFuel() - 100) * 5 / 10) 
+                                + " cr") / 2)), fillFuelButton.y + y);
 
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
 
