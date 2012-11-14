@@ -19,5 +19,13 @@ public class SpaceTraderTests {
         }
         assertFalse("Can't add to full storage?", craft.canAddToStorage());
     }
+    
+    @Test  
+    public void FillingFuelTest(){//Kirsten Roberts
+    	SpaceCraft craft = new Gnat();
+    	assertFalse("Cannot add fuel when full?", craft.canFillFuel());
+    	craft.setFuel(0);
+    	assertTrue("Fuel is empty, can add fuel?", craft.canFillFuel());
+    }
 
 }
