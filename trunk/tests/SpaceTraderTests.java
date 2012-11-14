@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.gatech.spacetrader.player.Player;
 import edu.gatech.spacetrader.spacecraft.SpaceCraft;
 import edu.gatech.spacetrader.spacecraft.Gnat;
 import edu.gatech.spacetrader.good.Good;
@@ -34,5 +35,13 @@ public class SpaceTraderTests {
     	assertTrue("Can fly away?", craft.canFly());
     	craft.setFuel(0);
     	assertFalse("Can't fly away?", craft.canFly());
+    } 
+    
+    @Test 
+    public void CanSpendMoneyTest() { //Piero 
+    	Player player= new Player(); 
+    	assertTrue("Can spend money if you have it?", player.canSpend(1));
+    	player.setCredits(0); 
+    	assertFalse("Cannot spend money?", player.canSpend(1)); 
     }
 }
