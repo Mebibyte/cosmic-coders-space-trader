@@ -28,4 +28,11 @@ public class SpaceTraderTests {
     	assertTrue("Fuel is empty, can add fuel?", craft.canFillFuel());
     }
 
+    @Test
+    public void  CanFlyTest(){
+    	SpaceCraft craft = new Gnat();
+    	assertTrue("Can fly away?", craft.canFly());
+    	craft.setFuel(0);
+    	assertFalse("Can't fly away?"), craft.canFly());
+    }
 }
