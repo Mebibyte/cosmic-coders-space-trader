@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.gatech.spacetrader.main.SpaceTrader;
+import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.player.Player;
 import edu.gatech.spacetrader.screens.ConfigScreen;
 import edu.gatech.spacetrader.spacecraft.SpaceCraft;
@@ -44,5 +46,12 @@ public class SpaceTraderTests {
     	assertTrue("Can spend money if you have it?", player.canSpend(1));
     	player.setCredits(0); 
     	assertFalse("Cannot spend money?", player.canSpend(1)); 
+    }
+    
+    public void TestMarketTechLevel(){ //Patrick Conner
+    	Planet planet = new Planet(300,SpaceTrader.WIDTH,SpaceTrader.HEIGHT);
+    	planet.setTechLevel("MEDIEVAL");
+    	Good good = new Good(9, planet,0,0); //"Robots"
+    	assertEquals("Result",0, planet.getMarket().getBuyPrice(good))
     }
 }
