@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edu.gatech.spacetrader.main.SpaceTrader;
+import edu.gatech.spacetrader.planet.Galaxy;
 import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.player.Player;
 import edu.gatech.spacetrader.screens.ConfigScreen;
@@ -33,7 +34,7 @@ public class SpaceTraderTests {
     }
 
     @Test
-    public void  CanFlyTest(){// by Kenisha Luby
+    public void CanFlyTest(){// by Kenisha Luby
     	SpaceCraft craft = new Gnat();
     	assertTrue("Can fly away?", craft.canFly());
     	craft.setFuel(0);
@@ -48,10 +49,12 @@ public class SpaceTraderTests {
     	assertFalse("Cannot spend money?", player.canSpend(1)); 
     }
     
+    @Test
     public void TestMarketTechLevel(){ //Patrick Conner
-    	Planet planet = new Planet(300,SpaceTrader.WIDTH,SpaceTrader.HEIGHT);
+    	Planet planet = new Planet(SpaceTrader.WIDTH, Galaxy.GALAXY_WIDTH, Galaxy.GALAXY_HEIGHT);
     	planet.setTechLevel("MEDIEVAL");
-    	Good good = new Good(9, planet,0,0); //"Robots"
-    	assertEquals("Result",0, planet.getMarket().getBuyPrice(good));
+    	planet.getMarket().updatePrices();
+    	assertEquals("Sell price of good is 0 if tech level isn't high enough.",
+                0, planet.getMarket().getGood(9).getSellPrice());
     }
 }
