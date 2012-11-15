@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import edu.gatech.spacetrader.main.GamePanel;
+import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.screens.ConfigScreen;
 import edu.gatech.spacetrader.spacecraft.Gnat;
 import edu.gatech.spacetrader.spacecraft.SpaceCraft;
@@ -111,6 +112,11 @@ public class Player {
     }
     
     /**
+     * 
+     */
+    private final Random rand = new Random();
+    
+    /**
      * Method getSpaceCraft.
     
      * @return SpaceCraft */
@@ -163,7 +169,34 @@ public class Player {
     /**
      * Checks for an event.
      */
-    public void checkForEvent(){
+    public void checkForEvent(Planet.Event event){
+    	switch(event){
+    	case THIEVES:
+    		credits = (credits * 9) / 10;
+    		break;
+    	case ASTEROID:
+    		spaceCraft.takeDamge(8);
+    		break;
+    	case TREASURE:
+    		credits += rand.nextInt(100) + 50; 
+    		break;
+    	case FUELHULL:
+    		spaceCraft.setFuel((spaceCraft.getFuel() * (rand.nextInt(1) + 9)) / 10);
+    		break;
+    	case THIEVES2:
+    		spaceCraft.loseRandomGood();
+    		break;
+    		
+    	case RANDOMGOOD:
+    		spaceCraft.addRandomGood();
+    		break;
+    		
+    	default:
+    		break;
+    	}
+    	
+    	
+    	/*
     	final Random rand = new Random();  
     	final int num = rand.nextInt(20);  
     	 
@@ -190,6 +223,8 @@ public class Player {
     		spaceCraft.addRandomGood(); 
     	} 
     	// other than that nothing happens
+    	 * 
+    	 */
     }
     
     /**
