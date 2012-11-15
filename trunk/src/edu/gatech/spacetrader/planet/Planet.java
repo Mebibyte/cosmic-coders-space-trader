@@ -57,7 +57,12 @@ public class Planet {
         BOREDOM("There is a quiet unrest among citizens here"),
         PLAGUE("Food is currently scarce"),
         LACKOFWORKERS("Economic difficulties have resulted in large worker strikes"),
-        NONE("No event");
+        NONE("No event"), THIEVES("Thieves steal 10% of your money!"), 
+        ASTEROID("Hit by a stray asteroid took damage: "), 
+        TREASURE("You found an abandonded ship in space with money in it!"), 
+        FUELHULL("Your fuel storage sprung a leak"), 
+        THIEVES2("Thieves steal a good from your storage!"), 
+        RANDOMGOOD("You found a random good floating in space!");
         //TODO make array of messages per event to add some variety;
         /**
          * Field eventString.
