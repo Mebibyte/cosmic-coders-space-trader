@@ -52,6 +52,6 @@ public class SpaceTraderTests {
     	Planet planet = new Planet(300,SpaceTrader.WIDTH,SpaceTrader.HEIGHT);
     	planet.setTechLevel("MEDIEVAL");
     	Good good = new Good(9, planet,0,0); //"Robots"
-    	assertEquals("Result",0, planet.getMarket().getBuyPrice(good))
+    	assertEquals("Result",0, planet.getMarket().getBuyPrice(good));
     }
 }
