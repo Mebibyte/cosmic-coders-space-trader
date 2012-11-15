@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
@@ -63,8 +61,10 @@ public class Planet {
         TREASURE("You found an abandonded ship in space with money in it!"), 
         FUELHULL("Your fuel storage sprung a leak"), 
         THIEVESTWO("Thieves steal a good from your storage!"), 
-        RANDOMGOOD("You found a random good floating in space!");
+        RANDOMGOOD("You found a random good floating in space!"),
+        ADCANCE("The planet just advanced to a new Tech Level.");
         //TODO make array of messages per event to add some variety;
+        
         /**
          * Field eventString.
          */
@@ -308,14 +308,9 @@ public class Planet {
         
         market.updatePrices();
         if(this.equals(gs.getCurrentPlanet())){
-	        if (RAND.nextInt(100) == 0) { //TODO make advancing harder as civ. level increases. Put that number in TechLevel enum
-	        	advanceCivilization();
-	        	JOptionPane.showMessageDialog(new JFrame(), this.name + " just advanced to the " + this.techLevel.name() + " civilization level!");
-	        	//System.out.println(this.toString() + " advanced to " + 
-	        	//this.getTechLevel().toString();//TODO message box
-	        }
-	        if (isEventChanged()) {
-	        	//System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
+	        changeEvent();
+	        if (currentEvent == Event.ADCANCE) {
+	            advanceTechLevel();
 	        }
         }
     }
@@ -357,7 +352,7 @@ public class Planet {
      * called internally when a random conditional is met during player
      * movement.
      */
-    private void advanceCivilization() { // $codepro.audit.disable unusedMethod
+    private void advanceTechLevel() { // $codepro.audit.disable unusedMethod
         switch (techLevel) {
         case PRE_AGRICULTURAL:
             techLevel = TechLevel.AGRICULTURAL;
@@ -384,15 +379,12 @@ public class Planet {
 
     /**
      * Method changeEvent. Changes the current event to a new random event.
-     * @return if event changed.
      */
-    public boolean isEventChanged() {
+    public void changeEvent() {
     	if (RAND.nextInt(4) == 0) { //create a one-in-four chance of an event occuring at all.
     		currentEvent = Event.values()[RAND.nextInt(Event.values().length)];
-    		return true;
     	} else {
     		currentEvent = Event.NONE;
-    		return false;
     	}
     }
 
