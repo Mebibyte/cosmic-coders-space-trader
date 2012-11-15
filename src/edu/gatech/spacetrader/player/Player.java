@@ -174,9 +174,6 @@ public class Player {
     	case THIEVES:
     		credits = (credits * 9) / 10;
     		break;
-    	case ASTEROID:
-    		spaceCraft.takeDamge(8);
-    		break;
     	case TREASURE:
     		credits += rand.nextInt(100) + 50; 
     		break;
