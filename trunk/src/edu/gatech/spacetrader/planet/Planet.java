@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import edu.gatech.spacetrader.good.PlanetMarket;
 import edu.gatech.spacetrader.main.GamePanel;
@@ -308,11 +310,12 @@ public class Planet {
         if(this.equals(gs.getCurrentPlanet())){
 	        if (RAND.nextInt(100) == 0) { //TODO make advancing harder as civ. level increases. Put that number in TechLevel enum
 	        	advanceCivilization();
-	        	System.out.println(this.toString() + " advanced to " + 
-	        	this.getTechLevel().toString());//TODO message box
+	        	JOptionPane.showMessageDialog(new JFrame(), this.name + " just advanced to the " + this.techLevel.name() + " civilization level!");
+	        	//System.out.println(this.toString() + " advanced to " + 
+	        	//this.getTechLevel().toString();//TODO message box
 	        }
 	        if (isEventChanged()) {
-	        	System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
+	        	//System.out.println(this.getCurrentEvent().getEventString()); //TODO message box
 	        }
         }
     }
