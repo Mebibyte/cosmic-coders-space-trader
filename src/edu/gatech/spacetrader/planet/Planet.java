@@ -60,7 +60,7 @@ public class Planet {
         NONE("No event"), THIEVES("Thieves steal 10% of your money!"),  
         TREASURE("You found an abandonded ship in space with money in it!"), 
         FUELHULL("Your fuel storage sprung a leak"), 
-        THIEVES2("Thieves steal a good from your storage!"), 
+        THIEVESTWO("Thieves steal a good from your storage!"), 
         RANDOMGOOD("You found a random good floating in space!");
         //TODO make array of messages per event to add some variety;
         /**
