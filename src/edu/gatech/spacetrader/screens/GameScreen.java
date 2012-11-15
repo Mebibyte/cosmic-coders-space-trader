@@ -130,6 +130,10 @@ public class GameScreen extends Screen {
         final int halfSidebarWidth = 82;
         final int sidebarWidth = 176;
         
+        g.setColor(Color.MAGENTA);
+        g.fillRect(0, 0, 163, height-119);
+        
+        g.setColor(Color.BLACK);
         g.fillRect(sidebarWidth, 0, width, y + 5);
         g.setColor(Color.WHITE);
         g.drawString(currentPlanet.getCurrentEvent().getEventString(), sidebarWidth, y);
@@ -156,6 +160,10 @@ public class GameScreen extends Screen {
 
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
 
+        
+        g.drawString("Click in Fill Fuel box", 40, 183);
+        g.drawString(" to buy fuel.", 40, 193);
+        
         g.drawString("Planet Information",
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
                 y * 19);
