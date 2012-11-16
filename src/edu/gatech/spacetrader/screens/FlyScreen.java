@@ -208,7 +208,7 @@ public class FlyScreen extends Screen {
         
         g.drawString("Selected Planet: ", midSidebar
                 - (fm.stringWidth("Selected Planet: ") / 2), y += fh + fh + fh + fh);
-        if (hoveredPlanet == null) {
+        if (hoveredPlanet == null && chosenPlanet == null) {
             g.drawString("No Planet Selected", midSidebar
                     - (fm.stringWidth("No Planet Selected") / 2), y += fh);
             g.drawString("Hover over a planet to", midSidebar
