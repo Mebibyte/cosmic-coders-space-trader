@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
 
 import edu.gatech.spacetrader.good.Good;
 import edu.gatech.spacetrader.main.GamePanel;
-import edu.gatech.spacetrader.main.SpaceTrader;
 import edu.gatech.spacetrader.planet.Galaxy;
 import edu.gatech.spacetrader.planet.Planet;
 import edu.gatech.spacetrader.player.Player;
@@ -56,16 +55,13 @@ public class GameScreen extends Screen {
     /**
      * Field fuel button
      */
-    private final Rectangle fillFuelButton, pauseButton;
+    private final Rectangle fillFuelButton;
 
     /**
      * Field BG
      */
     private static final ImageIcon BG = new ImageIcon(
-            GameScreen.class
-                    .getResource("/edu/gatech/spacetrader/res/market.png")), 
-            PAUSE = new ImageIcon(GameScreen.class
-                    .getResource("/edu/gatech/spacetrader/res/pause.png"));
+            GameScreen.class.getResource("/edu/gatech/spacetrader/res/market.png"));
 
     /**
      * Constructor for GameScreen.
@@ -85,8 +81,6 @@ public class GameScreen extends Screen {
         currentPlanet = galaxy.getStartingPlanet();
         player.getSpaceCraft().setSellPrices(currentPlanet.getMarket());
         fillFuelButton = new Rectangle(40, 200, 85, 36);
-        pauseButton = new Rectangle(SpaceTrader.WIDTH - PAUSE.getIconWidth(),
-                0, PAUSE.getIconWidth(), PAUSE.getIconHeight());
     }
 
     /**
@@ -97,19 +91,20 @@ public class GameScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         final FontMetrics fm = g.getFontMetrics();
-
+        
+        //---------------------
+        // Mini Map
+        //---------------------
+        
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
         
         g.setColor(Color.GRAY);
-        g.drawOval(
-                currentPlanet.getX()
-                        - (player.getSpaceCraft().getSpeed() + player
-                                .getSkillsArray()[0] / 2) * 5,
-                currentPlanet.getY() + height
-                        - (2 * Galaxy.HALF_GALAXY_HEIGHT)
-                        - (player.getSpaceCraft().getSpeed() + player
-                                .getSkillsArray()[0] / 2) * 5,
+        g.drawOval(currentPlanet.getX() - (player.getSpaceCraft().getSpeed()
+                + player.getSkillsArray()[0] / 2) * 5,
+                currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT)
+                        - (player.getSpaceCraft().getSpeed()
+                                + player.getSkillsArray()[0] / 2) * 5,
                 (player.getSpaceCraft().getSpeed()
                         + player.getSkillsArray()[0] / 2) * 10,
                 (player.getSpaceCraft().getSpeed()
@@ -124,32 +119,43 @@ public class GameScreen extends Screen {
                 - (Galaxy.GALAXY_HEIGHT + 10));
         
         BG.paintIcon(panel, g, 0, 0);
-
+        
         final int x = 0;
         final int y = fm.getHeight();
         final int halfSidebarWidth = 82;
         final int sidebarWidth = 176;
         
-        g.setColor(Color.MAGENTA);
-        g.fillRect(0, 0, 163, height-119);
-        
-        g.setColor(Color.BLACK);
+        //---------------------
+        //  Event
+        //---------------------
+
         g.fillRect(sidebarWidth, 0, width, y + 5);
         g.setColor(Color.WHITE);
         g.drawString(currentPlanet.getCurrentEvent().getEventString(), sidebarWidth, y);
         g.setColor(Color.BLACK);
         
-        PAUSE.paintIcon(panel, g, SpaceTrader.WIDTH - PAUSE.getIconWidth(), 0);
-
+        //---------------------
+        // Player Information
+        //---------------------
+        
         g.drawString("Player Information",
-                halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
-                y);
+                halfSidebarWidth - (fm.stringWidth("Player Information") / 2), y);
         player.drawInfo(g, panel, x, y);
 
+        // ------------
+        // FUEL
+        // ------------
+        
+        if (fillFuelButton.contains(getHoverPoint())) {
+            g.setColor(Color.GREEN);
+            g.fillRoundRect(fillFuelButton.x, fillFuelButton.y, fillFuelButton.width,
+                    fillFuelButton.height, 50, 50);
+            g.setColor(Color.BLACK);
+        }
         g.drawRoundRect(fillFuelButton.x, fillFuelButton.y, fillFuelButton.width,
                 fillFuelButton.height, 50, 50);
 
-        g.drawString( "Fill Fuel", fillFuelButton.x + ((fillFuelButton.width / 2) 
+        g.drawString("Fill Fuel", fillFuelButton.x + ((fillFuelButton.width / 2) 
                         - (fm.stringWidth("Fill Fuel") / 2)), fillFuelButton.y + y);
         
         final String fuelCost = (-1 * (player.getSpaceCraft().getFuel() - 100) * 5 / 10)
@@ -159,10 +165,10 @@ public class GameScreen extends Screen {
                     - (fm.stringWidth(fuelCost) / 2)), fillFuelButton.y + y * 2);
 
         player.getSpaceCraft().drawFuel(g, panel, x, y * 11);
-
         
-        g.drawString("Click in Fill Fuel box", 40, 183);
-        g.drawString(" to buy fuel.", 40, 193);
+        //---------------------
+        // Planet Information
+        //---------------------
         
         g.drawString("Planet Information",
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
@@ -183,11 +189,9 @@ public class GameScreen extends Screen {
     public void checkForClick(Point point) {
         if (!isPaused()) {
             if (galaxy.isClicked(point)) {
-                panel.setActiveScreen(new FlyScreen(this, panel, width, height));
+                panel.setActiveScreen(new FlyScreen(this, panel));
             } else if (fillFuelButton.contains(point)) {
                 player.fillFuel();
-            } else if (pauseButton.contains(point)) {
-                setPaused(true);
             } else {
                 final Good bought = currentPlanet.getMarket().goodClicked(point);
                 if (bought != null) {
