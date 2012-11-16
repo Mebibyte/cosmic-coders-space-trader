@@ -276,7 +276,6 @@ public class FlyScreen extends Screen {
                     chosenPlanet = p;
                     degrees = Math.atan2(deltaY, deltaX);
                     rotation = degrees - Math.toRadians(90);
-                    System.out.println(rotation);
                 }
             }
         }
