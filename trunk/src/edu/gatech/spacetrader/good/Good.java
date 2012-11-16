@@ -123,7 +123,7 @@ public class Good {
      * Field GOOD_BG.
      */
     public static final ImageIcon GOOD_BG = new ImageIcon(
-            BigButton.class.getResource("/edu/gatech/spacetrader/res/good.png"));
+            BigButton.class.getResource("/edu/gatech/spacetrader/res/good2.png"));
 
     /**
      * Field RAND.

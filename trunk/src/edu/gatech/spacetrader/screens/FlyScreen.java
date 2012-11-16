@@ -6,6 +6,7 @@ package edu.gatech.spacetrader.screens;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -177,6 +178,7 @@ public class FlyScreen extends Screen {
      */
     @Override
     public void draw(Graphics g) {
+    	g.setFont(new Font("serif", Font.PLAIN, 12));
         g.setColor(Color.black);
         g.fillRect(0, 0, Galaxy.GALAXY_WIDTH * SCALE + 45, SpaceTrader.HEIGHT);
         gameScreen.getGalaxy().draw(g, panel, width, height);
@@ -202,6 +204,12 @@ public class FlyScreen extends Screen {
         final FontMetrics fm = g.getFontMetrics();
         final int fh = fm.getHeight();
         int y = fh;
+        
+        //right pane background color
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(791, 0, sidebarWidth + 15, height);
+        
+        g.setColor(Color.WHITE);
         g.drawString("Current Planet Information: ", midSidebar
                 - (fm.stringWidth("Current Planet Information: ") / 2), y);
         gameScreen.getCurrentPlanet().drawInfo(g, sidebarLocation, y += fh);

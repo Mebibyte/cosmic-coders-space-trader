@@ -7,6 +7,7 @@
 package edu.gatech.spacetrader.screens;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -92,9 +93,12 @@ public class GameScreen extends Screen {
     public void draw(Graphics g) {
         final FontMetrics fm = g.getFontMetrics();
         
+        g.setFont(new Font("serif", Font.PLAIN, 12));
+        
         //---------------------
         // Mini Map
         //---------------------
+        
         
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
@@ -109,9 +113,6 @@ public class GameScreen extends Screen {
                         + player.getSkillsArray()[0] / 2) * 10,
                 (player.getSpaceCraft().getSpeed()
                         + player.getSkillsArray()[0] / 2) * 10);
-        
-        g.setColor(Color.WHITE);
-        g.fillRect(0, height - Galaxy.GALAXY_HEIGHT - 40, 164, 32);
         
         g.setColor(Color.BLACK);
         g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
@@ -137,7 +138,10 @@ public class GameScreen extends Screen {
         //---------------------
         // Player Information
         //---------------------
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(0, 0, 164, height-128);
         
+        g.setColor(Color.WHITE);
         g.drawString("Player Information",
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2), y);
         player.drawInfo(g, panel, x, y);
@@ -170,6 +174,7 @@ public class GameScreen extends Screen {
         // Planet Information
         //---------------------
         
+        g.setColor(Color.WHITE);
         g.drawString("Planet Information",
                 halfSidebarWidth - (fm.stringWidth("Player Information") / 2),
                 y * 19);
