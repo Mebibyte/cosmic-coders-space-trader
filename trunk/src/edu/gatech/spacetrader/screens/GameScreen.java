@@ -98,8 +98,7 @@ public class GameScreen extends Screen {
         //---------------------
         // Mini Map
         //---------------------
-        
-        
+
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
         
@@ -114,10 +113,13 @@ public class GameScreen extends Screen {
                 (player.getSpaceCraft().getSpeed()
                         + player.getSkillsArray()[0] / 2) * 10);
         
-        g.setColor(Color.BLACK);
+        g.setColor(Color.DARK_GRAY);        
+        g.fillRect(0, height - Galaxy.GALAXY_HEIGHT - 40, 164, 32);
+        
+        g.setColor(Color.WHITE);
         g.drawString("Click Minimap to fly!", ((Galaxy.GALAXY_WIDTH + 9) / 2)
                 - fm.stringWidth("Click Minimap to fly!") / 2, height
-                - (Galaxy.GALAXY_HEIGHT + 10));
+                - (Galaxy.GALAXY_HEIGHT + 10) - 1);
         
         BG.paintIcon(panel, g, 0, 0);
         
@@ -129,17 +131,17 @@ public class GameScreen extends Screen {
         //---------------------
         //  Event
         //---------------------
-
+        
+        g.setColor(Color.BLACK);
         g.fillRect(sidebarWidth, 0, width, y + 5);
         g.setColor(Color.WHITE);
         g.drawString(currentPlanet.getCurrentEvent().getEventString(), sidebarWidth, y);
-        g.setColor(Color.BLACK);
         
         //---------------------
         // Player Information
         //---------------------
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, 164, height-128);
+        g.fillRect(0, 0, 164, height - 128);
         
         g.setColor(Color.WHITE);
         g.drawString("Player Information",
