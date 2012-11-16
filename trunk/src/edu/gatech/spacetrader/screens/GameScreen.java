@@ -98,11 +98,15 @@ public class GameScreen extends Screen {
         //---------------------
         // Mini Map
         //---------------------
-
+        
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(0, 0, 164, height);
+        
+        g.setColor(Color.BLACK);
         galaxy.drawMiniMap(g, panel, Galaxy.HALF_GALAXY_WIDTH + 6, height
                 - Galaxy.HALF_GALAXY_HEIGHT);
         
-        g.setColor(Color.GRAY);
+        g.setColor(Color.WHITE);
         g.drawOval(currentPlanet.getX() - (player.getSpaceCraft().getSpeed()
                 + player.getSkillsArray()[0] / 2) * 5,
                 currentPlanet.getY() + height - (2 * Galaxy.HALF_GALAXY_HEIGHT)
@@ -140,8 +144,6 @@ public class GameScreen extends Screen {
         //---------------------
         // Player Information
         //---------------------
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, 164, height - 128);
         
         g.setColor(Color.WHITE);
         g.drawString("Player Information",
