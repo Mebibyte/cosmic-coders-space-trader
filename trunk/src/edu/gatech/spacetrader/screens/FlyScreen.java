@@ -92,16 +92,25 @@ public class FlyScreen extends Screen {
     private boolean flying;
     
     /**
-     * Field chosenX, choseY.
+     * Field chosenX, choseY, deltaX, deltaY
      * X and Y coordinates of chosen planet.
+     * Change in x and y to get to chosen planet.
      */
     private int chosenX, chosenY, deltaX, deltaY;
     
     /**
-     * Field chosenX, choseY.
-     * X and Y coordinates of chosen planet.
+     * Field slope, shipXFloat, shipYFloat, timeTaken.
+     * Slope of line between planet and ship.
+     * Float location of ship.
+     * Time taken to get to planet.
      */
-    private float slope, shipYFloat;
+    private float slope, shipXFloat, shipYFloat, timeTaken;
+    
+    /**
+     * Field lastTime
+     * Last time updated.
+     */
+    private long lastTime;
 
     /**
      * Constructor for FlyScreen.
@@ -244,11 +253,14 @@ public class FlyScreen extends Screen {
             shipY = ((gameScreen.getCurrentPlanet().getY() * SCALE) + 3)
                     + ((int) (Math.sin(rotation) * 25)); // $codepro.audit.disable lossOfPrecisionInCast
         } else {
-            if (shipX != chosenX && shipY != chosenY) {
-                final int deltaShipX = deltaX / Math.abs(deltaX);
-                shipX += deltaShipX;
-                shipYFloat += slope * deltaShipX;
+            if (timeTaken < 1) {
+                final double deltaT = (System.currentTimeMillis() - lastTime) * 0.001;
+                lastTime = System.currentTimeMillis();
+                shipXFloat += deltaX * deltaT;
+                shipX = Math.round(shipXFloat);
+                shipYFloat += slope * (deltaX * deltaT);
                 shipY = Math.round(shipYFloat);
+                timeTaken += deltaT;
             } else {
                 gameScreen.changePlanet(chosenPlanet);
                 panel.setActiveScreen(gameScreen);
@@ -273,9 +285,11 @@ public class FlyScreen extends Screen {
                     deltaY = chosenY - shipY;
                     slope = deltaY / (float) deltaX;
                     shipYFloat = shipY;
+                    shipXFloat = shipX;
                     chosenPlanet = p;
                     degrees = Math.atan2(deltaY, deltaX);
                     rotation = degrees - Math.toRadians(90);
+                    lastTime = System.currentTimeMillis();
                 }
             }
         }
