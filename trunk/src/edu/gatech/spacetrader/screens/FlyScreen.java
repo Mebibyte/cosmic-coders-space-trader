@@ -68,22 +68,39 @@ public class FlyScreen extends Screen {
     /**
      * Field shipX, shipY, & degrees.
      */
-    private int shipX, shipY, degrees;
-
-    /**
-     * Field rotation.
-     */
-    private double rotation = Math.toRadians(degrees);
+    private int shipX, shipY;
     
     /**
-     * Field hoveredPlanet.
+     * Field degrees, rotation.
      */
-    private Planet hoveredPlanet;
+    private double degrees, rotation = Math.toRadians(degrees);
+    
+    /**
+     * Field hoveredPlanet, chosenPlanet
+     */
+    private Planet hoveredPlanet, chosenPlanet;
    
     /**
      * Field scale.
      */
     private static final int SCALE = 5, SHIFT = 10;
+    
+    /**
+     * Field flying.
+     */
+    private boolean flying;
+    
+    /**
+     * Field chosenX, choseY.
+     * X and Y coordinates of chosen planet.
+     */
+    private int chosenX, chosenY, deltaX, deltaY;
+    
+    /**
+     * Field chosenX, choseY.
+     * X and Y coordinates of chosen planet.
+     */
+    private float slope, shipYFloat;
 
     /**
      * Constructor for FlyScreen.
@@ -190,7 +207,7 @@ public class FlyScreen extends Screen {
         gameScreen.getCurrentPlanet().drawInfo(g, sidebarLocation, y += fh);
         
         g.drawString("Selected Planet: ", midSidebar
-                - (fm.stringWidth("Selected Planet: ") / 2), y += fh + fh);
+                - (fm.stringWidth("Selected Planet: ") / 2), y += fh + fh + fh + fh);
         if (hoveredPlanet == null) {
             g.drawString("No Planet Selected", midSidebar
                     - (fm.stringWidth("No Planet Selected") / 2), y += fh);
@@ -198,8 +215,10 @@ public class FlyScreen extends Screen {
                     - (fm.stringWidth("Hover over a planet to") / 2), y += fh);
             g.drawString("view its information!", midSidebar
                     - (fm.stringWidth("view its information!") / 2), y += fh);
-        } else {
+        } else if (chosenPlanet == null) {
             hoveredPlanet.drawInfo(g, sidebarLocation, y += fh);
+        } else {
+            chosenPlanet.drawInfo(g, sidebarLocation, y += fh);
         }
     }
 
@@ -208,13 +227,25 @@ public class FlyScreen extends Screen {
      */
     @Override
     public void tick() {
-        degrees++;
-        degrees %= 360;
-        rotation = Math.toRadians(degrees);
-        shipX = ((gameScreen.getCurrentPlanet().getX() * SCALE) + 1)
-                + ((int) (Math.cos(rotation) * 25)); // $codepro.audit.disable lossOfPrecisionInCast
-        shipY = ((gameScreen.getCurrentPlanet().getY() * SCALE) + 3)
-                + ((int) (Math.sin(rotation) * 25)); // $codepro.audit.disable lossOfPrecisionInCast
+        if (!flying) {
+            degrees++;
+            degrees %= 360;
+            rotation = Math.toRadians(degrees);
+            shipX = ((gameScreen.getCurrentPlanet().getX() * SCALE) + 1)
+                    + ((int) (Math.cos(rotation) * 25)); // $codepro.audit.disable lossOfPrecisionInCast
+            shipY = ((gameScreen.getCurrentPlanet().getY() * SCALE) + 3)
+                    + ((int) (Math.sin(rotation) * 25)); // $codepro.audit.disable lossOfPrecisionInCast
+        } else {
+            if (shipX != chosenX && shipY != chosenY) {
+                final int deltaShipX = deltaX / Math.abs(deltaX);
+                shipX += deltaShipX;
+                shipYFloat += slope * deltaShipX;
+                shipY = Math.round(shipYFloat);
+            } else {
+                gameScreen.changePlanet(chosenPlanet);
+                panel.setActiveScreen(gameScreen);
+            }
+        }
     }
 
     /**
@@ -226,8 +257,19 @@ public class FlyScreen extends Screen {
     public void checkForClick(Point point) {
         for (Planet p : gameScreen.getGalaxy().getPlanets()) {
             if (range.contains(point) && p.isClicked(point)) {
-                gameScreen.changePlanet(p);
-                panel.setActiveScreen(gameScreen);
+                if (!flying) {
+                    flying = true;
+                    chosenX = p.getX() * SCALE;
+                    chosenY = p.getY() * SCALE;
+                    deltaX = chosenX - shipX;
+                    deltaY = chosenY - shipY;
+                    slope = deltaY / (float) deltaX;
+                    shipYFloat = shipY;
+                    chosenPlanet = p;
+                    degrees = Math.atan2(deltaY, deltaX);
+                    rotation = degrees - Math.toRadians(90);
+                    System.out.println(rotation);
+                }
             }
         }
     }
