@@ -177,13 +177,12 @@ public class ConfigScreen extends Screen{
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.setFont(new Font("arial heavy", Font.BOLD, 25));
+	    final Font defaultFont = g.getFont();
+        g.setFont(new Font("serif", Font.BOLD, 25));
 		BG.paintIcon(panel, g, 0, 0);
 		g.setColor(Color.white);
-	    g.drawString("Player name: " + playerName, 
-	            (width / 2) - 
-	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2),
-	            35);
+	    g.drawString("Player name: " + playerName, (width / 2) - 
+	            (g.getFontMetrics().stringWidth("Player name: " + playerName) / 2), 35);
 		
 		editName.draw(g, panel, width, height);
 		g.setColor(Color.white);
@@ -215,6 +214,8 @@ public class ConfigScreen extends Screen{
 		    y += sep;
 		    x = (width / 2) - sep;
 		}
+		
+		g.setFont(defaultFont);
 		
 		easy.draw(g, panel, width, height);
 		normal.draw(g, panel, width, height);

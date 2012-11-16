@@ -6,11 +6,14 @@
 package edu.gatech.spacetrader.screens;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
@@ -44,12 +47,24 @@ public class Screen {
     private boolean paused;
     
     /**
+     * Field pauseButton.
+     */
+    private final Rectangle pauseButton = new Rectangle(SpaceTrader.WIDTH
+            - PAUSE.getIconWidth(), 0, PAUSE.getIconWidth(), PAUSE.getIconHeight());
+    
+    /**
      * Field saveGame and quitGame buttons.
      */
     private final BigButton saveGame = new BigButton("Save Game", (SpaceTrader.WIDTH / 2),
             SpaceTrader.HEIGHT / 2), 
             quitGame = new BigButton("Quit Game", (SpaceTrader.WIDTH / 2),
                     (SpaceTrader.HEIGHT / 2) + saveGame.getHeight());
+    
+    /**
+     * Field PAUSE.
+     */
+    private static final ImageIcon PAUSE = new ImageIcon(GameScreen.class
+            .getResource("/edu/gatech/spacetrader/res/pause.png"));
     
 	/**
 	 * Method draw.
@@ -60,17 +75,19 @@ public class Screen {
 	        g.setColor(new Color(0, 0, 0, 150));
 	        g.fillRect(0, 0, SpaceTrader.WIDTH, SpaceTrader.HEIGHT);
 	        g.setColor(Color.WHITE);
+	        final Font defaultFont = g.getFont();
+	        g.setFont(new Font("serif", Font.PLAIN, 25));
 	        g.drawString("Paused", (SpaceTrader.WIDTH / 2)
 	                - (g.getFontMetrics().stringWidth("Paused") / 2),
 	                (SpaceTrader.HEIGHT / 2) - saveGame.getHeight());
-	        g.drawString("Press escape to unpause!", (SpaceTrader.WIDTH / 2)
-                    - (g.getFontMetrics().stringWidth("Press escape to unpause!") / 2),
-                    (SpaceTrader.HEIGHT / 2) - saveGame.getHeight() + 16);
 	        saveGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
 	                SpaceTrader.HEIGHT);
 	        quitGame.draw(g, SpaceTrader.GAME_PANEL, SpaceTrader.WIDTH,
 	                SpaceTrader.HEIGHT);
+	        g.setFont(defaultFont);
 	    }
+        PAUSE.paintIcon(SpaceTrader.GAME_PANEL, g,
+                SpaceTrader.WIDTH - PAUSE.getIconWidth(), 0);
 	}
 	
 	/**
@@ -87,6 +104,9 @@ public class Screen {
 	                    new TitleScreen(SpaceTrader.GAME_PANEL,
 	                    SpaceTrader.WIDTH, SpaceTrader.HEIGHT));
 	        }
+	    }
+	    if (pauseButton.contains(point)) {
+            paused = !paused;
 	    }
 	}
 	
@@ -145,15 +165,6 @@ public class Screen {
      */
     public String toString() {
         return "Screen";
-    }
-    
-    /**
-     * Changes the value of paused.
-     * 
-     * @param paused
-     */
-    public void setPaused(boolean paused) {
-        this.paused = paused;
     }
     
     /**

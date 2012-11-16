@@ -43,7 +43,7 @@ public class FlyScreen extends Screen {
     /**
      * Field width, height.
      */
-    private final int width, height;
+    private final int width = SpaceTrader.WIDTH, height = SpaceTrader.HEIGHT;
 
     /**
      * Field range. Range the player can fly.
@@ -89,17 +89,11 @@ public class FlyScreen extends Screen {
      * Constructor for FlyScreen.
      * 
      * @param gameScreen
-     * @param panel
-     * @param width
-     * @param height
-     * @throws IOException 
+     * @param panel 
      */
-    public FlyScreen(GameScreen gameScreen, GamePanel panel, int width,
-            int height) {
+    public FlyScreen(GameScreen gameScreen, GamePanel panel) {
         this.gameScreen = gameScreen;
         this.panel = panel;
-        this.width = width;
-        this.height = height;
         
         final int ovalX = (gameScreen.getCurrentPlanet().getX() * SCALE) + SHIFT;
         final int ovalY = (gameScreen.getCurrentPlanet().getY() * SCALE) + SHIFT;
@@ -193,11 +187,7 @@ public class FlyScreen extends Screen {
         int y = fh;
         g.drawString("Current Planet Information: ", midSidebar
                 - (fm.stringWidth("Current Planet Information: ") / 2), y);
-        g.drawString("Name: " + gameScreen.getCurrentPlanet().toString(),
-                sidebarLocation, y += fh);
-        g.drawString("Tech Level: " 
-                + gameScreen.getCurrentPlanet().getTechLevel().toString(),
-                sidebarLocation, y += fh);
+        gameScreen.getCurrentPlanet().drawInfo(g, sidebarLocation, y += fh);
         
         g.drawString("Selected Planet: ", midSidebar
                 - (fm.stringWidth("Selected Planet: ") / 2), y += fh + fh);

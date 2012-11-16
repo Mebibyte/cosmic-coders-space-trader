@@ -51,18 +51,12 @@ public class BigButton extends Button {
 	private final String text;
 	
 	/**
-	 * Field buttonHeight.
-	 */
-	/**
-	 * Field buttonWidth.
+	 * Field buttonHeight, buttonWidth.
 	 */
 	private final int buttonWidth, buttonHeight;
 	
 	/**
-	 * Field y.
-	 */
-	/**
-	 * Field x.
+	 * Field y, x.
 	 */
 	private final int x, y;
 	
@@ -77,10 +71,7 @@ public class BigButton extends Button {
 	private final Rectangle bounds;
 	
 	/**
-     * Field disabled.
-     */
-	/**
-     * Field hovered.
+     * Field disabled, hovered, selected
      */
 	private boolean disabled, hovered, selected;
 	
