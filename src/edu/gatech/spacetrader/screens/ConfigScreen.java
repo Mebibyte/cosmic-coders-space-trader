@@ -39,14 +39,14 @@ public class ConfigScreen extends Screen{
      */
     private static final ImageIcon UN_SKILL_POINT = new ImageIcon(
             ConfigScreen.class.getResource(
-                    "/edu/gatech/spacetrader/res/unusedSkillPoint.png"));
+                    "/edu/gatech/spacetrader/res/unusedSkillPoint1.png"));
 
     /**
      * Field usedSkillPoint.
      */
     private static final ImageIcon SKILL_POINT = new ImageIcon(
             ConfigScreen.class.getResource(
-                    "/edu/gatech/spacetrader/res/usedSkillPoint.png"));
+                    "/edu/gatech/spacetrader/res/usedSkillPoint1.png"));
     
     /**
      * Field BG.
