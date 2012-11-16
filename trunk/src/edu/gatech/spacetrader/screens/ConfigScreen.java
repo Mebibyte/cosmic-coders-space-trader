@@ -159,16 +159,16 @@ public class ConfigScreen extends Screen{
 	    
 	    final int buttonSep = 200;
 	    
-	    easy = new BigButton("Easy", (width / 2) - buttonSep, height - 125);
-	    normal = new BigButton("Normal", width / 2, height - 125, false, true);
-	    hard = new BigButton("Hard", (width / 2) + buttonSep, height - 125);
+	    easy = new BigButton("Easy", (width / 2) - buttonSep - 65, height - 380);    				//original x and y: width/2 - buttonSep     height - 125
+	    normal = new BigButton("Normal", (width / 2) - buttonSep - 65, height - 280, false, true);  //original x and y: width /2  				 height - 125
+	    hard = new BigButton("Hard", (width / 2) - buttonSep - 65, height - 180);    				 //original x and y: width/2 +buttonSep      height - 125
         
 		this.panel = panel;
 		this.width = width;
 		this.height = height;
 		
 		editName = new BigButton("Edit", width / 2, 75);
-		startGame = new BigButton("Start", width / 2, height - 50, true);
+		startGame = new BigButton("Start", width / 2 + 250, height - 50, true);  //original x: width/2
 	}
 
 	/**
