@@ -1,0 +1,1 @@
+Cosmic Coders' implementation of Space Trader for Georgia Tech's Fall 2012 CS2340 class.
